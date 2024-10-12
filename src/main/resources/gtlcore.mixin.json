@@ -30,6 +30,7 @@
         "extendedae.ContainerPatternModifierMixin",
         "extendedae.PartExPatternProviderMixin",
         "extendedae.TileExPatternProviderMixin",
+        "ftbu.YouCantBreakAE2Mixin",
         "gtm.CWURecipeCapabilityMixin",
         "gtm.FluidPipeTypeMixin",
         "gtm.MultiblockInfoCategoryMixin",
@@ -55,6 +56,7 @@
         "gtm.machine.MEOutputPartMachineMixin",
         "gtm.machine.MetaMachineMixin",
         "gtm.machine.ParallelHatchPartMachineMixin",
+        "gtm.machine.RotorHolderPartMachineMixin",
         "gtm.machine.SimpleGeneratorMachineMixin",
         "gtm.machine.SimpleTieredMachineMixin",
         "gtm.machine.SteamItemBusPartMachineMixin",
@@ -85,5 +87,5 @@
     "injectors": {
         "defaultRequire": 1,
         "maxShiftBy": 5
-  }
+    }
 }

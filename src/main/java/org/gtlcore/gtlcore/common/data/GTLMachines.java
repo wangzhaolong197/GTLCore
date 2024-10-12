@@ -4,12 +4,14 @@ import org.gtlcore.gtlcore.GTLCore;
 import org.gtlcore.gtlcore.api.machine.multiblock.CoilWorkableElectricMultipleRecipesMultiblockMachine;
 import org.gtlcore.gtlcore.api.machine.multiblock.GTLPartAbility;
 import org.gtlcore.gtlcore.client.renderer.machine.BallHatchRenderer;
+import org.gtlcore.gtlcore.client.renderer.machine.WindMillTurbineRenderer;
 import org.gtlcore.gtlcore.common.data.machines.*;
 import org.gtlcore.gtlcore.common.machine.generator.LightningRodMachine;
 import org.gtlcore.gtlcore.common.machine.generator.MagicEnergyMachine;
+import org.gtlcore.gtlcore.common.machine.generator.WindMillTurbineMachine;
 import org.gtlcore.gtlcore.common.machine.multiblock.generator.CombustionEngineMachine;
 import org.gtlcore.gtlcore.common.machine.multiblock.generator.GeneratorArrayMachine;
-import org.gtlcore.gtlcore.common.machine.multiblock.generator.MegaTurbineMachine;
+import org.gtlcore.gtlcore.common.machine.multiblock.generator.TurbineMachine;
 import org.gtlcore.gtlcore.common.machine.multiblock.part.*;
 
 import com.gregtechceu.gtceu.GTCEu;
@@ -231,6 +233,24 @@ public class GTLMachines {
                     .register(),
             GTValues.ULV, GTValues.LV);
 
+    public static final MachineDefinition[] WIND_MILL_TURBINE = registerTieredMachines(
+            "wind_mill_turbine",
+            WindMillTurbineMachine::new,
+            (tier, builder) -> builder
+                    .langValue("%s Wind Mill Turbine %s".formatted(GTValues.VLVH[tier], GTValues.VLVT[tier]))
+                    .rotationState(RotationState.NON_Y_AXIS)
+                    .renderer(() -> new WindMillTurbineRenderer(tier))
+                    .hasTESR(true)
+                    .tooltips(Component.translatable("gtceu.machine.wind_mill_turbine.tooltip.0"))
+                    .tooltips(Component.translatable("gtceu.machine.wind_mill_turbine.tooltip.1"))
+                    .tooltips(Component.translatable("gtceu.universal.tooltip.ampere_out", 2))
+                    .tooltips(Component.translatable("gtceu.universal.tooltip.voltage_out",
+                            FormattingUtil.formatNumbers(GTValues.V[tier]), GTValues.VNF[tier]))
+                    .tooltips(Component.translatable("gtceu.universal.tooltip.energy_storage_capacity",
+                            FormattingUtil.formatNumbers(GTValues.V[tier] * 64)))
+                    .register(),
+            GTValues.ULV, GTValues.LV, GTValues.MV, GTValues.HV);
+
     private static MachineDefinition[] registerHugeFluidHatches(String name, String displayname, String model,
                                                                 String tooltip, IO io, PartAbility... abilities) {
         return registerTieredMachines(name,
@@ -407,11 +427,11 @@ public class GTLMachines {
     }
 
     public static MultiblockMachineDefinition registerLargeTurbine(GTRegistrate registrate, String name, int tier, boolean special, GTRecipeType recipeType, Supplier<? extends Block> casing, Supplier<? extends Block> gear, ResourceLocation casingTexture, ResourceLocation overlayModel, boolean isGTM) {
-        MultiblockMachineBuilder builder = registrate.multiblock(name, holder -> new MegaTurbineMachine(holder, tier, special, false))
+        MultiblockMachineBuilder builder = registrate.multiblock(name, holder -> new TurbineMachine(holder, tier, special, false))
                 .rotationState(RotationState.ALL)
                 .recipeType(recipeType)
                 .generator(true)
-                .recipeModifier(MegaTurbineMachine::recipeModifier, true)
+                .recipeModifier(TurbineMachine::recipeModifier, true)
                 .appearanceBlock(casing)
                 .pattern(definition -> FactoryBlockPattern.start()
                         .aisle("CCCC", "CHHC", "CCCC")
@@ -533,15 +553,15 @@ public class GTLMachines {
             .register();
 
     public static final MachineDefinition STERILE_CLEANING_MAINTENANCE_HATCH = REGISTRATE
-            .machine("sterile_cleaning_maintenance_hatch", CleaningMaintenancePartMachine::SterileCleaning)
+            .machine("sterile_cleaning_maintenance_hatch", holder -> new CMHatchPartMachine(holder, CMHatchPartMachine.STERILE_DUMMY_CLEANROOM))
             .rotationState(RotationState.ALL)
             .abilities(PartAbility.MAINTENANCE)
             .tooltips(Component.translatable("gtceu.universal.disabled"),
                     Component.translatable("gtceu.machine.maintenance_hatch_cleanroom_auto.tooltip.0"),
                     Component.translatable("gtceu.machine.maintenance_hatch_cleanroom_auto.tooltip.1"))
             .tooltipBuilder((stack, tooltips) -> {
-                for (CleanroomType type : CleaningMaintenancePartMachine
-                        .getCleanroomTypes(CleaningMaintenancePartMachine.STERILE_DUMMY_CLEANROOM)) {
+                for (CleanroomType type : CMHatchPartMachine
+                        .getCleanroomTypes(CMHatchPartMachine.STERILE_DUMMY_CLEANROOM)) {
                     tooltips.add(Component.literal(String.format("  %s%s", ChatFormatting.GREEN,
                             Component.translatable(type.getTranslationKey()).getString())));
                 }
@@ -550,15 +570,15 @@ public class GTLMachines {
             .register();
 
     public static final MachineDefinition LAW_CLEANING_MAINTENANCE_HATCH = REGISTRATE
-            .machine("law_cleaning_maintenance_hatch", CleaningMaintenancePartMachine::LawCleaning)
+            .machine("law_cleaning_maintenance_hatch", holder -> new CMHatchPartMachine(holder, CMHatchPartMachine.LAW_DUMMY_CLEANROOM))
             .rotationState(RotationState.ALL)
             .abilities(PartAbility.MAINTENANCE)
             .tooltips(Component.translatable("gtceu.universal.disabled"),
                     Component.translatable("gtceu.machine.maintenance_hatch_cleanroom_auto.tooltip.0"),
                     Component.translatable("gtceu.machine.maintenance_hatch_cleanroom_auto.tooltip.1"))
             .tooltipBuilder((stack, tooltips) -> {
-                for (CleanroomType type : CleaningMaintenancePartMachine
-                        .getCleanroomTypes(CleaningMaintenancePartMachine.LAW_DUMMY_CLEANROOM)) {
+                for (CleanroomType type : CMHatchPartMachine
+                        .getCleanroomTypes(CMHatchPartMachine.LAW_DUMMY_CLEANROOM)) {
                     tooltips.add(Component.literal(String.format("  %s%s", ChatFormatting.GREEN,
                             Component.translatable(type.getTranslationKey()).getString())));
                 }
@@ -567,7 +587,7 @@ public class GTLMachines {
             .register();
 
     public static final MachineDefinition AUTO_CONFIGURATION_MAINTENANCE_HATCH = REGISTRATE
-            .machine("auto_configuration_maintenance_hatch", AutoConfigurationMaintenanceHatchPartMachine::new)
+            .machine("auto_configuration_maintenance_hatch", ACMHatchPartMachine::new)
             .rotationState(RotationState.ALL)
             .abilities(PartAbility.MAINTENANCE)
             .tooltips(Component.translatable("gtceu.universal.disabled"))
@@ -575,16 +595,15 @@ public class GTLMachines {
             .register();
 
     public static final MachineDefinition CLEANING_CONFIGURATION_MAINTENANCE_HATCH = REGISTRATE
-            .machine("cleaning_configuration_maintenance_hatch",
-                    CleaningConfigurationMaintenanceHatchPartMachine::Cleaning)
+            .machine("cleaning_configuration_maintenance_hatch", holder -> new CCMHatchPartMachine(holder, CMHatchPartMachine.DUMMY_CLEANROOM))
             .rotationState(RotationState.ALL)
             .abilities(PartAbility.MAINTENANCE)
             .tooltips(Component.translatable("gtceu.universal.disabled"),
                     Component.translatable("gtceu.machine.maintenance_hatch_cleanroom_auto.tooltip.0"),
                     Component.translatable("gtceu.machine.maintenance_hatch_cleanroom_auto.tooltip.1"))
             .tooltipBuilder((stack, tooltips) -> {
-                for (CleanroomType type : CleaningConfigurationMaintenanceHatchPartMachine
-                        .getCleanroomTypes(CleaningConfigurationMaintenanceHatchPartMachine.DUMMY_CLEANROOM)) {
+                for (CleanroomType type : CMHatchPartMachine
+                        .getCleanroomTypes(CMHatchPartMachine.DUMMY_CLEANROOM)) {
                     tooltips.add(Component.literal(String.format("  %s%s", ChatFormatting.GREEN,
                             Component.translatable(type.getTranslationKey()).getString())));
                 }
@@ -593,16 +612,15 @@ public class GTLMachines {
             .register();
 
     public static final MachineDefinition STERILE_CONFIGURATION_CLEANING_MAINTENANCE_HATCH = REGISTRATE
-            .machine("sterile_configuration_cleaning_maintenance_hatch",
-                    CleaningConfigurationMaintenanceHatchPartMachine::SterileCleaning)
+            .machine("sterile_configuration_cleaning_maintenance_hatch", holder -> new CCMHatchPartMachine(holder, CMHatchPartMachine.STERILE_DUMMY_CLEANROOM))
             .rotationState(RotationState.ALL)
             .abilities(PartAbility.MAINTENANCE)
             .tooltips(Component.translatable("gtceu.universal.disabled"),
                     Component.translatable("gtceu.machine.maintenance_hatch_cleanroom_auto.tooltip.0"),
                     Component.translatable("gtceu.machine.maintenance_hatch_cleanroom_auto.tooltip.1"))
             .tooltipBuilder((stack, tooltips) -> {
-                for (CleanroomType type : CleaningConfigurationMaintenanceHatchPartMachine
-                        .getCleanroomTypes(CleaningConfigurationMaintenanceHatchPartMachine.STERILE_DUMMY_CLEANROOM)) {
+                for (CleanroomType type : CMHatchPartMachine
+                        .getCleanroomTypes(CMHatchPartMachine.STERILE_DUMMY_CLEANROOM)) {
                     tooltips.add(Component.literal(String.format("  %s%s", ChatFormatting.GREEN,
                             Component.translatable(type.getTranslationKey()).getString())));
                 }
@@ -611,21 +629,122 @@ public class GTLMachines {
             .register();
 
     public static final MachineDefinition LAW_CONFIGURATION_CLEANING_MAINTENANCE_HATCH = REGISTRATE
-            .machine("law_configuration_cleaning_maintenance_hatch",
-                    CleaningConfigurationMaintenanceHatchPartMachine::LawCleaning)
+            .machine("law_configuration_cleaning_maintenance_hatch", holder -> new CCMHatchPartMachine(holder, CMHatchPartMachine.LAW_DUMMY_CLEANROOM))
             .rotationState(RotationState.ALL)
             .abilities(PartAbility.MAINTENANCE)
             .tooltips(Component.translatable("gtceu.universal.disabled"),
                     Component.translatable("gtceu.machine.maintenance_hatch_cleanroom_auto.tooltip.0"),
                     Component.translatable("gtceu.machine.maintenance_hatch_cleanroom_auto.tooltip.1"))
             .tooltipBuilder((stack, tooltips) -> {
-                for (CleanroomType type : CleaningConfigurationMaintenanceHatchPartMachine
-                        .getCleanroomTypes(CleaningConfigurationMaintenanceHatchPartMachine.LAW_DUMMY_CLEANROOM)) {
+                for (CleanroomType type : CMHatchPartMachine
+                        .getCleanroomTypes(CMHatchPartMachine.LAW_DUMMY_CLEANROOM)) {
                     tooltips.add(Component.literal(String.format("  %s%s", ChatFormatting.GREEN,
                             Component.translatable(type.getTranslationKey()).getString())));
                 }
             })
             .renderer(() -> new MaintenanceHatchPartRenderer(12, GTLCore.id("block/machine/part/maintenance.law_cleaning")))
+            .register();
+
+    public static final MachineDefinition CLEANING_GRAVITY_MAINTENANCE_HATCH = REGISTRATE
+            .machine("cleaning_gravity_maintenance_hatch", holder -> new CGMHatchPartMachine(holder, CMHatchPartMachine.DUMMY_CLEANROOM))
+            .rotationState(RotationState.ALL)
+            .abilities(PartAbility.MAINTENANCE)
+            .tooltips(Component.translatable("gtceu.universal.disabled"),
+                    Component.translatable("gtceu.machine.maintenance_hatch_cleanroom_auto.tooltip.0"),
+                    Component.translatable("gtceu.machine.maintenance_hatch_cleanroom_auto.tooltip.1"))
+            .tooltipBuilder((stack, tooltips) -> {
+                for (CleanroomType type : CMHatchPartMachine
+                        .getCleanroomTypes(CMHatchPartMachine.DUMMY_CLEANROOM)) {
+                    tooltips.add(Component.literal(String.format("  %s%s", ChatFormatting.GREEN,
+                            Component.translatable(type.getTranslationKey()).getString())));
+                }
+            })
+            .renderer(() -> new MaintenanceHatchPartRenderer(9, GTCEu.id("block/machine/part/maintenance.cleaning")))
+            .register();
+
+    public static final MachineDefinition STERILE_GRAVITY_CLEANING_MAINTENANCE_HATCH = REGISTRATE
+            .machine("sterile_gravity_cleaning_maintenance_hatch", holder -> new CGMHatchPartMachine(holder, CMHatchPartMachine.STERILE_DUMMY_CLEANROOM))
+            .rotationState(RotationState.ALL)
+            .abilities(PartAbility.MAINTENANCE)
+            .tooltips(Component.translatable("gtceu.universal.disabled"),
+                    Component.translatable("gtceu.machine.maintenance_hatch_cleanroom_auto.tooltip.0"),
+                    Component.translatable("gtceu.machine.maintenance_hatch_cleanroom_auto.tooltip.1"))
+            .tooltipBuilder((stack, tooltips) -> {
+                for (CleanroomType type : CMHatchPartMachine
+                        .getCleanroomTypes(CMHatchPartMachine.STERILE_DUMMY_CLEANROOM)) {
+                    tooltips.add(Component.literal(String.format("  %s%s", ChatFormatting.GREEN,
+                            Component.translatable(type.getTranslationKey()).getString())));
+                }
+            })
+            .renderer(() -> new MaintenanceHatchPartRenderer(11, GTLCore.id("block/machine/part/maintenance.sterile_cleaning")))
+            .register();
+
+    public static final MachineDefinition LAW_GRAVITY_CLEANING_MAINTENANCE_HATCH = REGISTRATE
+            .machine("law_gravity_cleaning_maintenance_hatch", holder -> new CGMHatchPartMachine(holder, CMHatchPartMachine.LAW_DUMMY_CLEANROOM))
+            .rotationState(RotationState.ALL)
+            .abilities(PartAbility.MAINTENANCE)
+            .tooltips(Component.translatable("gtceu.universal.disabled"),
+                    Component.translatable("gtceu.machine.maintenance_hatch_cleanroom_auto.tooltip.0"),
+                    Component.translatable("gtceu.machine.maintenance_hatch_cleanroom_auto.tooltip.1"))
+            .tooltipBuilder((stack, tooltips) -> {
+                for (CleanroomType type : CMHatchPartMachine
+                        .getCleanroomTypes(CMHatchPartMachine.LAW_DUMMY_CLEANROOM)) {
+                    tooltips.add(Component.literal(String.format("  %s%s", ChatFormatting.GREEN,
+                            Component.translatable(type.getTranslationKey()).getString())));
+                }
+            })
+            .renderer(() -> new MaintenanceHatchPartRenderer(13, GTLCore.id("block/machine/part/maintenance.law_cleaning")))
+            .register();
+
+    public static final MachineDefinition CLEANING_GRAVITY_CONFIGURATION_MAINTENANCE_HATCH = REGISTRATE
+            .machine("cleaning_gravity_configuration_maintenance_hatch", holder -> new CGCMHatchPartMachine(holder, CMHatchPartMachine.DUMMY_CLEANROOM))
+            .rotationState(RotationState.ALL)
+            .abilities(PartAbility.MAINTENANCE)
+            .tooltips(Component.translatable("gtceu.universal.disabled"),
+                    Component.translatable("gtceu.machine.maintenance_hatch_cleanroom_auto.tooltip.0"),
+                    Component.translatable("gtceu.machine.maintenance_hatch_cleanroom_auto.tooltip.1"))
+            .tooltipBuilder((stack, tooltips) -> {
+                for (CleanroomType type : CMHatchPartMachine
+                        .getCleanroomTypes(CMHatchPartMachine.DUMMY_CLEANROOM)) {
+                    tooltips.add(Component.literal(String.format("  %s%s", ChatFormatting.GREEN,
+                            Component.translatable(type.getTranslationKey()).getString())));
+                }
+            })
+            .renderer(() -> new MaintenanceHatchPartRenderer(10, GTCEu.id("block/machine/part/maintenance.cleaning")))
+            .register();
+
+    public static final MachineDefinition STERILE_GRAVITY_CONFIGURATION_CLEANING_MAINTENANCE_HATCH = REGISTRATE
+            .machine("sterile_gravity_configuration_cleaning_maintenance_hatch", holder -> new CGCMHatchPartMachine(holder, CMHatchPartMachine.STERILE_DUMMY_CLEANROOM))
+            .rotationState(RotationState.ALL)
+            .abilities(PartAbility.MAINTENANCE)
+            .tooltips(Component.translatable("gtceu.universal.disabled"),
+                    Component.translatable("gtceu.machine.maintenance_hatch_cleanroom_auto.tooltip.0"),
+                    Component.translatable("gtceu.machine.maintenance_hatch_cleanroom_auto.tooltip.1"))
+            .tooltipBuilder((stack, tooltips) -> {
+                for (CleanroomType type : CMHatchPartMachine
+                        .getCleanroomTypes(CMHatchPartMachine.STERILE_DUMMY_CLEANROOM)) {
+                    tooltips.add(Component.literal(String.format("  %s%s", ChatFormatting.GREEN,
+                            Component.translatable(type.getTranslationKey()).getString())));
+                }
+            })
+            .renderer(() -> new MaintenanceHatchPartRenderer(12, GTLCore.id("block/machine/part/maintenance.sterile_cleaning")))
+            .register();
+
+    public static final MachineDefinition LAW_GRAVITY_CONFIGURATION_CLEANING_MAINTENANCE_HATCH = REGISTRATE
+            .machine("law_gravity_configuration_cleaning_maintenance_hatch", holder -> new CGCMHatchPartMachine(holder, CMHatchPartMachine.LAW_DUMMY_CLEANROOM))
+            .rotationState(RotationState.ALL)
+            .abilities(PartAbility.MAINTENANCE)
+            .tooltips(Component.translatable("gtceu.universal.disabled"),
+                    Component.translatable("gtceu.machine.maintenance_hatch_cleanroom_auto.tooltip.0"),
+                    Component.translatable("gtceu.machine.maintenance_hatch_cleanroom_auto.tooltip.1"))
+            .tooltipBuilder((stack, tooltips) -> {
+                for (CleanroomType type : CMHatchPartMachine
+                        .getCleanroomTypes(CMHatchPartMachine.LAW_DUMMY_CLEANROOM)) {
+                    tooltips.add(Component.literal(String.format("  %s%s", ChatFormatting.GREEN,
+                            Component.translatable(type.getTranslationKey()).getString())));
+                }
+            })
+            .renderer(() -> new MaintenanceHatchPartRenderer(14, GTLCore.id("block/machine/part/maintenance.law_cleaning")))
             .register();
 
     public static final MachineDefinition GRAVITY_HATCH = REGISTRATE

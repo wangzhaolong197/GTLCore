@@ -1,5 +1,7 @@
 package org.gtlcore.gtlcore.common.machine.multiblock.part;
 
+import org.gtlcore.gtlcore.api.machine.part.IGravityPartMachine;
+
 import com.gregtechceu.gtceu.api.gui.widget.IntInputWidget;
 import com.gregtechceu.gtceu.api.machine.IMachineBlockEntity;
 import com.gregtechceu.gtceu.api.machine.multiblock.part.MultiblockPartMachine;
@@ -16,7 +18,7 @@ import lombok.Getter;
 import org.jetbrains.annotations.NotNull;
 
 @Getter
-public class GravityPartMachine extends AutoMaintenanceHatchPartMachine {
+public class GravityPartMachine extends AutoMaintenanceHatchPartMachine implements IGravityPartMachine {
 
     protected static final ManagedFieldHolder MANAGED_FIELD_HOLDER = new ManagedFieldHolder(
             GravityPartMachine.class, MultiblockPartMachine.MANAGED_FIELD_HOLDER);
