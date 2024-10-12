@@ -810,6 +810,10 @@ public class GTLMaterials {
     public static Material LutetiumExtractedNanoResin;
     public static Material ScandiumExtractedNanoResin;
     public static Material YttriumExtractedNanoResin;
+    public static Material LowGuideMagic;
+    public static Material MiddleGuideMagic;
+    public static Material HighGuideMagic;
+    public static Material LimitlessGuideMagic;
 
     public static void init() {
         MaterialAdd.init();

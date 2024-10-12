@@ -640,5 +640,7 @@
     "item.gtlcore.time_twister": "时间扭曲者",
     "item.gtlcore.transcendent_max_battery": "超·终极电池",
     "structure_writer.export_order": "导出顺序： C:%s  S:%s  A:%s",
-    "structure_writer.structural_scale": "结构规模： X:%s  Y:%s  Z:%s"
+    "structure_writer.structural_scale": "结构规模： X:%s  Y:%s  Z:%s",
+    "block.gtlcore.ancient_echoes_altar": "远古之门祭坛",
+    "block.gtlcore.mystic_revelation_platform": "秘法启示台"
 }

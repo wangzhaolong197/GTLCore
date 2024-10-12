@@ -1,5 +1,6 @@
 package org.gtlcore.gtlcore.common.data.material;
 
+import com.gregtechceu.gtceu.api.data.chemical.material.info.MaterialFlag;
 import org.gtlcore.gtlcore.api.data.chemical.material.info.GTLMaterialFlags;
 import org.gtlcore.gtlcore.api.data.chemical.material.info.GTLMaterialIconSet;
 import org.gtlcore.gtlcore.api.item.tool.GTLToolType;
@@ -19,6 +20,7 @@ import static com.gregtechceu.gtceu.api.data.chemical.material.info.MaterialFlag
 import static com.gregtechceu.gtceu.api.data.chemical.material.info.MaterialIconSet.*;
 import static com.gregtechceu.gtceu.api.data.chemical.material.properties.BlastProperty.GasTier.*;
 import static com.gregtechceu.gtceu.common.data.GTMaterials.*;
+import static com.gregtechceu.gtceu.common.data.GTRecipeTypes.FORGE_HAMMER_RECIPES;
 import static org.gtlcore.gtlcore.common.data.GTLMaterials.*;
 
 public class MaterialBuilder {
@@ -2040,6 +2042,7 @@ public class MaterialBuilder {
 
         Mana = new Material.Builder(GTCEu.id("mana"))
                 .gas()
+                .liquid()
                 .color(0x9400d3)
                 .element(GTLElements.MANA)
                 .iconSet(DULL)
@@ -5989,5 +5992,39 @@ public class MaterialBuilder {
                 .color(0x008000)
                 .iconSet(GTLMaterialIconSet.LIMPID)
                 .buildAndRegister();
+
+        // 魔法注册
+
+        LowGuideMagic = new Material.Builder(GTCEu.id("low_guide_magic"))
+                .gem()
+                .ore(1, 1, true)
+                .color(0xfae6ff)
+                .iconSet(RUBY)
+                .flags(GTLMaterialFlags.GENERATE_MAGICCRYSTAL)
+                .buildAndRegister().setFormula("§7 ༒ ");
+
+        MiddleGuideMagic = new Material.Builder(GTCEu.id("middle_guide_magic"))
+                .gem()
+                .ore(1, 1, true)
+                .color(0xeb99ff)
+                .iconSet(RUBY)
+                .flags(GTLMaterialFlags.GENERATE_MAGICCRYSTAL)
+                .buildAndRegister().setFormula("§6 ༒ ");
+
+        HighGuideMagic = new Material.Builder(GTCEu.id("high_guide_magic"))
+                .gem()
+                .ore(1, 1, true)
+                .color(0xdb4dff)
+                .iconSet(RUBY)
+                .flags(GTLMaterialFlags.GENERATE_MAGICCRYSTAL)
+                .buildAndRegister().setFormula("§2 ༒ ");
+
+        LimitlessGuideMagic = new Material.Builder(GTCEu.id("limitless_guide_magic"))
+                .gem()
+                .ore(1, 1, true)
+                .color(0xcc00ff)
+                .iconSet(RUBY)
+                .flags(GTLMaterialFlags.GENERATE_MAGICCRYSTAL)
+                .buildAndRegister().setFormula("§5§ke§r ༒ §ke§r");
     }
 }

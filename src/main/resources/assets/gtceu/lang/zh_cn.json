@@ -1181,5 +1181,12 @@
     "tagprefix.nanoswarm": "%s纳米蜂群",
     "tagprefix.plutostone": "冥王星%s矿石",
     "tagprefix.titanstone": "土卫六%s矿石",
-    "tagprefix.venus_stone": "金星石%s矿石"
+    "tagprefix.venus_stone": "金星石%s矿石",
+    "material.gtceu.low_guide_magic": "劣质导魔石",
+    "material.gtceu.middle_guide_magic": "优质导魔石",
+    "material.gtceu.high_guide_magic": "极品导魔石",
+    "material.gtceu.limitless_guide_magic": "无限导魔石",
+    "tagprefix.magiccrystal": "%s晶",
+    "gtceu.yuangu_huixiang": "远古呼唤",
+    "gtceu.anzhu_qihui": "暗珠启辉"
 }

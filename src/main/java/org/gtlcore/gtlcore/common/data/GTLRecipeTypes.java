@@ -744,6 +744,20 @@ public class GTLRecipeTypes {
             .setProgressBar(GuiTextures.PROGRESS_BAR_ARROW, LEFT_TO_RIGHT)
             .setSound(GTSoundEntries.MIXER);
 
+    // 远古呼唤
+    public static final GTRecipeType YUANHU_HUIXIANG = register("yuangu_huixiang", MULTIBLOCK)
+            .setEUIO(IO.NONE)
+            .setMaxIOSize(3, 3, 3, 3)
+            .setProgressBar(GuiTextures.PROGRESS_BAR_ARROW, LEFT_TO_RIGHT)
+            .setSound(GTSoundEntries.FORGE_HAMMER);
+
+    // 暗珠启辉
+    public static final GTRecipeType ANZHU_QIHUI = register("anzhu_qihui", MULTIBLOCK)
+            .setEUIO(IO.NONE)
+            .setMaxIOSize(1, 1, 0, 0)
+            .setProgressBar(GuiTextures.PROGRESS_BAR_ARROW, LEFT_TO_RIGHT)
+            .setSound(GTSoundEntries.FORGE_HAMMER);
+
     public static void init() {
         RecipeModify.init();
     }
