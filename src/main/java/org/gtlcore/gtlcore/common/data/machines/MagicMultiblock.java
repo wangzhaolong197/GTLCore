@@ -49,7 +49,7 @@ public class MagicMultiblock {
                     .where("A", Predicates.blocks(Registries.getBlock("minecraft:stone_bricks")))
                     .where("E", Predicates.blocks(Registries.getBlock("minecraft:soul_fire")))
                     .where("I", Predicates.controller(Predicates.blocks(definition.get())))
-                    .where("C", Predicates.blocks(Registries.getBlock("minecraft:deepslate_tiles")))
+                    .where("C", Predicates.blocks(GTLBlocks.MAGIC_COIL_LOW_BLOCK.get()))
                     .build())
             .workableCasingRenderer(new ResourceLocation("minecraft:block/stone_bricks"), new ResourceLocation("minecraft:block/stone_bricks"))
             .register();
@@ -95,7 +95,7 @@ public class MagicMultiblock {
                     .where("N", Predicates.blocks(Registries.getBlock("minecraft:purple_stained_glass")))
                     .where("B", Predicates.blocks(Registries.getBlock("minecraft:cobblestone_wall")))
                     .where("M", Predicates.blocks(Registries.getBlock("minecraft:oak_fence")))
-                    .where("A", Predicates.blocks(Registries.getBlock("gtceu:low_guide_magic_stone_block")))
+                    .where("A", Predicates.blocks(GTLBlocks.MAGIC_MECHANICAL_LOW_CUBE.get()))
                     .where("L", Predicates.blocks(Registries.getBlock("minecraft:sea_lantern")))
                     .build())
             .workableCasingRenderer(new ResourceLocation("minecraft:block/stone_bricks"), GTCEu.id("block/multiblock/vacuum_freezer"))

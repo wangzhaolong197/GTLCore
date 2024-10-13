@@ -1,0 +1,7 @@
+{
+  "variants": {
+    "": {
+      "model": "gtlcore:block/magic_coil_low_block"
+    }
+  }
+}

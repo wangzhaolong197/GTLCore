@@ -42,12 +42,6 @@ public class MagicFormula {
                     .duration(1200)
                     .save(provider);
 
-            ANZHU_QIHUI.recipeBuilder("anzhu_qihui_gemExquisite_" + i)
-                    .inputItems(gemExquisite, rareEarthElement, 1)
-                    .outputItems(magiccrystal, rareEarthElement, 1)
-                    .duration(200)
-                    .save(provider);
-
         }
     }
 }

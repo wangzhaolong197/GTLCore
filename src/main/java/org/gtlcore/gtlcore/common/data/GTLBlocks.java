@@ -58,6 +58,7 @@ public class GTLBlocks {
     public static Map<Integer, Supplier<Block>> scmap = new HashMap<>();
     public static Map<Integer, Supplier<ActiveBlock>> sepmmap = new HashMap<>();
     public static Map<Integer, Supplier<Block>> calmap = new HashMap<>();
+    public static Map<Integer, Supplier<Block>> mgmap = new HashMap<>();
 
     static {
         REGISTRATE.creativeModeTab(() -> GTLCreativeModeTabs.GTL_CORE);
@@ -553,6 +554,11 @@ public class GTLBlocks {
     public static final BlockEntry<Block> DEGENERATE_RHENIUM_CONSTRAINED_CASING = createCasingBlock(
             "degenerate_rhenium_constrained_casing", GTLCore.id("block/casings/degenerate_rhenium_constrained_casing"));
 
+    public static final BlockEntry<Block> PRESSURE_CONTAINMENT_CASING = createCasingBlock(
+            "pressure_containment_casing", GTLCore.id("block/pressure_containment_casing"));
+    public static final BlockEntry<Block> DRACONIUMAWAKENED_CASING = createCasingBlock(
+            "draconiumawakened_casing", GTLCore.id("block/draconiumawakened_casing"));
+
     public static final BlockEntry<Block> FORCE_FIELD_GLASS = createGlassCasingBlock(
             "force_field_glass", GTLCore.id("block/force_field_glass"), () -> RenderType::cutoutMipped);
     public static final BlockEntry<Block> INFINITY_GLASS = createGlassCasingBlock(
@@ -602,4 +608,54 @@ public class GTLBlocks {
             "block/variant/power_module", sepmmap, 4);
     public static final BlockEntry<ActiveBlock> POWER_MODULE_5 = GTLBlocks.createActiveTierCasing("power_module_5",
             "block/variant/power_module", sepmmap, 5);
+
+    public static final BlockEntry<Block> ELECTRON_PERMEABLE_NEUTRONIUM_COATED_GLASS = createGlassCasingBlock(
+            "electron_permeable_neutronium_coated_glass", GTLCore.id("block/casings/electron_permeable_neutronium_coated_glass"), () -> RenderType::translucent);
+    public static final BlockEntry<Block> NON_PHOTONIC_MATTER_EXCLUSION_GLASS = createGlassCasingBlock(
+            "non_photonic_matter_exclusion_glass", GTLCore.id("block/casings/non_photonic_matter_exclusion_glass"), () -> RenderType::translucent);
+    public static final BlockEntry<Block> SPATIALLY_TRANSCENDENT_GRAVITATIONAL_LENS_BLOCK = createGlassCasingBlock(
+            "spatially_transcendent_gravitational_lens_block", GTLCore.id("block/casings/spatially_transcendent_gravitational_lens_block"), () -> RenderType::translucent);
+    public static final BlockEntry<Block> OMNI_PURPOSE_INFINITY_FUSED_GLASS = createGlassCasingBlock(
+            "omni_purpose_infinity_fused_glass", GTLCore.id("block/casings/omni_purpose_infinity_fused_glass"), () -> RenderType::translucent);
+    public static final BlockEntry<Block> HAWKING_RADIATION_REALIGNMENT_FOCUS = createGlassCasingBlock(
+            "hawking_radiation_realignment_focus", GTLCore.id("block/casings/hawking_radiation_realignment_focus"), () -> RenderType::translucent);
+    public static final BlockEntry<Block> CHEMICAL_GRADE_GLASS = createGlassCasingBlock(
+            "chemical_grade_glass", GTLCore.id("block/casings/chemical_grade_glass"), () -> RenderType::translucent);
+
+    public static final BlockEntry<Block> QUANTUM_GLASS = createCasingBlock("quantum_glass",
+            arg -> new GlassBlock(arg) {
+
+                @Override
+                public void appendHoverText(@NotNull ItemStack stack, @Nullable BlockGetter level,
+                                            @NotNull List<Component> tooltip, @NotNull TooltipFlag flag) {
+                    tooltip.add(Component.translatable("tooltip.gtlcore.quantum_glass.0"));
+                    tooltip.add(Component.translatable("tooltip.gtlcore.quantum_glass.1"));
+                }
+            },
+            GTLCore.id("block/casings/quantum_glass"), () -> Blocks.GLASS, () -> RenderType::translucent);
+
+    public static final BlockEntry<Block> MAGIC_MECHANICAL_LOW_CUBE = createTierCasings(
+            "magic_mechanical_low_cube", GTLCore.id("block/magic/magic_mechanical_low_cube"),
+            mgmap, 1);
+    public static final BlockEntry<Block> MAGIC_MECHANICAL_MIDDLE_CUBE = createTierCasings(
+            "magic_mechanical_middle_cube", GTLCore.id("block/magic/magic_mechanical_middle_cube"),
+            mgmap, 2);
+    public static final BlockEntry<Block> MAGIC_MECHANICAL_HIGH_CUBE = createTierCasings(
+            "magic_mechanical_high_cube", GTLCore.id("block/magic/magic_mechanical_high_cube"),
+            mgmap, 3);
+
+    public static final BlockEntry<Block> MAGIC_COIL_LOW_BLOCK = createTierCasings(
+            "magic_coil_low_block", GTLCore.id("block/magic/magic_coil_low_block"),
+            mgmap, 1);
+    public static final BlockEntry<Block> MAGIC_COIL_MIDDLE_BLOCK = createTierCasings(
+            "magic_coil_middle_block", GTLCore.id("block/magic/magic_coil_middle_block"),
+            mgmap, 2);
+    public static final BlockEntry<Block> MAGIC_COIL_HIGH_BLOCK = createTierCasings(
+            "magic_coil_high_block", GTLCore.id("block/magic/magic_coil_high_block"),
+            mgmap, 3);
+
+    public static final BlockEntry<Block> MAGIC_GLASS_BLOCK = createGlassCasingBlock(
+            "magic_glass_block", GTLCore.id("block/magic/magic_glass_block"), () -> RenderType::translucent);
+    public static final BlockEntry<Block> ARCANE_GLASS_BLOCK = createGlassCasingBlock(
+            "arcane_glass_block", GTLCore.id("block/magic/arcane_glass_block"), () -> RenderType::translucent);
 }
