@@ -123,6 +123,8 @@ public class MachineRecipe {
                 CABLE, 'G', CONVEYOR);
         registerMachineRecipe(provider, GTLMachines.LOOM, "CWC", "EME", "EWE", 'M', HULL, 'E', MOTOR, 'C', CIRCUIT,
                 'W', CABLE);
+        registerMachineRecipe(provider, GTLMachines.VACUUM_PUMP, "CLC", "LML", "PLP", 'M', HULL, 'P', PUMP, 'C', CIRCUIT,
+                'W', CABLE, 'L', PIPE_LARGE);
 
         VanillaRecipeHelper.addShapedRecipe(provider, true, "rotor_holder_uhv", GTLMachines.ROTOR_HOLDER[UHV].asStack(),
                 "SGS", "GHG", "SGS", 'H', GTMachines.HULL[GTValues.UHV].asStack(), 'G',
@@ -252,6 +254,9 @@ public class MachineRecipe {
                 AdvancedMultiBlockMachine.LARGE_BLOCK_CONVERSION_ROOM.asStack(), "SES", "EHE", "SES",
                 'S', GTItems.SENSOR_ZPM.asStack(), 'E', GTItems.EMITTER_ZPM.asStack(), 'H',
                 AdvancedMultiBlockMachine.BLOCK_CONVERSION_ROOM.asStack());
+
+        VanillaRecipeHelper.addShapedRecipe(provider, true, "steam_vacuum_pump", GTLMachines.STEAM_VACUUM_PUMP.first().asStack(), "DSD",
+                "SMS", "GSG", 'M', GTBlocks.BRONZE_BRICKS_HULL.asStack(), 'S', new UnificationEntry(TagPrefix.pipeNormalFluid, GTMaterials.Bronze), 'D', GTMachines.BRONZE_DRUM.asStack(), 'G', new UnificationEntry(TagPrefix.gearSmall, GTMaterials.Bronze));
 
         ASSEMBLER_RECIPES.recipeBuilder(GTLCore.id("zpm_fluid_drilling_rig"))
                 .inputItems(GTMachines.HULL[UV])
