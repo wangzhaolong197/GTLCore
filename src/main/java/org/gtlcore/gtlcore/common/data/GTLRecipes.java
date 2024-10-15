@@ -18,7 +18,7 @@ public class GTLRecipes {
     public static void recipeAddition(Consumer<FinishedRecipe> provider) {
         GCyMRecipes.init(provider);
         MachineRecipe.init(provider);
-        Misc.init(provider);
+        MiscRecipe.init(provider);
         ElementCopying.init(provider);
         StoneDustProcess.init(provider);
         Lanthanidetreatment.init(provider);
@@ -26,5 +26,6 @@ public class GTLRecipes {
         CircuitRecipes.init(provider);
         MixerRecipes.init(provider);
         RadiationHatchRecipes.init(provider);
+        RecipeOverwrite.init(provider);
     }
 }

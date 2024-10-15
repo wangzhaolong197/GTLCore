@@ -12,6 +12,7 @@ import com.gregtechceu.gtceu.api.data.chemical.material.stack.UnificationEntry;
 import com.gregtechceu.gtceu.api.data.tag.TagPrefix;
 import com.gregtechceu.gtceu.api.data.tag.TagUtil;
 import com.gregtechceu.gtceu.api.item.ComponentItem;
+import com.gregtechceu.gtceu.api.machine.MachineDefinition;
 import com.gregtechceu.gtceu.common.data.GTBlocks;
 import com.gregtechceu.gtceu.common.data.GTItems;
 import com.gregtechceu.gtceu.common.data.GTMachines;
@@ -27,8 +28,8 @@ import com.tterrag.registrate.util.entry.ItemEntry;
 import java.util.List;
 import java.util.function.Consumer;
 
-import static com.gregtechceu.gtceu.api.GTValues.MAX;
-import static com.gregtechceu.gtceu.api.GTValues.VN;
+import static com.gregtechceu.gtceu.api.GTValues.*;
+import static com.gregtechceu.gtceu.api.GTValues.VA;
 import static com.gregtechceu.gtceu.common.data.GTRecipeTypes.ASSEMBLER_RECIPES;
 import static com.gregtechceu.gtceu.data.recipe.CraftingComponent.*;
 import static com.gregtechceu.gtceu.data.recipe.misc.MetaTileEntityLoader.registerMachineRecipe;
@@ -69,22 +70,22 @@ public class HatchRecipe {
             var exportHatch9x = GTMachines.FLUID_EXPORT_HATCH_9X[tier];
 
             VanillaRecipeHelper.addShapedRecipe(
-                    provider, true, "fluid_import_hatch_4x_" + tierName,
+                    provider, true, GTLCore.id("fluid_import_hatch_4x_" + tierName),
                     importHatch4x.asStack(), "P", "M",
                     'M', importHatch.asStack(),
                     'P', new UnificationEntry(TagPrefix.pipeQuadrupleFluid, material));
             VanillaRecipeHelper.addShapedRecipe(
-                    provider, true, "fluid_export_hatch_4x_" + tierName,
+                    provider, true, GTLCore.id("fluid_export_hatch_4x_" + tierName),
                     exportHatch4x.asStack(), "M", "P",
                     'M', exportHatch.asStack(),
                     'P', new UnificationEntry(TagPrefix.pipeQuadrupleFluid, material));
             VanillaRecipeHelper.addShapedRecipe(
-                    provider, true, "fluid_import_hatch_9x_" + tierName,
+                    provider, true, GTLCore.id("fluid_import_hatch_9x_" + tierName),
                     importHatch9x.asStack(), "P", "M",
                     'M', importHatch.asStack(),
                     'P', new UnificationEntry(TagPrefix.pipeNonupleFluid, material));
             VanillaRecipeHelper.addShapedRecipe(
-                    provider, true, "fluid_export_hatch_9x_" + tierName,
+                    provider, true, GTLCore.id("fluid_export_hatch_9x_" + tierName),
                     exportHatch9x.asStack(), "M", "P",
                     'M', exportHatch.asStack(),
                     'P', new UnificationEntry(TagPrefix.pipeNonupleFluid, material));
@@ -317,5 +318,56 @@ public class HatchRecipe {
                 .duration(200)
                 .EUt(GTValues.VA[MAX])
                 .save(provider);
+
+        for (int tier = 1; tier < 4; tier++) {
+            var hatch = GTLMachines.ENERGY_INPUT_HATCH_4A[tier];
+
+            ASSEMBLER_RECIPES.recipeBuilder("energy_hatch_4a_" + GTValues.VN[tier].toLowerCase())
+                    .inputItems(GTMachines.ENERGY_INPUT_HATCH[tier])
+                    .inputItems(WIRE_QUAD.getIngredient(tier), 2)
+                    .inputItems(PLATE.getIngredient(tier), 2)
+                    .outputItems(hatch)
+                    .duration(100).EUt(VA[tier]).save(provider);
+        }
+
+        for (int tier = 1; tier < 4; tier++) {
+            MachineDefinition hatch = GTLMachines.ENERGY_INPUT_HATCH_16A[tier];
+            MachineDefinition transformer;
+            transformer = GTMachines.TRANSFORMER[tier];
+            ASSEMBLER_RECIPES.recipeBuilder(GTLCore.id("energy_hatch_16a_" + GTValues.VN[tier].toLowerCase()))
+                    .inputItems(transformer)
+                    .inputItems(GTLMachines.ENERGY_INPUT_HATCH_4A[tier])
+                    .inputItems(WIRE_OCT.getIngredient(tier), 2)
+                    .inputItems(PLATE.getIngredient(tier), 4)
+                    .outputItems(hatch)
+                    .duration(200).EUt(VA[tier]).save(provider);
+        }
+
+        for (int tier = 1; tier < 4; tier++) {
+            var hatch = GTLMachines.ENERGY_OUTPUT_HATCH_4A[tier];
+            ASSEMBLER_RECIPES.recipeBuilder(GTLCore.id("dynamo_hatch_4a_" + GTValues.VN[tier].toLowerCase()))
+                    .inputItems(GTMachines.ENERGY_OUTPUT_HATCH[tier])
+                    .inputItems(WIRE_QUAD.getIngredient(tier), 2)
+                    .inputItems(PLATE.getIngredient(tier), 2)
+                    .outputItems(hatch)
+                    .duration(100)
+                    .EUt(VA[tier])
+                    .save(provider);
+        }
+
+        for (int tier = 1; tier < 4; tier++) {
+            MachineDefinition hatch = GTLMachines.ENERGY_OUTPUT_HATCH_16A[tier];
+
+            MachineDefinition transformer;
+            transformer = GTMachines.TRANSFORMER[tier];
+
+            ASSEMBLER_RECIPES.recipeBuilder(GTLCore.id("dynamo_hatch_16a_" + GTValues.VN[tier].toLowerCase()))
+                    .inputItems(transformer)
+                    .inputItems(GTLMachines.ENERGY_OUTPUT_HATCH_4A[tier])
+                    .inputItems(WIRE_OCT.getIngredient(tier), 2)
+                    .inputItems(PLATE.getIngredient(tier), 4)
+                    .outputItems(hatch)
+                    .duration(200).EUt(VA[tier]).save(provider);
+        }
     }
 }

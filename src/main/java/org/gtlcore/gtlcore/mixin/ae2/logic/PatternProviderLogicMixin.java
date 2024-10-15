@@ -1,4 +1,6 @@
-package org.gtlcore.gtlcore.mixin.ae2.login;
+package org.gtlcore.gtlcore.mixin.ae2.logic;
+
+import com.gregtechceu.gtceu.common.data.GTItems;
 
 import com.gregtechceu.gtceu.common.data.GTItems;
 
@@ -20,7 +22,7 @@ import java.util.Set;
 @Mixin(PatternProviderLogic.class)
 public class PatternProviderLogicMixin {
 
-    @Shadow
+    @Shadow(remap = false)
     @Final
     private Set<AEKey> patternInputs;
 
