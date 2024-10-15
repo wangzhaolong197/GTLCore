@@ -57,6 +57,7 @@ public class GTLElements {
     public static Element ASTRALTITANIUM;
     public static Element CELESTIALTUNGSTEN;
     public static Element QUANTANIUM;
+    public static Element HEXAPHASECOPPER;
 
     public static void init() {
         SPACETIME = GTElements.createAndRegister(0, 1000, -1, null, "spacetime", "§7熔炼为流体的时空", false);
@@ -111,5 +112,6 @@ public class GTLElements {
         ASTRALTITANIUM = GTElements.createAndRegister(1000, 1000, -1, null, "astraltitanium", "✧◇✧", false);
         CELESTIALTUNGSTEN = GTElements.createAndRegister(10000, 10000, -1, null, "celestialtungsten", "✦◆✦", false);
         QUANTANIUM = GTElements.createAndRegister(800, 800, -1, null, "quantanium", "Qt", false);
+        HEXAPHASECOPPER = GTElements.createAndRegister(152936, 52460, -1, null, "hexaphasecopper", "✢", false);
     }
 }

@@ -555,9 +555,57 @@ public class GTLBlocks {
             "degenerate_rhenium_constrained_casing", GTLCore.id("block/casings/degenerate_rhenium_constrained_casing"));
 
     public static final BlockEntry<Block> PRESSURE_CONTAINMENT_CASING = createCasingBlock(
-            "pressure_containment_casing", GTLCore.id("block/pressure_containment_casing"));
+            "pressure_containment_casing", GTLCore.id("block/casings/pressure_containment_casing"));
     public static final BlockEntry<Block> DRACONIUMAWAKENED_CASING = createCasingBlock(
-            "draconiumawakened_casing", GTLCore.id("block/draconiumawakened_casing"));
+            "draconiumawakened_casing", GTLCore.id("block/casings/draconiumawakened_casing"));
+    public static final BlockEntry<Block> ANTIMATTER_ANNIHILATION_MATRIX = createCasingBlock(
+            "antimatter_annihilation_matrix", GTLCore.id("block/antimatter_annihilation_matrix"));
+    public static final BlockEntry<Block> ANTIMATTER_CONTAINMENT_CASING = createCasingBlock(
+            "antimatter_containment_casing", GTLCore.id("block/antimatter_containment_casing"));
+    public static final BlockEntry<Block> BOUNDLESS_GRAVITATIONALLY_SEVERED_STRUCTURE_CASING = createCasingBlock(
+            "boundless_gravitationally_severed_structure_casing", GTLCore.id("block/boundless_gravitationally_severed_structure_casing"));
+    public static final BlockEntry<Block> CELESTIAL_MATTER_GUIDANCE_CASING = createCasingBlock(
+            "celestial_matter_guidance_casing", GTLCore.id("block/celestial_matter_guidance_casing"));
+    public static final BlockEntry<Block> COMPRESSOR_CONTROLLER_CASING = createCasingBlock(
+            "compressor_controller_casing", GTLCore.id("block/compressor_controller_casing"));
+    public static final BlockEntry<Block> COMPRESSOR_PIPE_CASING = createCasingBlock(
+            "compressor_pipe_casing", GTLCore.id("block/compressor_pipe_casing"));
+    public static final BlockEntry<Block> EXTREME_DENSITY_CASING = createCasingBlock(
+            "extreme_density_casing", GTLCore.id("block/extreme_density_casing"));
+    public static final BlockEntry<Block> FLOCCULATION_CASING = createCasingBlock(
+            "flocculation_casing", GTLCore.id("block/flocculation_casing"));
+    public static final BlockEntry<Block> GRAVITY_STABILIZATION_CASING = createCasingBlock(
+            "gravity_stabilization_casing", GTLCore.id("block/gravity_stabilization_casing"));
+    public static final BlockEntry<Block> HIGH_PRESSURE_RESISTANT_CASING = createCasingBlock(
+            "high_pressure_resistant_casing", GTLCore.id("block/high_pressure_resistant_casing"));
+    public static final BlockEntry<Block> LASER_CASING = createCasingBlock(
+            "laser_casing", GTLCore.id("block/laser_casing"));
+    public static final BlockEntry<Block> MAGTECH_CASING = createCasingBlock(
+            "magtech_casing", GTLCore.id("block/magtech_casing"));
+    public static final BlockEntry<Block> NAQUADAH_REINFORCED_PLANT_CASING = createCasingBlock(
+            "naquadah_reinforced_plant_casing", GTLCore.id("block/naquadah_reinforced_plant_casing"));
+    public static final BlockEntry<Block> NEUTRONIUM_CASING = createCasingBlock(
+            "neutronium_casing", GTLCore.id("block/neutronium_casing"));
+    public static final BlockEntry<Block> OZONE_CASING = createCasingBlock(
+            "ozone_casing", GTLCore.id("block/ozone_casing"));
+    public static final BlockEntry<Block> PLASMA_HEATER_CASING = createCasingBlock(
+            "plasma_heater_casing", GTLCore.id("block/plasma_heater_casing"));
+    public static final BlockEntry<Block> PROTOMATTER_ACTIVATION_COIL = createCasingBlock(
+            "protomatter_activation_coil", GTLCore.id("block/protomatter_activation_coil"));
+    public static final BlockEntry<Block> RADIATION_ABSORBENT_CASING = createCasingBlock(
+            "radiation_absorbent_casing", GTLCore.id("block/radiation_absorbent_casing"));
+    public static final BlockEntry<Block> REINFORCED_WOOD_CASING = createCasingBlock(
+            "reinforced_wood_casing", GTLCore.id("block/reinforced_wood_casing"));
+    public static final BlockEntry<Block> SHIELDED_ACCELERATOR = createCasingBlock(
+            "shielded_accelerator", GTLCore.id("block/shielded_accelerator"));
+    public static final BlockEntry<Block> SINGULARITY_REINFORCED_STELLAR_SHIELDING_CASING = createCasingBlock(
+            "singularity_reinforced_stellar_shielding_casing", GTLCore.id("block/singularity_reinforced_stellar_shielding_casing"));
+    public static final BlockEntry<Block> STELLAR_ENERGY_SIPHON_CASING = createCasingBlock(
+            "stellar_energy_siphon_casing", GTLCore.id("block/stellar_energy_siphon_casing"));
+    public static final BlockEntry<Block> TRANSCENDENTALLY_AMPLIFIED_MAGNETIC_CONFINEMENT_CASING = createCasingBlock(
+            "transcendentally_amplified_magnetic_confinement_casing", GTLCore.id("block/transcendentally_amplified_magnetic_confinement_casing"));
+    public static final BlockEntry<Block> NEUTRONIUM_ACTIVE_CASING = createCasingBlock(
+            "neutronium_active_casing", GTLCore.id("block/neutronium_active_casing"));
 
     public static final BlockEntry<Block> FORCE_FIELD_GLASS = createGlassCasingBlock(
             "force_field_glass", GTLCore.id("block/force_field_glass"), () -> RenderType::cutoutMipped);
@@ -614,7 +662,7 @@ public class GTLBlocks {
     public static final BlockEntry<Block> NON_PHOTONIC_MATTER_EXCLUSION_GLASS = createGlassCasingBlock(
             "non_photonic_matter_exclusion_glass", GTLCore.id("block/casings/non_photonic_matter_exclusion_glass"), () -> RenderType::translucent);
     public static final BlockEntry<Block> SPATIALLY_TRANSCENDENT_GRAVITATIONAL_LENS_BLOCK = createGlassCasingBlock(
-            "spatially_transcendent_gravitational_lens_block", GTLCore.id("block/casings/spatially_transcendent_gravitational_lens_block"), () -> RenderType::translucent);
+            "spatially_transcendent_gravitational_lens_block", GTLCore.id("block/spatially_transcendent_gravitational_lens_block"), () -> RenderType::translucent);
     public static final BlockEntry<Block> OMNI_PURPOSE_INFINITY_FUSED_GLASS = createGlassCasingBlock(
             "omni_purpose_infinity_fused_glass", GTLCore.id("block/casings/omni_purpose_infinity_fused_glass"), () -> RenderType::translucent);
     public static final BlockEntry<Block> HAWKING_RADIATION_REALIGNMENT_FOCUS = createGlassCasingBlock(

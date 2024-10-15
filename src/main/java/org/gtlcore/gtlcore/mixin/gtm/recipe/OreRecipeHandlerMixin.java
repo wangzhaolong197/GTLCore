@@ -94,7 +94,7 @@ public class OreRecipeHandlerMixin {
         Material byproductMaterial = GTUtil.selectItemInList(0, material, property.getOreByProducts(), Material.class);
         ItemStack ingotStack;
         ItemStack byproductStack = ChemicalHelper.get(gem, byproductMaterial);
-        if(material.hasFlag(GENERATE_MAGICCRYSTAL))
+        if (material.hasFlag(GENERATE_MAGICCRYSTAL))
             return;
         if (byproductStack.isEmpty()) byproductStack = ChemicalHelper.get(dust, byproductMaterial);
         Material smeltingMaterial = property.getDirectSmeltResult() == null ? material :

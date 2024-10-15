@@ -24,22 +24,53 @@ public class MagicFormula {
                 LowGuideMagic,
                 MiddleGuideMagic,
                 HighGuideMagic,
-                LimitlessGuideMagic
+                NonattributeMagicCrystals,
+                NaturalMagicCrystals,
+                OceanMagicCrystals,
+                ColdMagicCrystals,
+                HiddenMagicCrystals,
+                AncientMagicCrystals,
+                PurgatoryMagicCrystals,
+                EndMagicCrystals,
+                StarrySkyMagicCrystals,
+                AbyssMagicCrystals,
+                SunMagicCrystals,
+                TimeMagicCrystals,
+                SpaceMagicCrystals
+        };
+
+        int[] MagicStonetime = {
+                1000,
+                1000000,
+                1000000000,
+                1000,
+                2000,
+                2000,
+                2000,
+                2000,
+                2000000,
+                2000000,
+                2000000,
+                2000000,
+                2000000000,
+                2000000000,
+                2000000000,
+                2000000000
         };
 
         for (int i = 0; i < SomeMagicstones.length; i++) {
-            Material rareEarthElement = SomeMagicstones[i];
+            Material MagicStone = SomeMagicstones[i];
 
             ANZHU_QIHUI.recipeBuilder("anzhu_qihui_rawOre_" + i)
-                    .inputItems(rawOre, rareEarthElement, 2)
-                    .chancedOutput(magiccrystal, rareEarthElement, 1, 1000, 0)
-                    .duration(1200)
+                    .inputItems(rawOre, MagicStone, 2)
+                    .chancedOutput(magiccrystal, MagicStone, 1, 1000, 0)
+                    .duration(MagicStonetime[i])
                     .save(provider);
 
             ANZHU_QIHUI.recipeBuilder("anzhu_qihui_ore_" + i)
-                    .inputItems(ore, rareEarthElement, 1)
-                    .chancedOutput(magiccrystal, rareEarthElement, 1, 1000, 0)
-                    .duration(1200)
+                    .inputItems(ore, MagicStone, 1)
+                    .chancedOutput(magiccrystal, MagicStone, 1, 1000, 0)
+                    .duration(MagicStonetime[i])
                     .save(provider);
 
         }

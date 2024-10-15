@@ -809,10 +809,24 @@ public class GTLMaterials {
     public static Material LutetiumExtractedNanoResin;
     public static Material ScandiumExtractedNanoResin;
     public static Material YttriumExtractedNanoResin;
+    public static Material HexaphaseCopper;
     public static Material LowGuideMagic;
     public static Material MiddleGuideMagic;
     public static Material HighGuideMagic;
     public static Material LimitlessGuideMagic;
+    public static Material NonattributeMagicCrystals;
+    public static Material NaturalMagicCrystals;
+    public static Material OceanMagicCrystals;
+    public static Material ColdMagicCrystals;
+    public static Material HiddenMagicCrystals;
+    public static Material AncientMagicCrystals;
+    public static Material PurgatoryMagicCrystals;
+    public static Material EndMagicCrystals;
+    public static Material StarrySkyMagicCrystals;
+    public static Material AbyssMagicCrystals;
+    public static Material SunMagicCrystals;
+    public static Material TimeMagicCrystals;
+    public static Material SpaceMagicCrystals;
 
     public static void init() {
         MaterialAdd.init();
