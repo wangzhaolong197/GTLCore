@@ -16,9 +16,7 @@ import com.gregtechceu.gtceu.api.machine.multiblock.CleanroomType;
 import com.gregtechceu.gtceu.common.data.GTItems;
 import com.gregtechceu.gtceu.common.data.GTMaterials;
 import com.gregtechceu.gtceu.common.item.TurbineRotorBehaviour;
-import com.gregtechceu.gtceu.config.ConfigHolder;
 import com.gregtechceu.gtceu.data.recipe.VanillaRecipeHelper;
-import com.gregtechceu.gtceu.data.recipe.builder.GTRecipeBuilder;
 import com.gregtechceu.gtceu.data.recipe.generated.PartsRecipeHandler;
 import com.gregtechceu.gtceu.utils.GTUtil;
 
@@ -85,7 +83,7 @@ public class PartsRecipeHandlerMixin {
                 .EUt(4)
                 .save(provider);
 
-        if (mass < 240 && material.getBlastTemperature() < 4000)
+        if (mass < 240 && material.getBlastTemperature() < 3600)
             VanillaRecipeHelper.addShapedRecipe(provider, String.format("screw_%s", material.getName()),
                     screwStack, "fX", "X ",
                     'X', new UnificationEntry(bolt, material));
@@ -95,7 +93,7 @@ public class PartsRecipeHandlerMixin {
     private static void gTLCore$processFoil(TagPrefix foilPrefix, Material material, IngotProperty property,
                                             Consumer<FinishedRecipe> provider) {
         int mass = (int) material.getMass();
-        if (!material.hasFlag(NO_SMASHING) && mass < 240 && material.getBlastTemperature() < 4000)
+        if (!material.hasFlag(NO_SMASHING) && mass < 240 && material.getBlastTemperature() < 3600)
             VanillaRecipeHelper.addShapedRecipe(provider, String.format("foil_%s", material.getName()),
                     ChemicalHelper.get(foilPrefix, material, 2),
                     "hP ", 'P', new UnificationEntry(plate, material));
@@ -123,7 +121,7 @@ public class PartsRecipeHandlerMixin {
                                                 Consumer<FinishedRecipe> provider) {
         ItemStack fineWireStack = ChemicalHelper.get(fineWirePrefix, material);
         int mass = (int) material.getMass();
-        if (!ChemicalHelper.get(foil, material).isEmpty() && mass < 240 && material.getBlastTemperature() < 4000)
+        if (!ChemicalHelper.get(foil, material).isEmpty() && mass < 240 && material.getBlastTemperature() < 3600)
             VanillaRecipeHelper.addShapelessRecipe(provider, String.format("fine_wire_%s", material.getName()),
                     fineWireStack, 'x', new UnificationEntry(foil, material));
 
@@ -192,7 +190,7 @@ public class PartsRecipeHandlerMixin {
 
         if (material.hasFlag(GENERATE_PLATE) && material.hasFlag(GENERATE_ROD)) {
             if (gearPrefix == gearSmall) {
-                if (mass < 240 && material.getBlastTemperature() < 4000)
+                if (mass < 240 && material.getBlastTemperature() < 3600)
                     VanillaRecipeHelper.addShapedRecipe(provider, String.format("small_gear_%s", material.getName()),
                             ChemicalHelper.get(gearSmall, material),
                             " R ", "hPx", " R ", 'R', new UnificationEntry(rod, material), 'P',
@@ -223,7 +221,7 @@ public class PartsRecipeHandlerMixin {
                             .EUt(material.getBlastTemperature() >= 2800 ? 256 : 64)
                             .save(provider);
                 }
-            } else if (mass < 240 && material.getBlastTemperature() < 4000) {
+            } else if (mass < 240 && material.getBlastTemperature() < 3600) {
                 VanillaRecipeHelper.addShapedRecipe(provider, String.format("gear_%s", material.getName()), stack,
                         "RPR", "PwP", "RPR",
                         'P', new UnificationEntry(plate, material),
@@ -237,7 +235,7 @@ public class PartsRecipeHandlerMixin {
                                                    Consumer<FinishedRecipe> provider) {
         int mass = (int) material.getMass();
         if (material.hasFlag(GENERATE_PLATE)) {
-            if (!material.hasFlag(NO_SMASHING) && mass < 240 && material.getBlastTemperature() < 4000) {
+            if (!material.hasFlag(NO_SMASHING) && mass < 240 && material.getBlastTemperature() < 3600) {
                 VanillaRecipeHelper.addShapedRecipe(provider, String.format("plate_double_%s", material.getName()),
                         ChemicalHelper.get(doublePrefix, material),
                         "h", "P", "P", 'P', new UnificationEntry(plate, material));
@@ -295,7 +293,7 @@ public class PartsRecipeHandlerMixin {
         }
 
         if (!material.hasFlag(NO_SMASHING)) {
-            if (mass < 240 && material.getBlastTemperature() < 4000)
+            if (mass < 240 && material.getBlastTemperature() < 3600)
                 VanillaRecipeHelper.addShapedRecipe(provider, String.format("ring_%s", material.getName()),
                         ChemicalHelper.get(ringPrefix, material),
                         "h ", " X",
@@ -315,7 +313,7 @@ public class PartsRecipeHandlerMixin {
     private static void gTLCore$processSpringSmall(TagPrefix springPrefix, Material material, IngotProperty property,
                                                    Consumer<FinishedRecipe> provider) {
         int mass = (int) material.getMass();
-        if (mass < 240 && material.getBlastTemperature() < 4000)
+        if (mass < 240 && material.getBlastTemperature() < 3600)
             VanillaRecipeHelper.addShapedRecipe(provider, String.format("spring_small_%s", material.getName()),
                     ChemicalHelper.get(springSmall, material),
                     " s ", "fRx", 'R', new UnificationEntry(rod, material));
@@ -340,7 +338,7 @@ public class PartsRecipeHandlerMixin {
                 .EUt(16)
                 .save(provider);
 
-        if (mass < 240 && material.getBlastTemperature() < 4000)
+        if (mass < 240 && material.getBlastTemperature() < 3600)
             VanillaRecipeHelper.addShapedRecipe(provider, String.format("spring_%s", material.getName()),
                     ChemicalHelper.get(spring, material),
                     " s ", "fRx", " R ", 'R', new UnificationEntry(rodLong, material));
@@ -351,7 +349,7 @@ public class PartsRecipeHandlerMixin {
                                              Consumer<FinishedRecipe> provider) {
         int mass = (int) material.getMass();
         ItemStack stack = ChemicalHelper.get(rotorPrefix, material);
-        if (mass < 240 && material.getBlastTemperature() < 4000)
+        if (mass < 240 && material.getBlastTemperature() < 3600)
             VanillaRecipeHelper.addShapedRecipe(provider, String.format("rotor_%s", material.getName()), stack,
                     "ChC", "SRf", "CdC",
                     'C', new UnificationEntry(plate, material),
@@ -363,7 +361,7 @@ public class PartsRecipeHandlerMixin {
                     .notConsumable(GTItems.SHAPE_MOLD_ROTOR)
                     .inputFluids(material.getFluid(L * 4))
                     .outputItems(GTUtil.copy(stack))
-                    .duration(120)
+                    .duration(mass * 4)
                     .EUt(20)
                     .save(provider);
         }
@@ -392,18 +390,11 @@ public class PartsRecipeHandlerMixin {
                                              Consumer<FinishedRecipe> provider) {
         int mass = (int) material.getMass();
         if (material.hasProperty(PropertyKey.GEM) || material.hasProperty(PropertyKey.INGOT)) {
-            GTRecipeBuilder builder = LATHE_RECIPES.recipeBuilder(GTLCore.id("lathe_" + material.getName() + "_to_rod"))
+            LATHE_RECIPES.recipeBuilder(GTLCore.id("lathe_" + material.getName() + "_to_rod"))
                     .inputItems(material.hasProperty(PropertyKey.GEM) ? gem : ingot, material)
+                    .outputItems(rod, material, 2)
                     .duration(mass * 2)
-                    .EUt(16);
-
-            if (ConfigHolder.INSTANCE.recipes.harderRods) {
-                builder.outputItems(rod, material);
-                builder.outputItems(dustSmall, material, 2);
-            } else {
-                builder.outputItems(rod, material, 2);
-            }
-            builder.save(provider);
+                    .EUt(16).save(provider);
         }
 
         if (material.hasFlag(GENERATE_BOLT_SCREW)) {
@@ -415,7 +406,7 @@ public class PartsRecipeHandlerMixin {
                     .EUt(4)
                     .save(provider);
 
-            if (mass < 240 && material.getBlastTemperature() < 4000)
+            if (mass < 240 && material.getBlastTemperature() < 3600)
                 VanillaRecipeHelper.addShapedRecipe(provider, String.format("bolt_saw_%s", material.getName()),
                         GTUtil.copyAmount(2, boltStack),
                         "s ", " X",
@@ -435,12 +426,12 @@ public class PartsRecipeHandlerMixin {
                 .duration(mass).EUt(4)
                 .save(provider);
 
-        if (mass < 240 && material.getBlastTemperature() < 4000)
+        if (mass < 240 && material.getBlastTemperature() < 3600)
             VanillaRecipeHelper.addShapedRecipe(provider, String.format("stick_long_%s", material.getName()),
                     GTUtil.copyAmount(2, stickStack),
                     "s", "X", 'X', new UnificationEntry(rodLong, material));
 
-        if (material.hasProperty(PropertyKey.GEM) && mass < 240 && material.getBlastTemperature() < 4000) {
+        if (material.hasProperty(PropertyKey.GEM) && mass < 240 && material.getBlastTemperature() < 3600) {
             VanillaRecipeHelper.addShapedRecipe(provider,
                     String.format("stick_long_gem_flawless_%s", material.getName()),
                     stickStack,
@@ -456,7 +447,7 @@ public class PartsRecipeHandlerMixin {
 
         }
 
-        if (mass < 240 && material.getBlastTemperature() < 4000)
+        if (mass < 240 && material.getBlastTemperature() < 3600)
             VanillaRecipeHelper.addShapedRecipe(provider, String.format("stick_long_stick_%s", material.getName()), stack,
                     "ShS",
                     'S', new UnificationEntry(rod, material));
@@ -513,7 +504,7 @@ public class PartsRecipeHandlerMixin {
                 .EUt(120)
                 .save(provider);
 
-        if (mass < 240 && material.getBlastTemperature() < 4000)
+        if (mass < 240 && material.getBlastTemperature() < 3600)
             VanillaRecipeHelper.addShapedRecipe(provider, String.format("turbine_blade_%s", material.getName()),
                     ChemicalHelper.get(toolPrefix, material),
                     "PPP", "SPS", "fPd",
@@ -535,7 +526,7 @@ public class PartsRecipeHandlerMixin {
         }
 
         LATHE_RECIPES.recipeBuilder("lathe_" + material.getName() + "_nugget_to_round")
-                .EUt(VA[ULV]).duration(100)
+                .EUt(VA[ULV]).duration(Math.min(1, (int) material.getMass() / 9))
                 .inputItems(nugget, material)
                 .outputItems(round, material)
                 .save(provider);

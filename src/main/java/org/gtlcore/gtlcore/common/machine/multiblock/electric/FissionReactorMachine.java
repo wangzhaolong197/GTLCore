@@ -1,9 +1,10 @@
 package org.gtlcore.gtlcore.common.machine.multiblock.electric;
 
+import org.gtlcore.gtlcore.api.machine.multiblock.IParallelMachine;
 import org.gtlcore.gtlcore.api.pattern.util.IValueContainer;
 import org.gtlcore.gtlcore.common.data.GTLBlocks;
 import org.gtlcore.gtlcore.common.data.GTLMaterials;
-import org.gtlcore.gtlcore.utils.MachineIO;
+import org.gtlcore.gtlcore.utils.MachineUtil;
 
 import com.gregtechceu.gtceu.api.machine.ConditionalSubscriptionHandler;
 import com.gregtechceu.gtceu.api.machine.IMachineBlockEntity;
@@ -35,7 +36,7 @@ import javax.annotation.ParametersAreNonnullByDefault;
 
 @ParametersAreNonnullByDefault
 @MethodsReturnNonnullByDefault
-public class FissionReactorMachine extends WorkableElectricMultiblockMachine implements IExplosionMachine {
+public class FissionReactorMachine extends WorkableElectricMultiblockMachine implements IExplosionMachine, IParallelMachine {
 
     protected static final ManagedFieldHolder MANAGED_FIELD_HOLDER = new ManagedFieldHolder(
             FissionReactorMachine.class, WorkableMultiblockMachine.MANAGED_FIELD_HOLDER);
@@ -88,14 +89,7 @@ public class FissionReactorMachine extends WorkableElectricMultiblockMachine imp
         Level level = getLevel();
         int heatA = 0;
         int coolerA = 0;
-        int x = 0, y = 0, z = 0;
-        switch (getFrontFacing()) {
-            case NORTH -> z = 4;
-            case SOUTH -> z = -4;
-            case WEST -> x = 4;
-            case EAST -> x = -4;
-        }
-        final BlockPos blockPos = getPos().offset(x, y, z);
+        final BlockPos blockPos = MachineUtil.getOffsetPos(4, 0, getFrontFacing(), getPos());
         centrePos = blockPos.offset(0, 4, 0);
         for (int i = -3; i < 4; i++) {
             for (int j = 0; j < 8; j++) {
@@ -144,17 +138,17 @@ public class FissionReactorMachine extends WorkableElectricMultiblockMachine imp
     }
 
     private boolean inputWater(long amount) {
-        boolean value = MachineIO.inputFluid(this, GTMaterials.DistilledWater.getFluid(amount * 800));
+        boolean value = MachineUtil.inputFluid(this, GTMaterials.DistilledWater.getFluid(amount * 800));
         double steamMultiplier = heat > 373 ? 160 : 160 / Math.pow(1.4, 373 - heat);
-        if (value) value = MachineIO.outputFluid(this, GTMaterials.Steam.getFluid((long) (amount * 800 * steamMultiplier)));
+        if (value) value = MachineUtil.outputFluid(this, GTMaterials.Steam.getFluid((long) (amount * 800 * steamMultiplier)));
         return value;
     }
 
     private boolean inputSodiumPotassium(long amount) {
-        boolean value = MachineIO.inputFluid(this, GTMaterials.SodiumPotassium.getFluid(amount * 20));
+        boolean value = MachineUtil.inputFluid(this, GTMaterials.SodiumPotassium.getFluid(amount * 20));
         if (heat > 825) {
-            if (value) value = MachineIO.outputFluid(this, GTLMaterials.SupercriticalSodiumPotassium.getFluid(amount * 20));
-        } else if (value) value = MachineIO.outputFluid(this, GTLMaterials.HotSodiumPotassium.getFluid(amount * 20));
+            if (value) value = MachineUtil.outputFluid(this, GTLMaterials.SupercriticalSodiumPotassium.getFluid(amount * 20));
+        } else if (value) value = MachineUtil.outputFluid(this, GTLMaterials.HotSodiumPotassium.getFluid(amount * 20));
         return value;
     }
 
@@ -246,5 +240,10 @@ public class FissionReactorMachine extends WorkableElectricMultiblockMachine imp
             textList.add(Component.translatable("gtceu.machine.fission_reactor.heat", heat));
             textList.add(Component.translatable("gtceu.machine.fission_reactor.damaged", damaged).append("%"));
         }
+    }
+
+    @Override
+    public int getParallel() {
+        return fuel;
     }
 }

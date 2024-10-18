@@ -151,6 +151,7 @@
     "block.gtlcore.gravitation_shockburst": "引力震爆器",
     "block.gtlcore.graviton_field_constraint_casing": "引力场约束方块",
     "block.gtlcore.gravity_hatch": "重力控制仓",
+    "block.gtlcore.gravity_configuration_hatch": "可配置重力维护仓",
     "block.gtlcore.greenhouse": "温室",
     "block.gtlcore.grind_ball_hatch": "研磨球仓",
     "block.gtlcore.hastelloy_n_75_casing": "哈斯特洛依合金-N75防水机器外壳",
@@ -656,6 +657,7 @@
     "block.gtlcore.uxv_world_data_scanner": "§e史诗世界信息扫描仪 IV§r",
     "block.gtlcore.vacuum_drying_furnace": "真空干燥炉",
     "block.gtlcore.vacuum_hatch": "真空仓",
+    "block.gtlcore.vacuum_configuration_hatch": "可配置真空维护仓",
     "block.gtlcore.void_fluid_drilling_rig": "虚空流体钻机",
     "block.gtlcore.void_miner": "虚空采矿机",
     "block.gtlcore.weather_control": "天气控制器",
@@ -1219,18 +1221,15 @@
     "block.gtlcore.stellar_energy_siphon_casing": "恒星能量汲取机械方块",
     "block.gtlcore.transcendentally_amplified_magnetic_confinement_casing": "超强放大磁约束机械方块",
     "block.gtlcore.hawking_radiation_realignment_focus": "霍金辐射重新调整焦点",
-
     "block.gtlcore.hull_machine": " 物品展示台",
     "gtlcore.call_of_the_ancients": "远古呼唤",
     "gtlcore.the_ocean_calls": "海洋之息",
     "gtlcore.dark_pearl_qihui": "暗珠启辉",
     "gtlcore.infusion_ritual": "注魔仪式",
-
     "block.gtlcore.ancient_echoes_altar": "远古之门祭坛",
     "block.gtlcore.ocean_sltar": "海洋祭坛",
     "block.gtlcore.mystic_revelation_platform": "共鸣启示台",
     "block.gtlcore.infused_altar": "注魔祭坛",
-
     "block.gtlcore.magic_mechanical_low_cube": "低阶导魔机械方块",
     "block.gtlcore.magic_mechanical_middle_cube": "中阶导魔机械方块",
     "block.gtlcore.magic_mechanical_high_cube": "高阶导魔机械方块",
@@ -1239,7 +1238,6 @@
     "block.gtlcore.magic_coil_high_block": "高阶导魔线圈方块",
     "block.gtlcore.magic_glass_block": "通魔玻璃",
     "block.gtlcore.arcane_glass_block": "奥术玻璃",
-
     "material.gtlcore.low_guide_magic": "劣质导魔石",
     "material.gtlcore.middle_guide_magic": "优质导魔石",
     "material.gtlcore.high_guide_magic": "极品导魔石",
@@ -1260,7 +1258,6 @@
     "material.gtlcore.sun_magic_crystals": "太阳蕴魔石",
     "material.gtlcore.time_magic_crystals": "时间蕴魔石",
     "material.gtlcore.space_magic_crystals": "空间蕴魔石",
-
     "block.gtlcore.non_attribute_magic_crystals_block": "稀薄蕴魔方块",
     "block.gtlcore.charge_magic_crystals_block": "充能蕴魔方块",
     "block.gtlcore.focus_magic_crystals_block": "激发蕴魔方块",
@@ -1277,7 +1274,6 @@
     "block.gtlcore.sun_magic_crystals_block": "太阳蕴魔方块",
     "block.gtlcore.time_magic_crystals_block": "时间蕴魔方块",
     "block.gtlcore.space_magic_crystals_block": "空间蕴魔方块",
-
     "item.gtlcore.magic_core1": "魔法核心",
     "item.gtlcore.magic_core2": "进阶魔法核心",
     "item.gtlcore.magic_core3": "超阶魔法核心",

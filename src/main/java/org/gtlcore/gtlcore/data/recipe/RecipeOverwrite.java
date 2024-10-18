@@ -1,5 +1,7 @@
 package org.gtlcore.gtlcore.data.recipe;
 
+import org.gtlcore.gtlcore.common.data.GTLMaterials;
+import org.gtlcore.gtlcore.common.data.GTLRecipeTypes;
 import org.gtlcore.gtlcore.common.recipe.condition.GravityCondition;
 import org.gtlcore.gtlcore.common.recipe.condition.VacuumCondition;
 
@@ -8,16 +10,10 @@ import net.minecraft.data.recipes.FinishedRecipe;
 import java.util.function.Consumer;
 
 import static com.gregtechceu.gtceu.api.GTValues.*;
-import static com.gregtechceu.gtceu.api.GTValues.LV;
 import static com.gregtechceu.gtceu.api.data.tag.TagPrefix.*;
-import static com.gregtechceu.gtceu.api.data.tag.TagPrefix.dust;
 import static com.gregtechceu.gtceu.common.data.GTItems.*;
-import static com.gregtechceu.gtceu.common.data.GTItems.ENGRAVED_CRYSTAL_CHIP;
 import static com.gregtechceu.gtceu.common.data.GTMaterials.*;
 import static com.gregtechceu.gtceu.common.data.GTRecipeTypes.*;
-import static org.gtlcore.gtlcore.common.data.GTLMaterials.SodiumFormate;
-import static org.gtlcore.gtlcore.common.data.GTLMaterials.SodiumSulfate;
-import static org.gtlcore.gtlcore.common.data.GTLRecipeTypes.LIGHTNING_PROCESSOR_RECIPES;
 
 public class RecipeOverwrite {
 
@@ -46,7 +42,7 @@ public class RecipeOverwrite {
                 .inputItems(bolt, Steel)
                 .inputItems(wireGtSingle, AnnealedCopper, 2)
                 .inputFluids(RedAlloy.getFluid(18))
-                .outputItems(VACUUM_TUBE, 8)
+                .outputItems(VACUUM_TUBE, 6)
                 .addCondition(new VacuumCondition(3))
                 .duration(40).EUt(VA[LV]).save(provider);
 
@@ -94,25 +90,26 @@ public class RecipeOverwrite {
                 .addCondition(new GravityCondition(true))
                 .save(provider);
 
-        LIGHTNING_PROCESSOR_RECIPES.recipeBuilder("ender_pearl_dust").duration(400).EUt(VA[LV])
+        GTLRecipeTypes.LIGHTNING_PROCESSOR_RECIPES.recipeBuilder("ender_pearl_dust").duration(400).EUt(VA[LV])
                 .inputItems(dust, Beryllium)
                 .inputItems(dust, Potassium, 4)
                 .inputFluids(Nitrogen.getFluid(5000))
                 .circuitMeta(1)
                 .outputItems(dust, EnderPearl, 10)
+                .addCondition(new VacuumCondition(3))
                 .save(provider);
 
         CHEMICAL_RECIPES.recipeBuilder("formic_acid")
-                .inputFluids(SodiumFormate.getFluid(2000))
+                .inputFluids(GTLMaterials.SodiumFormate.getFluid(2000))
                 .inputFluids(SulfuricAcid.getFluid(1000))
                 .circuitMeta(1)
                 .outputFluids(FormicAcid.getFluid(2000))
-                .outputItems(dust, SodiumSulfate, 7)
+                .outputItems(dust, GTLMaterials.SodiumSulfate, 7)
                 .duration(15).EUt(VA[LV]).save(provider);
 
         // 修复冲突
         CHEMICAL_RECIPES.recipeBuilder("hypochlorous_acid_mercury")
-                .circuitMeta(1)
+                .circuitMeta(10)
                 .inputFluids(Mercury.getFluid(1000))
                 .inputFluids(Water.getFluid(10000))
                 .inputFluids(Chlorine.getFluid(10000))
@@ -120,7 +117,7 @@ public class RecipeOverwrite {
                 .duration(600).EUt(VA[ULV]).save(provider);
 
         CHEMICAL_RECIPES.recipeBuilder("hypochlorous_acid")
-                .circuitMeta(2)
+                .circuitMeta(11)
                 .inputFluids(Water.getFluid(1000))
                 .inputFluids(Chlorine.getFluid(2000))
                 .outputFluids(DilutedHydrochloricAcid.getFluid(1000))
@@ -204,6 +201,29 @@ public class RecipeOverwrite {
                 .outputFluids(HydrochloricAcid.getFluid(1000))
                 .outputFluids(Dichlorobenzene.getFluid(1000))
                 .duration(400).EUt(VA[MV])
+                .save(provider);
+
+        MIXER_RECIPES.recipeBuilder("tungstencarbide").duration(200).EUt(VA[EV])
+                .inputItems(dust, Tungsten)
+                .inputItems(dust, Carbon)
+                .circuitMeta(2)
+                .outputItems(dust, TungstenCarbide, 2)
+                .save(provider);
+
+        MIXER_RECIPES.recipeBuilder("titanium_carbide")
+                .inputItems(dust, Titanium)
+                .inputItems(dust, Carbon)
+                .circuitMeta(2)
+                .outputItems(dust, TitaniumCarbide, 2)
+                .duration(160).EUt(VA[EV])
+                .save(provider);
+
+        MIXER_RECIPES.recipeBuilder("tantalum_carbide")
+                .inputItems(dust, Tantalum)
+                .inputItems(dust, Carbon)
+                .circuitMeta(2)
+                .outputItems(dust, TantalumCarbide, 2)
+                .duration(150).EUt(VA[EV])
                 .save(provider);
     }
 }
