@@ -706,4 +706,37 @@ public class GTLBlocks {
             "magic_glass_block", GTLCore.id("block/magic/magic_glass_block"), () -> RenderType::translucent);
     public static final BlockEntry<Block> ARCANE_GLASS_BLOCK = createGlassCasingBlock(
             "arcane_glass_block", GTLCore.id("block/magic/arcane_glass_block"), () -> RenderType::translucent);
+
+    public static final BlockEntry<Block> NON_ATTRIBUTE_MAGIC_CRYSTALS_BLOCK = createCasingBlock(
+            "non_attribute_magic_crystals_block", GTLCore.id("block/magic/non_attribute_magic_crystals_block"));
+    public static final BlockEntry<Block> CHANGE_MAGIC_CRYSTALS_BLOCK = createCasingBlock(
+            "non_attribute_magic_crystals_block", GTLCore.id("block/magic/change_magic_crystals_block"));
+    public static final BlockEntry<Block> FOCUS_MAGIC_CRYSTALS_BLOCK = createCasingBlock(
+            "non_attribute_magic_crystals_block", GTLCore.id("block/magic/focus_magic_crystals_block"));
+    public static final BlockEntry<Block> SHINING_MAGIC_CRYSTALS_BLOCK = createCasingBlock(
+            "non_attribute_magic_crystals_block", GTLCore.id("block/magic/shining_magic_crystals_block"));
+    public static final BlockEntry<Block> NATURAL_MAGIC_CRYSTALS_BLOCK = createCasingBlock(
+            "natural_magic_crystals_block", GTLCore.id("block/magic/natural_magic_crystals_block"));
+    public static final BlockEntry<Block> OCEAN_MAGIC_CRYSTALS_BLOCK = createCasingBlock(
+            "ocean_magic_crystals_block", GTLCore.id("block/magic/ocean_magic_crystals_block"));
+    public static final BlockEntry<Block> COLD_MAGIC_CRYSTALS_BLOCK = createCasingBlock(
+            "cold_magic_crystals_block", GTLCore.id("block/magic/cold_magic_crystals_block"));
+    public static final BlockEntry<Block> HIDDEN_MAGIC_CRYSTALS_BLOCK = createCasingBlock(
+            "hidden_magic_crystals_block", GTLCore.id("block/magic/hidden_magic_crystals_block"));
+    public static final BlockEntry<Block> ANCIENT_MAGIC_CRYSTALS_BLOCK = createCasingBlock(
+            "ancient_magic_crystals_block", GTLCore.id("block/magic/ancient_magic_crystals_block"));
+    public static final BlockEntry<Block> PURGATORY_MAGIC_CRYSTALS_BLOCK = createCasingBlock(
+            "purgatory_magic_crystals_block", GTLCore.id("block/magic/purgatory_magic_crystals_block"));
+    public static final BlockEntry<Block> END_MAGIC_CRYSTALS_BLOCK = createCasingBlock(
+            "end_magic_crystals_block", GTLCore.id("block/magic/end_magic_crystals_block"));
+    public static final BlockEntry<Block> STARRY_SKY_MAGIC_CRYSTALS_BLOCK = createCasingBlock(
+            "starry_sky_magic_crystals_block", GTLCore.id("block/magic/starry_sky_magic_crystals_block"));
+    public static final BlockEntry<Block> ABYSS_MAGIC_CRYSTALS_BLOCK = createCasingBlock(
+            "abyss_magic_crystals_block", GTLCore.id("block/magic/abyss_magic_crystals_block"));
+    public static final BlockEntry<Block> SUN_MAGIC_CRYSTALS_BLOCK = createCasingBlock(
+            "sun_magic_crystals_block", GTLCore.id("block/magic/sun_magic_crystals_block"));
+    public static final BlockEntry<Block> TIME_MAGIC_CRYSTALS_BLOCK = createCasingBlock(
+            "time_magic_crystals_block", GTLCore.id("block/magic/time_magic_crystals_block"));
+    public static final BlockEntry<Block> SPACE_MAGIC_CRYSTALS_BLOCK = createCasingBlock(
+            "space_magic_crystals_block", GTLCore.id("block/magic/space_magic_crystals_block"));
 }

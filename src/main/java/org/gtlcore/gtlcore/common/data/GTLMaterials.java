@@ -815,6 +815,9 @@ public class GTLMaterials {
     public static Material HighGuideMagic;
     public static Material LimitlessGuideMagic;
     public static Material NonattributeMagicCrystals;
+    public static Material ChargeMagicCrystals;
+    public static Material FocusMagicCrystals;
+    public static Material ShiningMagicCrystals;
     public static Material NaturalMagicCrystals;
     public static Material OceanMagicCrystals;
     public static Material ColdMagicCrystals;

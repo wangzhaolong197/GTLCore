@@ -2,8 +2,6 @@ package org.gtlcore.gtlcore.mixin.ae2.logic;
 
 import com.gregtechceu.gtceu.common.data.GTItems;
 
-import com.gregtechceu.gtceu.common.data.GTItems;
-
 import appeng.api.stacks.AEItemKey;
 import appeng.api.stacks.AEKey;
 import appeng.helpers.patternprovider.PatternProviderLogic;

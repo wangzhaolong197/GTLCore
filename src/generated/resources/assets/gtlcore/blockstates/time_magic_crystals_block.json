@@ -1,0 +1,7 @@
+{
+  "variants": {
+    "": {
+      "model": "gtlcore:block/time_magic_crystals_block"
+    }
+  }
+}

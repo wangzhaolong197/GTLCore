@@ -1186,5 +1186,7 @@
     "tagprefix.titanstone": "土卫六%s矿石",
     "tagprefix.venus_stone": "金星石%s矿石",
     "material.gtceu.hexaphasecopper": "六相铜",
-    "tagprefix.magiccrystal": "%s晶"
+    "tagprefix.magiccrystal": "%s晶",
+    "tagprefix.elements": "%s要素"
+
 }

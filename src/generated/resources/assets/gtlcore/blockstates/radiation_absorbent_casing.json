@@ -1,0 +1,7 @@
+{
+  "variants": {
+    "": {
+      "model": "gtlcore:block/radiation_absorbent_casing"
+    }
+  }
+}

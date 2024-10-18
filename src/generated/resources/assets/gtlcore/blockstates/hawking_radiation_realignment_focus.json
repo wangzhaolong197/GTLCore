@@ -1,0 +1,7 @@
+{
+  "variants": {
+    "": {
+      "model": "gtlcore:block/hawking_radiation_realignment_focus"
+    }
+  }
+}

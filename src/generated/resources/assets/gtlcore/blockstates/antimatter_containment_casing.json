@@ -1,0 +1,7 @@
+{
+  "variants": {
+    "": {
+      "model": "gtlcore:block/antimatter_containment_casing"
+    }
+  }
+}

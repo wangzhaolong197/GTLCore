@@ -1,0 +1,7 @@
+{
+  "variants": {
+    "": {
+      "model": "gtlcore:block/spatially_transcendent_gravitational_lens_block"
+    }
+  }
+}

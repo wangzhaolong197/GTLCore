@@ -14,7 +14,7 @@ import static org.gtlcore.gtlcore.common.data.GTLRecipeTypes.*;
 public class MagicFormula {
 
     public static void init(Consumer<FinishedRecipe> provider) {
-        YUANHU_HUIXIANG.recipeBuilder("magic_formula_1")
+        CALL_OF_THE_ANCIENTS.recipeBuilder("magic_formula_1")
                 .inputItems(magiccrystal, LowGuideMagic, 4)
                 .inputItems(block, PulsatingAlloy, 1)
                 .duration(200)
@@ -61,13 +61,13 @@ public class MagicFormula {
         for (int i = 0; i < SomeMagicstones.length; i++) {
             Material MagicStone = SomeMagicstones[i];
 
-            ANZHU_QIHUI.recipeBuilder("anzhu_qihui_rawOre_" + i)
+            DARK_PEARL_QIHUI.recipeBuilder("anzhu_qihui_rawOre_" + i)
                     .inputItems(rawOre, MagicStone, 2)
                     .chancedOutput(magiccrystal, MagicStone, 1, 1000, 0)
                     .duration(MagicStonetime[i])
                     .save(provider);
 
-            ANZHU_QIHUI.recipeBuilder("anzhu_qihui_ore_" + i)
+            DARK_PEARL_QIHUI.recipeBuilder("anzhu_qihui_ore_" + i)
                     .inputItems(ore, MagicStone, 1)
                     .chancedOutput(magiccrystal, MagicStone, 1, 1000, 0)
                     .duration(MagicStonetime[i])

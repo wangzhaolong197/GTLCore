@@ -1,0 +1,7 @@
+{
+  "variants": {
+    "": {
+      "model": "gtlcore:block/non_attribute_magic_crystals_block"
+    }
+  }
+}

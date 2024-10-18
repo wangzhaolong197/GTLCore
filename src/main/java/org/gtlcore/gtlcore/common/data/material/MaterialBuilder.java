@@ -20,6 +20,7 @@ import static com.gregtechceu.gtceu.api.data.chemical.material.info.MaterialFlag
 import static com.gregtechceu.gtceu.api.data.chemical.material.info.MaterialIconSet.*;
 import static com.gregtechceu.gtceu.api.data.chemical.material.properties.BlastProperty.GasTier.*;
 import static com.gregtechceu.gtceu.common.data.GTMaterials.*;
+import static org.gtlcore.gtlcore.api.data.chemical.material.info.GTLMaterialFlags.*;
 import static org.gtlcore.gtlcore.common.data.GTLMaterials.*;
 
 public class MaterialBuilder {
@@ -6003,8 +6004,10 @@ public class MaterialBuilder {
                 .iconSet(METALLIC)
                 .flags(GTLMaterialFlags.GENERATE_NANOSWARM, GENERATE_ROTOR, GENERATE_FRAME, GENERATE_GEAR, GENERATE_SMALL_GEAR, GENERATE_LONG_ROD)
                 .buildAndRegister();
+
         // 魔法注册
 
+        // 各种魔石4+4+12
         LowGuideMagic = new Material.Builder(GTLCore.id("low_guide_magic"))
                 .gem()
                 .ore(0, 0, true)
@@ -6046,13 +6049,36 @@ public class MaterialBuilder {
                 .flags(GTLMaterialFlags.GENERATE_MAGICCRYSTAL)
                 .buildAndRegister();
 
+        ChargeMagicCrystals = new Material.Builder(GTLCore.id("charge_magic_crystals"))
+                .gem()
+                .ore(0, 0, true)
+                .addOreByproducts(MiddleGuideMagic)
+                .color(0xffffff)
+                .iconSet(RUBY)
+                .flags(GTLMaterialFlags.GENERATE_MAGICCRYSTAL)
+                .buildAndRegister();
+
+        FocusMagicCrystals = new Material.Builder(GTLCore.id("focus_magic_crystals"))
+                .gem()
+                .color(0xffffff)
+                .iconSet(RUBY)
+                .flags(GTLMaterialFlags.GENERATE_MAGICCRYSTAL)
+                .buildAndRegister();
+
+        ShiningMagicCrystals = new Material.Builder(GTLCore.id("shining_magic_crystals"))
+                .gem()
+                .color(0xffffff)
+                .iconSet(RUBY)
+                .flags(GTLMaterialFlags.GENERATE_MAGICCRYSTAL)
+                .buildAndRegister();
+
         NaturalMagicCrystals = new Material.Builder(GTLCore.id("natural_magic_crystals"))
                 .gem()
                 .ore(0, 0, true)
                 .addOreByproducts(LowGuideMagic)
                 .color(0x00ff00) // 绿色代表自然
                 .iconSet(RUBY)
-                .flags(GTLMaterialFlags.GENERATE_MAGICCRYSTAL)
+                .flags(GTLMaterialFlags.GENERATE_MAGICCRYSTAL, GENERATE_ELEMENTS)
                 .buildAndRegister();
 
         OceanMagicCrystals = new Material.Builder(GTLCore.id("ocean_magic_crystals"))
@@ -6061,7 +6087,7 @@ public class MaterialBuilder {
                 .addOreByproducts(LowGuideMagic)
                 .color(0x0000ff) // 蓝色代表海洋
                 .iconSet(RUBY)
-                .flags(GTLMaterialFlags.GENERATE_MAGICCRYSTAL)
+                .flags(GTLMaterialFlags.GENERATE_MAGICCRYSTAL, GENERATE_ELEMENTS)
                 .buildAndRegister();
 
         ColdMagicCrystals = new Material.Builder(GTLCore.id("cold_magic_crystals"))
@@ -6070,7 +6096,7 @@ public class MaterialBuilder {
                 .addOreByproducts(LowGuideMagic)
                 .color(0x808080) // 灰色代表寒冷
                 .iconSet(RUBY)
-                .flags(GTLMaterialFlags.GENERATE_MAGICCRYSTAL)
+                .flags(GTLMaterialFlags.GENERATE_MAGICCRYSTAL, GENERATE_ELEMENTS)
                 .buildAndRegister();
 
         HiddenMagicCrystals = new Material.Builder(GTLCore.id("hidden_magic_crystals"))
@@ -6079,7 +6105,7 @@ public class MaterialBuilder {
                 .addOreByproducts(LowGuideMagic)
                 .color(0x008000) // 暗绿色代表隐藏
                 .iconSet(RUBY)
-                .flags(GTLMaterialFlags.GENERATE_MAGICCRYSTAL)
+                .flags(GTLMaterialFlags.GENERATE_MAGICCRYSTAL, GENERATE_ELEMENTS)
                 .buildAndRegister();
 
         AncientMagicCrystals = new Material.Builder(GTLCore.id("ancient_magic_crystals"))
@@ -6088,7 +6114,7 @@ public class MaterialBuilder {
                 .addOreByproducts(MiddleGuideMagic)
                 .color(0x8b4513) // 棕色代表古代
                 .iconSet(RUBY)
-                .flags(GTLMaterialFlags.GENERATE_MAGICCRYSTAL)
+                .flags(GTLMaterialFlags.GENERATE_MAGICCRYSTAL, GENERATE_ELEMENTS)
                 .buildAndRegister();
 
         StarrySkyMagicCrystals = new Material.Builder(GTLCore.id("starry_sky_magic_crystals"))
@@ -6097,7 +6123,7 @@ public class MaterialBuilder {
                 .addOreByproducts(MiddleGuideMagic)
                 .color(0x00ffff) // 青色代表星空
                 .iconSet(RUBY)
-                .flags(GTLMaterialFlags.GENERATE_MAGICCRYSTAL)
+                .flags(GTLMaterialFlags.GENERATE_MAGICCRYSTAL, GENERATE_ELEMENTS)
                 .buildAndRegister();
 
         PurgatoryMagicCrystals = new Material.Builder(GTLCore.id("purgatory_magic_crystals"))
@@ -6106,7 +6132,7 @@ public class MaterialBuilder {
                 .addOreByproducts(HighGuideMagic)
                 .color(0xff0000) // 红色代表炼狱
                 .iconSet(RUBY)
-                .flags(GTLMaterialFlags.GENERATE_MAGICCRYSTAL)
+                .flags(GTLMaterialFlags.GENERATE_MAGICCRYSTAL, GENERATE_ELEMENTS)
                 .buildAndRegister();
 
         EndMagicCrystals = new Material.Builder(GTLCore.id("end_magic_crystals"))
@@ -6115,35 +6141,35 @@ public class MaterialBuilder {
                 .addOreByproducts(HighGuideMagic)
                 .color(0x555555) // 深灰色代表终界
                 .iconSet(RUBY)
-                .flags(GTLMaterialFlags.GENERATE_MAGICCRYSTAL)
+                .flags(GTLMaterialFlags.GENERATE_MAGICCRYSTAL, GENERATE_ELEMENTS)
                 .buildAndRegister();
 
         AbyssMagicCrystals = new Material.Builder(GTLCore.id("abyss_magic_crystals"))
                 .gem()
                 .color(0x000080) // 深蓝色代表深渊
                 .iconSet(RUBY)
-                .flags(GTLMaterialFlags.GENERATE_MAGICCRYSTAL)
+                .flags(GTLMaterialFlags.GENERATE_MAGICCRYSTAL, GENERATE_ELEMENTS)
                 .buildAndRegister();
 
         SunMagicCrystals = new Material.Builder(GTLCore.id("sun_magic_crystals"))
                 .gem()
                 .color(0xffff00) // 黄色代表太阳
                 .iconSet(RUBY)
-                .flags(GTLMaterialFlags.GENERATE_MAGICCRYSTAL)
+                .flags(GTLMaterialFlags.GENERATE_MAGICCRYSTAL, GENERATE_ELEMENTS)
                 .buildAndRegister();
 
         TimeMagicCrystals = new Material.Builder(GTLCore.id("time_magic_crystals"))
                 .gem()
                 .color(0x800080) // 紫色代表时间
                 .iconSet(RUBY)
-                .flags(GTLMaterialFlags.GENERATE_MAGICCRYSTAL)
+                .flags(GTLMaterialFlags.GENERATE_MAGICCRYSTAL, GENERATE_ELEMENTS)
                 .buildAndRegister();
 
         SpaceMagicCrystals = new Material.Builder(GTLCore.id("space_magic_crystals"))
                 .gem()
                 .color(0x0000ff) // 深蓝色代表空间
                 .iconSet(RUBY)
-                .flags(GTLMaterialFlags.GENERATE_MAGICCRYSTAL)
+                .flags(GTLMaterialFlags.GENERATE_MAGICCRYSTAL, GENERATE_ELEMENTS)
                 .buildAndRegister();
     }
 }

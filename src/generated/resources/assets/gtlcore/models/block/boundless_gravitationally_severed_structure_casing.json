@@ -1,0 +1,6 @@
+{
+  "parent": "minecraft:block/cube_all",
+  "textures": {
+    "all": "gtlcore:block/boundless_gravitationally_severed_structure_casing"
+  }
+}
