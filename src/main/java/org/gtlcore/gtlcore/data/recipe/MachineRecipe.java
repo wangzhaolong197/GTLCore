@@ -256,7 +256,7 @@ public class MachineRecipe {
         VanillaRecipeHelper.addShapedRecipe(provider, true, GTLCore.id("steam_vacuum_pump"), GTLMachines.STEAM_VACUUM_PUMP.first().asStack(), "DSD",
                 "SMS", "GSG", 'M', GTBlocks.BRONZE_BRICKS_HULL.asStack(), 'S', new UnificationEntry(TagPrefix.pipeNormalFluid, GTMaterials.Bronze), 'D', GTMachines.BRONZE_DRUM.asStack(), 'G', new UnificationEntry(TagPrefix.gearSmall, GTMaterials.Bronze));
 
-        ASSEMBLER_RECIPES.recipeBuilder(GTLCore.id("zpm_fluid_drilling_rig"))
+        ASSEMBLER_RECIPES.recipeBuilder(GTLCore.id("infinity_fluid_drilling_rig"))
                 .inputItems(GTMachines.HULL[UV])
                 .inputItems(frameGt, Ruridit, 4)
                 .inputItems(CustomTags.UV_CIRCUITS, 4)
@@ -264,7 +264,7 @@ public class MachineRecipe {
                 .inputItems(GTItems.ELECTRIC_PUMP_UV, 4)
                 .inputItems(gear, Neutronium, 4)
                 .circuitMeta(2)
-                .outputItems(AdvancedMultiBlockMachineA.FLUID_DRILLING_RIG[ZPM])
+                .outputItems(AdvancedMultiBlockMachineA.INFINITY_FLUID_DRILLING_RIG)
                 .duration(400).EUt(VA[UV]).save(provider);
 
         ASSEMBLER_RECIPES.recipeBuilder(GTLCore.id("wood_distillation"))

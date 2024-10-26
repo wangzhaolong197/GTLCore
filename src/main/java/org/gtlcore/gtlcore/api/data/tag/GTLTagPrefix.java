@@ -45,4 +45,15 @@ public class GTLTagPrefix {
             .unificationEnabled(true)
             .generateItem(true)
             .generationCondition(mat -> mat.hasFlag(GTLMaterialFlags.GENERATE_MILLED));
+
+    public static final TagPrefix magiccrystal = new TagPrefix("magiccrystal")
+            .idPattern("%s_magiccrystal")
+            .defaultTagPath("/%s_magiccrystal")
+            .unformattedTagPath("magiccrystal")
+            .langValue("MagicCrystal %s")
+            .materialAmount(GTValues.M)
+            .materialIconType(new MaterialIconType("magiccrystal"))
+            .unificationEnabled(true)
+            .generateItem(true)
+            .generationCondition(mat -> mat.hasFlag(GTLMaterialFlags.GENERATE_MAGICCRYSTAL));
 }

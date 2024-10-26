@@ -805,6 +805,41 @@ public class GTLRecipeTypes {
                         widgetGroup.getSize().width - 50, widgetGroup.getSize().height - 40, false, false));
             });
 
+    // 远古呼唤
+    public static final GTRecipeType CALL_OF_THE_ANCIENTS = register("call_of_the_ancients", MULTIBLOCK)
+            .setEUIO(IO.NONE)
+            .setMaxIOSize(3, 3, 3, 3)
+            .setProgressBar(GuiTextures.PROGRESS_BAR_ARROW, LEFT_TO_RIGHT)
+            .setSound(GTSoundEntries.FORGE_HAMMER);
+
+    // 海洋之息
+    public static final GTRecipeType THE_OCEAN_CALLS = register("the_ocean_calls", MULTIBLOCK)
+            .setEUIO(IO.NONE)
+            .setMaxIOSize(3, 3, 3, 3)
+            .setProgressBar(GuiTextures.PROGRESS_BAR_ARROW, LEFT_TO_RIGHT)
+            .setSound(GTSoundEntries.FORGE_HAMMER);
+
+    // 暗珠启辉
+    public static final GTRecipeType DARK_PEARL_QIHUI = register("dark_pearl_qihui", MULTIBLOCK)
+            .setEUIO(IO.NONE)
+            .setMaxIOSize(1, 1, 0, 0)
+            .setProgressBar(GuiTextures.PROGRESS_BAR_ARROW, LEFT_TO_RIGHT)
+            .setSound(GTSoundEntries.FORGE_HAMMER);
+
+    // 注魔仪式
+    public static final GTRecipeType INFUSION_RITUAL = register("infusion_ritual", MULTIBLOCK)
+            .setEUIO(IO.NONE)
+            .setMaxIOSize(16, 1, 8, 1)
+            .setProgressBar(GuiTextures.PROGRESS_BAR_ARROW, LEFT_TO_RIGHT)
+            .setSound(GTSoundEntries.FORGE_HAMMER);
+
+    // 神秘启示
+    public static final GTRecipeType MYSTERIOUS_REVELATION = register("mysterious_revelation", MULTIBLOCK)
+            .setEUIO(IO.NONE)
+            .setMaxIOSize(6, 6, 3, 3)
+            .setProgressBar(GuiTextures.PROGRESS_BAR_ARROW, LEFT_TO_RIGHT)
+            .setSound(GTSoundEntries.FORGE_HAMMER);
+
     public static void init() {
         RecipeModify.init();
     }

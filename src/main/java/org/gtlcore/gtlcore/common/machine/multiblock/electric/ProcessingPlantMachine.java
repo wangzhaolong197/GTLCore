@@ -144,12 +144,6 @@ public class ProcessingPlantMachine extends StorageMachine implements IParallelM
     }
 
     @Override
-    public void onStructureFormed() {
-        super.onStructureFormed();
-        onMachineChanged();
-    }
-
-    @Override
     public void addDisplayText(List<Component> textList) {
         super.addDisplayText(textList);
         if (!this.isFormed) return;

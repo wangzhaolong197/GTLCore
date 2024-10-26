@@ -1175,35 +1175,30 @@ public class AdvancedMultiBlockMachineA {
                     GTCEu.id("block/multiblock/implosion_compressor"))
             .register();
 
-    public static final MultiblockMachineDefinition[] FLUID_DRILLING_RIG = GTLMachines.registerTieredMultis(
-            "fluid_drilling_rig", INFFluidDrillMachine::new, (tier, builder) -> builder
-                    .rotationState(RotationState.ALL)
-                    .langValue("%s Fluid Drilling Rig %s".formatted(GTValues.VLVH[tier], GTValues.VLVT[tier]))
-                    .recipeType(GTRecipeTypes.DUMMY_RECIPES)
-                    .tooltips(
-                            Component.translatable("gtceu.machine.fluid_drilling_rig.description"),
-                            Component.translatable("gtceu.machine.fluid_drilling_rig.depletion", 0),
-                            Component.translatable("gtceu.universal.tooltip.energy_tier_range", GTValues.VNF[tier],
-                                    GTValues.VNF[tier + 1]),
-                            Component.translatable("gtceu.machine.fluid_drilling_rig.production", 256, 384))
-                    .appearanceBlock(GTLBlocks.IRIDIUM_CASING)
-                    .pattern((definition) -> FactoryBlockPattern.start()
-                            .aisle("XXX", "#F#", "#F#", "#F#", "###", "###", "###")
-                            .aisle("XXX", "FCF", "FCF", "FCF", "#F#", "#F#", "#F#")
-                            .aisle("XSX", "#F#", "#F#", "#F#", "###", "###", "###")
-                            .where('S', Predicates.controller(Predicates.blocks(definition.get())))
-                            .where('X', Predicates.blocks(GTLBlocks.IRIDIUM_CASING.get()).setMinGlobalLimited(3)
-                                    .or(Predicates.abilities(PartAbility.INPUT_ENERGY).setMinGlobalLimited(1)
-                                            .setMaxGlobalLimited(2))
-                                    .or(Predicates.abilities(PartAbility.EXPORT_FLUIDS).setMaxGlobalLimited(1)))
-                            .where('C', Predicates.blocks(GTLBlocks.IRIDIUM_CASING.get()))
-                            .where('F', Predicates.blocks(ChemicalHelper.getBlock(TagPrefix.frameGt, GTMaterials.Ruridit)))
-                            .where('#', Predicates.any())
-                            .build())
-                    .workableCasingRenderer(GTLCore.id("block/casings/iridium_casing"),
-                            GTCEu.id("block/multiblock/fluid_drilling_rig"))
-                    .register(),
-            GTValues.ZPM);
+    public static final MultiblockMachineDefinition INFINITY_FLUID_DRILLING_RIG = REGISTRATE
+            .multiblock("infinity_fluid_drilling_rig", holder -> new INFFluidDrillMachine(holder, GTValues.ZPM, 256))
+            .rotationState(RotationState.ALL)
+            .recipeType(GTRecipeTypes.DUMMY_RECIPES)
+            .tooltips(Component.translatable("gtceu.machine.fluid_drilling_rig.description"),
+                    Component.translatable("gtceu.machine.fluid_drilling_rig.depletion", 0),
+                    Component.translatable("gtceu.universal.tooltip.energy_tier_range", GTValues.VNF[GTValues.ZPM], GTValues.VNF[GTValues.UV]),
+                    Component.translatable("gtceu.machine.fluid_drilling_rig.production", 256, 384))
+            .appearanceBlock(GTLBlocks.IRIDIUM_CASING)
+            .pattern((definition) -> FactoryBlockPattern.start()
+                    .aisle("XXX", "#F#", "#F#", "#F#", "###", "###", "###")
+                    .aisle("XXX", "FCF", "FCF", "FCF", "#F#", "#F#", "#F#")
+                    .aisle("XSX", "#F#", "#F#", "#F#", "###", "###", "###")
+                    .where('S', Predicates.controller(Predicates.blocks(definition.get())))
+                    .where('X', Predicates.blocks(GTLBlocks.IRIDIUM_CASING.get()).setMinGlobalLimited(3)
+                            .or(Predicates.abilities(PartAbility.INPUT_ENERGY).setMinGlobalLimited(1)
+                                    .setMaxGlobalLimited(2))
+                            .or(Predicates.abilities(PartAbility.EXPORT_FLUIDS).setMaxGlobalLimited(1)))
+                    .where('C', Predicates.blocks(GTLBlocks.IRIDIUM_CASING.get()))
+                    .where('F', Predicates.blocks(ChemicalHelper.getBlock(TagPrefix.frameGt, GTMaterials.Ruridit)))
+                    .where('#', Predicates.any())
+                    .build())
+            .workableCasingRenderer(GTLCore.id("block/casings/iridium_casing"), GTCEu.id("block/multiblock/fluid_drilling_rig"))
+            .register();
 
     public final static MultiblockMachineDefinition ADVANCED_ASSEMBLY_LINE = REGISTRATE
             .multiblock("advanced_assembly_line", AdvancedAssemblyLineMachine::new)

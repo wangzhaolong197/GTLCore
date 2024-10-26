@@ -38,6 +38,7 @@
         "gtm.OverclockingLogicMixin",
         "gtm.RockBreakerConditionMixin",
         "gtm.TagPrefixItemMixin",
+        "gtm.TagPrefixMixin",
         "gtm.cover.ConveyorCoverMixin",
         "gtm.cover.InfiniteWaterCoverMixin",
         "gtm.cover.PumpCoverMixin",

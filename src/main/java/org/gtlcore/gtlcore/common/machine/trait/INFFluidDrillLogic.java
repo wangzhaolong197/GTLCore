@@ -1,5 +1,6 @@
 package org.gtlcore.gtlcore.common.machine.trait;
 
+import org.gtlcore.gtlcore.common.data.GTLRecipeModifiers;
 import org.gtlcore.gtlcore.common.machine.multiblock.electric.INFFluidDrillMachine;
 
 import com.gregtechceu.gtceu.api.GTValues;
@@ -27,6 +28,7 @@ public class INFFluidDrillLogic extends RecipeLogic {
 
     @Nullable
     private Fluid veinFluid;
+    private int parallel = 1;
 
     public INFFluidDrillLogic(INFFluidDrillMachine machine) {
         super(machine);
@@ -66,10 +68,9 @@ public class INFFluidDrillLogic extends RecipeLogic {
         if (getMachine().getLevel() instanceof ServerLevel serverLevel && veinFluid != null) {
             var data = BedrockFluidVeinSavedData.getOrCreate(serverLevel);
             var recipe = GTRecipeBuilder.ofRaw()
+                    .outputFluids(FluidStack.create(veinFluid, getFluidToProduce(data.getFluidVeinWorldEntry(getChunkX(), getChunkZ()))))
                     .duration(MAX_PROGRESS)
-                    .EUt(GTValues.VA[getMachine().getEnergyTier()])
-                    .outputFluids(FluidStack.create(veinFluid,
-                            getFluidToProduce(data.getFluidVeinWorldEntry(getChunkX(), getChunkZ()))))
+                    .EUt((long) (GTValues.VA[getMachine().getEnergyTier()] * Math.pow(parallel, 1.2)))
                     .buildRawRecipe();
             if (recipe.matchRecipe(getMachine()).isSuccess() && recipe.matchTickRecipe(getMachine()).isSuccess()) {
                 return recipe;
@@ -95,11 +96,15 @@ public class INFFluidDrillLogic extends RecipeLogic {
 
             int produced = Math.max(depletedYield,
                     regularYield * remainingOperations / BedrockFluidVeinSavedData.MAXIMUM_VEIN_OPERATIONS);
-            produced *= 256;
+            produced *= getMachine().getBasis();
 
             // Overclocks produce 50% more fluid
             if (isOverclocked()) {
                 produced = produced * 3 / 2;
+            }
+            if (produced > 1000) {
+                parallel = GTLRecipeModifiers.getHatchParallel(getMachine());
+                produced *= parallel;
             }
             return produced * FluidHelper.getBucket() / 1000;
         }

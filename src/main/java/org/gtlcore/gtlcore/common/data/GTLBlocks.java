@@ -56,6 +56,7 @@ public class GTLBlocks {
     public static Map<Integer, Supplier<Block>> scmap = new HashMap<>();
     public static Map<Integer, Supplier<ActiveBlock>> sepmmap = new HashMap<>();
     public static Map<Integer, Supplier<Block>> calmap = new HashMap<>();
+    public static Map<Integer, Supplier<Block>> mgmap = new HashMap<>();
 
     static {
         REGISTRATE.creativeModeTab(() -> GTLCreativeModeTabs.GTL_CORE);
@@ -127,7 +128,7 @@ public class GTLBlocks {
     public static BlockEntry<ActiveBlock> createActiveCasing(String name, String baseModelPath) {
         return REGISTRATE.block(name, ActiveBlock::new)
                 .initialProperties(() -> Blocks.IRON_BLOCK)
-                .addLayer(() -> RenderType::cutoutMipped)
+                .addLayer(() -> RenderType::solid)
                 .blockstate(GTModels.createActiveModel(GTLCore.id(baseModelPath)))
                 .tag(GTToolType.WRENCH.harvestTags.get(0), BlockTags.MINEABLE_WITH_PICKAXE)
                 .item(BlockItem::new)
@@ -149,7 +150,7 @@ public class GTLBlocks {
         })
                 .initialProperties(() -> Blocks.IRON_BLOCK)
                 .properties(p -> p.isValidSpawn((state, level, pos, ent) -> false))
-                .addLayer(() -> RenderType::cutoutMipped)
+                .addLayer(() -> RenderType::solid)
                 .blockstate(GTModels.cubeAllModel(name, texture))
                 .tag(GTToolType.WRENCH.harvestTags.get(0), BlockTags.MINEABLE_WITH_PICKAXE)
                 .item(BlockItem::new)
@@ -171,7 +172,7 @@ public class GTLBlocks {
             }
         })
                 .initialProperties(() -> Blocks.IRON_BLOCK)
-                .addLayer(() -> RenderType::cutoutMipped)
+                .addLayer(() -> RenderType::solid)
                 .blockstate(GTModels.createActiveModel(GTLCore.id(baseModelPath)))
                 .tag(GTToolType.WRENCH.harvestTags.get(0), BlockTags.MINEABLE_WITH_PICKAXE)
                 .item(BlockItem::new)
@@ -188,7 +189,7 @@ public class GTLBlocks {
                 .initialProperties(() -> Blocks.IRON_BLOCK)
                 .properties(properties -> properties.strength(2.0f, 8.0f).sound(SoundType.METAL)
                         .isValidSpawn((blockState, blockGetter, blockPos, entityType) -> false))
-                .addLayer(() -> RenderType::cutoutMipped)
+                .addLayer(() -> RenderType::solid)
                 .blockstate(NonNullBiConsumer.noop())
                 .tag(GTToolType.WRENCH.harvestTags.get(0), CustomTags.TOOL_TIERS[1])
                 .item(BlockItem::new)
@@ -205,7 +206,7 @@ public class GTLBlocks {
 
     public static BlockEntry<Block> createCasingBlock(String name, ResourceLocation texture) {
         return createCasingBlock(name, Block::new, texture, () -> Blocks.IRON_BLOCK,
-                () -> RenderType::cutoutMipped);
+                () -> RenderType::solid);
     }
 
     @SuppressWarnings("all")
@@ -230,7 +231,7 @@ public class GTLBlocks {
         return REGISTRATE.block(name, Block::new)
                 .initialProperties(() -> Blocks.IRON_BLOCK)
                 .properties(p -> p.isValidSpawn((state, level, pos, ent) -> false))
-                .addLayer(() -> RenderType::cutoutMipped)
+                .addLayer(() -> RenderType::solid)
                 .blockstate((ctx, prov) -> {
                     prov.simpleBlock(ctx.getEntry(), prov.models().cubeBottomTop(name,
                             texture.withSuffix("/side"),
@@ -247,7 +248,7 @@ public class GTLBlocks {
     public static BlockEntry<Block> createStoneBlock(String name, ResourceLocation texture) {
         return REGISTRATE.block(name, Block::new)
                 .initialProperties(() -> Blocks.STONE)
-                .addLayer(() -> RenderType::cutoutMipped)
+                .addLayer(() -> RenderType::solid)
                 .blockstate(GTModels.cubeAllModel(name, texture))
                 .tag(BlockTags.MINEABLE_WITH_PICKAXE)
                 .item(BlockItem::new)
@@ -259,7 +260,7 @@ public class GTLBlocks {
     public static BlockEntry<Block> createSandBlock(String name, ResourceLocation texture) {
         return REGISTRATE.block(name, Block::new)
                 .initialProperties(() -> Blocks.SAND)
-                .addLayer(() -> RenderType::cutoutMipped)
+                .addLayer(() -> RenderType::solid)
                 .blockstate(GTModels.cubeAllModel(name, texture))
                 .tag(BlockTags.MINEABLE_WITH_SHOVEL)
                 .item(BlockItem::new)
@@ -273,7 +274,7 @@ public class GTLBlocks {
                 .block(casingType.getSerializedName(), p -> (FusionCasingBlock) new GTLFusionCasingBlock(p, casingType))
                 .initialProperties(() -> Blocks.IRON_BLOCK)
                 .properties(properties -> properties.strength(5.0f, 10.0f).sound(SoundType.METAL))
-                .addLayer(() -> RenderType::cutoutMipped)
+                .addLayer(() -> RenderType::solid)
                 .blockstate((ctx, prov) -> {
                     ActiveBlock block = ctx.getEntry();
                     ModelFile inactive = prov.models().getExistingFile(GTLCore.id(casingType.getSerializedName()));
@@ -296,7 +297,7 @@ public class GTLBlocks {
                 .lang("Hermetic Casing %s".formatted(GTValues.LVT[tier]))
                 .initialProperties(() -> Blocks.IRON_BLOCK)
                 .properties(p -> p.isValidSpawn((state, level, pos, ent) -> false))
-                .addLayer(() -> RenderType::cutoutMipped)
+                .addLayer(() -> RenderType::solid)
                 .blockstate(NonNullBiConsumer.noop())
                 .tag(GTToolType.WRENCH.harvestTags.get(0), BlockTags.MINEABLE_WITH_PICKAXE)
                 .item(BlockItem::new)
@@ -310,7 +311,7 @@ public class GTLBlocks {
                 .block("%s_coil_block".formatted(coilType.getName()), p -> new CoilBlock(p, coilType))
                 .initialProperties(() -> Blocks.IRON_BLOCK)
                 .properties(p -> p.isValidSpawn((state, level, pos, ent) -> false))
-                .addLayer(() -> RenderType::cutoutMipped)
+                .addLayer(() -> RenderType::solid)
                 .blockstate((ctx, prov) -> {
                     ActiveBlock block = ctx.getEntry();
                     ModelFile inactive = prov.models().getExistingFile(coilType.getTexture());
@@ -561,14 +562,83 @@ public class GTLBlocks {
     public static final BlockEntry<Block> DEGENERATE_RHENIUM_CONSTRAINED_CASING = createCasingBlock(
             "degenerate_rhenium_constrained_casing", GTLCore.id("block/casings/degenerate_rhenium_constrained_casing"));
 
+    public static final BlockEntry<Block> PRESSURE_CONTAINMENT_CASING = createCasingBlock(
+            "pressure_containment_casing", GTLCore.id("block/casings/pressure_containment_casing"));
+    public static final BlockEntry<Block> DRACONIUMAWAKENED_CASING = createCasingBlock(
+            "draconiumawakened_casing", GTLCore.id("block/casings/draconiumawakened_casing"));
+    public static final BlockEntry<Block> ANTIMATTER_ANNIHILATION_MATRIX = createCasingBlock(
+            "antimatter_annihilation_matrix", GTLCore.id("block/antimatter_annihilation_matrix"));
+    public static final BlockEntry<Block> BOUNDLESS_GRAVITATIONALLY_SEVERED_STRUCTURE_CASING = createCasingBlock(
+            "boundless_gravitationally_severed_structure_casing", GTLCore.id("block/boundless_gravitationally_severed_structure_casing"));
+    public static final BlockEntry<Block> CELESTIAL_MATTER_GUIDANCE_CASING = createCasingBlock(
+            "celestial_matter_guidance_casing", GTLCore.id("block/celestial_matter_guidance_casing"));
+    public static final BlockEntry<Block> COMPRESSOR_CONTROLLER_CASING = createCasingBlock(
+            "compressor_controller_casing", GTLCore.id("block/compressor_controller_casing"));
+    public static final BlockEntry<Block> COMPRESSOR_PIPE_CASING = createCasingBlock(
+            "compressor_pipe_casing", GTLCore.id("block/compressor_pipe_casing"));
+    public static final BlockEntry<Block> EXTREME_DENSITY_CASING = createCasingBlock(
+            "extreme_density_casing", GTLCore.id("block/extreme_density_casing"));
+    public static final BlockEntry<Block> FLOCCULATION_CASING = createCasingBlock(
+            "flocculation_casing", GTLCore.id("block/flocculation_casing"));
+    public static final BlockEntry<Block> GRAVITY_STABILIZATION_CASING = createCasingBlock(
+            "gravity_stabilization_casing", GTLCore.id("block/gravity_stabilization_casing"));
+    public static final BlockEntry<Block> HIGH_PRESSURE_RESISTANT_CASING = createCasingBlock(
+            "high_pressure_resistant_casing", GTLCore.id("block/high_pressure_resistant_casing"));
+    public static final BlockEntry<Block> LASER_CASING = createCasingBlock(
+            "laser_casing", GTLCore.id("block/laser_casing"));
+    public static final BlockEntry<Block> MAGTECH_CASING = createCasingBlock(
+            "magtech_casing", GTLCore.id("block/magtech_casing"));
+    public static final BlockEntry<Block> NAQUADAH_REINFORCED_PLANT_CASING = createCasingBlock(
+            "naquadah_reinforced_plant_casing", GTLCore.id("block/naquadah_reinforced_plant_casing"));
+    public static final BlockEntry<Block> NEUTRONIUM_CASING = createCasingBlock(
+            "neutronium_casing", GTLCore.id("block/neutronium_casing"));
+    public static final BlockEntry<Block> OZONE_CASING = createCasingBlock(
+            "ozone_casing", GTLCore.id("block/ozone_casing"));
+    public static final BlockEntry<Block> PLASMA_HEATER_CASING = createCasingBlock(
+            "plasma_heater_casing", GTLCore.id("block/plasma_heater_casing"));
+    public static final BlockEntry<Block> PROTOMATTER_ACTIVATION_COIL = createCasingBlock(
+            "protomatter_activation_coil", GTLCore.id("block/protomatter_activation_coil"));
+    public static final BlockEntry<Block> RADIATION_ABSORBENT_CASING = createCasingBlock(
+            "radiation_absorbent_casing", GTLCore.id("block/radiation_absorbent_casing"));
+    public static final BlockEntry<Block> REINFORCED_WOOD_CASING = createSidedCasingBlock(
+            "reinforced_wood_casing", GTLCore.id("block/casings/reinforced_wood_casing"));
+    public static final BlockEntry<Block> SHIELDED_ACCELERATOR = createCasingBlock(
+            "shielded_accelerator", GTLCore.id("block/shielded_accelerator"));
+    public static final BlockEntry<Block> SINGULARITY_REINFORCED_STELLAR_SHIELDING_CASING = createCasingBlock(
+            "singularity_reinforced_stellar_shielding_casing", GTLCore.id("block/singularity_reinforced_stellar_shielding_casing"));
+    public static final BlockEntry<Block> STELLAR_ENERGY_SIPHON_CASING = createCasingBlock(
+            "stellar_energy_siphon_casing", GTLCore.id("block/stellar_energy_siphon_casing"));
+    public static final BlockEntry<Block> TRANSCENDENTALLY_AMPLIFIED_MAGNETIC_CONFINEMENT_CASING = createCasingBlock(
+            "transcendentally_amplified_magnetic_confinement_casing", GTLCore.id("block/transcendentally_amplified_magnetic_confinement_casing"));
+    public static final BlockEntry<Block> NEUTRONIUM_ACTIVE_CASING = createCasingBlock(
+            "neutronium_active_casing", GTLCore.id("block/neutronium_active_casing"));
+    public static final BlockEntry<Block> STERILE_CASING = createCasingBlock(
+            "sterile-casing", GTLCore.id("block/sterile-casing"));
+    public static final BlockEntry<Block> QUARK_PIPE = createCasingBlock(
+            "quark_pipe", GTLCore.id("block/quark_pipe"));
+    public static final BlockEntry<Block> QUARK_EXCLUSION_CASING = createCasingBlock(
+            "quark_exclusion_casing", GTLCore.id("block/quark_exclusion_casing"));
+    public static final BlockEntry<Block> INERT_NEUTRALIZATION_WATER_PLANT_CASING = createCasingBlock(
+            "inert_neutralization_water_plant_casing", GTLCore.id("block/inert_neutralization_water_plant_casing"));
+    public static final BlockEntry<Block> HIGH_ENERGY_ULTRAVIOLET_EMITTER_CASING = createCasingBlock(
+            "high_energy_ultraviolet_emitter_casing", GTLCore.id("block/high_energy_ultraviolet_emitter_casing"));
+    public static final BlockEntry<Block> REINFORCED_STERILE_WATER_PLANT_CASING = createCasingBlock(
+            "reinforced_sterile_water_plant_casing", GTLCore.id("block/reinforced_sterile_water_plant_casing"));
+    public static final BlockEntry<Block> NEUTRONIUM_STABLE_CASING = createCasingBlock(
+            "neutronium_stable_casing", GTLCore.id("block/neutronium_stable_casing"));
+    public static final BlockEntry<Block> STERILE_WATER_PLANT_CASING = createCasingBlock(
+            "sterile_water_plant_casing", GTLCore.id("block/sterile_water_plant_casing"));
+    public static final BlockEntry<Block> STABILIZED_NAQUADAH_WATER_PLANT_CASING = createCasingBlock(
+            "stabilized_naquadah_water_plant_casing", GTLCore.id("block/stabilized_naquadah_water_plant_casing"));
+
     public static final BlockEntry<Block> FORCE_FIELD_GLASS = createGlassCasingBlock(
-            "force_field_glass", GTLCore.id("block/force_field_glass"), () -> RenderType::cutoutMipped);
+            "force_field_glass", GTLCore.id("block/force_field_glass"), () -> RenderType::translucent);
     public static final BlockEntry<Block> INFINITY_GLASS = createGlassCasingBlock(
-            "infinity_glass", GTLCore.id("block/casings/infinity_glass"), () -> RenderType::cutoutMipped);
+            "infinity_glass", GTLCore.id("block/casings/infinity_glass"), () -> RenderType::translucent);
     public static final BlockEntry<Block> RHENIUM_REINFORCED_ENERGY_GLASS = createGlassCasingBlock(
-            "rhenium_reinforced_energy_glass", GTLCore.id("block/casings/rhenium_reinforced_energy_glass"), () -> RenderType::cutoutMipped);
+            "rhenium_reinforced_energy_glass", GTLCore.id("block/casings/rhenium_reinforced_energy_glass"), () -> RenderType::translucent);
     public static final BlockEntry<Block> HSSS_REINFORCED_BOROSILICATE_GLASS = createGlassCasingBlock(
-            "hsss_reinforced_borosilicate_glass", GTLCore.id("block/casings/hsss_reinforced_borosilicate_glass"), () -> RenderType::cutoutMipped);
+            "hsss_reinforced_borosilicate_glass", GTLCore.id("block/casings/hsss_reinforced_borosilicate_glass"), () -> RenderType::translucent);
 
     public static final BlockEntry<ActiveBlock> POWER_CORE = createActiveCasing("power_core",
             "block/variant/hyper_core");
@@ -610,4 +680,90 @@ public class GTLBlocks {
             "block/variant/power_module", sepmmap, 4);
     public static final BlockEntry<ActiveBlock> POWER_MODULE_5 = createActiveTierCasing("power_module_5",
             "block/variant/power_module", sepmmap, 5);
+
+    public static final BlockEntry<Block> ELECTRON_PERMEABLE_NEUTRONIUM_COATED_GLASS = createGlassCasingBlock(
+            "electron_permeable_neutronium_coated_glass", GTLCore.id("block/casings/electron_permeable_neutronium_coated_glass"), () -> RenderType::translucent);
+    public static final BlockEntry<Block> NON_PHOTONIC_MATTER_EXCLUSION_GLASS = createGlassCasingBlock(
+            "non_photonic_matter_exclusion_glass", GTLCore.id("block/casings/non_photonic_matter_exclusion_glass"), () -> RenderType::translucent);
+    public static final BlockEntry<Block> SPATIALLY_TRANSCENDENT_GRAVITATIONAL_LENS_BLOCK = createGlassCasingBlock(
+            "spatially_transcendent_gravitational_lens_block", GTLCore.id("block/spatially_transcendent_gravitational_lens_block"), () -> RenderType::translucent);
+    public static final BlockEntry<Block> OMNI_PURPOSE_INFINITY_FUSED_GLASS = createGlassCasingBlock(
+            "omni_purpose_infinity_fused_glass", GTLCore.id("block/casings/omni_purpose_infinity_fused_glass"), () -> RenderType::translucent);
+    public static final BlockEntry<Block> HAWKING_RADIATION_REALIGNMENT_FOCUS = createGlassCasingBlock(
+            "hawking_radiation_realignment_focus", GTLCore.id("block/casings/hawking_radiation_realignment_focus"), () -> RenderType::translucent);
+    public static final BlockEntry<Block> CHEMICAL_GRADE_GLASS = createGlassCasingBlock(
+            "chemical_grade_glass", GTLCore.id("block/casings/chemical_grade_glass"), () -> RenderType::translucent);
+    public static final BlockEntry<Block> ANTIMATTER_CONTAINMENT_CASING = createGlassCasingBlock(
+            "antimatter_containment_casing", GTLCore.id("block/antimatter_containment_casing"), () -> RenderType::translucent);
+
+    public static final BlockEntry<Block> QUANTUM_GLASS = createCasingBlock("quantum_glass",
+            arg -> new GlassBlock(arg) {
+
+                @Override
+                public void appendHoverText(@NotNull ItemStack stack, @Nullable BlockGetter level,
+                                            @NotNull List<Component> tooltip, @NotNull TooltipFlag flag) {
+                    tooltip.add(Component.translatable("tooltip.gtlcore.quantum_glass.0"));
+                    tooltip.add(Component.translatable("tooltip.gtlcore.quantum_glass.1"));
+                }
+            },
+            GTLCore.id("block/casings/quantum_glass"), () -> Blocks.GLASS, () -> RenderType::translucent);
+
+    /// *魔法线方块*
+    public static final BlockEntry<Block> MAGIC_MECHANICAL_LOW_CUBE = createTierCasings(
+            "magic_mechanical_low_cube", GTLCore.id("block/magic/magic_mechanical_low_cube"),
+            mgmap, 1);
+    public static final BlockEntry<Block> MAGIC_MECHANICAL_MIDDLE_CUBE = createTierCasings(
+            "magic_mechanical_middle_cube", GTLCore.id("block/magic/magic_mechanical_middle_cube"),
+            mgmap, 2);
+    public static final BlockEntry<Block> MAGIC_MECHANICAL_HIGH_CUBE = createTierCasings(
+            "magic_mechanical_high_cube", GTLCore.id("block/magic/magic_mechanical_high_cube"),
+            mgmap, 3);
+
+    public static final BlockEntry<Block> MAGIC_COIL_LOW_BLOCK = createTierCasings(
+            "magic_coil_low_block", GTLCore.id("block/magic/magic_coil_low_block"),
+            mgmap, 1);
+    public static final BlockEntry<Block> MAGIC_COIL_MIDDLE_BLOCK = createTierCasings(
+            "magic_coil_middle_block", GTLCore.id("block/magic/magic_coil_middle_block"),
+            mgmap, 2);
+    public static final BlockEntry<Block> MAGIC_COIL_HIGH_BLOCK = createTierCasings(
+            "magic_coil_high_block", GTLCore.id("block/magic/magic_coil_high_block"),
+            mgmap, 3);
+
+    public static final BlockEntry<Block> MAGIC_GLASS_BLOCK = createGlassCasingBlock(
+            "magic_glass_block", GTLCore.id("block/magic/magic_glass_block"), () -> RenderType::translucent);
+    public static final BlockEntry<Block> ARCANE_GLASS_BLOCK = createGlassCasingBlock(
+            "arcane_glass_block", GTLCore.id("block/magic/arcane_glass_block"), () -> RenderType::translucent);
+
+    public static final BlockEntry<Block> NON_ATTRIBUTE_MAGIC_CRYSTALS_BLOCK = createCasingBlock(
+            "non_attribute_magic_crystals_block", GTLCore.id("block/magic/non_attribute_magic_crystals_block"));
+    public static final BlockEntry<Block> CHANGE_MAGIC_CRYSTALS_BLOCK = createCasingBlock(
+            "charge_magic_crystals_block", GTLCore.id("block/magic/charge_magic_crystals_block"));
+    public static final BlockEntry<Block> FOCUS_MAGIC_CRYSTALS_BLOCK = createCasingBlock(
+            "focus_magic_crystals_block", GTLCore.id("block/magic/focus_magic_crystals_block"));
+    public static final BlockEntry<Block> SHINING_MAGIC_CRYSTALS_BLOCK = createCasingBlock(
+            "shining_magic_crystals_block", GTLCore.id("block/magic/shining_magic_crystals_block"));
+    public static final BlockEntry<Block> NATURAL_MAGIC_CRYSTALS_BLOCK = createCasingBlock(
+            "natural_magic_crystals_block", GTLCore.id("block/magic/natural_magic_crystals_block"));
+    public static final BlockEntry<Block> OCEAN_MAGIC_CRYSTALS_BLOCK = createCasingBlock(
+            "ocean_magic_crystals_block", GTLCore.id("block/magic/ocean_magic_crystals_block"));
+    public static final BlockEntry<Block> COLD_MAGIC_CRYSTALS_BLOCK = createCasingBlock(
+            "cold_magic_crystals_block", GTLCore.id("block/magic/cold_magic_crystals_block"));
+    public static final BlockEntry<Block> HIDDEN_MAGIC_CRYSTALS_BLOCK = createCasingBlock(
+            "hidden_magic_crystals_block", GTLCore.id("block/magic/hidden_magic_crystals_block"));
+    public static final BlockEntry<Block> ANCIENT_MAGIC_CRYSTALS_BLOCK = createCasingBlock(
+            "ancient_magic_crystals_block", GTLCore.id("block/magic/ancient_magic_crystals_block"));
+    public static final BlockEntry<Block> PURGATORY_MAGIC_CRYSTALS_BLOCK = createCasingBlock(
+            "purgatory_magic_crystals_block", GTLCore.id("block/magic/purgatory_magic_crystals_block"));
+    public static final BlockEntry<Block> END_MAGIC_CRYSTALS_BLOCK = createCasingBlock(
+            "end_magic_crystals_block", GTLCore.id("block/magic/end_magic_crystals_block"));
+    public static final BlockEntry<Block> STARRY_SKY_MAGIC_CRYSTALS_BLOCK = createCasingBlock(
+            "starry_sky_magic_crystals_block", GTLCore.id("block/magic/starry_sky_magic_crystals_block"));
+    public static final BlockEntry<Block> ABYSS_MAGIC_CRYSTALS_BLOCK = createCasingBlock(
+            "abyss_magic_crystals_block", GTLCore.id("block/magic/abyss_magic_crystals_block"));
+    public static final BlockEntry<Block> SUN_MAGIC_CRYSTALS_BLOCK = createCasingBlock(
+            "sun_magic_crystals_block", GTLCore.id("block/magic/sun_magic_crystals_block"));
+    public static final BlockEntry<Block> TIME_MAGIC_CRYSTALS_BLOCK = createCasingBlock(
+            "time_magic_crystals_block", GTLCore.id("block/magic/time_magic_crystals_block"));
+    public static final BlockEntry<Block> SPACE_MAGIC_CRYSTALS_BLOCK = createCasingBlock(
+            "space_magic_crystals_block", GTLCore.id("block/magic/space_magic_crystals_block"));
 }
