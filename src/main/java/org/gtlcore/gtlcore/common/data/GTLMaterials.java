@@ -2,6 +2,7 @@ package org.gtlcore.gtlcore.common.data;
 
 import org.gtlcore.gtlcore.common.data.material.MaterialAdd;
 import org.gtlcore.gtlcore.common.data.material.MaterialBuilder;
+import org.gtlcore.gtlcore.common.data.material.MaterialBuilderbatch;
 
 import com.gregtechceu.gtceu.api.data.chemical.material.Material;
 import com.gregtechceu.gtceu.api.data.chemical.material.properties.OreProperty;
@@ -823,10 +824,66 @@ public class GTLMaterials {
     public static Material LutetiumExtractedNanoResin;
     public static Material ScandiumExtractedNanoResin;
     public static Material YttriumExtractedNanoResin;
+    public static Material HexaphaseCopper;
+    public static Material LowGuideMagic;
+    public static Material MiddleGuideMagic;
+    public static Material HighGuideMagic;
+    public static Material LimitlessGuideMagic;
+    public static Material NonattributeMagicCrystals;
+    public static Material ChargeMagicCrystals;
+    public static Material FocusMagicCrystals;
+    public static Material ShiningMagicCrystals;
+    public static Material NaturalMagicCrystals;
+    public static Material OceanMagicCrystals;
+    public static Material ColdMagicCrystals;
+    public static Material HiddenMagicCrystals;
+    public static Material AncientMagicCrystals;
+    public static Material PurgatoryMagicCrystals;
+    public static Material EndMagicCrystals;
+    public static Material StarrySkyMagicCrystals;
+    public static Material AbyssMagicCrystals;
+    public static Material SunMagicCrystals;
+    public static Material TimeMagicCrystals;
+    public static Material SpaceMagicCrystals;
+    public static Material NonattributeMagicCrystalsTurbid;
+    public static Material ChargeMagicCrystalsTurbid;
+    public static Material FocusMagicCrystalsTurbid;
+    public static Material ShiningMagicCrystalsTurbid;
+    public static Material NaturalMagicCrystalsTurbid;
+    public static Material OceanMagicCrystalsTurbid;
+    public static Material ColdMagicCrystalsTurbid;
+    public static Material HiddenMagicCrystalsTurbid;
+    public static Material AncientMagicCrystalsTurbid;
+    public static Material PurgatoryMagicCrystalsTurbid;
+    public static Material EndMagicCrystalsTurbid;
+    public static Material StarrySkyMagicCrystalsTurbid;
+    public static Material AbyssMagicCrystalsTurbid;
+    public static Material SunMagicCrystalsTurbid;
+    public static Material TimeMagicCrystalsTurbid;
+    public static Material SpaceMagicCrystalsTurbid;
+    public static Material NaturalMagicSource;
+    public static Material OceanMagicSource;
+    public static Material ColdMagicSource;
+    public static Material HiddenMagicSource;
+    public static Material AncientMagicSource;
+    public static Material PurgatoryMagicSource;
+    public static Material EndMagicSource;
+    public static Material StarrySkyMagicSource;
+    public static Material AbyssMagicSource;
+    public static Material SunMagicSource;
+    public static Material TimeMagicSource;
+    public static Material SpaceMagicSource;
+    public static Material MagicSource;
+    public static Material HighMagicSource;
+    public static Material ConcentratedMagicSource;
+    public static Material CondensedMagicSource;
+
+    public static Material Mercury194;
 
     public static void init() {
         MaterialAdd.init();
         MaterialBuilder.init();
+        MaterialBuilderbatch.init();
 
         OreProperty oreProp = Bastnasite.getProperty(PropertyKey.ORE);
         oreProp.getOreByProducts().clear();

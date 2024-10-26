@@ -318,6 +318,12 @@ public class GTLItems {
                 .register();
     }
 
+    private static ItemEntry<Item> registerMagic(String id) {
+        return REGISTRATE.item(id, Item::new)
+                .model((ctx, prov) -> prov.generated(ctx, GTLCore.id("item/magic/" + id)))
+                .register();
+    }
+
     public static ItemEntry<KineticRotorItem> WOOD_ROTOR = registerRotor("wood_rotor", 2400, 4, 10, 0);
     public static ItemEntry<KineticRotorItem> IRON_ROTOR = registerRotor("iron_rotor", 14000, 10, 20, 1);
     public static ItemEntry<KineticRotorItem> STEEL_ROTOR = registerRotor("steel_rotor", 16000, 10, 30, 1);
@@ -734,4 +740,21 @@ public class GTLItems {
     public static ItemEntry<Item> SHEWANELLA_PETRI_DISH = register("shewanella_petri_dish", "germ");
 
     public static ItemEntry<Item> CONVERSION_SIMULATE_CARD = register("conversion_simulate_card");
+
+    // 魔法物品
+    public static ItemEntry<Item> MAGIC_CORE1 = registerMagic("magic_core1");
+    public static ItemEntry<Item> MAGIC_CORE2 = registerMagic("magic_core2");
+    public static ItemEntry<Item> MAGIC_CORE3 = registerMagic("magic_core3");
+    public static ItemEntry<Item> ARCANE_CORE1 = registerMagic("arcane_core1");
+    public static ItemEntry<Item> ARCANE_CORE2 = registerMagic("arcane_core2");
+
+    public static ItemEntry<Item> SOUL_FRAGMENT = registerMagic("soul_fragment");
+    public static ItemEntry<Item> SOUL_CRYSTAL_SMALL = registerMagic("soul_crystal_small");
+    public static ItemEntry<Item> SOUL_CRYSTAL_MEDIUM = registerMagic("soul_crystal_medium");
+    public static ItemEntry<Item> SOUL_CRYSTAL_LARGE = registerMagic("soul_crystal_large");
+    public static ItemEntry<Item> SOUL_CRYSTAL_COMPLETE = registerMagic("soul_crystal_complete");
+    public static ItemEntry<Item> SOUL_COIN = registerMagic("soul_coin");
+
+    public static ItemEntry<Item> MAGICAL_RESIDUE = registerMagic("magical_residue");
+    public static ItemEntry<Item> ARCANE_RESIDUE = registerMagic("arcane_residue");
 }

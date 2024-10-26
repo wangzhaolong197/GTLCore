@@ -4,6 +4,7 @@ import org.gtlcore.gtlcore.data.recipe.*;
 import org.gtlcore.gtlcore.data.recipe.chemistry.EBFRecipe;
 import org.gtlcore.gtlcore.data.recipe.chemistry.MixerRecipes;
 import org.gtlcore.gtlcore.data.recipe.processing.Lanthanidetreatment;
+import org.gtlcore.gtlcore.data.recipe.processing.MagicFormula;
 import org.gtlcore.gtlcore.data.recipe.processing.StoneDustProcess;
 
 import net.minecraft.data.recipes.FinishedRecipe;
@@ -22,6 +23,7 @@ public class GTLRecipes {
         ElementCopying.init(provider);
         StoneDustProcess.init(provider);
         Lanthanidetreatment.init(provider);
+        MagicFormula.init(provider);
         CircuitRecipes.init(provider);
         MixerRecipes.init(provider);
         RadiationHatchRecipes.init(provider);

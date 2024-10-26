@@ -1238,5 +1238,7 @@
     "tagprefix.nanoswarm": "%s纳米蜂群",
     "tagprefix.plutostone": "冥王星%s矿石",
     "tagprefix.titanstone": "土卫六%s矿石",
-    "tagprefix.venus_stone": "金星石%s矿石"
+    "tagprefix.venus_stone": "金星石%s矿石",
+    "material.gtceu.hexaphasecopper": "六相铜",
+    "tagprefix.magiccrystal": "%s晶"
 }
