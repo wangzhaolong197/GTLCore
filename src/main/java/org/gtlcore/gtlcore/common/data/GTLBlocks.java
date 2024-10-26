@@ -128,7 +128,7 @@ public class GTLBlocks {
     public static BlockEntry<ActiveBlock> createActiveCasing(String name, String baseModelPath) {
         return REGISTRATE.block(name, ActiveBlock::new)
                 .initialProperties(() -> Blocks.IRON_BLOCK)
-                .addLayer(() -> RenderType::cutoutMipped)
+                .addLayer(() -> RenderType::solid)
                 .blockstate(GTModels.createActiveModel(GTLCore.id(baseModelPath)))
                 .tag(GTToolType.WRENCH.harvestTags.get(0), BlockTags.MINEABLE_WITH_PICKAXE)
                 .item(BlockItem::new)
@@ -150,7 +150,7 @@ public class GTLBlocks {
         })
                 .initialProperties(() -> Blocks.IRON_BLOCK)
                 .properties(p -> p.isValidSpawn((state, level, pos, ent) -> false))
-                .addLayer(() -> RenderType::cutoutMipped)
+                .addLayer(() -> RenderType::solid)
                 .blockstate(GTModels.cubeAllModel(name, texture))
                 .tag(GTToolType.WRENCH.harvestTags.get(0), BlockTags.MINEABLE_WITH_PICKAXE)
                 .item(BlockItem::new)
@@ -172,7 +172,7 @@ public class GTLBlocks {
             }
         })
                 .initialProperties(() -> Blocks.IRON_BLOCK)
-                .addLayer(() -> RenderType::cutoutMipped)
+                .addLayer(() -> RenderType::solid)
                 .blockstate(GTModels.createActiveModel(GTLCore.id(baseModelPath)))
                 .tag(GTToolType.WRENCH.harvestTags.get(0), BlockTags.MINEABLE_WITH_PICKAXE)
                 .item(BlockItem::new)
@@ -189,7 +189,7 @@ public class GTLBlocks {
                 .initialProperties(() -> Blocks.IRON_BLOCK)
                 .properties(properties -> properties.strength(2.0f, 8.0f).sound(SoundType.METAL)
                         .isValidSpawn((blockState, blockGetter, blockPos, entityType) -> false))
-                .addLayer(() -> RenderType::cutoutMipped)
+                .addLayer(() -> RenderType::solid)
                 .blockstate(NonNullBiConsumer.noop())
                 .tag(GTToolType.WRENCH.harvestTags.get(0), CustomTags.TOOL_TIERS[1])
                 .item(BlockItem::new)
@@ -206,7 +206,7 @@ public class GTLBlocks {
 
     public static BlockEntry<Block> createCasingBlock(String name, ResourceLocation texture) {
         return createCasingBlock(name, Block::new, texture, () -> Blocks.IRON_BLOCK,
-                () -> RenderType::cutoutMipped);
+                () -> RenderType::solid);
     }
 
     @SuppressWarnings("all")
@@ -231,7 +231,7 @@ public class GTLBlocks {
         return REGISTRATE.block(name, Block::new)
                 .initialProperties(() -> Blocks.IRON_BLOCK)
                 .properties(p -> p.isValidSpawn((state, level, pos, ent) -> false))
-                .addLayer(() -> RenderType::cutoutMipped)
+                .addLayer(() -> RenderType::solid)
                 .blockstate((ctx, prov) -> {
                     prov.simpleBlock(ctx.getEntry(), prov.models().cubeBottomTop(name,
                             texture.withSuffix("/side"),
@@ -248,7 +248,7 @@ public class GTLBlocks {
     public static BlockEntry<Block> createStoneBlock(String name, ResourceLocation texture) {
         return REGISTRATE.block(name, Block::new)
                 .initialProperties(() -> Blocks.STONE)
-                .addLayer(() -> RenderType::cutoutMipped)
+                .addLayer(() -> RenderType::solid)
                 .blockstate(GTModels.cubeAllModel(name, texture))
                 .tag(BlockTags.MINEABLE_WITH_PICKAXE)
                 .item(BlockItem::new)
@@ -260,7 +260,7 @@ public class GTLBlocks {
     public static BlockEntry<Block> createSandBlock(String name, ResourceLocation texture) {
         return REGISTRATE.block(name, Block::new)
                 .initialProperties(() -> Blocks.SAND)
-                .addLayer(() -> RenderType::cutoutMipped)
+                .addLayer(() -> RenderType::solid)
                 .blockstate(GTModels.cubeAllModel(name, texture))
                 .tag(BlockTags.MINEABLE_WITH_SHOVEL)
                 .item(BlockItem::new)
@@ -274,7 +274,7 @@ public class GTLBlocks {
                 .block(casingType.getSerializedName(), p -> (FusionCasingBlock) new GTLFusionCasingBlock(p, casingType))
                 .initialProperties(() -> Blocks.IRON_BLOCK)
                 .properties(properties -> properties.strength(5.0f, 10.0f).sound(SoundType.METAL))
-                .addLayer(() -> RenderType::cutoutMipped)
+                .addLayer(() -> RenderType::solid)
                 .blockstate((ctx, prov) -> {
                     ActiveBlock block = ctx.getEntry();
                     ModelFile inactive = prov.models().getExistingFile(GTLCore.id(casingType.getSerializedName()));
@@ -297,7 +297,7 @@ public class GTLBlocks {
                 .lang("Hermetic Casing %s".formatted(GTValues.LVT[tier]))
                 .initialProperties(() -> Blocks.IRON_BLOCK)
                 .properties(p -> p.isValidSpawn((state, level, pos, ent) -> false))
-                .addLayer(() -> RenderType::cutoutMipped)
+                .addLayer(() -> RenderType::solid)
                 .blockstate(NonNullBiConsumer.noop())
                 .tag(GTToolType.WRENCH.harvestTags.get(0), BlockTags.MINEABLE_WITH_PICKAXE)
                 .item(BlockItem::new)
@@ -311,7 +311,7 @@ public class GTLBlocks {
                 .block("%s_coil_block".formatted(coilType.getName()), p -> new CoilBlock(p, coilType))
                 .initialProperties(() -> Blocks.IRON_BLOCK)
                 .properties(p -> p.isValidSpawn((state, level, pos, ent) -> false))
-                .addLayer(() -> RenderType::cutoutMipped)
+                .addLayer(() -> RenderType::solid)
                 .blockstate((ctx, prov) -> {
                     ActiveBlock block = ctx.getEntry();
                     ModelFile inactive = prov.models().getExistingFile(coilType.getTexture());
@@ -613,7 +613,9 @@ public class GTLBlocks {
     public static final BlockEntry<Block> NEUTRONIUM_ACTIVE_CASING = createCasingBlock(
             "neutronium_active_casing", GTLCore.id("block/neutronium_active_casing"));
     public static final BlockEntry<Block> STERILE_CASING = createCasingBlock(
+
             "sterile_casing", GTLCore.id("block/sterile_casing"));
+
     public static final BlockEntry<Block> QUARK_PIPE = createCasingBlock(
             "quark_pipe", GTLCore.id("block/quark_pipe"));
     public static final BlockEntry<Block> QUARK_EXCLUSION_CASING = createCasingBlock(
@@ -737,11 +739,12 @@ public class GTLBlocks {
     public static final BlockEntry<Block> NON_ATTRIBUTE_MAGIC_CRYSTALS_BLOCK = createCasingBlock(
             "non_attribute_magic_crystals_block", GTLCore.id("block/magic/non_attribute_magic_crystals_block"));
     public static final BlockEntry<Block> CHANGE_MAGIC_CRYSTALS_BLOCK = createCasingBlock(
-            "non_attribute_magic_crystals_block", GTLCore.id("block/magic/change_magic_crystals_block"));
+            "charge_magic_crystals_block", GTLCore.id("block/magic/charge_magic_crystals_block"));
     public static final BlockEntry<Block> FOCUS_MAGIC_CRYSTALS_BLOCK = createCasingBlock(
-            "non_attribute_magic_crystals_block", GTLCore.id("block/magic/focus_magic_crystals_block"));
+            "focus_magic_crystals_block", GTLCore.id("block/magic/focus_magic_crystals_block"));
     public static final BlockEntry<Block> SHINING_MAGIC_CRYSTALS_BLOCK = createCasingBlock(
-            "non_attribute_magic_crystals_block", GTLCore.id("block/magic/shining_magic_crystals_block"));
+            "shining_magic_crystals_block", GTLCore.id("block/magic/shining_magic_crystals_block"));
+
     public static final BlockEntry<Block> NATURAL_MAGIC_CRYSTALS_BLOCK = createCasingBlock(
             "natural_magic_crystals_block", GTLCore.id("block/magic/natural_magic_crystals_block"));
     public static final BlockEntry<Block> OCEAN_MAGIC_CRYSTALS_BLOCK = createCasingBlock(

@@ -3,6 +3,8 @@ package org.gtlcore.gtlcore.common.data;
 import org.gtlcore.gtlcore.common.data.material.MaterialAdd;
 import org.gtlcore.gtlcore.common.data.material.MaterialBuilder;
 import org.gtlcore.gtlcore.common.data.material.MaterialBuilderMachine;
+import org.gtlcore.gtlcore.common.data.material.MaterialBuilderbatch;
+
 
 import com.gregtechceu.gtceu.api.data.chemical.material.Material;
 import com.gregtechceu.gtceu.api.data.chemical.material.properties.OreProperty;

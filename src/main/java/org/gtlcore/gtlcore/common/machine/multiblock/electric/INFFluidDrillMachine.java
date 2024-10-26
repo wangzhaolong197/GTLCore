@@ -22,7 +22,6 @@ import net.minecraft.network.chat.Style;
 import net.minecraft.world.level.material.Fluid;
 
 import lombok.Getter;
-import org.jetbrains.annotations.NotNull;
 
 import java.util.List;
 
@@ -34,10 +33,12 @@ import javax.annotation.ParametersAreNonnullByDefault;
 public class INFFluidDrillMachine extends WorkableElectricMultiblockMachine implements ITieredMachine {
 
     private final int tier;
+    private final int basis;
 
-    public INFFluidDrillMachine(IMachineBlockEntity holder, int tier) {
+    public INFFluidDrillMachine(IMachineBlockEntity holder, int tier, int basis) {
         super(holder);
         this.tier = tier;
+        this.basis = basis;
     }
 
     @Override
@@ -45,7 +46,6 @@ public class INFFluidDrillMachine extends WorkableElectricMultiblockMachine impl
         return new INFFluidDrillLogic(this);
     }
 
-    @NotNull
     @Override
     public INFFluidDrillLogic getRecipeLogic() {
         return (INFFluidDrillLogic) super.getRecipeLogic();

@@ -1,21 +1,17 @@
 package org.gtlcore.gtlcore.common.machine.multiblock.generator;
 
+import org.gtlcore.gtlcore.api.machine.multiblock.StorageMachine;
 import org.gtlcore.gtlcore.common.data.GTLRecipeTypes;
 
 import com.gregtechceu.gtceu.api.GTValues;
 import com.gregtechceu.gtceu.api.capability.recipe.EURecipeCapability;
 import com.gregtechceu.gtceu.api.capability.recipe.FluidRecipeCapability;
-import com.gregtechceu.gtceu.api.capability.recipe.IO;
 import com.gregtechceu.gtceu.api.capability.recipe.RecipeCapability;
-import com.gregtechceu.gtceu.api.gui.GuiTextures;
 import com.gregtechceu.gtceu.api.item.MetaMachineItem;
 import com.gregtechceu.gtceu.api.machine.IMachineBlockEntity;
 import com.gregtechceu.gtceu.api.machine.MachineDefinition;
 import com.gregtechceu.gtceu.api.machine.MetaMachine;
 import com.gregtechceu.gtceu.api.machine.MultiblockMachineDefinition;
-import com.gregtechceu.gtceu.api.machine.feature.IMachineLife;
-import com.gregtechceu.gtceu.api.machine.multiblock.WorkableElectricMultiblockMachine;
-import com.gregtechceu.gtceu.api.machine.trait.NotifiableItemStackHandler;
 import com.gregtechceu.gtceu.api.recipe.GTRecipe;
 import com.gregtechceu.gtceu.api.recipe.GTRecipeType;
 import com.gregtechceu.gtceu.api.recipe.RecipeHelper;
@@ -27,11 +23,6 @@ import com.gregtechceu.gtceu.utils.FormattingUtil;
 
 import com.lowdragmc.lowdraglib.gui.util.ClickData;
 import com.lowdragmc.lowdraglib.gui.widget.ComponentPanelWidget;
-import com.lowdragmc.lowdraglib.gui.widget.SlotWidget;
-import com.lowdragmc.lowdraglib.gui.widget.Widget;
-import com.lowdragmc.lowdraglib.gui.widget.WidgetGroup;
-import com.lowdragmc.lowdraglib.misc.ItemStackTransfer;
-import com.lowdragmc.lowdraglib.syncdata.annotation.DescSynced;
 import com.lowdragmc.lowdraglib.syncdata.annotation.Persisted;
 import com.lowdragmc.lowdraglib.syncdata.field.ManagedFieldHolder;
 
@@ -53,14 +44,11 @@ import javax.annotation.ParametersAreNonnullByDefault;
 
 @ParametersAreNonnullByDefault
 @MethodsReturnNonnullByDefault
-public class GeneratorArrayMachine extends WorkableElectricMultiblockMachine implements IMachineLife {
+public class GeneratorArrayMachine extends StorageMachine {
 
     protected static final ManagedFieldHolder MANAGED_FIELD_HOLDER = new ManagedFieldHolder(
-            GeneratorArrayMachine.class, WorkableElectricMultiblockMachine.MANAGED_FIELD_HOLDER);
+            GeneratorArrayMachine.class, StorageMachine.MANAGED_FIELD_HOLDER);
 
-    @Persisted
-    @DescSynced
-    public final NotifiableItemStackHandler machineStorage;
     @Nullable
     private GTRecipeType[] recipeTypeCache;
 
@@ -74,8 +62,7 @@ public class GeneratorArrayMachine extends WorkableElectricMultiblockMachine imp
     private long eut = 0;
 
     public GeneratorArrayMachine(IMachineBlockEntity holder, Object... args) {
-        super(holder, args);
-        this.machineStorage = createMachineStorage(args);
+        super(holder, 16);
     }
 
     @Override
@@ -83,19 +70,8 @@ public class GeneratorArrayMachine extends WorkableElectricMultiblockMachine imp
         return MANAGED_FIELD_HOLDER;
     }
 
-    protected NotifiableItemStackHandler createMachineStorage(Object... args) {
-        var storage = new NotifiableItemStackHandler(this, 1, IO.NONE, IO.NONE, slots -> new ItemStackTransfer(1) {
-
-            @Override
-            public int getSlotLimit(int slot) {
-                return 16;
-            }
-        });
-        storage.setFilter(this::isMachineStack);
-        return storage;
-    }
-
-    protected boolean isMachineStack(ItemStack itemStack) {
+    @Override
+    protected boolean filter(ItemStack itemStack) {
         if (itemStack.getItem() instanceof MetaMachineItem metaMachineItem) {
             MachineDefinition definition = metaMachineItem.getDefinition();
 
@@ -155,11 +131,6 @@ public class GeneratorArrayMachine extends WorkableElectricMultiblockMachine imp
             }
             getRecipeLogic().updateTickSubscription();
         }
-    }
-
-    @Override
-    public void onMachineRemoved() {
-        clearInventory(machineStorage.storage);
     }
 
     //////////////////////////////////////
@@ -298,16 +269,5 @@ public class GeneratorArrayMachine extends WorkableElectricMultiblockMachine imp
                 this.isw = !this.isw;
             }
         }
-    }
-
-    @Override
-    public Widget createUIWidget() {
-        var widget = super.createUIWidget();
-        if (widget instanceof WidgetGroup group) {
-            var size = group.getSize();
-            group.addWidget(new SlotWidget(machineStorage.storage, 0, size.width - 30, size.height - 30, true, true)
-                    .setBackground(GuiTextures.SLOT));
-        }
-        return widget;
     }
 }

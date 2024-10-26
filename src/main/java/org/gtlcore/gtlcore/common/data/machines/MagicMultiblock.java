@@ -43,7 +43,8 @@ public class MagicMultiblock {
                     .aisle("                                            ", "             AAAAAAAHIHHAAAAAAA             ", "                   B    B                   ", "                                            ", "                                            ", "                                            ", "                                            ", "                                            ", "                                            ")
                     .where("H", Predicates.blocks(Registries.getBlock("minecraft:stone_bricks"))
                             .or(Predicates.autoAbilities(definition.getRecipeTypes())))
-                    .where("D", Predicates.blocks(Registries.getBlock("minecraft:soul_sand")))
+                    .where("D", Predicates.blocks(Registries.getBlock("minecraft:soul_sand"))) // 别用这个 用
+                                                                                               // Blocks.SOUL_SAND
                     .where("B", Predicates.blocks(Registries.getBlock("minecraft:candle")))
                     .where("F", Predicates.blocks(Registries.getBlock("minecraft:reinforced_deepslate")))
                     .where("A", Predicates.blocks(Registries.getBlock("minecraft:stone_bricks")))

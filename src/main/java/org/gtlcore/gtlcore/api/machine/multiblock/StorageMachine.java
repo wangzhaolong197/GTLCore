@@ -17,8 +17,6 @@ import com.lowdragmc.lowdraglib.syncdata.field.ManagedFieldHolder;
 import net.minecraft.MethodsReturnNonnullByDefault;
 import net.minecraft.world.item.ItemStack;
 
-import org.jetbrains.annotations.NotNull;
-
 import java.util.List;
 
 import javax.annotation.ParametersAreNonnullByDefault;
@@ -61,7 +59,7 @@ public class StorageMachine extends WorkableElectricMultiblockMachine implements
     }
 
     @Override
-    public @NotNull Widget createUIWidget() {
+    public Widget createUIWidget() {
         var widget = super.createUIWidget();
         if (widget instanceof WidgetGroup group) {
             var size = group.getSize();
@@ -76,12 +74,8 @@ public class StorageMachine extends WorkableElectricMultiblockMachine implements
         return machineStorage.getStackInSlot(0);
     }
 
-    public void setMachineStorageItem(ItemStack item) {
-        machineStorage.storage.setStackInSlot(0, item);
-    }
-
     @Override
-    public @NotNull ManagedFieldHolder getFieldHolder() {
+    public ManagedFieldHolder getFieldHolder() {
         return MANAGED_FIELD_HOLDER;
     }
 }

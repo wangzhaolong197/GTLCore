@@ -124,6 +124,7 @@ public class GTLMachines {
         MultiBlockMachineA.init();
         AdvancedMultiBlockMachineA.init();
         MagicMultiblock.init();
+
     }
 
     public static final FactoryBlockPattern DTPF = FactoryBlockPattern.start()

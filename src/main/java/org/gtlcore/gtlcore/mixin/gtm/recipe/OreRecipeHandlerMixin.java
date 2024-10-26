@@ -1,6 +1,7 @@
 package org.gtlcore.gtlcore.mixin.gtm.recipe;
 
 import org.gtlcore.gtlcore.GTLCore;
+import org.gtlcore.gtlcore.api.data.chemical.material.info.GTLMaterialFlags;
 import org.gtlcore.gtlcore.config.GTLConfigHolder;
 
 import com.gregtechceu.gtceu.api.data.chemical.ChemicalHelper;
@@ -69,6 +70,7 @@ public class OreRecipeHandlerMixin {
 
     @Unique
     private static void gtlcore$processOreForgeHammer(TagPrefix orePrefix, Material material, OreProperty property, Consumer<FinishedRecipe> provider) {
+        if (material.hasFlag(GTLMaterialFlags.DISABLE_ORE_PROCESS)) return;
         ItemStack crushedStack = ChemicalHelper.get(crushed, material);
         int amountOfCrushedOre = property.getOreMultiplier();
         int oreTypeMultiplier = GTLConfigHolder.INSTANCE.oreMultiplier;
@@ -89,6 +91,7 @@ public class OreRecipeHandlerMixin {
 
     @Unique
     private static void gtlcore$processOre(TagPrefix orePrefix, Material material, OreProperty property, Consumer<FinishedRecipe> provider) {
+        if (material.hasFlag(GTLMaterialFlags.DISABLE_ORE_PROCESS)) return;
         TagKey<Item> tag = orePrefix.getItemTags(material)[0];
         Material byproductMaterial = GTUtil.selectItemInList(0, material, property.getOreByProducts(), Material.class);
         ItemStack ingotStack;
@@ -390,6 +393,7 @@ public class OreRecipeHandlerMixin {
 
     @Unique
     private static void gtlcore$processRawOre(TagPrefix orePrefix, Material material, OreProperty property, Consumer<FinishedRecipe> provider) {
+        if (material.hasFlag(GTLMaterialFlags.DISABLE_ORE_PROCESS)) return;
         ItemStack crushedStack = ChemicalHelper.get(crushed, material,
                 material.getProperty(PropertyKey.ORE).getOreMultiplier() * GTLConfigHolder.INSTANCE.oreMultiplier / 2);
         ItemStack ingotStack;
@@ -665,5 +669,30 @@ public class OreRecipeHandlerMixin {
                 .outputItems(rawOre, material, 9)
                 .circuitMeta(2)
                 .duration(300).EUt(2).save(provider);
+    }
+
+    @Inject(method = "processCrushedOre", at = @At("HEAD"), remap = false, cancellable = true)
+    private static void processCrushedOre(TagPrefix crushedPrefix, Material material, OreProperty property, Consumer<FinishedRecipe> provider, CallbackInfo ci) {
+        if (material.hasFlag(GTLMaterialFlags.DISABLE_ORE_PROCESS)) ci.cancel();
+    }
+
+    @Inject(method = "processCrushedPurified", at = @At("HEAD"), remap = false, cancellable = true)
+    private static void processCrushedPurified(TagPrefix crushedPrefix, Material material, OreProperty property, Consumer<FinishedRecipe> provider, CallbackInfo ci) {
+        if (material.hasFlag(GTLMaterialFlags.DISABLE_ORE_PROCESS)) ci.cancel();
+    }
+
+    @Inject(method = "processCrushedCentrifuged", at = @At("HEAD"), remap = false, cancellable = true)
+    private static void processCrushedCentrifuged(TagPrefix crushedPrefix, Material material, OreProperty property, Consumer<FinishedRecipe> provider, CallbackInfo ci) {
+        if (material.hasFlag(GTLMaterialFlags.DISABLE_ORE_PROCESS)) ci.cancel();
+    }
+
+    @Inject(method = "processDirtyDust", at = @At("HEAD"), remap = false, cancellable = true)
+    private static void processDirtyDust(TagPrefix crushedPrefix, Material material, OreProperty property, Consumer<FinishedRecipe> provider, CallbackInfo ci) {
+        if (material.hasFlag(GTLMaterialFlags.DISABLE_ORE_PROCESS)) ci.cancel();
+    }
+
+    @Inject(method = "processPureDust", at = @At("HEAD"), remap = false, cancellable = true)
+    private static void processPureDust(TagPrefix crushedPrefix, Material material, OreProperty property, Consumer<FinishedRecipe> provider, CallbackInfo ci) {
+        if (material.hasFlag(GTLMaterialFlags.DISABLE_ORE_PROCESS)) ci.cancel();
     }
 }
