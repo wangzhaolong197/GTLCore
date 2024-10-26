@@ -757,4 +757,14 @@ public class GTLItems {
 
     public static ItemEntry<Item> MAGICAL_RESIDUE = registerMagic("magical_residue");
     public static ItemEntry<Item> ARCANE_RESIDUE = registerMagic("arcane_residue");
+
+    public static ItemEntry<Item> CONDENSED_MAGIC_SOURCE = registerMagic("condensed_magic_source");
+    public static ItemEntry<Item> CRUSHED_CONDENSED_MAGIC_SOURCE = registerMagic("crushed_condensed_magic_source");
+    public static ItemEntry<Item> CONCENTRATED_MAGIC_ESSENCE_CRYSTAL = registerMagic("concentrated_magic_essence_crystal");
+    public static ItemEntry<Item> IMPURE_ARCANE_ELEMENTIUM_CRYSTAL = registerMagic("impure_arcane_elementium_crystal");
+    public static ItemEntry<Item> CRYSTALS_CONTAINING_THE_BREATH_OF_THE_ABYSS = registerMagic("crystals_containing_the_breath_of_the_abyss");
+    public static ItemEntry<Item> CRYSTALS_CONTAINING_THE_BREATH_OF_THE_SUN = registerMagic("crystals_containing_the_breath_of_the_sun");
+    public static ItemEntry<Item> BRIGHT_LARGE_PIECE_OF_MAGIC_CRYSTAL = registerMagic("bright_large_piece_of_magic_crystal");
+    public static ItemEntry<Item> ARCANE_SIEVE = registerMagic("arcane_sieve");
+    public static ItemEntry<Item> SATURATED_ARCANE_SIEVE = registerMagic("saturated_arcane_sieve");
 }

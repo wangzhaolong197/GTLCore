@@ -201,26 +201,37 @@ public class MagicFormula {
         /// 奥术源质提取
         {
             EVAPORATION_RECIPES.recipeBuilder(GTLCore.id("evaporate_magicsource"))
-                    .outputFluids(MagicSource.getFluid(10000))
+                    .inputFluids(MagicSource.getFluid(10000))
                     .outputFluids(ConcentratedMagicSource.getFluid(100))
                     .duration(1000)
                     .EUt(VA[HV])
                     .save(provider);
 
-            ASSEMBLY_LINE_RECIPES.recipeBuilder(GTLCore.id("evaporate_magicsource"))
+            VACUUM_RECIPES.recipeBuilder(GTLCore.id("evaporate_magicsource"))
                     .inputFluids(ConcentratedMagicSource.getFluid(1000))
                     .inputFluids(Helium.getFluid(FluidStorageKeys.LIQUID, 5000))
                     .outputFluids(Helium.getFluid(3000))
-                    .outputItems(gem, CondensedMagicSource, 3)
+                    .outputItems(CONDENSED_MAGIC_SOURCE, 3)
                     .duration(100)
                     .EUt(VA[EV])
                     .save(provider);
 
-            SIFTER_RECIPES.recipeBuilder(GTLCore.id("sifter_magicsource"))
-                    .inputItems(dust, CondensedMagicSource, 3)
+            MACERATOR_RECIPES.recipeBuilder(GTLCore.id("crushing_magicsource"))
+                    .inputItems(CONDENSED_MAGIC_SOURCE, 1)
+                    .outputItems(CRUSHED_CONDENSED_MAGIC_SOURCE, 1)
+                    .duration(400)
+                    .EUt(VA[ULV])
+                    .save(provider);
 
-                    .duration(100)
-                    .EUt(VA[EV])
+            SIFTER_RECIPES.recipeBuilder(GTLCore.id("sifter_magicsource"))
+                    .inputItems(CRUSHED_CONDENSED_MAGIC_SOURCE, 1)
+                    .outputItems(CONCENTRATED_MAGIC_ESSENCE_CRYSTAL, 1)
+                    .chancedOutput(new ItemStack(IMPURE_ARCANE_ELEMENTIUM_CRYSTAL, 1), 1500, 0)
+                    .chancedOutput(new ItemStack(CRYSTALS_CONTAINING_THE_BREATH_OF_THE_ABYSS, 1), 500, 0)
+                    .chancedOutput(new ItemStack(CRYSTALS_CONTAINING_THE_BREATH_OF_THE_SUN, 1), 500, 0)
+                    .chancedOutput(new ItemStack(MAGICAL_RESIDUE, 1), 4000, 0)
+                    .duration(400)
+                    .EUt(VA[HV])
                     .save(provider);
         }
     }
