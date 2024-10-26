@@ -2,6 +2,7 @@ package org.gtlcore.gtlcore.data.recipe.processing;
 
 import org.gtlcore.gtlcore.GTLCore;
 import org.gtlcore.gtlcore.common.data.GTLItems;
+import org.gtlcore.gtlcore.common.data.GTLRecipeTypes;
 
 import com.gregtechceu.gtceu.api.fluids.store.FluidStorageKeys;
 
@@ -150,7 +151,7 @@ public class StoneDustProcess {
                 .duration(80).EUt(3000)
                 .save(provider);
 
-        BLAST_RECIPES.recipeBuilder(GTLCore.id("metallic_residues_output"))
+        GTLRecipeTypes.REACTION_FURNACE_RECIPES.recipeBuilder(GTLCore.id("metallic_residues_output"))
                 .inputItems(dust, OxidizedResidues, 10)
                 .inputFluids(Hydrogen.getFluid(60000))
                 .outputItems(dust, MetallicResidues, 1)
@@ -159,7 +160,7 @@ public class StoneDustProcess {
                 .blastFurnaceTemp(3500)
                 .save(provider);
 
-        BLAST_RECIPES.recipeBuilder(GTLCore.id("heavy_metallic_residues_output"))
+        GTLRecipeTypes.REACTION_FURNACE_RECIPES.recipeBuilder(GTLCore.id("heavy_metallic_residues_output"))
                 .inputItems(dust, HeavyOxidizedResidues, 10)
                 .inputFluids(Hydrogen.getFluid(60000))
                 .outputItems(dust, HeavyMetallicResidues, 1)

@@ -1,6 +1,7 @@
 package org.gtlcore.gtlcore.data.recipe.processing;
 
 import org.gtlcore.gtlcore.GTLCore;
+import org.gtlcore.gtlcore.common.data.GTLRecipeTypes;
 
 import com.gregtechceu.gtceu.api.data.chemical.material.Material;
 
@@ -88,7 +89,7 @@ public class Lanthanidetreatment {
                 .EUt(256)
                 .save(provider);
 
-        BLAST_RECIPES.recipeBuilder(GTLCore.id("thorium_phosphate_filter_cake_powder8"))
+        GTLRecipeTypes.REACTION_FURNACE_RECIPES.recipeBuilder(GTLCore.id("thorium_phosphate_filter_cake_powder8"))
                 .inputItems(dust, ThoriumPhosphateFilterCakePowder, 1)
                 .outputItems(dust, ThoriumPhosphateRefinedPowder, 1)
                 .duration(100)
@@ -140,7 +141,7 @@ public class Lanthanidetreatment {
                 .EUt(30)
                 .save(provider);
 
-        BLAST_RECIPES.recipeBuilder(GTLCore.id("concentrated_monazite_rare_earth_hydroxide_powder14"))
+        GTLRecipeTypes.REACTION_FURNACE_RECIPES.recipeBuilder(GTLCore.id("concentrated_monazite_rare_earth_hydroxide_powder14"))
                 .inputItems(dust, ConcentratedMonaziteRareEarthHydroxidePowder, 1)
                 .outputItems(dust, DriedConcentratedNitricMonaziteRareEarthPowder, 1)
                 .duration(300)
@@ -232,7 +233,7 @@ public class Lanthanidetreatment {
                 .EUt(120)
                 .save(provider);
 
-        BLAST_RECIPES.recipeBuilder(GTLCore.id("vanadium_pentoxide_powder24"))
+        GTLRecipeTypes.REACTION_FURNACE_RECIPES.recipeBuilder(GTLCore.id("vanadium_pentoxide_powder24"))
                 .inputItems(dust, Vanadium, 2)
                 .inputFluids(Oxygen.getFluid(5000))
                 .outputItems(dust, VanadiumPentoxidePowder, 7)
@@ -241,7 +242,7 @@ public class Lanthanidetreatment {
                 .blastFurnaceTemp(2500)
                 .save(provider);
 
-        BLAST_RECIPES.recipeBuilder(GTLCore.id("cerium_oxalate_powder25"))
+        GTLRecipeTypes.REACTION_FURNACE_RECIPES.recipeBuilder(GTLCore.id("cerium_oxalate_powder25"))
                 .inputItems(dust, CeriumOxalatePowder, 5)
                 .inputItems(dust, Carbon, 3)
                 .outputItems(dust, CeriumOxide, 5)
@@ -284,7 +285,7 @@ public class Lanthanidetreatment {
                 .EUt(240)
                 .save(provider);
 
-        BLAST_RECIPES.recipeBuilder(GTLCore.id("heterogeneous_halide_monazite_rare_earth_mixture_powder30"))
+        GTLRecipeTypes.REACTION_FURNACE_RECIPES.recipeBuilder(GTLCore.id("heterogeneous_halide_monazite_rare_earth_mixture_powder30"))
                 .inputItems(dust, MonaziteRareEarthPrecipitatePowder, 1)
                 .inputFluids(Chlorine.getFluid(1000))
                 .outputItems(dust, HeterogeneousHalideMonaziteRareEarthMixturePowder, 1)
@@ -485,7 +486,7 @@ public class Lanthanidetreatment {
                 .EUt(240)
                 .save(provider);
 
-        BLAST_RECIPES.recipeBuilder(GTLCore.id("fluoro_carbon_lanthanide_cerium_oxide_powder53"))
+        GTLRecipeTypes.REACTION_FURNACE_RECIPES.recipeBuilder(GTLCore.id("fluoro_carbon_lanthanide_cerium_oxide_powder53"))
                 .inputFluids(FilteredFluoroCarbonLanthanideSlurry.getFluid(1000))
                 .outputItems(dust, FluoroCarbonLanthanideCeriumOxidePowder, 1)
                 .duration(240)
@@ -501,7 +502,7 @@ public class Lanthanidetreatment {
                 .EUt(30)
                 .save(provider);
 
-        BLAST_RECIPES.recipeBuilder(GTLCore.id("calcined_rare_earth_oxide_powder55"))
+        GTLRecipeTypes.REACTION_FURNACE_RECIPES.recipeBuilder(GTLCore.id("calcined_rare_earth_oxide_powder55"))
                 .inputItems(dust, AcidLeachedFluoroCarbonLanthanideCeriumOxidePowder, 1)
                 .inputFluids(Oxygen.getFluid(1000))
                 .outputItems(dust, CalcinedRareEarthOxidePowder, 1)
@@ -570,7 +571,7 @@ public class Lanthanidetreatment {
                 .EUt(480)
                 .save(provider);
 
-        BLAST_RECIPES.recipeBuilder(GTLCore.id("samarium_terbium_mixture_powder63"))
+        GTLRecipeTypes.REACTION_FURNACE_RECIPES.recipeBuilder(GTLCore.id("samarium_terbium_mixture_powder63"))
                 .inputItems(dust, FluorinatedSamariumConcentratePowder, 4)
                 .inputItems(dust, Calcium, 4)
                 .outputItems(dust, Holmium, 1)

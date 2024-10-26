@@ -63,7 +63,7 @@ public class PlatGroupMetals {
                 .chancedOutput(dustTiny, RarestMetalMixture, 1, 9000, 100)
                 .save(provider);
 
-        BLAST_RECIPES.recipeBuilder(GTLCore.id("leach_residue"))
+        GTLRecipeTypes.REACTION_FURNACE_RECIPES.recipeBuilder(GTLCore.id("leach_residue"))
                 .inputItems(dust, PlatinumSlag, 6)
                 .inputItems(dust, PotassiumPyrosulfate, 11)
                 .inputFluids(Oxygen.getFluid(1000))
@@ -73,7 +73,7 @@ public class PlatGroupMetals {
                 .blastFurnaceTemp(775)
                 .duration(120).EUt(VA[MV]).save(provider);
 
-        BLAST_RECIPES.recipeBuilder(GTLCore.id("rarest_metal_mixture"))
+        GTLRecipeTypes.REACTION_FURNACE_RECIPES.recipeBuilder(GTLCore.id("rarest_metal_mixture"))
                 .inputItems(dust, LeachResidue, 40)
                 .inputItems(dust, SodaAsh, 18)
                 .inputFluids(Oxygen.getFluid(3000))
@@ -109,7 +109,7 @@ public class PlatGroupMetals {
                 .duration(140).EUt(VA[LV]).save(provider);
 
         // RHODIUM / RUTHENIUM
-        BLAST_RECIPES.recipeBuilder(GTLCore.id("leach_residue_one"))
+        GTLRecipeTypes.REACTION_FURNACE_RECIPES.recipeBuilder(GTLCore.id("leach_residue_one"))
                 .inputItems(dust, InertMetalMixture, 6)
                 .inputItems(dust, SodiumNitrate, 10)
                 .inputFluids(SulfuricAcid.getFluid(1000))
@@ -165,7 +165,7 @@ public class PlatGroupMetals {
                 .outputItems(dust, RoughlyRhodiumMetal, 1)
                 .duration(140).EUt(VA[LV]).save(provider);
 
-        BLAST_RECIPES.recipeBuilder(GTLCore.id("rhodium_salt_ebf"))
+        GTLRecipeTypes.REACTION_FURNACE_RECIPES.recipeBuilder(GTLCore.id("rhodium_salt_ebf"))
                 .inputItems(dust, RoughlyRhodiumMetal, 1)
                 .inputItems(dust, Salt, 2)
                 .inputFluids(Chlorine.getFluid(1000))
@@ -226,7 +226,7 @@ public class PlatGroupMetals {
                 .duration(170).EUt(VA[LV]).save(provider);
 
         // OSMIUM / IRIDIUM
-        BLAST_RECIPES.recipeBuilder(GTLCore.id("rarest_metal_residue_ebf"))
+        GTLRecipeTypes.REACTION_FURNACE_RECIPES.recipeBuilder(GTLCore.id("rarest_metal_residue"))
                 .inputItems(dust, RarestMetalMixture, 7)
                 .inputFluids(HydrochloricAcid.getFluid(4000))
                 .outputItems(dust, IridiumMetalResidue, 5)

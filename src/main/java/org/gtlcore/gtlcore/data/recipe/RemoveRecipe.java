@@ -19,6 +19,43 @@ public class RemoveRecipe {
 
     public static void init(Consumer<ResourceLocation> consumer) {
         DISASSEMBLY_RECORD.clear();
+        consumer.accept(new ResourceLocation("minecraft", "coal_ingot_from_blasting_deepslate_coal_ore"));
+        consumer.accept(new ResourceLocation("minecraft", "coal_ingot_from_blasting_coal_ore"));
+        consumer.accept(new ResourceLocation("minecraft", "coal_ingot_from_smelting_deepslate_coal_ore"));
+        consumer.accept(new ResourceLocation("minecraft", "coal_ingot_from_smelting_coal_ore"));
+        consumer.accept(new ResourceLocation("minecraft", "copper_ingot_from_blasting_deepslate_copper_ore"));
+        consumer.accept(new ResourceLocation("minecraft", "copper_ingot_from_blasting_copper_ore"));
+        consumer.accept(new ResourceLocation("minecraft", "copper_ingot_from_smelting_deepslate_copper_ore"));
+        consumer.accept(new ResourceLocation("minecraft", "copper_ingot_from_smelting_copper_ore"));
+        consumer.accept(new ResourceLocation("minecraft", "redstone_ingot_from_blasting_deepslate_redstone_ore"));
+        consumer.accept(new ResourceLocation("minecraft", "redstone_ingot_from_blasting_redstone_ore"));
+        consumer.accept(new ResourceLocation("minecraft", "redstone_ingot_from_smelting_deepslate_redstone_ore"));
+        consumer.accept(new ResourceLocation("minecraft", "redstone_ingot_from_smelting_redstone_ore"));
+        consumer.accept(new ResourceLocation("minecraft", "emerald_ingot_from_blasting_deepslate_emerald_ore"));
+        consumer.accept(new ResourceLocation("minecraft", "emerald_ingot_from_blasting_emerald_ore"));
+        consumer.accept(new ResourceLocation("minecraft", "emerald_ingot_from_smelting_deepslate_emerald_ore"));
+        consumer.accept(new ResourceLocation("minecraft", "emerald_ingot_from_smelting_emerald_ore"));
+        consumer.accept(new ResourceLocation("minecraft", "lapis_lazuli_ingot_from_blasting_deepslate_lapis_ore"));
+        consumer.accept(new ResourceLocation("minecraft", "lapis_lazuli_ingot_from_blasting_lapis_ore"));
+        consumer.accept(new ResourceLocation("minecraft", "lapis_lazuli_ingot_from_smelting_deepslate_lapis_ore"));
+        consumer.accept(new ResourceLocation("minecraft", "lapis_lazuli_ingot_from_smelting_lapis_ore"));
+        consumer.accept(new ResourceLocation("minecraft", "diamond_ingot_from_blasting_deepslate_diamond_ore"));
+        consumer.accept(new ResourceLocation("minecraft", "diamond_ingot_from_blasting_diamond_ore"));
+        consumer.accept(new ResourceLocation("minecraft", "diamond_ingot_from_smelting_deepslate_diamond_ore"));
+        consumer.accept(new ResourceLocation("minecraft", "diamond_ingot_from_smelting_diamond_ore"));
+        consumer.accept(new ResourceLocation("minecraft", "iron_ingot_from_blasting_deepslate_iron_ore"));
+        consumer.accept(new ResourceLocation("minecraft", "iron_ingot_from_blasting_iron_ore"));
+        consumer.accept(new ResourceLocation("minecraft", "iron_ingot_from_smelting_deepslate_iron_ore"));
+        consumer.accept(new ResourceLocation("minecraft", "iron_ingot_from_smelting_iron_ore"));
+        consumer.accept(new ResourceLocation("minecraft", "gold_ingot_from_blasting_deepslate_gold_ore"));
+        consumer.accept(new ResourceLocation("minecraft", "gold_ingot_from_blasting_gold_ore"));
+        consumer.accept(new ResourceLocation("minecraft", "gold_ingot_from_blasting_nether_gold_ore"));
+        consumer.accept(new ResourceLocation("minecraft", "gold_ingot_from_smelting_deepslate_gold_ore"));
+        consumer.accept(new ResourceLocation("minecraft", "gold_ingot_from_smelting_gold_ore"));
+        consumer.accept(new ResourceLocation("minecraft", "gold_ingot_from_smelting_nether_gold_ore"));
+        consumer.accept(new ResourceLocation("minecraft", "quartz"));
+        consumer.accept(new ResourceLocation("minecraft", "quartz_from_blasting"));
+        consumer.accept(new ResourceLocation("minecraft", "hay_block"));
         consumer.accept(new ResourceLocation("minecraft", "netherite_ingot"));
         consumer.accept(new ResourceLocation("minecraft", "netherite_scrap"));
         consumer.accept(new ResourceLocation("minecraft", "netherite_scrap_from_blasting"));
@@ -186,6 +223,24 @@ public class RemoveRecipe {
         consumer.accept(GTCEu.id("extruder/nan_certificate"));
         consumer.accept(GTCEu.id("centrifuge/rare_earth_separation"));
         consumer.accept(GTCEu.id("electrolyzer/bone_meal_electrolysis"));
+        consumer.accept(GTCEu.id("electric_blast_furnace/pyrite_metallurgy"));
+        consumer.accept(GTCEu.id("electric_blast_furnace/aluminium_from_ruby_dust"));
+        consumer.accept(GTCEu.id("electric_blast_furnace/aluminium_from_ruby_gem"));
+        consumer.accept(GTCEu.id("electric_blast_furnace/aluminium_from_sapphire_gem"));
+        consumer.accept(GTCEu.id("electric_blast_furnace/stibnite_metallurgy"));
+        consumer.accept(GTCEu.id("electric_blast_furnace/soda_ash_from_calcite"));
+        consumer.accept(GTCEu.id("electric_blast_furnace/pentlandite_metallurgy"));
+        consumer.accept(GTCEu.id("electric_blast_furnace/aluminium_from_green_sapphire_gem"));
+        consumer.accept(GTCEu.id("electric_blast_furnace/rutile_from_ilmenite"));
+        consumer.accept(GTCEu.id("electric_blast_furnace/chalcopyrite_metallurgy"));
+        consumer.accept(GTCEu.id("electric_blast_furnace/cobaltite_metallurgy"));
+        consumer.accept(GTCEu.id("electric_blast_furnace/tetrahedrite_metallurgy"));
+        consumer.accept(GTCEu.id("electric_blast_furnace/galena_metallurgy"));
+        consumer.accept(GTCEu.id("electric_blast_furnace/sphalerite_metallurgy"));
+        consumer.accept(GTCEu.id("electric_blast_furnace/aluminium_from_green_sapphire_dust"));
+        consumer.accept(GTCEu.id("electric_blast_furnace/blast_silicon_dioxide"));
+        consumer.accept(GTCEu.id("electric_blast_furnace/aluminium_from_sapphire_dust"));
+        consumer.accept(GTCEu.id("electric_blast_furnace/titanium_from_tetrachloride"));
 
         Material[] fluidMap = new Material[] { GTMaterials.Glue, GTMaterials.Polyethylene,
                 GTMaterials.Polytetrafluoroethylene, GTMaterials.Polybenzimidazole };

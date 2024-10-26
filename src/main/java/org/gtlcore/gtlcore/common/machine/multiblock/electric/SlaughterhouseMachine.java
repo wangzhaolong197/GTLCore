@@ -33,7 +33,6 @@ import net.minecraftforge.common.util.FakePlayer;
 
 import com.enderio.machines.common.init.MachineBlocks;
 import com.mojang.authlib.GameProfile;
-import org.jetbrains.annotations.NotNull;
 
 import java.util.List;
 import java.util.Optional;
@@ -60,7 +59,12 @@ public class SlaughterhouseMachine extends StorageMachine {
     }
 
     @Override
-    public @NotNull ManagedFieldHolder getFieldHolder() {
+    protected boolean filter(ItemStack itemStack) {
+        return itemStack.is(MachineBlocks.POWERED_SPAWNER.asItem());
+    }
+
+    @Override
+    public ManagedFieldHolder getFieldHolder() {
         return MANAGED_FIELD_HOLDER;
     }
 
@@ -81,7 +85,7 @@ public class SlaughterhouseMachine extends StorageMachine {
         Level level = getLevel();
         BlockPos blockPos = MachineUtil.getOffsetPos(3, 1, getFrontFacing(), getPos());
         ItemStack itemStack = getMachineStorageItem();
-        boolean isFixed = itemStack.is(MachineBlocks.POWERED_SPAWNER.asItem()) && itemStack.getTag() != null;
+        boolean isFixed = itemStack.getTag() != null;
 
         if (level instanceof ServerLevel serverLevel) {
             FakePlayer fakePlayer = new FakePlayer(serverLevel, new GameProfile(uuid, "slaughter"));
@@ -147,7 +151,7 @@ public class SlaughterhouseMachine extends StorageMachine {
     }
 
     @Override
-    public void addDisplayText(@NotNull List<Component> textList) {
+    public void addDisplayText(List<Component> textList) {
         super.addDisplayText(textList);
         if (!this.isFormed) return;
         textList.add(Component.translatable("gtceu.machine.slaughterhouse.is_spawn")

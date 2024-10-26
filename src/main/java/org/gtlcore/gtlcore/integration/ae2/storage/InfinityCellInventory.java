@@ -267,10 +267,9 @@ public class InfinityCellInventory implements StorageCell {
 
     @Override
     public long extract(AEKey what, long amount, Actionable mode, IActionSource source) {
-        long extractAmount = Math.min(Integer.MAX_VALUE, amount);
         long currentAmount = getCellStoredMap().getLong(what);
         if (currentAmount > 0) {
-            if (extractAmount >= currentAmount) {
+            if (amount >= currentAmount) {
                 if (mode == Actionable.MODULATE) {
                     getCellStoredMap().remove(what, currentAmount);
                     this.saveChanges();
@@ -279,11 +278,11 @@ public class InfinityCellInventory implements StorageCell {
                 return currentAmount;
             } else {
                 if (mode == Actionable.MODULATE) {
-                    getCellStoredMap().put(what, currentAmount - extractAmount);
+                    getCellStoredMap().put(what, currentAmount - amount);
                     this.saveChanges();
                 }
 
-                return extractAmount;
+                return amount;
             }
         }
         return 0;

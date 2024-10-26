@@ -3,7 +3,7 @@ package org.gtlcore.gtlcore.common.machine.multiblock.electric;
 import org.gtlcore.gtlcore.api.machine.multiblock.IParallelMachine;
 import org.gtlcore.gtlcore.common.data.GTLBlocks;
 import org.gtlcore.gtlcore.common.data.GTLRecipeModifiers;
-import org.gtlcore.gtlcore.common.data.machines.AdvancedMultiBlockMachine;
+import org.gtlcore.gtlcore.common.data.machines.AdvancedMultiBlockMachineA;
 
 import com.gregtechceu.gtceu.api.GTValues;
 import com.gregtechceu.gtceu.api.capability.GTCapabilityHelper;
@@ -64,7 +64,7 @@ public class SpaceElevatorModuleMachine extends WorkableElectricMultiblockMachin
                         i.offset(0, 2, -3) };
                 for (BlockPos j : coordinatess) {
                     RecipeLogic logic = GTCapabilityHelper.getRecipeLogic(level, j, null);
-                    if (logic != null && logic.getMachine().getDefinition() == AdvancedMultiBlockMachine.SPACE_ELEVATOR && logic.isWorking() && logic.getProgress() > 80) {
+                    if (logic != null && logic.getMachine().getDefinition() == AdvancedMultiBlockMachineA.SPACE_ELEVATOR && logic.isWorking() && logic.getProgress() > 80) {
                         SpaceElevatorTier = ((SpaceElevatorMachine) logic.machine).getTier() - GTValues.ZPM;
                         ModuleTier = ((SpaceElevatorMachine) logic.machine).getCasingTier();
                     }

@@ -38,8 +38,8 @@ public class GTLConfigHolder {
     @Configurable.DecimalRange(min = 0.001)
     public double durationMultiplier = 1;
     @Configurable
-    @Configurable.Range(min = 1)
-    public int travelStaffCD = 2;
+    @Configurable.Range(min = 1, max = 1024)
+    public int eioFluidRate = 16;
     @Configurable
     @Configurable.Comment({ "更大的数值会让界面显示有问题，推荐在样板管理终端管理" })
     @Configurable.Range(min = 36, max = 360)

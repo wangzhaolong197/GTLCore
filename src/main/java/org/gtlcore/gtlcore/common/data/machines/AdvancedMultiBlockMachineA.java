@@ -58,7 +58,7 @@ import java.util.*;
 import static org.gtlcore.gtlcore.api.registries.GTLRegistration.REGISTRATE;
 
 @SuppressWarnings("unused")
-public class AdvancedMultiBlockMachine {
+public class AdvancedMultiBlockMachineA {
 
     public static void init() {}
 
@@ -1495,13 +1495,9 @@ public class AdvancedMultiBlockMachine {
                     .langValue("Fusion Reactor Computer MK %s".formatted(FormattingUtil.toRomanNumeral(tier - 5)))
                     .recipeType(GTRecipeTypes.FUSION_RECIPES)
                     .recipeModifiers(GTRecipeModifiers.PARALLEL_HATCH, FusionReactorMachine::recipeModifier)
-                    .tooltips(
-                            Component.translatable("gtceu.machine.fusion_reactor.capacity",
-                                    FusionReactorMachine.calculateEnergyStorageFactor(tier, 16) / 1000000L),
-                            Component.translatable("gtceu.machine.fusion_reactor.overclocking"))
+                    .tooltips(Component.translatable("gtceu.machine.fusion_reactor.capacity", FusionReactorMachine.calculateEnergyStorageFactor(tier, 16) / 1000000L), Component.translatable("gtceu.machine.fusion_reactor.overclocking"))
                     .tooltips(Component.translatable("gtceu.multiblock.laser.tooltip"))
                     .tooltips(Component.translatable("gtceu.multiblock.parallelizable.tooltip"))
-
                     .appearanceBlock(() -> GTLFusionCasingBlock.getCasingState(tier))
                     .pattern((definition) -> {
                         TraceabilityPredicate casing = Predicates.blocks(GTLFusionCasingBlock.getCasingState(tier));

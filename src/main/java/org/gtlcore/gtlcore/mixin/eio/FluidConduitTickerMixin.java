@@ -1,5 +1,7 @@
 package org.gtlcore.gtlcore.mixin.eio;
 
+import org.gtlcore.gtlcore.config.GTLConfigHolder;
+
 import net.minecraftforge.fluids.capability.IFluidHandler;
 
 import com.enderio.api.conduit.ticker.CapabilityAwareConduitTicker;
@@ -15,6 +17,6 @@ public class FluidConduitTickerMixin {
 
     @Inject(method = "getScaledFluidRate", at = @At("RETURN"), remap = false, cancellable = true)
     private void getScaledFluidRate(CapabilityAwareConduitTicker<FluidConduitData, IFluidHandler>.CapabilityConnection extractingConnection, CallbackInfoReturnable<Integer> cir) {
-        cir.setReturnValue(cir.getReturnValueI() * 16);
+        cir.setReturnValue(cir.getReturnValueI() * GTLConfigHolder.INSTANCE.eioFluidRate);
     }
 }

@@ -63,6 +63,7 @@ public abstract class WirelessEnergyReceiveCoverMixin extends CoverBehavior {
 
     @Inject(method = "updateEnergy", at = @At("HEAD"), remap = false, cancellable = true)
     private void updateEnergy(CallbackInfo ci) {
+        ci.cancel();
         if (this.uuid == null) return;
         var energyContainer = getEnergyContainer(coverHolder.getLevel(), coverHolder.getPos(), attachedSide);
         if (energyContainer != null) {
@@ -80,6 +81,5 @@ public abstract class WirelessEnergyReceiveCoverMixin extends CoverBehavior {
             }
         }
         this.updateCoverSub();
-        ci.cancel();
     }
 }

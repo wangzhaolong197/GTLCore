@@ -94,10 +94,13 @@ public class blockConversionRoomMachine extends StorageMachine {
             int amount = getTier() * am - 7;
             if (blockBusPartMachine != null && getMachineStorageItem().getItem() == GTLItems.CONVERSION_SIMULATE_CARD.get()) {
                 ItemStackTransfer stackTransfer = blockBusPartMachine.getInventory().storage;
-                for (int i = 0; i < Math.min(Math.sqrt(amount), stackTransfer.getSlots()); i++) {
+                int a = amount;
+                for (int i = 0; a > 0 && i < stackTransfer.getSlots(); i++) {
                     ItemStack itemStack = stackTransfer.getStackInSlot(i);
                     if (itemStack.getItem() instanceof BlockItem blockItem && covRecipe.containsKey(blockItem.getBlock())) {
-                        stackTransfer.setStackInSlot(i, new ItemStack(covRecipe.get(blockItem.getBlock()).asItem(), itemStack.getCount()));
+                        int count = itemStack.getCount();
+                        a -= count;
+                        stackTransfer.setStackInSlot(i, new ItemStack(covRecipe.get(blockItem.getBlock()).asItem(), count));
                     }
                 }
             } else {

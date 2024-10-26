@@ -2,7 +2,7 @@ package org.gtlcore.gtlcore.common.machine.multiblock.electric;
 
 import org.gtlcore.gtlcore.api.machine.multiblock.IParallelMachine;
 import org.gtlcore.gtlcore.common.data.GTLRecipeModifiers;
-import org.gtlcore.gtlcore.common.data.machines.AdvancedMultiBlockMachine;
+import org.gtlcore.gtlcore.common.data.machines.AdvancedMultiBlockMachineA;
 
 import com.gregtechceu.gtceu.api.machine.IMachineBlockEntity;
 import com.gregtechceu.gtceu.api.machine.MetaMachine;
@@ -48,7 +48,7 @@ public class SuprachronalAssemblyLineMachine extends WorkableElectricMultiblockM
                     pos.offset(0, 0, -3) };
             for (BlockPos i : coordinates) {
                 MetaMachine metaMachine = MetaMachine.getMachine(level, i);
-                if (metaMachine != null && metaMachine.getBlockState().getBlock() == AdvancedMultiBlockMachine.SUPRACHRONAL_ASSEMBLY_LINE_MODULE.getBlock() && ((WorkableElectricMultiblockMachine) metaMachine).isFormed()) {
+                if (metaMachine != null && metaMachine.getBlockState().getBlock() == AdvancedMultiBlockMachineA.SUPRACHRONAL_ASSEMBLY_LINE_MODULE.getBlock() && ((WorkableElectricMultiblockMachine) metaMachine).isFormed()) {
                     module++;
                 }
             }
@@ -65,7 +65,7 @@ public class SuprachronalAssemblyLineMachine extends WorkableElectricMultiblockM
                     pos.offset(0, 0, -3) };
             for (BlockPos i : coordinates) {
                 MetaMachine metaMachine = MetaMachine.getMachine(level, i);
-                if (metaMachine != null && metaMachine.getBlockState().getBlock() == AdvancedMultiBlockMachine.SUPRACHRONAL_ASSEMBLY_LINE.getBlock() && ((WorkableElectricMultiblockMachine) metaMachine).isFormed()) {
+                if (metaMachine != null && metaMachine.getBlockState().getBlock() == AdvancedMultiBlockMachineA.SUPRACHRONAL_ASSEMBLY_LINE.getBlock() && ((WorkableElectricMultiblockMachine) metaMachine).isFormed()) {
                     machine = (WorkableElectricMultiblockMachine) metaMachine;
                 }
             }

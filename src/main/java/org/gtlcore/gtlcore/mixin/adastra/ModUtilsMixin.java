@@ -31,13 +31,13 @@ public abstract class ModUtilsMixin {
     @Inject(method = "land", at = @At("HEAD"), remap = false, cancellable = true)
     private static void land(ServerPlayer player, ServerLevel targetLevel, Vec3 pos, CallbackInfo ci) {
         if (player.removeTag("canTeleportToPlanet")) {
+            ci.cancel();
             player.moveTo(pos);
             Lander lander = ModEntityTypes.LANDER.get().create(targetLevel);
             if (lander == null) return;
             lander.setPos(pos);
             targetLevel.addFreshEntity(lander);
             teleportToDimension(player, targetLevel).startRiding(lander);
-            ci.cancel();
         }
     }
 }

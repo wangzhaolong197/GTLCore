@@ -86,7 +86,7 @@ public class MaterialBuilder {
                 .color(0xa4ff70)
                 .iconSet(METALLIC)
                 .flags(DISABLE_DECOMPOSITION)
-                .blastTemp(2450, LOW, GTValues.VA[GTValues.HV], 800)
+                .blastTemp(2450, LOW, GTValues.VA[GTValues.MV], 900)
                 .components(EnergeticAlloy, 1, EnderPearl, 1)
                 .cableProperties(512, 1, 0, true)
                 .buildAndRegister();
@@ -112,6 +112,7 @@ public class MaterialBuilder {
 
         PulsatingAlloy = new Material.Builder(GTCEu.id("pulsating_alloy"))
                 .ingot()
+                .fluid()
                 .color(0x6ae26e)
                 .iconSet(SHINY)
                 .flags(DISABLE_DECOMPOSITION)
@@ -141,7 +142,7 @@ public class MaterialBuilder {
                 .color(0xd6d980)
                 .iconSet(METALLIC)
                 .flags(DISABLE_DECOMPOSITION)
-                .blastTemp(3250, LOW, GTValues.VA[GTValues.EV], 900)
+                .blastTemp(3250, LOW, GTValues.VA[GTValues.HV], 900)
                 .cableProperties(2048, 1, 0, true)
                 .components(Endstone, 1, DarkSteel, 1, Obsidian, 1)
                 .buildAndRegister();

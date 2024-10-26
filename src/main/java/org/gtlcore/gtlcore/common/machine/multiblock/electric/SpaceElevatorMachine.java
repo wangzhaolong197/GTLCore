@@ -1,7 +1,7 @@
 package org.gtlcore.gtlcore.common.machine.multiblock.electric;
 
 import org.gtlcore.gtlcore.api.machine.multiblock.TierCasingMachine;
-import org.gtlcore.gtlcore.common.data.machines.AdvancedMultiBlockMachine;
+import org.gtlcore.gtlcore.common.data.machines.AdvancedMultiBlockMachineA;
 import org.gtlcore.gtlcore.utils.MachineUtil;
 
 import com.gregtechceu.gtceu.api.machine.IMachineBlockEntity;
@@ -54,7 +54,7 @@ public class SpaceElevatorMachine extends TierCasingMachine {
                 if (metaMachine instanceof WorkableElectricMultiblockMachine mbmachine &&
                         mbmachine.isFormed()) {
                     Block block = mbmachine.getBlockState().getBlock();
-                    if (block == AdvancedMultiBlockMachine.ASSEMBLER_MODULE.getBlock() || block == AdvancedMultiBlockMachine.RESOURCE_COLLECTION.getBlock()) {
+                    if (block == AdvancedMultiBlockMachineA.ASSEMBLER_MODULE.getBlock() || block == AdvancedMultiBlockMachineA.RESOURCE_COLLECTION.getBlock()) {
                         mam++;
                     }
                 }

@@ -249,9 +249,9 @@ public class MachineRecipe {
                 GTItems.FIELD_GENERATOR_UIV.asStack(), 'H', GTMachines.HULL[13].asStack());
 
         VanillaRecipeHelper.addShapedRecipe(provider, true, GTLCore.id("large_block_conversion_room"),
-                AdvancedMultiBlockMachine.LARGE_BLOCK_CONVERSION_ROOM.asStack(), "SES", "EHE", "SES",
+                AdvancedMultiBlockMachineA.LARGE_BLOCK_CONVERSION_ROOM.asStack(), "SES", "EHE", "SES",
                 'S', GTItems.SENSOR_ZPM.asStack(), 'E', GTItems.EMITTER_ZPM.asStack(), 'H',
-                AdvancedMultiBlockMachine.BLOCK_CONVERSION_ROOM.asStack());
+                AdvancedMultiBlockMachineA.BLOCK_CONVERSION_ROOM.asStack());
 
         VanillaRecipeHelper.addShapedRecipe(provider, true, GTLCore.id("steam_vacuum_pump"), GTLMachines.STEAM_VACUUM_PUMP.first().asStack(), "DSD",
                 "SMS", "GSG", 'M', GTBlocks.BRONZE_BRICKS_HULL.asStack(), 'S', new UnificationEntry(TagPrefix.pipeNormalFluid, GTMaterials.Bronze), 'D', GTMachines.BRONZE_DRUM.asStack(), 'G', new UnificationEntry(TagPrefix.gearSmall, GTMaterials.Bronze));
@@ -264,11 +264,11 @@ public class MachineRecipe {
                 .inputItems(GTItems.ELECTRIC_PUMP_UV, 4)
                 .inputItems(gear, Neutronium, 4)
                 .circuitMeta(2)
-                .outputItems(AdvancedMultiBlockMachine.FLUID_DRILLING_RIG[ZPM])
+                .outputItems(AdvancedMultiBlockMachineA.FLUID_DRILLING_RIG[ZPM])
                 .duration(400).EUt(VA[UV]).save(provider);
 
         ASSEMBLER_RECIPES.recipeBuilder(GTLCore.id("wood_distillation"))
-                .inputItems(MultiBlockMachineA.LARGE_PYROLYSE_OVEN.asStack(), 2)
+                .inputItems(MultiBlockMachineA.COKING_TOWER.asStack(), 2)
                 .inputItems(GCyMMachines.LARGE_DISTILLERY.asStack(), 4)
                 .inputItems(CustomTags.LuV_CIRCUITS, 16)
                 .inputItems(GTItems.EMITTER_LuV.asStack(), 4)

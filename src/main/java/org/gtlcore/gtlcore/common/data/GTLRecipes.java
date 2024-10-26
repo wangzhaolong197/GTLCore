@@ -1,6 +1,7 @@
 package org.gtlcore.gtlcore.common.data;
 
 import org.gtlcore.gtlcore.data.recipe.*;
+import org.gtlcore.gtlcore.data.recipe.chemistry.EBFRecipe;
 import org.gtlcore.gtlcore.data.recipe.chemistry.MixerRecipes;
 import org.gtlcore.gtlcore.data.recipe.processing.Lanthanidetreatment;
 import org.gtlcore.gtlcore.data.recipe.processing.StoneDustProcess;
@@ -25,5 +26,6 @@ public class GTLRecipes {
         MixerRecipes.init(provider);
         RadiationHatchRecipes.init(provider);
         RecipeOverwrite.init(provider);
+        EBFRecipe.init(provider);
     }
 }

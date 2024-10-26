@@ -3,6 +3,7 @@ package org.gtlcore.gtlcore.common.data.machines;
 import org.gtlcore.gtlcore.GTLCore;
 import org.gtlcore.gtlcore.api.machine.multiblock.WorkableElectricParallelHatchMultipleRecipesMachine;
 import org.gtlcore.gtlcore.common.data.GTLBlocks;
+import org.gtlcore.gtlcore.common.data.GTLMachines;
 import org.gtlcore.gtlcore.common.data.GTLRecipeModifiers;
 import org.gtlcore.gtlcore.common.data.GTLRecipeTypes;
 import org.gtlcore.gtlcore.common.machine.multiblock.noenergy.PrimitiveOreMachine;
@@ -19,6 +20,7 @@ import com.gregtechceu.gtceu.api.machine.multiblock.PartAbility;
 import com.gregtechceu.gtceu.api.machine.multiblock.WorkableElectricMultiblockMachine;
 import com.gregtechceu.gtceu.api.pattern.FactoryBlockPattern;
 import com.gregtechceu.gtceu.api.pattern.Predicates;
+import com.gregtechceu.gtceu.api.pattern.util.RelativeDirection;
 import com.gregtechceu.gtceu.api.recipe.OverclockingLogic;
 import com.gregtechceu.gtceu.common.data.*;
 
@@ -32,6 +34,26 @@ import static org.gtlcore.gtlcore.api.registries.GTLRegistration.REGISTRATE;
 public class MultiBlockMachineB {
 
     public static void init() {}
+
+    public final static MultiblockMachineDefinition PRIMITIVE_VOID_ORE = GTLConfigHolder.INSTANCE.enablePrimitiveVoidOre ?
+            REGISTRATE.multiblock("primitive_void_ore", PrimitiveOreMachine::new)
+                    .langValue("Primitive Void Ore")
+                    .tooltips(Component.literal("运行时根据维度每tick随机产出一组任意粗矿"))
+                    .tooltips(Component.literal("支持主世界,下界,末地"))
+                    .rotationState(RotationState.ALL)
+                    .recipeType(GTLRecipeTypes.PRIMITIVE_VOID_ORE_RECIPES)
+                    .appearanceBlock(() -> Blocks.DIRT)
+                    .pattern(definition -> FactoryBlockPattern.start()
+                            .aisle("XXX", "XXX", "XXX")
+                            .aisle("XXX", "XAX", "XXX")
+                            .aisle("XXX", "XSX", "XXX")
+                            .where('S', Predicates.controller(Predicates.blocks(definition.get())))
+                            .where('X', Predicates.blocks(Blocks.DIRT).or(Predicates.abilities(PartAbility.EXPORT_ITEMS)).or(Predicates.abilities(PartAbility.IMPORT_FLUIDS)))
+                            .where('A', Predicates.air())
+                            .build())
+                    .workableCasingRenderer(new ResourceLocation("minecraft:block/dirt"), GTCEu.id("block/multiblock/gcym/large_extractor"))
+                    .register() :
+            null;
 
     public final static MultiblockMachineDefinition LARGE_BENDER_AND_FORMING = REGISTRATE
             .multiblock("large_bender_and_forming", WorkableElectricMultiblockMachine::new)
@@ -124,6 +146,7 @@ public class MultiBlockMachineB {
                     .where('#', Predicates.any())
                     .build())
             .beforeWorking((machine, recipe) -> machine instanceof CoilWorkableElectricMultiblockMachine coilMachine && coilMachine.getCoilType().getCoilTemperature() >= recipe.data.getInt("ebf_temp"))
+            .additionalDisplay(GTLMachines.TEMPERATURE)
             .workableCasingRenderer(GTCEu.id("block/casings/solid/machine_casing_robust_tungstensteel"), GTCEu.id("block/multiblock/gcym/large_maceration_tower"))
             .register();
 
@@ -207,23 +230,63 @@ public class MultiBlockMachineB {
             .workableCasingRenderer(GTCEu.id("block/casings/solid/machine_casing_clean_stainless_steel"), GTCEu.id("block/multiblock/large_chemical_reactor"))
             .register();
 
-    public final static MultiblockMachineDefinition PRIMITIVE_VOID_ORE = GTLConfigHolder.INSTANCE.enablePrimitiveVoidOre ?
-            REGISTRATE.multiblock("primitive_void_ore", PrimitiveOreMachine::new)
-                    .langValue("Primitive Void Ore")
-                    .tooltips(Component.literal("运行时根据维度每tick随机产出一组任意粗矿"))
-                    .tooltips(Component.literal("支持主世界,下界,末地"))
-                    .rotationState(RotationState.ALL)
-                    .recipeType(GTLRecipeTypes.PRIMITIVE_VOID_ORE_RECIPES)
-                    .appearanceBlock(() -> Blocks.DIRT)
-                    .pattern(definition -> FactoryBlockPattern.start()
-                            .aisle("XXX", "XXX", "XXX")
-                            .aisle("XXX", "XAX", "XXX")
-                            .aisle("XXX", "XSX", "XXX")
-                            .where('S', Predicates.controller(Predicates.blocks(definition.get())))
-                            .where('X', Predicates.blocks(Blocks.DIRT).or(Predicates.abilities(PartAbility.EXPORT_ITEMS)).or(Predicates.abilities(PartAbility.IMPORT_FLUIDS)))
-                            .where('A', Predicates.air())
-                            .build())
-                    .workableCasingRenderer(new ResourceLocation("minecraft:block/dirt"), GTCEu.id("block/multiblock/gcym/large_extractor"))
-                    .register() :
-            null;
+    public final static MultiblockMachineDefinition LIQUEFACTION_FURNACE = REGISTRATE.multiblock("liquefaction_furnace", CoilWorkableElectricMultiblockMachine::new)
+            .tooltips(Component.translatable("gtceu.multiblock.parallelizable.tooltip"))
+            .tooltips(Component.translatable("gtceu.machine.available_recipe_map_1.tooltip",
+                    Component.translatable("gtceu.liquefaction_furnace")))
+            .rotationState(RotationState.ALL)
+            .recipeTypes(GTLRecipeTypes.LIQUEFACTION_FURNACE_RECIPES)
+            .recipeModifiers(GTRecipeModifiers.PARALLEL_HATCH, GTRecipeModifiers.ELECTRIC_OVERCLOCK.apply(OverclockingLogic.NON_PERFECT_OVERCLOCK_SUBTICK))
+            .appearanceBlock(GTBlocks.CASING_INVAR_HEATPROOF)
+            .pattern(definition -> FactoryBlockPattern.start(RelativeDirection.FRONT, RelativeDirection.UP, RelativeDirection.RIGHT)
+                    .aisle("AAAAA", " BBB ", " AAA ")
+                    .aisle("AAAAA", "B B B", "ACCCA")
+                    .aisle("AAAAS", "BBEBB", "ACFCA")
+                    .aisle("AAAAA", "B B B", "ACCCA")
+                    .aisle("AAAAA", " BBB ", " AAA ")
+                    .where("B", Predicates.heatingCoils())
+                    .where("C", Predicates.blocks(GTBlocks.CASING_STEEL_SOLID.get()))
+                    .where("E", Predicates.blocks(GTBlocks.CASING_STEEL_PIPE.get()))
+                    .where("A", Predicates.blocks(GTBlocks.CASING_INVAR_HEATPROOF.get())
+                            .setMinGlobalLimited(20)
+                            .or(Predicates.autoAbilities(definition.getRecipeTypes()))
+                            .or(Predicates.autoAbilities(true, false, true)))
+                    .where("F", Predicates.abilities(PartAbility.MUFFLER))
+                    .where('S', Predicates.controller(Predicates.blocks(definition.get())))
+                    .where(' ', Predicates.any())
+                    .build())
+            .beforeWorking((machine, recipe) -> machine instanceof CoilWorkableElectricMultiblockMachine coilMachine && coilMachine.getCoilType().getCoilTemperature() >= recipe.data.getInt("ebf_temp"))
+            .additionalDisplay(GTLMachines.TEMPERATURE)
+            .workableCasingRenderer(GTCEu.id("block/casings/solid/machine_casing_heatproof"), GTCEu.id("block/multiblock/multi_furnace"))
+            .register();
+
+    public final static MultiblockMachineDefinition REACTION_FURNACE = REGISTRATE.multiblock("reaction_furnace", CoilWorkableElectricMultiblockMachine::new)
+            .tooltips(Component.translatable("gtceu.multiblock.parallelizable.tooltip"))
+            .tooltips(Component.translatable("gtceu.machine.available_recipe_map_1.tooltip",
+                    Component.translatable("gtceu.reaction_furnace")))
+            .rotationState(RotationState.ALL)
+            .recipeTypes(GTLRecipeTypes.REACTION_FURNACE_RECIPES)
+            .recipeModifiers(GTRecipeModifiers.PARALLEL_HATCH, GTRecipeModifiers.ELECTRIC_OVERCLOCK.apply(OverclockingLogic.NON_PERFECT_OVERCLOCK_SUBTICK))
+            .appearanceBlock(GTBlocks.CASING_STEEL_SOLID)
+            .pattern(definition -> FactoryBlockPattern.start(RelativeDirection.BACK, RelativeDirection.UP, RelativeDirection.LEFT)
+                    .aisle("A   A", "ABBBA", "BBCBB", "BBBBB", " BBB ")
+                    .aisle("     ", "BBBBB", "BDCDB", "BDCDB", "BAAAB")
+                    .aisle("     ", "~BBBB", "CCCCC", "BCCCB", "BAFAB")
+                    .aisle("     ", "BBBBB", "BDCDB", "BDCDB", "BAAAB")
+                    .aisle("A   A", "ABBBA", "BBCBB", "BBBBB", " BBB ")
+                    .where("~", Predicates.controller(Predicates.blocks(definition.get())))
+                    .where("A", Predicates.blocks(ChemicalHelper.getBlock(TagPrefix.frameGt, GTMaterials.Steel)))
+                    .where("C", Predicates.heatingCoils())
+                    .where("D", Predicates.blocks(GTBlocks.CASING_STEEL_PIPE.get()))
+                    .where("B", Predicates.blocks(GTBlocks.CASING_STEEL_SOLID.get())
+                            .setMinGlobalLimited(20)
+                            .or(Predicates.autoAbilities(definition.getRecipeTypes()))
+                            .or(Predicates.autoAbilities(true, false, true)))
+                    .where("F", Predicates.abilities(PartAbility.MUFFLER))
+                    .where(' ', Predicates.any())
+                    .build())
+            .beforeWorking((machine, recipe) -> machine instanceof CoilWorkableElectricMultiblockMachine coilMachine && coilMachine.getCoilType().getCoilTemperature() >= recipe.data.getInt("ebf_temp"))
+            .additionalDisplay(GTLMachines.TEMPERATURE)
+            .workableCasingRenderer(GTCEu.id("block/casings/solid/machine_casing_solid_steel"), GTCEu.id("block/multiblock/electric_blast_furnace"))
+            .register();
 }

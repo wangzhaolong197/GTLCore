@@ -8,7 +8,7 @@ import com.gregtechceu.gtceu.common.data.machines.GTResearchMachines;
 
 import net.minecraft.network.chat.Component;
 
-public class MachineModify {
+public class GTMMachineTooltips {
 
     public static void init() {
         MachineDefinition hpca_computation_component = GTResearchMachines.HPCA_COMPUTATION_COMPONENT;

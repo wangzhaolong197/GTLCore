@@ -1,6 +1,7 @@
 package org.gtlcore.gtlcore.data.recipe.processing;
 
 import org.gtlcore.gtlcore.GTLCore;
+import org.gtlcore.gtlcore.common.data.GTLRecipeTypes;
 
 import net.minecraft.data.recipes.FinishedRecipe;
 
@@ -127,7 +128,7 @@ public class NaquadahProcess {
                 .outputItems(dust, EnrichedNaquadahSulfate, 6) // Nq+SO4
                 .save(provider);
 
-        BLAST_RECIPES.recipeBuilder(GTLCore.id("enriched_naquadah_sulfate_separation")).EUt(VA[IV]).duration(500)
+        GTLRecipeTypes.REACTION_FURNACE_RECIPES.recipeBuilder(GTLCore.id("enriched_naquadah_sulfate_separation")).EUt(VA[IV]).duration(500)
                 .blastFurnaceTemp(7000)
                 .inputItems(dust, EnrichedNaquadahSulfate, 6)
                 .inputFluids(Hydrogen.getFluid(2000))
@@ -253,7 +254,7 @@ public class NaquadahProcess {
                 .duration(200)
                 .save(provider);
 
-        BLAST_RECIPES.recipeBuilder(GTLCore.id("naquadria_sulfate_separation")).EUt(VA[ZPM]).duration(600).blastFurnaceTemp(9000)
+        GTLRecipeTypes.REACTION_FURNACE_RECIPES.recipeBuilder(GTLCore.id("naquadria_sulfate_separation")).EUt(VA[ZPM]).duration(600).blastFurnaceTemp(9000)
                 .inputItems(dust, NaquadriaSulfate, 6)
                 .inputFluids(Hydrogen.getFluid(2000))
                 .outputItems(ingotHot, Naquadria)
@@ -269,7 +270,7 @@ public class NaquadahProcess {
 
         // TRINIUM
 
-        BLAST_RECIPES.recipeBuilder(GTLCore.id("trinium_sulfide_separation")).duration(750).EUt(VA[LuV])
+        GTLRecipeTypes.REACTION_FURNACE_RECIPES.recipeBuilder(GTLCore.id("trinium_sulfide_separation")).duration(750).EUt(VA[LuV])
                 .blastFurnaceTemp(Trinium.getBlastTemperature())
                 .inputItems(dust, TriniumSulfide, 2)
                 .inputItems(dust, Zinc)
@@ -280,7 +281,7 @@ public class NaquadahProcess {
         // BYPRODUCT PROCESSING
 
         // Titanium Trifluoride
-        BLAST_RECIPES.recipeBuilder(GTLCore.id("titanium_trifluoride_separation")).EUt(VA[HV]).duration(900).blastFurnaceTemp(1941)
+        GTLRecipeTypes.REACTION_FURNACE_RECIPES.recipeBuilder(GTLCore.id("titanium_trifluoride_separation")).EUt(VA[HV]).duration(900).blastFurnaceTemp(1941)
                 .inputItems(dust, TitaniumTrifluoride, 4)
                 .inputFluids(Hydrogen.getFluid(3000))
                 .outputItems(ingotHot, Titanium)

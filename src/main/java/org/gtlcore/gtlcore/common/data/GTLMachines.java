@@ -5,9 +5,9 @@ import org.gtlcore.gtlcore.api.machine.multiblock.GTLPartAbility;
 import org.gtlcore.gtlcore.api.machine.multiblock.IParallelMachine;
 import org.gtlcore.gtlcore.client.renderer.machine.BallHatchRenderer;
 import org.gtlcore.gtlcore.client.renderer.machine.WindMillTurbineRenderer;
-import org.gtlcore.gtlcore.common.data.machines.AdvancedMultiBlockMachine;
+import org.gtlcore.gtlcore.common.data.machines.AdvancedMultiBlockMachineA;
+import org.gtlcore.gtlcore.common.data.machines.GTMMachineTooltips;
 import org.gtlcore.gtlcore.common.data.machines.GeneratorMachine;
-import org.gtlcore.gtlcore.common.data.machines.MachineModify;
 import org.gtlcore.gtlcore.common.data.machines.MultiBlockMachineA;
 import org.gtlcore.gtlcore.common.machine.electric.VacuumPumpMachine;
 import org.gtlcore.gtlcore.common.machine.generator.LightningRodMachine;
@@ -119,10 +119,10 @@ public class GTLMachines {
     }
 
     public static void init() {
-        MachineModify.init();
+        GTMMachineTooltips.init();
         GeneratorMachine.init();
         MultiBlockMachineA.init();
-        AdvancedMultiBlockMachine.init();
+        AdvancedMultiBlockMachineA.init();
     }
 
     public static final FactoryBlockPattern DTPF = FactoryBlockPattern.start()

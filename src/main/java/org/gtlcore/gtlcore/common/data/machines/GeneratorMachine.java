@@ -4,6 +4,8 @@ import org.gtlcore.gtlcore.GTLCore;
 import org.gtlcore.gtlcore.api.pattern.GTLPredicates;
 import org.gtlcore.gtlcore.client.renderer.machine.AnnihilateGeneratorRenderer;
 import org.gtlcore.gtlcore.common.data.*;
+import org.gtlcore.gtlcore.common.data.machines.structure.AnnihilateGeneratorA;
+import org.gtlcore.gtlcore.common.data.machines.structure.AnnihilateGeneratorB;
 import org.gtlcore.gtlcore.common.machine.multiblock.generator.ChemicalEnergyDevourerMachine;
 import org.gtlcore.gtlcore.common.machine.multiblock.generator.DysonSphereMachine;
 import org.gtlcore.gtlcore.common.machine.multiblock.generator.GeneratorArrayMachine;
