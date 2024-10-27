@@ -35,7 +35,7 @@ public class TurbineModel extends Model {
                 };
                 ModelPart blade1 = new ModelPart(Arrays.asList(blade1Cuboids), Collections.emptyMap());
                 blade1.setPos(0.0F, 0.0F, 0.0F);
-                setRotation(blade1, -0.5236F, 0.0F, 0.0F);
+                setRotation(blade1, 0.0F);
                 put("blade1", blade1);
 
                 ModelPart.Cube[] blade2Cuboids = {
@@ -43,7 +43,7 @@ public class TurbineModel extends Model {
                 };
                 ModelPart blade2 = new ModelPart(Arrays.asList(blade2Cuboids), Collections.emptyMap());
                 blade2.setPos(0.0F, 0.0F, 0.0F);
-                setRotation(blade2, -0.5236F, 0.0F, 2.0944F);
+                setRotation(blade2, 2.0944F);
                 put("blade2", blade2);
 
                 ModelPart.Cube[] blade3Cuboids = {
@@ -51,16 +51,16 @@ public class TurbineModel extends Model {
                 };
                 ModelPart blade3 = new ModelPart(Arrays.asList(blade3Cuboids), Collections.emptyMap());
                 blade3.setPos(0.0F, 0.0F, 0.0F);
-                setRotation(blade3, -0.5236F, 0.0F, -2.0944F);
+                setRotation(blade3, -2.0944F);
                 put("blade3", blade3);
             }
         });
         base.setPos(0.0F, 24.0F, 0.0F);
     }
 
-    private void setRotation(ModelPart model, float x, float y, float z) {
-        model.xRot = x;
-        model.yRot = y;
+    private void setRotation(ModelPart model, float z) {
+        model.xRot = (float) -0.5236;
+        model.yRot = (float) 0.0;
         model.zRot = z;
     }
 

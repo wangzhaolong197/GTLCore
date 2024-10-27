@@ -32,26 +32,24 @@ public class Ae2GtmProcessingPattern extends Ae2BaseProcessingPattern {
 
         int inputsLength = inputItemStack.size() + inputFluidStack.size();
         var Inputs = new GenericStack[inputsLength];
-        int inputIndex = 0;
-        for (ItemStack itemStack : inputItemStack) {
-            Inputs[inputIndex++] = new GenericStack(AEItemKey.of(itemStack.getItem()), itemStack.getCount());
-        }
-        for (FluidStack fluidStack : inputFluidStack) {
-            Inputs[inputIndex++] = new GenericStack(AEFluidKey.of(fluidStack.getFluid()), fluidStack.getAmount());
-        }
+        add(inputItemStack, inputFluidStack, Inputs);
 
         int outputsLength = outputItemStack.size() + outputFluidStack.size();
         var Outputs = new GenericStack[outputsLength];
-        int ouputIndex = 0;
-        for (ItemStack itemStack : outputItemStack) {
-            Outputs[ouputIndex++] = new GenericStack(AEItemKey.of(itemStack.getItem()), itemStack.getCount());
-        }
-        for (FluidStack fluidStack : outputFluidStack) {
-            Outputs[ouputIndex++] = new GenericStack(AEFluidKey.of(fluidStack.getFluid()), fluidStack.getAmount());
-        }
+        add(outputItemStack, outputFluidStack, Outputs);
 
         ItemStack patternStack = PatternDetailsHelper.encodeProcessingPattern(Inputs, Outputs);
         return new Ae2GtmProcessingPattern(patternStack, serverPlayer, recipe);
+    }
+
+    private static void add(List<ItemStack> inputItemStack, List<FluidStack> inputFluidStack, GenericStack[] inputs) {
+        int inputIndex = 0;
+        for (ItemStack itemStack : inputItemStack) {
+            inputs[inputIndex++] = new GenericStack(AEItemKey.of(itemStack.getItem()), itemStack.getCount());
+        }
+        for (FluidStack fluidStack : inputFluidStack) {
+            inputs[inputIndex++] = new GenericStack(AEFluidKey.of(fluidStack.getFluid()), fluidStack.getAmount());
+        }
     }
     // 将模头，模具加入忽略名单
     // this.PATTERNIGNOREITEMS.addAll(Arrays.stream(GTItems.SHAPE_MOLDS).map(ItemProviderEntry::asItem).toList());

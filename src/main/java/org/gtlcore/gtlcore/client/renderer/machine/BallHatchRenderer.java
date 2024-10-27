@@ -29,10 +29,10 @@ import java.util.function.Consumer;
 
 public class BallHatchRenderer extends TieredHullMachineRenderer {
 
-    public static final ResourceLocation BALL_HATCH_OVERLAY = GTLCore.id("block/overlay/machine/ball_hatch");
-    public static final ResourceLocation IDLE = GTLCore.id("block/overlay/machine/ball_hatch_idle");
-    public static final ResourceLocation SPINNING = GTLCore.id("block/overlay/machine/ball_hatch_spinning");
-    public static final AABB AABB = new AABB(-1, -1, -0.01, 2, 2, 1.01);
+    private static final ResourceLocation BALL_HATCH_OVERLAY = GTLCore.id("block/overlay/machine/ball_hatch");
+    private static final ResourceLocation IDLE = GTLCore.id("block/overlay/machine/ball_hatch_idle");
+    private static final ResourceLocation SPINNING = GTLCore.id("block/overlay/machine/ball_hatch_spinning");
+    private static final AABB AABB = new AABB(-1, -1, -0.01, 2, 2, 1.01);
 
     public BallHatchRenderer() {
         super(GTValues.IV, GTCEu.id("block/machine/hull_machine"));

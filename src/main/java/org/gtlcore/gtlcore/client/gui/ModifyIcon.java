@@ -25,14 +25,10 @@ public enum ModifyIcon {
     public static final int TEXTURE_HEIGHT = 48;
 
     ModifyIcon(int x, int y) {
-        this(x, y, 16, 16);
-    }
-
-    ModifyIcon(int x, int y, int width, int height) {
         this.x = x;
         this.y = y;
-        this.width = width;
-        this.height = height;
+        this.width = 16;
+        this.height = 16;
     }
 
     public Blitter getBlitter() {

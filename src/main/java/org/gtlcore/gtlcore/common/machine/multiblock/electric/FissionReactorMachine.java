@@ -53,7 +53,7 @@ public class FissionReactorMachine extends WorkableElectricMultiblockMachine imp
     private int recipeHeat = 0;
     private int fuel = 0, cooler = 0, heatAdjacent = 1, coolerAdjacent = 0;
 
-    protected ConditionalSubscriptionHandler HeatSubs;
+    private final ConditionalSubscriptionHandler HeatSubs;
 
     public FissionReactorMachine(IMachineBlockEntity holder, Object... args) {
         super(holder, args);

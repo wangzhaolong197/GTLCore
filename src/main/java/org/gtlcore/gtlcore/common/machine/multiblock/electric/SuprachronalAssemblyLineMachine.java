@@ -120,7 +120,7 @@ public class SuprachronalAssemblyLineMachine extends WorkableElectricMultiblockM
             if (getOffsetTimer() % 10 == 0) {
                 getSuprachronalAssemblyLine();
             }
-            textList.add(Component.translatable("gtlcore.machine.parallel", Component.literal(FormattingUtil.formatNumbers(getParallel())).withStyle(ChatFormatting.DARK_PURPLE)).withStyle(ChatFormatting.GRAY));
+            textList.add(Component.translatable("gtceu.multiblock.parallel", Component.literal(FormattingUtil.formatNumbers(getParallel())).withStyle(ChatFormatting.DARK_PURPLE)).withStyle(ChatFormatting.GRAY));
             textList.add(machine == null ? Component.translatable("gtlcore.machine.module.null") : Component.translatable("gtlcore.machine.module.have"));
         } else {
             if (getOffsetTimer() % 10 == 0) {

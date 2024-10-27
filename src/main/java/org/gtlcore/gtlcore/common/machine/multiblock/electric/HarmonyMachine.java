@@ -46,7 +46,7 @@ public class HarmonyMachine extends NoEnergyMultiblockMachine {
     @Persisted
     private UUID userid;
 
-    protected ConditionalSubscriptionHandler StartupSubs;
+    private final ConditionalSubscriptionHandler StartupSubs;
 
     public HarmonyMachine(IMachineBlockEntity holder, Object... args) {
         super(holder, args);

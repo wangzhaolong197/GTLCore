@@ -27,7 +27,7 @@ public class FluidHatchPartMachineMixin extends TieredIOPartMachine {
 
     @Inject(method = "createCircuitItemHandler", at = @At("HEAD"), remap = false, cancellable = true)
     protected void createCircuitItemHandler(Object[] args, CallbackInfoReturnable<NotifiableItemStackHandler> cir) {
-        if (args.length > 0 && args[0] instanceof IO io && io == IO.IN) {
+        if (args.length > 0 && args[0] instanceof IO i && i == IO.IN) {
             cir.setReturnValue(new NotifiableCircuitItemStackHandler(this));
         }
     }

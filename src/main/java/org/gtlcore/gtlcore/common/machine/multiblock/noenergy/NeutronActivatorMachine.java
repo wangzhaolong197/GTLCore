@@ -63,7 +63,7 @@ public class NeutronActivatorMachine extends NoEnergyMultiblockMachine implement
     @DescSynced
     private int eV;
 
-    protected ConditionalSubscriptionHandler neutronEnergySubs;
+    private final ConditionalSubscriptionHandler neutronEnergySubs;
 
     private Set<NeutronSensorPartMachine> sensorMachines;
 

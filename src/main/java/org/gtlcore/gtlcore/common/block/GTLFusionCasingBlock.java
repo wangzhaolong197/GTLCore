@@ -4,9 +4,9 @@ import org.gtlcore.gtlcore.GTLCore;
 import org.gtlcore.gtlcore.common.data.GTLBlocks;
 
 import com.gregtechceu.gtceu.api.block.IFusionCasingType;
+import com.gregtechceu.gtceu.api.data.chemical.ChemicalHelper;
 import com.gregtechceu.gtceu.api.data.tag.TagPrefix;
 import com.gregtechceu.gtceu.common.block.FusionCasingBlock;
-import com.gregtechceu.gtceu.common.data.GTBlocks;
 import com.gregtechceu.gtceu.common.data.GTMaterials;
 
 import net.minecraft.resources.ResourceLocation;
@@ -41,11 +41,11 @@ public class GTLFusionCasingBlock extends FusionCasingBlock {
 
     public static Block getFrameState(int tier) {
         return switch (tier) {
-            case LuV -> GTBlocks.MATERIAL_BLOCKS.get(TagPrefix.frameGt, GTMaterials.NaquadahAlloy).get();
-            case ZPM -> GTBlocks.MATERIAL_BLOCKS.get(TagPrefix.frameGt, GTMaterials.Duranium).get();
-            case UV -> GTBlocks.MATERIAL_BLOCKS.get(TagPrefix.frameGt, GTMaterials.Naquadria).get();
-            case UHV -> GTBlocks.MATERIAL_BLOCKS.get(TagPrefix.frameGt, GTMaterials.Trinium).get();
-            default -> GTBlocks.MATERIAL_BLOCKS.get(TagPrefix.frameGt, GTMaterials.Neutronium).get();
+            case LuV -> ChemicalHelper.getBlock(TagPrefix.frameGt, GTMaterials.NaquadahAlloy);
+            case ZPM -> ChemicalHelper.getBlock(TagPrefix.frameGt, GTMaterials.Duranium);
+            case UV -> ChemicalHelper.getBlock(TagPrefix.frameGt, GTMaterials.Naquadria);
+            case UHV -> ChemicalHelper.getBlock(TagPrefix.frameGt, GTMaterials.Trinium);
+            default -> ChemicalHelper.getBlock(TagPrefix.frameGt, GTMaterials.Neutronium);
         };
     }
 
@@ -71,16 +71,16 @@ public class GTLFusionCasingBlock extends FusionCasingBlock {
 
     public enum CasingType implements IFusionCasingType, StringRepresentable {
 
-        FUSION_CASING_MK4("fusion_casing_mk4", 3),
-        FUSION_CASING_MK5("fusion_casing_mk5", 3);
+        FUSION_CASING_MK4("fusion_casing_mk4"),
+        FUSION_CASING_MK5("fusion_casing_mk5");
 
         private final String name;
         @Getter
         private final int harvestLevel;
 
-        CasingType(String name, int harvestLevel) {
+        CasingType(String name) {
             this.name = name;
-            this.harvestLevel = harvestLevel;
+            this.harvestLevel = 3;
         }
 
         @Override

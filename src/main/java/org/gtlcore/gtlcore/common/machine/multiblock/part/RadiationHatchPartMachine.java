@@ -104,7 +104,7 @@ public class RadiationHatchPartMachine extends MultiblockPartMachine implements 
     }
 
     private void addDisplayText(List<Component> textList) {
-        textList.add(Component.translatable("gtlcore.machine.radiation_hatch.inhibition_dose：", inhibitionDose).append(ComponentPanelWidget.withButton(Component.literal(" [-]"), "Sub")).append(ComponentPanelWidget.withButton(Component.literal(" [+]"), "Add")));
+        textList.add(Component.translatable("gtlcore.machine.radiation_hatch.inhibition_dose", inhibitionDose).append(ComponentPanelWidget.withButton(Component.literal(" [-]"), "Sub")).append(ComponentPanelWidget.withButton(Component.literal(" [+]"), "Add")));
         textList.add(Component.translatable("gtlcore.recipe.radioactivity", radioactivity));
         textList.add(Component.translatable("gtlcore.machine.radiation_hatch.time", time, initialTime));
     }

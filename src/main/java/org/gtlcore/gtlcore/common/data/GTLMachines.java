@@ -5,7 +5,7 @@ import org.gtlcore.gtlcore.api.machine.multiblock.GTLPartAbility;
 import org.gtlcore.gtlcore.api.machine.multiblock.IParallelMachine;
 import org.gtlcore.gtlcore.client.renderer.machine.BallHatchRenderer;
 import org.gtlcore.gtlcore.client.renderer.machine.WindMillTurbineRenderer;
-import org.gtlcore.gtlcore.common.data.machines.*;
+import org.gtlcore.gtlcore.common.data.machines.AdvancedMultiBlockMachineA;
 import org.gtlcore.gtlcore.common.data.machines.GTMMachineTooltips;
 import org.gtlcore.gtlcore.common.data.machines.GeneratorMachine;
 import org.gtlcore.gtlcore.common.data.machines.MultiBlockMachineA;
@@ -94,7 +94,7 @@ public class GTLMachines {
 
     public static final BiConsumer<IMultiController, List<Component>> MAX_TEMPERATURE = (controller, components) -> {
         if (controller instanceof CoilWorkableElectricMultiblockMachine coilMachine && controller.isFormed()) {
-            components.add(Component.translatable("gtlcore.machine.blast_furnace.max_temperature",
+            components.add(Component.translatable("gtceu.multiblock.blast_furnace.max_temperature",
                     Component.translatable(FormattingUtil.formatNumbers(coilMachine.getCoilType().getCoilTemperature() + 100L * Math.max(0, coilMachine.getTier() - GTValues.MV)) + "K")
                             .setStyle(Style.EMPTY.withColor(ChatFormatting.RED))));
         }
@@ -102,7 +102,7 @@ public class GTLMachines {
 
     public static final BiConsumer<IMultiController, List<Component>> TEMPERATURE = (controller, components) -> {
         if (controller instanceof CoilWorkableElectricMultiblockMachine coilMachine && controller.isFormed()) {
-            components.add(Component.translatable("gtlcore.machine.blast_furnace.max_temperature",
+            components.add(Component.translatable("gtceu.multiblock.blast_furnace.max_temperature",
                     Component.translatable(FormattingUtil.formatNumbers(coilMachine.getCoilType().getCoilTemperature()) + "K")
                             .setStyle(Style.EMPTY.withColor(ChatFormatting.RED))));
         }
@@ -110,7 +110,7 @@ public class GTLMachines {
 
     public static final BiConsumer<IMultiController, List<Component>> COIL_PARALLEL = (controller, components) -> {
         if (controller instanceof IParallelMachine machine && controller.isFormed()) {
-            components.add(Component.translatable("gtlcore.machine.parallel", Component.literal(FormattingUtil.formatNumbers(machine.getParallel())).withStyle(ChatFormatting.DARK_PURPLE)).withStyle(ChatFormatting.GRAY));
+            components.add(Component.translatable("gtceu.multiblock.parallel", Component.literal(FormattingUtil.formatNumbers(machine.getParallel())).withStyle(ChatFormatting.DARK_PURPLE)).withStyle(ChatFormatting.GRAY));
         }
     };
 
@@ -300,7 +300,7 @@ public class GTLMachines {
                                 FormattingUtil.toEnglishName(name) + " Hatch")
                         .rotationState(RotationState.ALL)
                         .tooltips(Component.translatable("gtlcore.machine.laser_hatch." + name + ".tooltip"),
-                                Component.translatable("gtlcore.machine.laser_hatch.both.tooltip"),
+                                Component.translatable("gtceu.machine.laser_hatch.both.tooltip"),
                                 Component.translatable("gtceu.universal.disabled"))
                         .abilities(ability)
                         .renderer(() -> new OverlayTieredMachineRenderer(tier, GTCEu.id("block/machine/part/laser_hatch." + name)))
@@ -460,12 +460,12 @@ public class GTLMachines {
                         .where('X', Predicates.blocks(casing.get()))
                         .where('G', Predicates.blocks(gear.get()))
                         .where('C', Predicates.blocks(casing.get()).setMinGlobalLimited(3).or(Predicates.autoAbilities(definition.getRecipeTypes(), false, false, true, true, true, true)).or(Predicates.autoAbilities(true, true, false)))
-                        .where('D', Predicates.ability(PartAbility.OUTPUT_ENERGY, Stream.of(GTValues.EV, GTValues.IV, GTValues.LuV, GTValues.ZPM, GTValues.UV, GTValues.UHV).filter(t -> t >= tier).mapToInt(Integer::intValue).toArray()).addTooltips(Component.translatable("gtlcore.machine.pattern.error.limited.1", GTValues.VN[tier])))
-                        .where('A', Predicates.blocks(intake.get()).addTooltips(Component.translatable("gtlcore.machine.pattern.clear_amount_1")))
+                        .where('D', Predicates.ability(PartAbility.OUTPUT_ENERGY, Stream.of(GTValues.EV, GTValues.IV, GTValues.LuV, GTValues.ZPM, GTValues.UV, GTValues.UHV).filter(t -> t >= tier).mapToInt(Integer::intValue).toArray()).addTooltips(Component.translatable("gtceu.machine.large_combustion_engine.tooltip.boost_regular", GTValues.VN[tier])))
+                        .where('A', Predicates.blocks(intake.get()).addTooltips(Component.translatable("gtceu.multiblock.pattern.clear_amount_1")))
                         .where('Y', Predicates.controller(Predicates.blocks(definition.getBlock())))
                         .build())
                 .workableCasingRenderer(casingTexture, overlayModel)
-                .tooltips(Component.translatable("gtceu.universal.tooltip.base_production_eut", GTValues.V[tier] * 4), Component.translatable("gtceu.universal.tooltip.uses_per_hour_lubricant", FluidHelper.getBucket()), tier > GTValues.EV ? Component.translatable("gtlcore.machine.large_combustion_engine.tooltip.boost_extreme", GTValues.V[tier] * 16) : Component.translatable("gtlcore.machine.large_combustion_engine.tooltip.boost_regular", GTValues.V[tier] * 12));
+                .tooltips(Component.translatable("gtceu.universal.tooltip.base_production_eut", GTValues.V[tier] * 4), Component.translatable("gtceu.universal.tooltip.uses_per_hour_lubricant", FluidHelper.getBucket()), tier > GTValues.EV ? Component.translatable("gtceu.machine.large_combustion_engine.tooltip.boost_extreme", GTValues.V[tier] * 16) : Component.translatable("gtceu.machine.large_combustion_engine.tooltip.boost_regular", GTValues.V[tier] * 12));
         if (isGTM) builder.tooltipBuilder(GTLMachines.GTL_MODIFY);
         return builder.register();
     }
@@ -484,11 +484,11 @@ public class GTLMachines {
                         .where('S', Predicates.controller(Predicates.blocks(definition.getBlock())))
                         .where('G', Predicates.blocks(gear.get()))
                         .where('C', Predicates.blocks(casing.get()))
-                        .where('R', new TraceabilityPredicate(new SimplePredicate(state -> MetaMachine.getMachine(state.getWorld(), state.getPos()) instanceof IRotorHolderMachine rotorHolder && state.getWorld().getBlockState(state.getPos().relative(rotorHolder.self().getFrontFacing())).isAir(), () -> PartAbility.ROTOR_HOLDER.getAllBlocks().stream().map(BlockInfo::fromBlock).toArray(BlockInfo[]::new))).addTooltips(Component.translatable("gtlcore.machine.pattern.clear_amount_3")).addTooltips(Component.translatable("gtlcore.machine.pattern.error.limited.1", GTValues.VN[tier])).setExactLimit(1).or(Predicates.abilities(PartAbility.OUTPUT_ENERGY)).setExactLimit(1))
+                        .where('R', new TraceabilityPredicate(new SimplePredicate(state -> MetaMachine.getMachine(state.getWorld(), state.getPos()) instanceof IRotorHolderMachine rotorHolder && state.getWorld().getBlockState(state.getPos().relative(rotorHolder.self().getFrontFacing())).isAir(), () -> PartAbility.ROTOR_HOLDER.getAllBlocks().stream().map(BlockInfo::fromBlock).toArray(BlockInfo[]::new))).addTooltips(Component.translatable("gtceu.multiblock.pattern.clear_amount_3")).addTooltips(Component.translatable("gtceu.machine.large_combustion_engine.tooltip.boost_regular", GTValues.VN[tier])).setExactLimit(1).or(Predicates.abilities(PartAbility.OUTPUT_ENERGY)).setExactLimit(1))
                         .where('H', Predicates.blocks(casing.get()).or(Predicates.autoAbilities(definition.getRecipeTypes(), false, false, true, true, true, true).or(Predicates.autoAbilities(true, true, false))))
                         .build())
                 .workableCasingRenderer(casingTexture, overlayModel)
-                .tooltips(Component.translatable("gtceu.universal.tooltip.base_production_eut", GTValues.V[tier] * (special ? 3 : 2)), Component.translatable("gtlcore.machine.turbine.efficiency_tooltip", GTValues.VNF[tier]));
+                .tooltips(Component.translatable("gtceu.universal.tooltip.base_production_eut", GTValues.V[tier] * (special ? 3 : 2)), Component.translatable("gtceu.multiblock.turbine.efficiency_tooltip", GTValues.VNF[tier]));
         if (isGTM) builder.tooltipBuilder(GTLMachines.GTL_MODIFY);
         return builder.register();
     }
@@ -502,7 +502,7 @@ public class GTLMachines {
                     .langValue(GTValues.VNF[tier] + " 4A Energy Hatch")
                     .rotationState(RotationState.ALL)
                     .abilities(PartAbility.INPUT_ENERGY)
-                    .tooltips(Component.translatable("gtlcore.machine.energy_hatch.input_hi_amp.tooltip"))
+                    .tooltips(Component.translatable("gtceu.machine.energy_hatch.input_hi_amp.tooltip"))
                     .renderer(() -> new OverlayTieredMachineRenderer(tier, GTCEu.id("block/machine/part/" + "energy_hatch.input_4a")))
                     .register(),
             GTValues.tiersBetween(GTValues.LV, GTValues.HV));
@@ -513,7 +513,7 @@ public class GTLMachines {
                     .langValue(GTValues.VNF[tier] + " 4A Dynamo Hatch")
                     .rotationState(RotationState.ALL)
                     .abilities(PartAbility.OUTPUT_ENERGY)
-                    .tooltips(Component.translatable("gtlcore.machine.energy_hatch.output_hi_amp.tooltip"))
+                    .tooltips(Component.translatable("gtceu.machine.energy_hatch.output_hi_amp.tooltip"))
                     .renderer(() -> new OverlayTieredMachineRenderer(tier, GTCEu.id("block/machine/part/" + "energy_hatch.output_4a")))
                     .register(),
             GTValues.tiersBetween(GTValues.LV, GTValues.HV));
@@ -524,7 +524,7 @@ public class GTLMachines {
                     .langValue(GTValues.VNF[tier] + " 16A Energy Hatch")
                     .rotationState(RotationState.ALL)
                     .abilities(PartAbility.INPUT_ENERGY)
-                    .tooltips(Component.translatable("gtlcore.machine.energy_hatch.input_hi_amp.tooltip"))
+                    .tooltips(Component.translatable("gtceu.machine.energy_hatch.input_hi_amp.tooltip"))
                     .renderer(() -> new OverlayTieredMachineRenderer(tier, GTCEu.id("block/machine/part/" + "energy_hatch.input_16a")))
                     .register(),
             GTValues.tiersBetween(GTValues.LV, GTValues.HV));
@@ -535,7 +535,7 @@ public class GTLMachines {
                     .langValue(GTValues.VNF[tier] + " 16A Dynamo Hatch")
                     .rotationState(RotationState.ALL)
                     .abilities(PartAbility.OUTPUT_ENERGY)
-                    .tooltips(Component.translatable("gtlcore.machine.energy_hatch.output_hi_amp.tooltip"))
+                    .tooltips(Component.translatable("gtceu.machine.energy_hatch.output_hi_amp.tooltip"))
                     .renderer(() -> new OverlayTieredMachineRenderer(tier, GTCEu.id("block/machine/part/" + "energy_hatch.output_16a")))
                     .register(),
             GTValues.tiersBetween(GTValues.LV, GTValues.HV));
@@ -593,7 +593,7 @@ public class GTLMachines {
             .tooltips(Component.translatable("gtlcore.machine.large_steam_input_hatch.tooltip.0"),
                     Component.translatable("gtceu.universal.tooltip.fluid_storage_capacity",
                             8192 * FluidHelper.getBucket()),
-                    Component.translatable("gtlcore.machine.steam.steam_hatch.tooltip"))
+                    Component.translatable("gtceu.machine.steam.steam_hatch.tooltip"))
             .register();
 
     public static final MachineDefinition STERILE_CLEANING_MAINTENANCE_HATCH = REGISTRATE
@@ -601,8 +601,8 @@ public class GTLMachines {
             .rotationState(RotationState.ALL)
             .abilities(PartAbility.MAINTENANCE)
             .tooltips(Component.translatable("gtceu.universal.disabled"),
-                    Component.translatable("gtlcore.machine.maintenance_hatch_cleanroom_auto.tooltip.0"),
-                    Component.translatable("gtlcore.machine.maintenance_hatch_cleanroom_auto.tooltip.1"))
+                    Component.translatable("gtceu.machine.maintenance_hatch_cleanroom_auto.tooltip.0"),
+                    Component.translatable("gtceu.machine.maintenance_hatch_cleanroom_auto.tooltip.1"))
             .tooltipBuilder((stack, tooltips) -> {
                 for (CleanroomType type : CMHatchPartMachine
                         .getCleanroomTypes(CMHatchPartMachine.STERILE_DUMMY_CLEANROOM)) {
@@ -618,8 +618,8 @@ public class GTLMachines {
             .rotationState(RotationState.ALL)
             .abilities(PartAbility.MAINTENANCE)
             .tooltips(Component.translatable("gtceu.universal.disabled"),
-                    Component.translatable("gtlcore.machine.maintenance_hatch_cleanroom_auto.tooltip.0"),
-                    Component.translatable("gtlcore.machine.maintenance_hatch_cleanroom_auto.tooltip.1"))
+                    Component.translatable("gtceu.machine.maintenance_hatch_cleanroom_auto.tooltip.0"),
+                    Component.translatable("gtceu.machine.maintenance_hatch_cleanroom_auto.tooltip.1"))
             .tooltipBuilder((stack, tooltips) -> {
                 for (CleanroomType type : CMHatchPartMachine
                         .getCleanroomTypes(CMHatchPartMachine.LAW_DUMMY_CLEANROOM)) {
@@ -643,8 +643,8 @@ public class GTLMachines {
             .rotationState(RotationState.ALL)
             .abilities(PartAbility.MAINTENANCE)
             .tooltips(Component.translatable("gtceu.universal.disabled"),
-                    Component.translatable("gtlcore.machine.maintenance_hatch_cleanroom_auto.tooltip.0"),
-                    Component.translatable("gtlcore.machine.maintenance_hatch_cleanroom_auto.tooltip.1"))
+                    Component.translatable("gtceu.machine.maintenance_hatch_cleanroom_auto.tooltip.0"),
+                    Component.translatable("gtceu.machine.maintenance_hatch_cleanroom_auto.tooltip.1"))
             .tooltipBuilder((stack, tooltips) -> {
                 for (CleanroomType type : CMHatchPartMachine
                         .getCleanroomTypes(CMHatchPartMachine.DUMMY_CLEANROOM)) {
@@ -660,8 +660,8 @@ public class GTLMachines {
             .rotationState(RotationState.ALL)
             .abilities(PartAbility.MAINTENANCE)
             .tooltips(Component.translatable("gtceu.universal.disabled"),
-                    Component.translatable("gtlcore.machine.maintenance_hatch_cleanroom_auto.tooltip.0"),
-                    Component.translatable("gtlcore.machine.maintenance_hatch_cleanroom_auto.tooltip.1"))
+                    Component.translatable("gtceu.machine.maintenance_hatch_cleanroom_auto.tooltip.0"),
+                    Component.translatable("gtceu.machine.maintenance_hatch_cleanroom_auto.tooltip.1"))
             .tooltipBuilder((stack, tooltips) -> {
                 for (CleanroomType type : CMHatchPartMachine
                         .getCleanroomTypes(CMHatchPartMachine.STERILE_DUMMY_CLEANROOM)) {
@@ -677,8 +677,8 @@ public class GTLMachines {
             .rotationState(RotationState.ALL)
             .abilities(PartAbility.MAINTENANCE)
             .tooltips(Component.translatable("gtceu.universal.disabled"),
-                    Component.translatable("gtlcore.machine.maintenance_hatch_cleanroom_auto.tooltip.0"),
-                    Component.translatable("gtlcore.machine.maintenance_hatch_cleanroom_auto.tooltip.1"))
+                    Component.translatable("gtceu.machine.maintenance_hatch_cleanroom_auto.tooltip.0"),
+                    Component.translatable("gtceu.machine.maintenance_hatch_cleanroom_auto.tooltip.1"))
             .tooltipBuilder((stack, tooltips) -> {
                 for (CleanroomType type : CMHatchPartMachine
                         .getCleanroomTypes(CMHatchPartMachine.LAW_DUMMY_CLEANROOM)) {

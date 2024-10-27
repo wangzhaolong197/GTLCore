@@ -15,8 +15,8 @@ public class DebugBlockPattern {
     public RelativeDirection[] structureDir;
     public String[][] pattern;
     public int[][] aisleRepetitions;
-    public Map<Character, Set<String>> symbolMap;
-    public Map<Block, Character> legend = new LinkedHashMap<>();
+    private final Map<Character, Set<String>> symbolMap;
+    public final Map<Block, Character> legend = new LinkedHashMap<>();
 
     public DebugBlockPattern() {
         symbolMap = new HashMap<>();

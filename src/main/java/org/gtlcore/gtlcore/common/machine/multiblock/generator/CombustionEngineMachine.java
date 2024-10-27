@@ -37,11 +37,6 @@ import java.util.List;
 
 import javax.annotation.ParametersAreNonnullByDefault;
 
-/**
- * @author KilaBash
- * @date 2023/7/9
- * @implNote LargeCombustionEngineMachine
- */
 @ParametersAreNonnullByDefault
 @MethodsReturnNonnullByDefault
 public class CombustionEngineMachine extends WorkableElectricMultiblockMachine implements ITieredMachine {
@@ -163,22 +158,22 @@ public class CombustionEngineMachine extends WorkableElectricMultiblockMachine i
             if (isBoostAllowed()) {
                 if (!isExtreme()) {
                     if (isOxygenBoosted) {
-                        textList.add(Component.translatable("gtlcore.machine.large_combustion_engine.oxygen_boosted"));
+                        textList.add(Component.translatable("gtceu.multiblock.large_combustion_engine.oxygen_boosted"));
                     } else {
                         textList.add(Component
-                                .translatable("gtlcore.machine.large_combustion_engine.supply_oxygen_to_boost"));
+                                .translatable("gtceu.multiblock.large_combustion_engine.supply_oxygen_to_boost"));
                     }
                 } else {
                     if (isOxygenBoosted) {
                         textList.add(Component
-                                .translatable("gtlcore.machine.large_combustion_engine.liquid_oxygen_boosted"));
+                                .translatable("gtceu.multiblock.large_combustion_engine.liquid_oxygen_boosted"));
                     } else {
                         textList.add(Component.translatable(
-                                "gtlcore.machine.large_combustion_engine.supply_liquid_oxygen_to_boost"));
+                                "gtceu.multiblock.large_combustion_engine.supply_liquid_oxygen_to_boost"));
                     }
                 }
             } else {
-                textList.add(Component.translatable("gtlcore.machine.large_combustion_engine.boost_disallowed"));
+                textList.add(Component.translatable("gtceu.multiblock.large_combustion_engine.boost_disallowed"));
             }
         }
     }
@@ -188,7 +183,7 @@ public class CombustionEngineMachine extends WorkableElectricMultiblockMachine i
         super.attachTooltips(tooltipsPanel);
         tooltipsPanel.attachTooltips(new Basic(
                 () -> GuiTextures.INDICATOR_NO_STEAM.get(false),
-                () -> List.of(Component.translatable("gtlcore.machine.large_combustion_engine.obstructed")
+                () -> List.of(Component.translatable("gtceu.multiblock.large_combustion_engine.obstructed")
                         .setStyle(Style.EMPTY.withColor(ChatFormatting.RED))),
                 this::isIntakesObstructed,
                 () -> null));

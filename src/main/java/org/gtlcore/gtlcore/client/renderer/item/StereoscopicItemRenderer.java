@@ -28,7 +28,7 @@ public class StereoscopicItemRenderer implements IRenderer {
         poseStack.pushPose();
         if (transformType == ItemDisplayContext.GUI) {
             poseStack.mulPose(new Quaternionf()
-                    .fromAxisAngleDeg(0.3f, 0.5f, 0.2f, (System.currentTimeMillis() / 25) % 360));
+                    .fromAxisAngleDeg(0.3f, 0.5f, 0.2f, (System.currentTimeMillis() / 25F) % 360));
         }
         ClientUtil.vanillaRender(stack, transformType, leftHand, poseStack,
                 buffer, combinedLight, combinedOverlay, model);

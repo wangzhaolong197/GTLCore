@@ -147,7 +147,7 @@ public class ProcessingPlantMachine extends StorageMachine implements IParallelM
     public void addDisplayText(List<Component> textList) {
         super.addDisplayText(textList);
         if (!this.isFormed) return;
-        textList.add(Component.translatable("gtlcore.machine.parallel", Component.literal(FormattingUtil.formatNumbers(getParallel())).withStyle(ChatFormatting.DARK_PURPLE)).withStyle(ChatFormatting.GRAY));
+        textList.add(Component.translatable("gtceu.multiblock.parallel", Component.literal(FormattingUtil.formatNumbers(getParallel())).withStyle(ChatFormatting.DARK_PURPLE)).withStyle(ChatFormatting.GRAY));
         if (mismatched) textList.add(Component.translatable("gtlcore.machine.processing_plant.mismatched").withStyle(ChatFormatting.RED));
     }
 

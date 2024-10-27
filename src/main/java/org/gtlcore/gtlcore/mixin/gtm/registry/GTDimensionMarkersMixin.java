@@ -33,9 +33,8 @@ public class GTDimensionMarkersMixin {
     }
 
     @Unique
-    private static DimensionMarker gTLCore$createAndRegister(ResourceLocation dim, int tier, Supplier<ItemLike> supplier,
-                                                             @Nullable String overrideName) {
-        DimensionMarker marker = new DimensionMarker(tier, supplier, overrideName);
+    private static DimensionMarker gTLCore$createAndRegister(ResourceLocation dim, int tier, Supplier<ItemLike> supplier) {
+        DimensionMarker marker = new DimensionMarker(tier, supplier, null);
         marker.register(dim);
         return marker;
     }
@@ -80,11 +79,11 @@ public class GTDimensionMarkersMixin {
     private static void createAndRegister(ResourceLocation dim, int tier, Supplier<ItemLike> supplier, @Nullable String overrideName, CallbackInfoReturnable<DimensionMarker> cir) {
         if (dim == Level.NETHER.location()) {
             cir.setReturnValue(gTLCore$createAndRegister(Level.NETHER.location(), 3,
-                    () -> NETHER_MARKER, null));
+                    () -> NETHER_MARKER));
         }
         if (dim == Level.END.location()) {
             cir.setReturnValue(gTLCore$createAndRegister(Level.END.location(), 6,
-                    () -> END_MARKER, null));
+                    () -> END_MARKER));
         }
     }
 }

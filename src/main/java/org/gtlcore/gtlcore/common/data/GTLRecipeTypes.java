@@ -29,7 +29,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 import static com.gregtechceu.gtceu.common.data.GTRecipeTypes.*;
-import static com.gregtechceu.gtceu.common.data.GTRecipeTypes.register;
 import static com.lowdragmc.lowdraglib.gui.texture.ProgressTexture.FillDirection.LEFT_TO_RIGHT;
 
 public class GTLRecipeTypes {

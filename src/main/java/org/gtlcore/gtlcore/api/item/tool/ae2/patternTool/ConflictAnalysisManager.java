@@ -13,7 +13,7 @@ public class ConflictAnalysisManager {
     // 使用配方recipe自动生成的样板对象(工具类)的集
     // 一个Manager所管理的配方是一个机器的类型所能制造的配方
     ////////////////////////////////////////////////
-    public List<ConflictAnalysisObj> conflictAnalysisObjs;
+    private final List<ConflictAnalysisObj> conflictAnalysisObjs;
 
     public ConflictAnalysisManager(List<GTRecipe> recipes) {
         this.conflictAnalysisObjs = new ArrayList<>();

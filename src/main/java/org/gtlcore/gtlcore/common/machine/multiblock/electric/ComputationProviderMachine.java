@@ -171,7 +171,7 @@ public class ComputationProviderMachine extends WorkableElectricMultiblockMachin
                                 .append(Component.literal(" CWU/t"))
                                 .withStyle(ChatFormatting.AQUA);
                         tl.add(Component.translatable(
-                                "gtlcore.machine.hpca.computation",
+                                "gtceu.multiblock.hpca.computation",
                                 cwutInfo).withStyle(ChatFormatting.GRAY));
                     }
                 })

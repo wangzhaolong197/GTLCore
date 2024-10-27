@@ -79,7 +79,7 @@ public class TurbineMachine extends WorkableElectricMultiblockMachine implements
 
     private RotorHatchPartMachine rotorHatchPartMachine = null;
 
-    protected ConditionalSubscriptionHandler rotorSubs;
+    private final ConditionalSubscriptionHandler rotorSubs;
 
     public TurbineMachine(IMachineBlockEntity holder, int tier, boolean special, boolean mega) {
         super(holder);
@@ -249,21 +249,21 @@ public class TurbineMachine extends WorkableElectricMultiblockMachine implements
             var rotorHolder = getRotorHolder();
 
             if (rotorHolder != null && rotorHolder.getRotorEfficiency() > 0) {
-                textList.add(Component.translatable("gtlcore.machine.turbine.rotor_speed", FormattingUtil.formatNumbers(getRotorSpeed()), FormattingUtil.formatNumbers(rotorHolder.getMaxRotorHolderSpeed() * (highSpeedMode ? 3 : 1))));
-                textList.add(Component.translatable("gtlcore.machine.turbine.efficiency", rotorHolder.getTotalEfficiency()));
+                textList.add(Component.translatable("gtceu.multiblock.turbine.rotor_speed", FormattingUtil.formatNumbers(getRotorSpeed()), FormattingUtil.formatNumbers(rotorHolder.getMaxRotorHolderSpeed() * (highSpeedMode ? 3 : 1))));
+                textList.add(Component.translatable("gtceu.multiblock.turbine.efficiency", rotorHolder.getTotalEfficiency()));
 
                 if (isActive()) {
                     String voltageName = GTValues.VNF[GTUtil.getTierByVoltage(energyPerTick)];
-                    textList.add(3, Component.translatable("gtlcore.machine.turbine.energy_per_tick",
+                    textList.add(3, Component.translatable("gtceu.multiblock.turbine.energy_per_tick",
                             FormattingUtil.formatNumbers(energyPerTick), voltageName));
                 }
 
                 if (!mega) {
                     int rotorDurability = rotorHolder.getRotorDurabilityPercent();
                     if (rotorDurability > MIN_DURABILITY_TO_WARN) {
-                        textList.add(Component.translatable("gtlcore.machine.turbine.rotor_durability", rotorDurability));
+                        textList.add(Component.translatable("gtceu.multiblock.turbine.rotor_durability", rotorDurability));
                     } else {
-                        textList.add(Component.translatable("gtlcore.machine.turbine.rotor_durability", rotorDurability)
+                        textList.add(Component.translatable("gtceu.multiblock.turbine.rotor_durability", rotorDurability)
                                 .setStyle(Style.EMPTY.withColor(ChatFormatting.RED)));
                     }
                 }

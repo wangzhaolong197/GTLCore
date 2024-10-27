@@ -16,22 +16,22 @@ import java.util.*;
 
 public class ConflictAnalysisObj {
 
-    public GTRecipe recipe;
+    public final GTRecipe recipe;
 
-    public List<ItemStack> inputItemStacks = new ArrayList<>();
-    public List<FluidStack> inputFluidStacks = new ArrayList<>();
-    public List<ItemStack> outputItemStacks = new ArrayList<>();
-    public List<FluidStack> outputFluidStacks = new ArrayList<>();
+    private final List<ItemStack> inputItemStacks = new ArrayList<>();
+    private final List<FluidStack> inputFluidStacks = new ArrayList<>();
+    private final List<ItemStack> outputItemStacks = new ArrayList<>();
+    private final List<FluidStack> outputFluidStacks = new ArrayList<>();
 
-    public List<String> inputItemIds = new ArrayList<>();
-    public List<String> inputFluidIds = new ArrayList<>();
-    public List<String> outputItemIds = new ArrayList<>();
-    public List<String> outputFluidIds = new ArrayList<>();
+    public final List<String> inputItemIds = new ArrayList<>();
+    public final List<String> inputFluidIds = new ArrayList<>();
+    private final List<String> outputItemIds = new ArrayList<>();
+    private final List<String> outputFluidIds = new ArrayList<>();
 
-    public Map<String, Long> inputItemIdsMap = new HashMap<>();
-    public Map<String, Long> inputFluidIdsMap = new HashMap<>();
-    public Map<String, Long> outputItemIdsMap = new HashMap<>();
-    public Map<String, Long> outputFluidIdsMap = new HashMap<>();
+    private final Map<String, Long> inputItemIdsMap = new HashMap<>();
+    private final Map<String, Long> inputFluidIdsMap = new HashMap<>();
+    private final Map<String, Long> outputItemIdsMap = new HashMap<>();
+    private final Map<String, Long> outputFluidIdsMap = new HashMap<>();
 
     public Number CIRCUIT;
     private boolean hasINTEGRATED_CIRCUIT = false;

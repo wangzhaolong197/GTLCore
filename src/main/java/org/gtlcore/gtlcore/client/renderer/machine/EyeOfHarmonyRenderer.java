@@ -38,7 +38,7 @@ import java.util.function.Consumer;
 public class EyeOfHarmonyRenderer extends WorkableCasingMachineRenderer implements IControllerRenderer {
 
     private static final ResourceLocation SPACE_MODEL = GTLCore.id("obj/space");
-    public static final ResourceLocation STAR_MODEL = GTLCore.id("obj/star");
+    static final ResourceLocation STAR_MODEL = GTLCore.id("obj/star");
     private static final List<ResourceLocation> ORBIT_OBJECTS = List.of(
             GTLCore.id("obj/the_nether"),
             GTLCore.id("obj/overworld"),
@@ -93,10 +93,7 @@ public class EyeOfHarmonyRenderer extends WorkableCasingMachineRenderer implemen
 
     private void renderOuterSpaceShell(PoseStack poseStack, MultiBufferSource buffer) {
         float scale = 0.01F * 17.5F;
-        poseStack.pushPose();
-        poseStack.scale(scale, scale, scale);
-        ClientUtil.modelRenderer().renderModel(poseStack.last(), buffer.getBuffer(RenderType.solid()), null, ClientUtil.getBakedModel(SPACE_MODEL), 1.0F, 1.0F, 1.0F, LightTexture.FULL_BRIGHT, OverlayTexture.NO_OVERLAY, ModelData.EMPTY, RenderType.solid());
-        poseStack.popPose();
+        SpaceElevatorRenderer.RendererModel(poseStack, buffer, scale, SPACE_MODEL);
     }
 
     @Override

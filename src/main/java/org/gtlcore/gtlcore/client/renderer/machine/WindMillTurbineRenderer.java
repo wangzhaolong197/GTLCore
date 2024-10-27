@@ -27,7 +27,7 @@ import java.util.*;
 public class WindMillTurbineRenderer extends SimpleGeneratorMachineRenderer {
 
     private static final TurbineModel MODEL = new TurbineModel();
-    public static final List<ResourceLocation> TEXTURES = List.of(
+    private static final List<ResourceLocation> TEXTURES = List.of(
             GTLCore.id("textures/block/generators/wind_mill_turbine/wood_turbine.png"),
             GTLCore.id("textures/block/generators/wind_mill_turbine/metal_turbine.png"),
             GTLCore.id("textures/block/generators/wind_mill_turbine/carbon_turbine.png"));

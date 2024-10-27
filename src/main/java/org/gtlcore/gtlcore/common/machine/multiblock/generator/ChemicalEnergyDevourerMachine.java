@@ -171,14 +171,14 @@ public class ChemicalEnergyDevourerMachine extends WorkableElectricMultiblockMac
                     textList.add(Component.translatable(
                             "gtlcore.machine.large_combustion_engine.supply_dinitrogen_tetroxide_to_boost"));
                     textList.add(Component.translatable(
-                            "gtlcore.machine.large_combustion_engine.liquid_oxygen_boosted"));
+                            "gtceu.multiblock.large_combustion_engine.liquid_oxygen_boosted"));
                 } else {
                     textList.add(Component.translatable(
-                            "gtlcore.machine.large_combustion_engine.supply_liquid_oxygen_to_boost"));
+                            "gtceu.multiblock.large_combustion_engine.supply_liquid_oxygen_to_boost"));
                 }
             } else {
                 textList.add(Component.translatable(
-                        "gtlcore.machine.large_combustion_engine.boost_disallowed"));
+                        "gtceu.multiblock.large_combustion_engine.boost_disallowed"));
             }
         }
     }
@@ -188,7 +188,7 @@ public class ChemicalEnergyDevourerMachine extends WorkableElectricMultiblockMac
         super.attachTooltips(tooltipsPanel);
         tooltipsPanel.attachTooltips(new Basic(
                 () -> GuiTextures.INDICATOR_NO_STEAM.get(false),
-                () -> List.of(Component.translatable("gtlcore.machine.large_combustion_engine.obstructed")
+                () -> List.of(Component.translatable("gtceu.multiblock.large_combustion_engine.obstructed")
                         .setStyle(Style.EMPTY.withColor(ChatFormatting.RED))),
                 this::isIntakesObstructed,
                 () -> null));

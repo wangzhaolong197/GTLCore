@@ -117,25 +117,25 @@ public class LargeSteamParallelMultiblockMachine extends WorkableMultiblockMachi
                     handlers.get(0) instanceof SteamEnergyRecipeHandler steamHandler) {
                 if (steamHandler.getCapacity() > 0) {
                     long steamStored = steamHandler.getStored();
-                    textList.add(Component.translatable("gtlcore.machine.steam.steam_stored", steamStored,
+                    textList.add(Component.translatable("gtceu.multiblock.steam.steam_stored", steamStored,
                             steamHandler.getCapacity()));
                 }
             }
 
             if (!isWorkingEnabled()) {
-                textList.add(Component.translatable("gtlcore.machine.work_paused"));
+                textList.add(Component.translatable("gtceu.multiblock.work_paused"));
 
             } else if (isActive()) {
-                textList.add(Component.translatable("gtlcore.machine.running"));
+                textList.add(Component.translatable("gtceu.multiblock.running"));
                 int currentProgress = (int) (recipeLogic.getProgressPercent() * 100);
-                textList.add(Component.translatable("gtlcore.machine.parallel", this.max_parallels));
-                textList.add(Component.translatable("gtlcore.machine.progress", currentProgress));
+                textList.add(Component.translatable("gtceu.multiblock.parallel", this.max_parallels));
+                textList.add(Component.translatable("gtceu.multiblock.progress", currentProgress));
             } else {
-                textList.add(Component.translatable("gtlcore.machine.idling"));
+                textList.add(Component.translatable("gtceu.multiblock.idling"));
             }
 
             if (recipeLogic.isWaiting()) {
-                textList.add(Component.translatable("gtlcore.machine.steam.low_steam")
+                textList.add(Component.translatable("gtceu.multiblock.steam.low_steam")
                         .setStyle(Style.EMPTY.withColor(ChatFormatting.RED)));
             }
 

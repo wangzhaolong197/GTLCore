@@ -54,8 +54,8 @@ public class MultiBlockMachineA {
     public final static MultiblockMachineDefinition PLASMA_CONDENSER = REGISTRATE.multiblock("plasma_condenser", WorkableElectricMultiblockMachine::new)
             .rotationState(RotationState.ALL)
             .recipeType(GTLRecipeTypes.PLASMA_CONDENSER_RECIPES)
-            .tooltips(Component.translatable("gtlcore.machine.perfect_oc"))
-            .tooltips(Component.translatable("gtlcore.machine.available_recipe_map_1.tooltip",
+            .tooltips(Component.translatable("gtceu.machine.perfect_oc"))
+            .tooltips(Component.translatable("gtceu.machine.available_recipe_map_1.tooltip",
                     Component.translatable("gtceu.plasma_condenser")))
             .recipeModifier(GTRecipeModifiers.ELECTRIC_OVERCLOCK.apply(OverclockingLogic.PERFECT_OVERCLOCK_SUBTICK))
             .appearanceBlock(GTLBlocks.ANTIFREEZE_HEATPROOF_MACHINE_CASING)
@@ -82,8 +82,8 @@ public class MultiBlockMachineA {
     public final static MultiblockMachineDefinition RARE_EARTH_CENTRIFUGAL = REGISTRATE.multiblock("rare_earth_centrifugal", WorkableElectricMultiblockMachine::new)
             .rotationState(RotationState.ALL)
             .recipeType(GTLRecipeTypes.RARE_EARTH_CENTRIFUGAL_RECIPES)
-            .tooltips(Component.translatable("gtlcore.machine.parallelizable.tooltip"))
-            .tooltips(Component.translatable("gtlcore.machine.available_recipe_map_1.tooltip",
+            .tooltips(Component.translatable("gtceu.multiblock.parallelizable.tooltip"))
+            .tooltips(Component.translatable("gtceu.machine.available_recipe_map_1.tooltip",
                     Component.translatable("gtceu.rare_earth_centrifugal")))
             .recipeModifiers(GTRecipeModifiers.PARALLEL_HATCH, GTRecipeModifiers.ELECTRIC_OVERCLOCK.apply(OverclockingLogic.NON_PERFECT_OVERCLOCK_SUBTICK))
             .appearanceBlock(GTBlocks.CASING_HSSE_STURDY)
@@ -110,8 +110,8 @@ public class MultiBlockMachineA {
             .rotationState(RotationState.NON_Y_AXIS)
             .allowExtendedFacing(false)
             .recipeType(GTLRecipeTypes.MAGIC_MANUFACTURER_RECIPES)
-            .tooltips(Component.translatable("gtlcore.machine.perfect_oc"))
-            .tooltips(Component.translatable("gtlcore.machine.available_recipe_map_1.tooltip",
+            .tooltips(Component.translatable("gtceu.machine.perfect_oc"))
+            .tooltips(Component.translatable("gtceu.machine.available_recipe_map_1.tooltip",
                     Component.translatable("gtceu.magic_manufacturer")))
             .recipeModifier(GTRecipeModifiers.ELECTRIC_OVERCLOCK.apply(OverclockingLogic.PERFECT_OVERCLOCK_SUBTICK))
             .appearanceBlock(GTBlocks.MACHINE_CASING_UIV)
@@ -145,8 +145,8 @@ public class MultiBlockMachineA {
     public final static MultiblockMachineDefinition SPS_CRAFTING = REGISTRATE.multiblock("sps_crafting", WorkableElectricMultiblockMachine::new)
             .rotationState(RotationState.ALL)
             .recipeType(GTLRecipeTypes.SPS_CRAFTING_RECIPES)
-            .tooltips(Component.translatable("gtlcore.machine.perfect_oc"))
-            .tooltips(Component.translatable("gtlcore.machine.available_recipe_map_1.tooltip",
+            .tooltips(Component.translatable("gtceu.machine.perfect_oc"))
+            .tooltips(Component.translatable("gtceu.machine.available_recipe_map_1.tooltip",
                     Component.translatable("gtceu.sps_crafting")))
             .recipeModifier(GTRecipeModifiers.ELECTRIC_OVERCLOCK.apply(OverclockingLogic.PERFECT_OVERCLOCK_SUBTICK))
             .appearanceBlock(GTBlocks.FUSION_CASING_MK2)
@@ -177,9 +177,9 @@ public class MultiBlockMachineA {
             .rotationState(RotationState.ALL)
             .recipeType(GTLRecipeTypes.SPS_CRAFTING_RECIPES)
             .tooltips(Component.translatable("gtlcore.machine.laser.tooltip"))
-            .tooltips(Component.translatable("gtlcore.machine.perfect_oc"))
-            .tooltips(Component.translatable("gtlcore.machine.parallelizable.tooltip"))
-            .tooltips(Component.translatable("gtlcore.machine.available_recipe_map_1.tooltip",
+            .tooltips(Component.translatable("gtceu.machine.perfect_oc"))
+            .tooltips(Component.translatable("gtceu.multiblock.parallelizable.tooltip"))
+            .tooltips(Component.translatable("gtceu.machine.available_recipe_map_1.tooltip",
                     Component.translatable("gtceu.sps_crafting")))
             .recipeModifiers(GTRecipeModifiers.PARALLEL_HATCH, GTRecipeModifiers.ELECTRIC_OVERCLOCK.apply(OverclockingLogic.PERFECT_OVERCLOCK_SUBTICK))
             .appearanceBlock(GTBlocks.FUSION_CASING_MK2)
@@ -254,8 +254,8 @@ public class MultiBlockMachineA {
             .rotationState(RotationState.ALL)
             .recipeType(GTLRecipeTypes.MATTER_FABRICATOR_RECIPES)
             .tooltips(Component.translatable("gtlcore.machine.laser.tooltip"))
-            .tooltips(Component.translatable("gtlcore.machine.parallelizable.tooltip"))
-            .tooltips(Component.translatable("gtlcore.machine.available_recipe_map_1.tooltip",
+            .tooltips(Component.translatable("gtceu.multiblock.parallelizable.tooltip"))
+            .tooltips(Component.translatable("gtceu.machine.available_recipe_map_1.tooltip",
                     Component.translatable("gtceu.matter_fabricator")))
             .recipeModifiers(GTRecipeModifiers.PARALLEL_HATCH, GTRecipeModifiers.ELECTRIC_OVERCLOCK.apply(OverclockingLogic.NON_PERFECT_OVERCLOCK_SUBTICK))
             .appearanceBlock(GTBlocks.HIGH_POWER_CASING)
@@ -282,7 +282,7 @@ public class MultiBlockMachineA {
             .rotationState(RotationState.NON_Y_AXIS)
             .allowExtendedFacing(false)
             .recipeType(GTLRecipeTypes.VOID_FLUID_DRILLING_RIG_RECIPES)
-            .tooltips(Component.translatable("gtlcore.machine.available_recipe_map_1.tooltip",
+            .tooltips(Component.translatable("gtceu.machine.available_recipe_map_1.tooltip",
                     Component.translatable("gtceu.void_fluid_drilling_rig")))
             .recipeModifier(GTRecipeModifiers.ELECTRIC_OVERCLOCK.apply(OverclockingLogic.NON_PERFECT_OVERCLOCK_SUBTICK))
             .appearanceBlock(GTBlocks.CASING_HSSE_STURDY)
@@ -305,7 +305,7 @@ public class MultiBlockMachineA {
             .rotationState(RotationState.NON_Y_AXIS)
             .allowExtendedFacing(false)
             .recipeType(GTLRecipeTypes.VOID_MINER_RECIPES)
-            .tooltips(Component.translatable("gtlcore.machine.available_recipe_map_1.tooltip",
+            .tooltips(Component.translatable("gtceu.machine.available_recipe_map_1.tooltip",
                     Component.translatable("gtceu.void_miner")))
             .recipeModifier(GTRecipeModifiers.ELECTRIC_OVERCLOCK.apply(OverclockingLogic.NON_PERFECT_OVERCLOCK_SUBTICK))
             .appearanceBlock(GTBlocks.CASING_TITANIUM_STABLE)
@@ -331,7 +331,7 @@ public class MultiBlockMachineA {
             .recipeType(GTLRecipeTypes.RANDOM_ORE_RECIPES)
             .tooltips(Component.translatable("gtlcore.machine.large_void_miner.tooltip.0"))
             .tooltips(Component.translatable("gtlcore.machine.large_void_miner.tooltip.1"))
-            .tooltips(Component.translatable("gtlcore.machine.available_recipe_map_2.tooltip",
+            .tooltips(Component.translatable("gtceu.machine.available_recipe_map_2.tooltip",
                     Component.translatable("gtceu.large_void_miner"), Component.translatable("gtceu.random_ore")))
             .recipeModifier(GTRecipeModifiers.ELECTRIC_OVERCLOCK.apply(OverclockingLogic.NON_PERFECT_OVERCLOCK_SUBTICK))
             .appearanceBlock(GTBlocks.CASING_TUNGSTENSTEEL_ROBUST)
@@ -363,9 +363,9 @@ public class MultiBlockMachineA {
             .tooltips(Component.translatable("gtlcore.machine.eut_multiplier.tooltip", 0.8))
             .tooltips(Component.translatable("gtlcore.machine.duration_multiplier.tooltip", 0.6))
             .tooltips(Component.translatable("gtlcore.machine.chemical_plant.tooltip.0"))
-            .tooltips(Component.translatable("gtlcore.machine.perfect_oc"))
-            .tooltips(Component.translatable("gtlcore.machine.parallelizable.tooltip"))
-            .tooltips(Component.translatable("gtlcore.machine.available_recipe_map_1.tooltip",
+            .tooltips(Component.translatable("gtceu.machine.perfect_oc"))
+            .tooltips(Component.translatable("gtceu.multiblock.parallelizable.tooltip"))
+            .tooltips(Component.translatable("gtceu.machine.available_recipe_map_1.tooltip",
                     Component.translatable("gtceu.large_chemical_reactor")))
             .recipeModifier(GTLRecipeModifiers::chemicalPlantOverclock)
             .appearanceBlock(GTBlocks.CASING_PTFE_INERT)
@@ -392,8 +392,8 @@ public class MultiBlockMachineA {
     public final static MultiblockMachineDefinition DECAY_HASTENER = REGISTRATE.multiblock("decay_hastener", WorkableElectricMultiblockMachine::new)
             .rotationState(RotationState.ALL)
             .recipeType(GTLRecipeTypes.DECAY_HASTENER_RECIPES)
-            .tooltips(Component.translatable("gtlcore.machine.parallelizable.tooltip"))
-            .tooltips(Component.translatable("gtlcore.machine.available_recipe_map_1.tooltip",
+            .tooltips(Component.translatable("gtceu.multiblock.parallelizable.tooltip"))
+            .tooltips(Component.translatable("gtceu.machine.available_recipe_map_1.tooltip",
                     Component.translatable("gtceu.decay_hastener")))
             .recipeModifiers(GTRecipeModifiers.PARALLEL_HATCH, GTRecipeModifiers.ELECTRIC_OVERCLOCK.apply(OverclockingLogic.NON_PERFECT_OVERCLOCK_SUBTICK))
             .appearanceBlock(GTLBlocks.HYPER_MECHANICAL_CASING)
@@ -419,7 +419,7 @@ public class MultiBlockMachineA {
             .rotationState(RotationState.ALL)
             .recipeType(GTLRecipeTypes.LARGE_RECYCLER_RECIPES)
             .tooltips(Component.translatable("gtlcore.machine.large_recycler.tooltip.0"))
-            .tooltips(Component.translatable("gtlcore.machine.available_recipe_map_1.tooltip",
+            .tooltips(Component.translatable("gtceu.machine.available_recipe_map_1.tooltip",
                     Component.translatable("gtceu.large_recycler")))
             .recipeModifiers((machine, recipe, params, result) -> GTRecipeModifiers.accurateParallel(machine, recipe, (int) Math.pow(4, (((WorkableElectricMultiblockMachine) machine).getTier() - 4)), false).getFirst(), GTRecipeModifiers.ELECTRIC_OVERCLOCK.apply(OverclockingLogic.NON_PERFECT_OVERCLOCK_SUBTICK))
             .appearanceBlock(GTBlocks.STEEL_HULL)
@@ -436,7 +436,7 @@ public class MultiBlockMachineA {
                     .build())
             .additionalDisplay((controller, components) -> {
                 if (controller.isFormed()) {
-                    components.add(Component.translatable("gtlcore.machine.parallel", Component.literal(FormattingUtil.formatNumbers(Math.pow(4, (((WorkableElectricMultiblockMachine) controller).getTier() - 4)))).withStyle(ChatFormatting.DARK_PURPLE)).withStyle(ChatFormatting.GRAY));
+                    components.add(Component.translatable("gtceu.multiblock.parallel", Component.literal(FormattingUtil.formatNumbers(Math.pow(4, (((WorkableElectricMultiblockMachine) controller).getTier() - 4)))).withStyle(ChatFormatting.DARK_PURPLE)).withStyle(ChatFormatting.GRAY));
                 }
             })
             .workableCasingRenderer(GTCEu.id("block/casings/steam/steel/side"), GTCEu.id("block/multiblock/gcym/large_maceration_tower"))
@@ -445,9 +445,9 @@ public class MultiBlockMachineA {
     public final static MultiblockMachineDefinition MASS_FABRICATOR = REGISTRATE.multiblock("mass_fabricator", WorkableElectricMultiblockMachine::new)
             .rotationState(RotationState.ALL)
             .recipeType(GTLRecipeTypes.MASS_FABRICATOR_RECIPES)
-            .tooltips(Component.translatable("gtlcore.machine.perfect_oc"))
-            .tooltips(Component.translatable("gtlcore.machine.parallelizable.tooltip"))
-            .tooltips(Component.translatable("gtlcore.machine.available_recipe_map_1.tooltip",
+            .tooltips(Component.translatable("gtceu.machine.perfect_oc"))
+            .tooltips(Component.translatable("gtceu.multiblock.parallelizable.tooltip"))
+            .tooltips(Component.translatable("gtceu.machine.available_recipe_map_1.tooltip",
                     Component.translatable("gtceu.mass_fabricator")))
             .recipeModifiers(GTRecipeModifiers.PARALLEL_HATCH, GTRecipeModifiers.ELECTRIC_OVERCLOCK.apply(OverclockingLogic.PERFECT_OVERCLOCK_SUBTICK))
             .appearanceBlock(GTBlocks.MACHINE_CASING_UHV)
@@ -482,9 +482,9 @@ public class MultiBlockMachineA {
             .tooltips(Component.translatable("gtlcore.machine.eut_multiplier.tooltip", 0.8))
             .tooltips(Component.translatable("gtlcore.machine.duration_multiplier.tooltip", 0.5))
             .tooltips(Component.translatable("gtlcore.machine.laser.tooltip"))
-            .tooltips(Component.translatable("gtlcore.machine.perfect_oc"))
-            .tooltips(Component.translatable("gtlcore.machine.parallelizable.tooltip"))
-            .tooltips(Component.translatable("gtlcore.machine.available_recipe_map_1.tooltip",
+            .tooltips(Component.translatable("gtceu.machine.perfect_oc"))
+            .tooltips(Component.translatable("gtceu.multiblock.parallelizable.tooltip"))
+            .tooltips(Component.translatable("gtceu.machine.available_recipe_map_1.tooltip",
                     Component.translatable("gtceu.mass_fabricator")))
             .recipeModifiers((machine, recipe, params, result) -> GTLRecipeModifiers.reduction(machine, recipe, 0.8, 0.5), GTRecipeModifiers.PARALLEL_HATCH, GTRecipeModifiers.ELECTRIC_OVERCLOCK.apply(OverclockingLogic.PERFECT_OVERCLOCK_SUBTICK))
             .appearanceBlock(GTBlocks.MACHINE_CASING_UXV)
@@ -523,9 +523,9 @@ public class MultiBlockMachineA {
             .rotationState(RotationState.ALL)
             .recipeType(GTLRecipeTypes.PRECISION_ASSEMBLER_RECIPES)
             .recipeType(GTRecipeTypes.ASSEMBLER_RECIPES)
-            .tooltips(Component.translatable("gtlcore.machine.perfect_oc"))
-            .tooltips(Component.translatable("gtlcore.machine.parallelizable.tooltip"))
-            .tooltips(Component.translatable("gtlcore.machine.available_recipe_map_2.tooltip",
+            .tooltips(Component.translatable("gtceu.machine.perfect_oc"))
+            .tooltips(Component.translatable("gtceu.multiblock.parallelizable.tooltip"))
+            .tooltips(Component.translatable("gtceu.machine.available_recipe_map_2.tooltip",
                     Component.translatable("gtceu.precision_assembler"), Component.translatable("gtceu.assembler")))
             .recipeModifiers(GTRecipeModifiers.PARALLEL_HATCH, GTRecipeModifiers.ELECTRIC_OVERCLOCK.apply(OverclockingLogic.PERFECT_OVERCLOCK_SUBTICK))
             .appearanceBlock(GTLBlocks.OXIDATION_RESISTANT_HASTELLOY_N_MECHANICAL_CASING)
@@ -553,8 +553,8 @@ public class MultiBlockMachineA {
             .rotationState(RotationState.NON_Y_AXIS)
             .allowExtendedFacing(false)
             .recipeType(GTLRecipeTypes.FISHING_GROUND_RECIPES)
-            .tooltips(Component.translatable("gtlcore.machine.parallelizable.tooltip"))
-            .tooltips(Component.translatable("gtlcore.machine.available_recipe_map_1.tooltip",
+            .tooltips(Component.translatable("gtceu.multiblock.parallelizable.tooltip"))
+            .tooltips(Component.translatable("gtceu.machine.available_recipe_map_1.tooltip",
                     Component.translatable("gtceu.fishing_ground")))
             .recipeModifiers(GTRecipeModifiers.PARALLEL_HATCH, GTRecipeModifiers.ELECTRIC_OVERCLOCK.apply(OverclockingLogic.NON_PERFECT_OVERCLOCK_SUBTICK))
             .appearanceBlock(GTLBlocks.ALUMINIUM_BRONZE_CASING)
@@ -586,7 +586,7 @@ public class MultiBlockMachineA {
             .recipeModifier(GTRecipeModifiers.ELECTRIC_OVERCLOCK.apply(OverclockingLogic.NON_PERFECT_OVERCLOCK_SUBTICK))
             .appearanceBlock(GTBlocks.CASING_BRONZE_BRICKS)
             .recipeType(GTLRecipeTypes.LAVA_FURNACE_RECIPES)
-            .tooltips(Component.translatable("gtlcore.machine.available_recipe_map_1.tooltip",
+            .tooltips(Component.translatable("gtceu.machine.available_recipe_map_1.tooltip",
                     Component.translatable("gtceu.lava_furnace")))
             .pattern(definition -> FactoryBlockPattern.start()
                     .aisle("CCC", "DDD", "DDD")
@@ -608,7 +608,7 @@ public class MultiBlockMachineA {
             .allowFlip(false)
             .recipeType(GTLRecipeTypes.LARGE_GAS_COLLECTOR_RECIPES)
             .tooltips(Component.translatable("gtlcore.machine.large_gas_collector.tooltip.0"))
-            .tooltips(Component.translatable("gtlcore.machine.available_recipe_map_1.tooltip",
+            .tooltips(Component.translatable("gtceu.machine.available_recipe_map_1.tooltip",
                     Component.translatable("gtceu.large_gas_collector")))
             .recipeModifiers((machine, recipe, params, result) -> GTRecipeModifiers.accurateParallel(machine, recipe, 100000, false).getFirst(), GTRecipeModifiers.ELECTRIC_OVERCLOCK.apply(OverclockingLogic.NON_PERFECT_OVERCLOCK_SUBTICK))
             .appearanceBlock(GTBlocks.CASING_STEEL_SOLID)
@@ -634,8 +634,8 @@ public class MultiBlockMachineA {
             .rotationState(RotationState.ALL)
             .recipeType(GTLRecipeTypes.AGGREGATION_DEVICE_RECIPES)
             .tooltips(Component.translatable("gtlcore.machine.aggregation_device.tooltip.0"))
-            .tooltips(Component.translatable("gtlcore.machine.perfect_oc"))
-            .tooltips(Component.translatable("gtlcore.machine.available_recipe_map_1.tooltip",
+            .tooltips(Component.translatable("gtceu.machine.perfect_oc"))
+            .tooltips(Component.translatable("gtceu.machine.available_recipe_map_1.tooltip",
                     Component.translatable("gtceu.aggregation_device")))
             .recipeModifiers((machine, recipe, params, result) -> GTRecipeModifiers.accurateParallel(machine, recipe, (int) Math.pow(2, (((WorkableElectricMultiblockMachine) machine).getTier() - GTValues.UEV)), false).getFirst(), GTRecipeModifiers.ELECTRIC_OVERCLOCK.apply(OverclockingLogic.PERFECT_OVERCLOCK_SUBTICK))
             .appearanceBlock(GTBlocks.FUSION_CASING)
@@ -660,7 +660,7 @@ public class MultiBlockMachineA {
                     .build())
             .additionalDisplay((controller, components) -> {
                 if (controller.isFormed()) {
-                    components.add(Component.translatable("gtlcore.machine.parallel", Component.literal(FormattingUtil.formatNumbers(Math.pow(2, (((WorkableElectricMultiblockMachine) controller).getTier() - GTValues.UEV)))).withStyle(ChatFormatting.DARK_PURPLE)).withStyle(ChatFormatting.GRAY));
+                    components.add(Component.translatable("gtceu.multiblock.parallel", Component.literal(FormattingUtil.formatNumbers(Math.pow(2, (((WorkableElectricMultiblockMachine) controller).getTier() - GTValues.UEV)))).withStyle(ChatFormatting.DARK_PURPLE)).withStyle(ChatFormatting.GRAY));
                 }
             })
             .workableCasingRenderer(GTCEu.id("block/casings/fusion/fusion_casing"), GTCEu.id("block/multiblock/fusion_reactor"))
@@ -672,9 +672,9 @@ public class MultiBlockMachineA {
             .recipeType(GTLRecipeTypes.PRECISION_LASER_ENGRAVER_RECIPES)
             .recipeType(GTRecipeTypes.LASER_ENGRAVER_RECIPES)
             .tooltips(Component.translatable("gtlcore.machine.engraving_laser_plant.tooltip.0"))
-            .tooltips(Component.translatable("gtlcore.machine.perfect_oc"))
-            .tooltips(Component.translatable("gtlcore.machine.parallelizable.tooltip"))
-            .tooltips(Component.translatable("gtlcore.machine.available_recipe_map_2.tooltip",
+            .tooltips(Component.translatable("gtceu.machine.perfect_oc"))
+            .tooltips(Component.translatable("gtceu.multiblock.parallelizable.tooltip"))
+            .tooltips(Component.translatable("gtceu.machine.available_recipe_map_2.tooltip",
                     Component.translatable("gtceu.precision_laser_engraver"), Component.translatable("gtceu.laser_engraver")))
             .recipeModifiers((machine, recipe, params, result) -> {
                 if (machine instanceof WorkableElectricMultiblockMachine workableElectricMultiblockMachine && workableElectricMultiblockMachine.getRecipeType() == GTRecipeTypes.LASER_ENGRAVER_RECIPES) {
@@ -721,11 +721,11 @@ public class MultiBlockMachineA {
             .tooltips(Component.translatable("gtlcore.machine.duration_multiplier.tooltip", 0.6))
             .tooltips(Component.translatable("gtlcore.machine.alloy_blast_smelter.tooltip.0"))
             .tooltips(Component.translatable("gtlcore.machine.alloy_blast_smelter.tooltip.1"))
-            .tooltips(Component.translatable("gtlcore.machine.electric_blast_furnace.tooltip.0"),
-                    Component.translatable("gtlcore.machine.electric_blast_furnace.tooltip.1"),
-                    Component.translatable("gtlcore.machine.electric_blast_furnace.tooltip.2"))
-            .tooltips(Component.translatable("gtlcore.machine.parallelizable.tooltip"))
-            .tooltips(Component.translatable("gtlcore.machine.available_recipe_map_1.tooltip",
+            .tooltips(Component.translatable("gtceu.machine.electric_blast_furnace.tooltip.0"),
+                    Component.translatable("gtceu.machine.electric_blast_furnace.tooltip.1"),
+                    Component.translatable("gtceu.machine.electric_blast_furnace.tooltip.2"))
+            .tooltips(Component.translatable("gtceu.multiblock.parallelizable.tooltip"))
+            .tooltips(Component.translatable("gtceu.machine.available_recipe_map_1.tooltip",
                     Component.translatable("gtceu.alloy_blast_smelter")))
             .pattern(definition -> FactoryBlockPattern.start()
                     .aisle("   eeeee   ", "   cbbbc   ", "   cbbbc   ", "   cbbbc   ", "   eeeee   ", "   bbbbb   ", "           ", "           ", "           ", "           ", "           ", "           ", "           ", "           ", "           ", "           ", "           ", "           ")
@@ -765,9 +765,9 @@ public class MultiBlockMachineA {
             .recipeType(GTRecipeTypes.MIXER_RECIPES)
             .tooltips(Component.translatable("gtlcore.machine.dimensionally_transcendent_mixer.tooltip.0"))
             .tooltips(Component.translatable("gtlcore.machine.laser.tooltip"))
-            .tooltips(Component.translatable("gtlcore.machine.perfect_oc"))
-            .tooltips(Component.translatable("gtlcore.machine.parallelizable.tooltip"))
-            .tooltips(Component.translatable("gtlcore.machine.available_recipe_map_2.tooltip",
+            .tooltips(Component.translatable("gtceu.machine.perfect_oc"))
+            .tooltips(Component.translatable("gtceu.multiblock.parallelizable.tooltip"))
+            .tooltips(Component.translatable("gtceu.machine.available_recipe_map_2.tooltip",
                     Component.translatable("gtceu.dimensionally_transcendent_mixer"), Component.translatable("gtceu.mixer")))
             .recipeModifiers((machine, recipe, params, result) -> {
                 if (machine instanceof WorkableElectricMultiblockMachine workableElectricMultiblockMachine && workableElectricMultiblockMachine.getRecipeType() == GTRecipeTypes.MIXER_RECIPES) {
@@ -802,14 +802,14 @@ public class MultiBlockMachineA {
             .workableCasingRenderer(GTLCore.id("block/casings/dimensionally_transcendent_casing"), GTCEu.id("block/multiblock/fusion_reactor"))
             .register();
 
-    public final static MultiblockMachineDefinition QFT = REGISTRATE.multiblock("qft", WorkableElectricMultiblockMachine::new)
+    public final static MultiblockMachineDefinition QUANTUM_FORCE_TRANSFORMER = REGISTRATE.multiblock("quantum_force_transformer", WorkableElectricMultiblockMachine::new)
             .rotationState(RotationState.NON_Y_AXIS)
             .allowExtendedFacing(false)
             .recipeType(GTLRecipeTypes.QUANTUM_FORCE_TRANSFORMER_RECIPES)
             .tooltips(Component.translatable("gtlcore.machine.laser.tooltip"))
-            .tooltips(Component.translatable("gtlcore.machine.parallelizable.tooltip"))
-            .tooltips(Component.translatable("gtlcore.machine.available_recipe_map_1.tooltip",
-                    Component.translatable("gtceu.qft")))
+            .tooltips(Component.translatable("gtceu.multiblock.parallelizable.tooltip"))
+            .tooltips(Component.translatable("gtceu.machine.available_recipe_map_1.tooltip",
+                    Component.translatable("gtceu.quantum_force_transformer")))
             .recipeModifiers(GTRecipeModifiers.PARALLEL_HATCH, GTRecipeModifiers.ELECTRIC_OVERCLOCK.apply(OverclockingLogic.NON_PERFECT_OVERCLOCK_SUBTICK))
             .appearanceBlock(GTLBlocks.MANIPULATOR)
             .pattern(definition -> FactoryBlockPattern.start()
@@ -837,7 +837,7 @@ public class MultiBlockMachineA {
                     .where("c", Predicates.blocks(GTLBlocks.SPACETIMEBENDINGCORE.get()))
                     .where("d", Predicates.blocks(GTLBlocks.MANIPULATOR.get()))
                     .where("e", Predicates.blocks(GTLBlocks.FORCE_FIELD_GLASS.get()))
-                    .where("f", Predicates.blocks(GTLBlocks.QFT_COIL.get()))
+                    .where("f", Predicates.blocks(GTLBlocks.quantum_force_transformer_coil.get()))
                     .where(" ", Predicates.any())
                     .build())
             .workableCasingRenderer(GTLCore.id("block/manipulator"), GTCEu.id("block/multiblock/fusion_reactor"))
@@ -850,9 +850,9 @@ public class MultiBlockMachineA {
             .tooltips(Component.translatable("gtlcore.machine.duration_multiplier.tooltip", 0.6))
             .tooltips(Component.translatable("gtlcore.machine.chemical_plant.tooltip.0"))
             .tooltips(Component.translatable("gtlcore.machine.laser.tooltip"))
-            .tooltips(Component.translatable("gtlcore.machine.perfect_oc"))
-            .tooltips(Component.translatable("gtlcore.machine.parallelizable.tooltip"))
-            .tooltips(Component.translatable("gtlcore.machine.available_recipe_map_1.tooltip",
+            .tooltips(Component.translatable("gtceu.machine.perfect_oc"))
+            .tooltips(Component.translatable("gtceu.multiblock.parallelizable.tooltip"))
+            .tooltips(Component.translatable("gtceu.machine.available_recipe_map_1.tooltip",
                     Component.translatable("gtceu.large_chemical_reactor")))
             .recipeModifier(GTLRecipeModifiers::chemicalPlantOverclock)
             .appearanceBlock(GTBlocks.CASING_PTFE_INERT)
@@ -896,9 +896,9 @@ public class MultiBlockMachineA {
             .tooltips(Component.translatable("gtlcore.machine.integrated_ore_processor.tooltip.5"))
             .tooltips(Component.translatable("gtlcore.machine.integrated_ore_processor.tooltip.6"))
             .tooltips(Component.translatable("gtlcore.machine.integrated_ore_processor.tooltip.7"))
-            .tooltips(Component.translatable("gtlcore.machine.parallelizable.tooltip"))
-            .tooltips(Component.translatable("gtlcore.machine.parallelizable.tooltip"))
-            .tooltips(Component.translatable("gtlcore.machine.available_recipe_map_1.tooltip",
+            .tooltips(Component.translatable("gtceu.multiblock.parallelizable.tooltip"))
+            .tooltips(Component.translatable("gtceu.multiblock.parallelizable.tooltip"))
+            .tooltips(Component.translatable("gtceu.machine.available_recipe_map_1.tooltip",
                     Component.translatable("gtceu.integrated_ore_processor")))
             .appearanceBlock(GTBlocks.CASING_STAINLESS_CLEAN)
             .recipeModifiers(GTRecipeModifiers.PARALLEL_HATCH, GTRecipeModifiers.ELECTRIC_OVERCLOCK.apply(OverclockingLogic.NON_PERFECT_OVERCLOCK_SUBTICK))
@@ -929,9 +929,9 @@ public class MultiBlockMachineA {
     public final static MultiblockMachineDefinition DRAGON_EGG_COPIER = REGISTRATE.multiblock("dragon_egg_copier", WorkableElectricMultiblockMachine::new)
             .rotationState(RotationState.ALL)
             .recipeType(GTLRecipeTypes.DRAGON_EGG_COPIER_RECIPES)
-            .tooltips(Component.translatable("gtlcore.machine.perfect_oc"))
-            .tooltips(Component.translatable("gtlcore.machine.parallelizable.tooltip"))
-            .tooltips(Component.translatable("gtlcore.machine.available_recipe_map_1.tooltip",
+            .tooltips(Component.translatable("gtceu.machine.perfect_oc"))
+            .tooltips(Component.translatable("gtceu.multiblock.parallelizable.tooltip"))
+            .tooltips(Component.translatable("gtceu.machine.available_recipe_map_1.tooltip",
                     Component.translatable("gtceu.dragon_egg_copier")))
             .recipeModifiers(GTRecipeModifiers.PARALLEL_HATCH, GTRecipeModifiers.ELECTRIC_OVERCLOCK.apply(OverclockingLogic.PERFECT_OVERCLOCK_SUBTICK))
             .appearanceBlock(GTLBlocks.DRAGON_STRENGTH_TRITANIUM_CASING)
@@ -954,8 +954,8 @@ public class MultiBlockMachineA {
     public final static MultiblockMachineDefinition LARGE_CRACKER = REGISTRATE.multiblock("large_cracker", CoilWorkableElectricMultiblockMachine::new)
             .rotationState(RotationState.ALL)
             .recipeType(GTRecipeTypes.CRACKING_RECIPES)
-            .tooltips(Component.translatable("gtlcore.machine.parallelizable.tooltip"))
-            .tooltips(Component.translatable("gtlcore.machine.available_recipe_map_1.tooltip",
+            .tooltips(Component.translatable("gtceu.multiblock.parallelizable.tooltip"))
+            .tooltips(Component.translatable("gtceu.machine.available_recipe_map_1.tooltip",
                     Component.translatable("gtceu.cracker")))
             .recipeModifiers(GTRecipeModifiers.PARALLEL_HATCH, GTRecipeModifiers::crackerOverclock)
             .appearanceBlock(GTBlocks.CASING_STAINLESS_CLEAN)
@@ -984,7 +984,7 @@ public class MultiBlockMachineA {
                     .build())
             .additionalDisplay((controller, components) -> {
                 if (controller.isFormed() && controller instanceof CoilWorkableElectricMultiblockMachine machine) {
-                    components.add(Component.translatable("gtlcore.machine.cracking_unit.energy", 100 - 10 * machine.getCoilTier()));
+                    components.add(Component.translatable("gtceu.multiblock.cracking_unit.energy", 100 - 10 * machine.getCoilTier()));
                 }
             })
             .workableCasingRenderer(GTCEu.id("block/casings/solid/machine_casing_clean_stainless_steel"), GTCEu.id("block/multiblock/cracking_unit"))
@@ -994,8 +994,8 @@ public class MultiBlockMachineA {
             .rotationState(RotationState.ALL)
             .recipeType(GTLRecipeTypes.GREENHOUSE_RECIPES)
             .tooltips(Component.translatable("gtlcore.machine.large_greenhouse.tooltip.0"))
-            .tooltips(Component.translatable("gtlcore.machine.parallelizable.tooltip"))
-            .tooltips(Component.translatable("gtlcore.machine.available_recipe_map_1.tooltip",
+            .tooltips(Component.translatable("gtceu.multiblock.parallelizable.tooltip"))
+            .tooltips(Component.translatable("gtceu.machine.available_recipe_map_1.tooltip",
                     Component.translatable("gtceu.greenhouse")))
             .appearanceBlock(GTBlocks.CASING_STAINLESS_CLEAN)
             .recipeModifiers(GTRecipeModifiers.PARALLEL_HATCH, GTRecipeModifiers.ELECTRIC_OVERCLOCK.apply(OverclockingLogic.NON_PERFECT_OVERCLOCK_SUBTICK))
@@ -1028,7 +1028,7 @@ public class MultiBlockMachineA {
     public final static MultiblockMachineDefinition STEAM_PISTON_HAMMER = REGISTRATE.multiblock("steam_piston_hammer", (holder) -> new LargeSteamParallelMultiblockMachine(holder, 8))
             .rotationState(RotationState.ALL)
             .recipeType(GTRecipeTypes.FORGE_HAMMER_RECIPES)
-            .tooltips(Component.translatable("gtlcore.machine.available_recipe_map_1.tooltip",
+            .tooltips(Component.translatable("gtceu.machine.available_recipe_map_1.tooltip",
                     Component.translatable("gtceu.forge_hammer")))
             .recipeModifier(GTLRecipeModifiers.STEAM_OC)
             .addOutputLimit(ItemRecipeCapability.CAP, 1)
@@ -1068,7 +1068,7 @@ public class MultiBlockMachineA {
     public final static MultiblockMachineDefinition STEAM_PRESSOR = REGISTRATE.multiblock("steam_pressor", (holder) -> new LargeSteamParallelMultiblockMachine(holder, 8))
             .rotationState(RotationState.ALL)
             .recipeType(GTRecipeTypes.COMPRESSOR_RECIPES)
-            .tooltips(Component.translatable("gtlcore.machine.available_recipe_map_1.tooltip",
+            .tooltips(Component.translatable("gtceu.machine.available_recipe_map_1.tooltip",
                     Component.translatable("gtceu.compressor")))
             .recipeModifier(GTLRecipeModifiers.STEAM_OC)
             .addOutputLimit(ItemRecipeCapability.CAP, 1)
@@ -1092,7 +1092,7 @@ public class MultiBlockMachineA {
     public final static MultiblockMachineDefinition STEAM_FOUNDRY = REGISTRATE.multiblock("steam_foundry", (holder) -> new LargeSteamParallelMultiblockMachine(holder, 8))
             .rotationState(RotationState.ALL)
             .recipeType(GTRecipeTypes.ALLOY_SMELTER_RECIPES)
-            .tooltips(Component.translatable("gtlcore.machine.available_recipe_map_1.tooltip",
+            .tooltips(Component.translatable("gtceu.machine.available_recipe_map_1.tooltip",
                     Component.translatable("gtceu.alloy_smelter")))
             .recipeModifier(GTLRecipeModifiers.STEAM_OC)
             .addOutputLimit(ItemRecipeCapability.CAP, 1)
@@ -1116,7 +1116,7 @@ public class MultiBlockMachineA {
     public final static MultiblockMachineDefinition LARGE_STEAM_MACERATOR = REGISTRATE.multiblock("large_steam_macerator", (holder) -> new LargeSteamParallelMultiblockMachine(holder, 64))
             .rotationState(RotationState.ALL)
             .recipeType(GTRecipeTypes.MACERATOR_RECIPES)
-            .tooltips(Component.translatable("gtlcore.machine.available_recipe_map_1.tooltip",
+            .tooltips(Component.translatable("gtceu.machine.available_recipe_map_1.tooltip",
                     Component.translatable("gtceu.macerator")))
             .recipeModifier(GTLRecipeModifiers.LARGE_STEAM_OC)
             .appearanceBlock(GTBlocks.CASING_BRONZE_BRICKS)
@@ -1148,7 +1148,7 @@ public class MultiBlockMachineA {
     public final static MultiblockMachineDefinition LARGE_STEAM_CIRCUIT_ASSEMBLER = REGISTRATE.multiblock("large_steam_circuit_assembler", largeSteamCircuitAssemblerMachine::new)
             .rotationState(RotationState.ALL)
             .recipeType(GTRecipeTypes.CIRCUIT_ASSEMBLER_RECIPES)
-            .tooltips(Component.translatable("gtlcore.machine.available_recipe_map_1.tooltip",
+            .tooltips(Component.translatable("gtceu.machine.available_recipe_map_1.tooltip",
                     Component.translatable("gtceu.circuit_assembler")))
             .recipeModifier(largeSteamCircuitAssemblerMachine::recipeModifier)
             .appearanceBlock(GTBlocks.CASING_BRONZE_BRICKS)
@@ -1182,7 +1182,7 @@ public class MultiBlockMachineA {
     public final static MultiblockMachineDefinition LARGE_STEAM_MIXER = REGISTRATE.multiblock("large_steam_mixer", (holder) -> new LargeSteamParallelMultiblockMachine(holder, 64))
             .rotationState(RotationState.ALL)
             .recipeType(GTRecipeTypes.MIXER_RECIPES)
-            .tooltips(Component.translatable("gtlcore.machine.available_recipe_map_1.tooltip",
+            .tooltips(Component.translatable("gtceu.machine.available_recipe_map_1.tooltip",
                     Component.translatable("gtceu.mixer")))
             .recipeModifier(GTLRecipeModifiers.LARGE_STEAM_OC)
             .appearanceBlock(GTBlocks.CASING_BRONZE_BRICKS)
@@ -1216,7 +1216,7 @@ public class MultiBlockMachineA {
     public final static MultiblockMachineDefinition STEAM_MIXER = REGISTRATE.multiblock("steam_mixer", (holder) -> new LargeSteamParallelMultiblockMachine(holder, 8))
             .rotationState(RotationState.ALL)
             .recipeType(GTRecipeTypes.MIXER_RECIPES)
-            .tooltips(Component.translatable("gtlcore.machine.available_recipe_map_1.tooltip",
+            .tooltips(Component.translatable("gtceu.machine.available_recipe_map_1.tooltip",
                     Component.translatable("gtceu.mixer")))
             .recipeModifier(GTLRecipeModifiers.STEAM_OC)
             .appearanceBlock(GTBlocks.CASING_BRONZE_BRICKS)
@@ -1249,7 +1249,7 @@ public class MultiBlockMachineA {
     public final static MultiblockMachineDefinition LARGE_STEAM_CENTRIFUGE = REGISTRATE.multiblock("large_steam_centrifuge", (holder) -> new LargeSteamParallelMultiblockMachine(holder, 64))
             .rotationState(RotationState.ALL)
             .recipeType(GTRecipeTypes.CENTRIFUGE_RECIPES)
-            .tooltips(Component.translatable("gtlcore.machine.available_recipe_map_1.tooltip",
+            .tooltips(Component.translatable("gtceu.machine.available_recipe_map_1.tooltip",
                     Component.translatable("gtceu.centrifuge")))
             .recipeModifier(GTLRecipeModifiers.LARGE_STEAM_OC)
             .appearanceBlock(GTBlocks.CASING_BRONZE_BRICKS)
@@ -1286,7 +1286,7 @@ public class MultiBlockMachineA {
     public final static MultiblockMachineDefinition LARGE_STEAM_THERMAL_CENTRIFUGE = REGISTRATE.multiblock("large_steam_thermal_centrifuge", (holder) -> new LargeSteamParallelMultiblockMachine(holder, 64))
             .rotationState(RotationState.ALL)
             .recipeType(GTRecipeTypes.THERMAL_CENTRIFUGE_RECIPES)
-            .tooltips(Component.translatable("gtlcore.machine.available_recipe_map_1.tooltip",
+            .tooltips(Component.translatable("gtceu.machine.available_recipe_map_1.tooltip",
                     Component.translatable("gtceu.thermal_centrifuge")))
             .recipeModifier(GTLRecipeModifiers.LARGE_STEAM_OC)
             .appearanceBlock(GTBlocks.CASING_BRONZE_BRICKS)
@@ -1317,7 +1317,7 @@ public class MultiBlockMachineA {
     public final static MultiblockMachineDefinition LARGE_STEAM_BATH = REGISTRATE.multiblock("large_steam_bath", (holder) -> new LargeSteamParallelMultiblockMachine(holder, 64))
             .rotationState(RotationState.ALL)
             .recipeType(GTRecipeTypes.CHEMICAL_BATH_RECIPES)
-            .tooltips(Component.translatable("gtlcore.machine.available_recipe_map_1.tooltip",
+            .tooltips(Component.translatable("gtceu.machine.available_recipe_map_1.tooltip",
                     Component.translatable("gtceu.chemical_bath")))
             .recipeModifier(GTLRecipeModifiers.LARGE_STEAM_OC)
             .appearanceBlock(GTBlocks.CASING_BRONZE_BRICKS)
@@ -1351,7 +1351,7 @@ public class MultiBlockMachineA {
     public final static MultiblockMachineDefinition STEAM_BATH = REGISTRATE.multiblock("steam_bath", (holder) -> new LargeSteamParallelMultiblockMachine(holder, 8))
             .rotationState(RotationState.ALL)
             .recipeType(GTRecipeTypes.CHEMICAL_BATH_RECIPES)
-            .tooltips(Component.translatable("gtlcore.machine.available_recipe_map_1.tooltip",
+            .tooltips(Component.translatable("gtceu.machine.available_recipe_map_1.tooltip",
                     Component.translatable("gtceu.chemical_bath")))
             .recipeModifier(GTLRecipeModifiers.STEAM_OC)
             .appearanceBlock(GTBlocks.CASING_BRONZE_BRICKS)
@@ -1381,7 +1381,7 @@ public class MultiBlockMachineA {
     public final static MultiblockMachineDefinition LARGE_STEAM_ORE_WASHER = REGISTRATE.multiblock("large_steam_ore_washer", (holder) -> new LargeSteamParallelMultiblockMachine(holder, 64))
             .rotationState(RotationState.ALL)
             .recipeType(GTRecipeTypes.ORE_WASHER_RECIPES)
-            .tooltips(Component.translatable("gtlcore.machine.available_recipe_map_1.tooltip",
+            .tooltips(Component.translatable("gtceu.machine.available_recipe_map_1.tooltip",
                     Component.translatable("gtceu.ore_washer")))
             .recipeModifier(GTLRecipeModifiers.LARGE_STEAM_OC)
             .appearanceBlock(GTBlocks.CASING_BRONZE_BRICKS)
@@ -1414,7 +1414,7 @@ public class MultiBlockMachineA {
     public final static MultiblockMachineDefinition steam_ore_washer = REGISTRATE.multiblock("steam_ore_washer", (holder) -> new LargeSteamParallelMultiblockMachine(holder, 8))
             .rotationState(RotationState.ALL)
             .recipeType(GTRecipeTypes.ORE_WASHER_RECIPES)
-            .tooltips(Component.translatable("gtlcore.machine.available_recipe_map_1.tooltip",
+            .tooltips(Component.translatable("gtceu.machine.available_recipe_map_1.tooltip",
                     Component.translatable("gtceu.ore_washer")))
             .recipeModifier(GTLRecipeModifiers.STEAM_OC)
             .appearanceBlock(GTBlocks.CASING_BRONZE_BRICKS)
@@ -1445,7 +1445,7 @@ public class MultiBlockMachineA {
             .rotationState(RotationState.ALL)
             .recipeType(GTRecipeTypes.PRIMITIVE_BLAST_FURNACE_RECIPES)
             .tooltips(Component.translatable("gtlcore.machine.dimensionally_transcendent_dirt_forge.tooltip.0"))
-            .tooltips(Component.translatable("gtlcore.machine.available_recipe_map_1.tooltip",
+            .tooltips(Component.translatable("gtceu.machine.available_recipe_map_1.tooltip",
                     Component.translatable("gtceu.primitive_blast_furnace")))
             .recipeModifier((machine, recipe, params, result) -> {
                 GTRecipe recipe1 = recipe.copy();
@@ -1466,7 +1466,7 @@ public class MultiBlockMachineA {
                     .build())
             .additionalDisplay((controller, components) -> {
                 if (controller.isFormed()) {
-                    components.add(Component.translatable("gtlcore.machine.parallel", Component.literal("524288").withStyle(ChatFormatting.DARK_PURPLE)).withStyle(ChatFormatting.GRAY));
+                    components.add(Component.translatable("gtceu.multiblock.parallel", Component.literal("524288").withStyle(ChatFormatting.DARK_PURPLE)).withStyle(ChatFormatting.GRAY));
                 }
             })
             .workableCasingRenderer(GTCEu.id("block/casings/solid/machine_primitive_bricks"), GTCEu.id("block/multiblock/primitive_blast_furnace"))
@@ -1476,8 +1476,8 @@ public class MultiBlockMachineA {
             .rotationState(RotationState.NON_Y_AXIS)
             .allowExtendedFacing(false)
             .recipeType(GTLRecipeTypes.PETROCHEMICAL_PLANT_RECIPES)
-            .tooltips(Component.translatable("gtlcore.machine.parallelizable.tooltip"))
-            .tooltips(Component.translatable("gtlcore.machine.available_recipe_map_1.tooltip",
+            .tooltips(Component.translatable("gtceu.multiblock.parallelizable.tooltip"))
+            .tooltips(Component.translatable("gtceu.machine.available_recipe_map_1.tooltip",
                     Component.translatable("gtceu.petrochemical_plant")))
             .recipeModifiers(GTRecipeModifiers.PARALLEL_HATCH, GTRecipeModifiers::crackerOverclock)
             .appearanceBlock(GTBlocks.CASING_STAINLESS_CLEAN)
@@ -1511,7 +1511,7 @@ public class MultiBlockMachineA {
                     .build())
             .additionalDisplay((controller, components) -> {
                 if (controller.isFormed() && controller instanceof CoilWorkableElectricMultiblockMachine machine) {
-                    components.add(Component.translatable("gtlcore.machine.cracking_unit.energy", 100 - 10 * machine.getCoilTier()));
+                    components.add(Component.translatable("gtceu.multiblock.cracking_unit.energy", 100 - 10 * machine.getCoilTier()));
                 }
             })
             .workableCasingRenderer(GTCEu.id("block/casings/solid/machine_casing_clean_stainless_steel"), GTCEu.id("block/multiblock/implosion_compressor"))
@@ -1520,8 +1520,8 @@ public class MultiBlockMachineA {
     public final static MultiblockMachineDefinition COKING_TOWER = REGISTRATE.multiblock("coking_tower", CoilWorkableElectricMultiblockMachine::new)
             .rotationState(RotationState.ALL)
             .recipeType(GTRecipeTypes.PYROLYSE_RECIPES)
-            .tooltips(Component.translatable("gtlcore.machine.parallelizable.tooltip"))
-            .tooltips(Component.translatable("gtlcore.machine.available_recipe_map_1.tooltip",
+            .tooltips(Component.translatable("gtceu.multiblock.parallelizable.tooltip"))
+            .tooltips(Component.translatable("gtceu.machine.available_recipe_map_1.tooltip",
                     Component.translatable("gtceu.pyrolyse_oven")))
             .recipeModifiers(GTRecipeModifiers.PARALLEL_HATCH, GTRecipeModifiers::pyrolyseOvenOverclock)
             .appearanceBlock(GTBlocks.CASING_STAINLESS_CLEAN)
@@ -1548,7 +1548,7 @@ public class MultiBlockMachineA {
                     .build())
             .additionalDisplay((controller, components) -> {
                 if (controller.isFormed() && controller instanceof CoilWorkableElectricMultiblockMachine machine) {
-                    components.add(Component.translatable("gtlcore.machine.pyrolyse_oven.speed", machine.getCoilTier() == 0 ? 75 : 50 * (machine.getCoilTier() + 15)));
+                    components.add(Component.translatable("gtceu.multiblock.pyrolyse_oven.speed", machine.getCoilTier() == 0 ? 75 : 50 * (machine.getCoilTier() + 15)));
                 }
             })
             .workableCasingRenderer(GTCEu.id("block/casings/solid/machine_casing_clean_stainless_steel"), GTCEu.id("block/multiblock/pyrolyse_oven"))
@@ -1560,8 +1560,8 @@ public class MultiBlockMachineA {
             .tooltips(Component.translatable("gtlcore.machine.eut_multiplier.tooltip", 0.8))
             .tooltips(Component.translatable("gtlcore.machine.duration_multiplier.tooltip", 0.6))
             .tooltips(Component.translatable("gtlcore.machine.large_rock_crusher.tooltip.0"))
-            .tooltips(Component.translatable("gtlcore.machine.parallelizable.tooltip"))
-            .tooltips(Component.translatable("gtlcore.machine.available_recipe_map_1.tooltip",
+            .tooltips(Component.translatable("gtceu.multiblock.parallelizable.tooltip"))
+            .tooltips(Component.translatable("gtceu.machine.available_recipe_map_1.tooltip",
                     Component.translatable("gtceu.rock_breaker")))
             .recipeModifiers(GTLRecipeModifiers.GCYM_REDUCTION, GTRecipeModifiers.PARALLEL_HATCH, GTRecipeModifiers.ELECTRIC_OVERCLOCK.apply(OverclockingLogic.NON_PERFECT_OVERCLOCK_SUBTICK))
             .appearanceBlock(GCyMBlocks.CASING_SECURE_MACERATION)
@@ -1592,7 +1592,7 @@ public class MultiBlockMachineA {
             .tooltips(Component.translatable("gtlcore.machine.chemical_distort.tooltip.0"))
             .tooltips(Component.translatable("gtlcore.machine.chemical_distort.tooltip.1"))
             .tooltips(Component.translatable("gtlcore.machine.laser.tooltip"))
-            .tooltips(Component.translatable("gtlcore.machine.available_recipe_map_1.tooltip",
+            .tooltips(Component.translatable("gtceu.machine.available_recipe_map_1.tooltip",
                     Component.translatable("gtceu.distort")))
             .recipeModifiers((machine, recipe, params, result) -> GTRecipeModifiers.accurateParallel(machine, recipe, Math.max(1, (((CoilWorkableElectricMultiblockMachine) machine).getCoilType().getCoilTemperature() - recipe.data.getInt("ebf_temp")) / 100 * 4), false).getFirst(), GTRecipeModifiers.ELECTRIC_OVERCLOCK.apply(OverclockingLogic.NON_PERFECT_OVERCLOCK_SUBTICK))
             .appearanceBlock(GTBlocks.CASING_PTFE_INERT)
@@ -1634,7 +1634,7 @@ public class MultiBlockMachineA {
             .tooltips(Component.translatable("gtlcore.machine.coil_parallel"))
             .tooltips(Component.translatable("gtlcore.machine.laser.tooltip"))
             .tooltips(Component.translatable("gtlcore.machine.multiple_recipes.tooltip"))
-            .tooltips(Component.translatable("gtlcore.machine.available_recipe_map_2.tooltip",
+            .tooltips(Component.translatable("gtceu.machine.available_recipe_map_2.tooltip",
                     Component.translatable("gtceu.wiremill"), Component.translatable("gtceu.loom")))
             .appearanceBlock(GTLBlocks.OXIDATION_RESISTANT_HASTELLOY_N_MECHANICAL_CASING)
             .pattern((definition) -> FactoryBlockPattern.start()
@@ -1696,7 +1696,7 @@ public class MultiBlockMachineA {
             .tooltips(Component.translatable("gtlcore.machine.coil_parallel"))
             .tooltips(Component.translatable("gtlcore.machine.laser.tooltip"))
             .tooltips(Component.translatable("gtlcore.machine.multiple_recipes.tooltip"))
-            .tooltips(Component.translatable("gtlcore.machine.available_recipe_map_5.tooltip",
+            .tooltips(Component.translatable("gtceu.machine.available_recipe_map_5.tooltip",
                     Component.translatable("gtceu.compressor"), Component.translatable("gtceu.forge_hammer"), Component.translatable("gtceu.bender"), Component.translatable("gtceu.rolling"), Component.translatable("gtceu.cluster")))
             .appearanceBlock(GTLBlocks.MOLECULAR_CASING)
             .pattern((definition) -> FactoryBlockPattern.start()
@@ -1751,7 +1751,7 @@ public class MultiBlockMachineA {
             .tooltips(Component.translatable("gtlcore.machine.coil_parallel"))
             .tooltips(Component.translatable("gtlcore.machine.laser.tooltip"))
             .tooltips(Component.translatable("gtlcore.machine.multiple_recipes.tooltip"))
-            .tooltips(Component.translatable("gtlcore.machine.available_recipe_map_2.tooltip",
+            .tooltips(Component.translatable("gtceu.machine.available_recipe_map_2.tooltip",
                     Component.translatable("gtceu.extractor"), Component.translatable("gtceu.fluid_solidifier")))
             .appearanceBlock(GTLBlocks.HYPER_MECHANICAL_CASING)
             .pattern((definition) -> FactoryBlockPattern.start()
@@ -1791,8 +1791,8 @@ public class MultiBlockMachineA {
             .recipeType(GTRecipeTypes.CANNER_RECIPES)
             .tooltips(Component.translatable("gtlcore.machine.laser.tooltip"))
             .tooltips(Component.translatable("gtlcore.machine.multiple_recipes.tooltip"))
-            .tooltips(Component.translatable("gtlcore.machine.parallelizable.tooltip"))
-            .tooltips(Component.translatable("gtlcore.machine.available_recipe_map_1.tooltip",
+            .tooltips(Component.translatable("gtceu.multiblock.parallelizable.tooltip"))
+            .tooltips(Component.translatable("gtceu.machine.available_recipe_map_1.tooltip",
                     Component.translatable("gtceu.canner")))
             .appearanceBlock(GTLBlocks.LAFIUM_MECHANICAL_CASING)
             .pattern(definition -> FactoryBlockPattern.start()
@@ -1829,7 +1829,7 @@ public class MultiBlockMachineA {
     public final static MultiblockMachineDefinition DISASSEMBLY = REGISTRATE.multiblock("disassembly", WorkableElectricMultiblockMachine::new)
             .rotationState(RotationState.ALL)
             .recipeType(GTLRecipeTypes.DISASSEMBLY_RECIPES)
-            .tooltips(Component.translatable("gtlcore.machine.available_recipe_map_1.tooltip",
+            .tooltips(Component.translatable("gtceu.machine.available_recipe_map_1.tooltip",
                     Component.translatable("gtceu.disassembly")))
             .recipeModifier(GTRecipeModifiers.ELECTRIC_OVERCLOCK.apply(OverclockingLogic.NON_PERFECT_OVERCLOCK_SUBTICK))
             .appearanceBlock(GTLBlocks.PROCESS_MACHINE_CASING)
@@ -1853,8 +1853,8 @@ public class MultiBlockMachineA {
             .rotationState(RotationState.ALL)
             .recipeType(GTLRecipeTypes.ELEMENT_COPYING_RECIPES)
             .tooltips(Component.translatable("gtlcore.machine.laser.tooltip"))
-            .tooltips(Component.translatable("gtlcore.machine.parallelizable.tooltip"))
-            .tooltips(Component.translatable("gtlcore.machine.available_recipe_map_1.tooltip",
+            .tooltips(Component.translatable("gtceu.multiblock.parallelizable.tooltip"))
+            .tooltips(Component.translatable("gtceu.machine.available_recipe_map_1.tooltip",
                     Component.translatable("gtceu.element_copying")))
             .recipeModifiers(GTRecipeModifiers.PARALLEL_HATCH, GTRecipeModifiers.ELECTRIC_OVERCLOCK.apply(OverclockingLogic.NON_PERFECT_OVERCLOCK_SUBTICK))
             .appearanceBlock(GTLBlocks.MOLECULAR_CASING)
@@ -1898,8 +1898,8 @@ public class MultiBlockMachineA {
             .recipeType(GTLRecipeTypes.FUEL_REFINING_RECIPES)
             .recipeType(GTLRecipeTypes.ATOMIC_ENERGY_EXCITATION_RECIPES)
             .tooltips(Component.translatable("gtlcore.machine.laser.tooltip"))
-            .tooltips(Component.translatable("gtlcore.machine.parallelizable.tooltip"))
-            .tooltips(Component.translatable("gtlcore.machine.available_recipe_map_2.tooltip",
+            .tooltips(Component.translatable("gtceu.multiblock.parallelizable.tooltip"))
+            .tooltips(Component.translatable("gtceu.machine.available_recipe_map_2.tooltip",
                     Component.translatable("gtceu.atomic_energy_excitation"), Component.translatable("gtceu.fuel_refining")))
             .recipeModifiers(GTRecipeModifiers.PARALLEL_HATCH, GTRecipeModifiers.ELECTRIC_OVERCLOCK.apply(OverclockingLogic.NON_PERFECT_OVERCLOCK_SUBTICK))
             .appearanceBlock(GTLBlocks.DIMENSIONALLY_TRANSCENDENT_CASING)
@@ -1939,9 +1939,9 @@ public class MultiBlockMachineA {
             .rotationState(RotationState.ALL)
             .recipeType(GTLRecipeTypes.FLOTATING_BENEFICIATION_RECIPES)
             .tooltips(Component.translatable("gtlcore.machine.flotation_cell_regulator.tooltip.0"))
-            .tooltips(Component.translatable("gtlcore.machine.perfect_oc"))
-            .tooltips(Component.translatable("gtlcore.machine.parallelizable.tooltip"))
-            .tooltips(Component.translatable("gtlcore.machine.available_recipe_map_1.tooltip",
+            .tooltips(Component.translatable("gtceu.machine.perfect_oc"))
+            .tooltips(Component.translatable("gtceu.multiblock.parallelizable.tooltip"))
+            .tooltips(Component.translatable("gtceu.machine.available_recipe_map_1.tooltip",
                     Component.translatable("gtceu.flotating_beneficiation")))
             .recipeModifiers(GTRecipeModifiers.PARALLEL_HATCH, GTRecipeModifiers.ELECTRIC_OVERCLOCK.apply(OverclockingLogic.PERFECT_OVERCLOCK_SUBTICK))
             .appearanceBlock(GTLBlocks.HASTELLOY_N_75_CASING)
@@ -1978,12 +1978,12 @@ public class MultiBlockMachineA {
             .recipeType(GTLRecipeTypes.VACUUM_DRYING_RECIPES)
             .recipeType(GTLRecipeTypes.DEHYDRATOR_RECIPES)
             .tooltips(Component.translatable("gtlcore.machine.vacuum_drying_furnace.tooltip.0"))
-            .tooltips(Component.translatable("gtlcore.machine.electric_blast_furnace.tooltip.0"),
-                    Component.translatable("gtlcore.machine.electric_blast_furnace.tooltip.1"),
-                    Component.translatable("gtlcore.machine.electric_blast_furnace.tooltip.2"))
+            .tooltips(Component.translatable("gtceu.machine.electric_blast_furnace.tooltip.0"),
+                    Component.translatable("gtceu.machine.electric_blast_furnace.tooltip.1"),
+                    Component.translatable("gtceu.machine.electric_blast_furnace.tooltip.2"))
             .tooltips(Component.translatable("gtlcore.machine.vacuum_drying_furnace.tooltip.1"))
             .tooltips(Component.translatable("gtlcore.machine.coil_parallel"))
-            .tooltips(Component.translatable("gtlcore.machine.available_recipe_map_2.tooltip",
+            .tooltips(Component.translatable("gtceu.machine.available_recipe_map_2.tooltip",
                     Component.translatable("gtceu.vacuum_drying"), Component.translatable("gtceu.dehydrator")))
             .recipeModifier((machine, recipe, params, result) -> {
                 if (machine instanceof CoilWorkableElectricMultiblockMachine coilMachine && coilMachine.getRecipeType() == GTRecipeTypes.get("dehydrator")) {
@@ -2016,9 +2016,9 @@ public class MultiBlockMachineA {
             .additionalDisplay((controller, components) -> {
                 if (controller instanceof CoilWorkableElectricMultiblockMachine coilMachine && controller.isFormed()) {
                     if (coilMachine.getRecipeType() == GTLRecipeTypes.DEHYDRATOR_RECIPES) {
-                        components.add(Component.translatable("gtlcore.machine.parallel", Component.literal(FormattingUtil.formatNumbers(Math.min(2147483647, (int) Math.pow(2, coilMachine.getCoilType().getCoilTemperature() / 900D)))).withStyle(ChatFormatting.DARK_PURPLE)).withStyle(ChatFormatting.GRAY));
+                        components.add(Component.translatable("gtceu.multiblock.parallel", Component.literal(FormattingUtil.formatNumbers(Math.min(2147483647, (int) Math.pow(2, coilMachine.getCoilType().getCoilTemperature() / 900D)))).withStyle(ChatFormatting.DARK_PURPLE)).withStyle(ChatFormatting.GRAY));
                     }
-                    components.add(Component.translatable("gtlcore.machine.blast_furnace.max_temperature",
+                    components.add(Component.translatable("gtceu.multiblock.blast_furnace.max_temperature",
                             Component.translatable(FormattingUtil.formatNumbers(coilMachine.getCoilType().getCoilTemperature() + 100L * Math.max(0, coilMachine.getTier() - GTValues.MV)) + "K")
                                     .setStyle(Style.EMPTY.withColor(ChatFormatting.RED))));
                 }
@@ -2033,7 +2033,7 @@ public class MultiBlockMachineA {
             .tooltips(Component.translatable("gtlcore.machine.coil_parallel"))
             .tooltips(Component.translatable("gtlcore.machine.laser.tooltip"))
             .tooltips(Component.translatable("gtlcore.machine.multiple_recipes.tooltip"))
-            .tooltips(Component.translatable("gtlcore.machine.available_recipe_map_1.tooltip",
+            .tooltips(Component.translatable("gtceu.machine.available_recipe_map_1.tooltip",
                     Component.translatable("gtceu.fluid_heater")))
             .appearanceBlock(GTLBlocks.IRIDIUM_CASING)
             .pattern(definition -> FactoryBlockPattern.start()
@@ -2071,8 +2071,8 @@ public class MultiBlockMachineA {
             .langValue("Electric Implosion Compressor")
             .tooltips(Component.translatable("gtlcore.machine.eut_multiplier.tooltip", 0.8))
             .tooltips(Component.translatable("gtlcore.machine.duration_multiplier.tooltip", 0.6))
-            .tooltips(Component.translatable("gtlcore.machine.parallelizable.tooltip"))
-            .tooltips(Component.translatable("gtlcore.machine.available_recipe_map_1.tooltip",
+            .tooltips(Component.translatable("gtceu.multiblock.parallelizable.tooltip"))
+            .tooltips(Component.translatable("gtceu.machine.available_recipe_map_1.tooltip",
                     Component.translatable("gtceu.electric_implosion_compressor")))
             .rotationState(RotationState.ALL)
             .recipeType(GTLRecipeTypes.ELECTRIC_IMPLOSION_COMPRESSOR_RECIPES)
@@ -2105,8 +2105,8 @@ public class MultiBlockMachineA {
             .rotationState(RotationState.NON_Y_AXIS)
             .allowExtendedFacing(false)
             .recipeType(GTLRecipeTypes.STELLAR_FORGE_RECIPES)
-            .tooltips(Component.translatable("gtlcore.machine.perfect_oc"))
-            .tooltips(Component.translatable("gtlcore.machine.available_recipe_map_1.tooltip",
+            .tooltips(Component.translatable("gtceu.machine.perfect_oc"))
+            .tooltips(Component.translatable("gtceu.machine.available_recipe_map_1.tooltip",
                     Component.translatable("gtceu.stellar_forge")))
             .recipeModifier(GTRecipeModifiers.ELECTRIC_OVERCLOCK.apply(OverclockingLogic.PERFECT_OVERCLOCK_SUBTICK))
             .appearanceBlock(GCyMBlocks.CASING_ATOMIC)
@@ -2142,8 +2142,8 @@ public class MultiBlockMachineA {
             .rotationState(RotationState.ALL)
             .recipeType(GTLRecipeTypes.COMPONENT_ASSEMBLY_LINE_RECIPES)
             .tooltips(Component.translatable("gtlcore.machine.laser.tooltip"))
-            .tooltips(Component.translatable("gtlcore.machine.parallelizable.tooltip"))
-            .tooltips(Component.translatable("gtlcore.machine.available_recipe_map_1.tooltip",
+            .tooltips(Component.translatable("gtceu.multiblock.parallelizable.tooltip"))
+            .tooltips(Component.translatable("gtceu.machine.available_recipe_map_1.tooltip",
                     Component.translatable("gtceu.component_assembly_line")))
             .recipeModifiers(GTRecipeModifiers.PARALLEL_HATCH, GTRecipeModifiers.ELECTRIC_OVERCLOCK.apply(OverclockingLogic.NON_PERFECT_OVERCLOCK_SUBTICK))
             .appearanceBlock(GTLBlocks.IRIDIUM_CASING)
@@ -2216,7 +2216,7 @@ public class MultiBlockMachineA {
             .tooltips(Component.translatable("gtlcore.machine.advanced_integrated_ore_processor.tooltip.0"))
             .tooltips(Component.translatable("gtlcore.machine.laser.tooltip"))
             .tooltips(Component.translatable("gtlcore.machine.multiple_recipes.tooltip"))
-            .tooltips(Component.translatable("gtlcore.machine.available_recipe_map_1.tooltip",
+            .tooltips(Component.translatable("gtceu.machine.available_recipe_map_1.tooltip",
                     Component.translatable("gtceu.integrated_ore_processor")))
             .appearanceBlock(GTBlocks.CASING_TUNGSTENSTEEL_ROBUST)
             .pattern((definition) -> FactoryBlockPattern.start()
@@ -2274,9 +2274,9 @@ public class MultiBlockMachineA {
     public final static MultiblockMachineDefinition DIMENSIONALLY_TRANSCENDENT_STEAM_BOILER = REGISTRATE.multiblock("dimensionally_transcendent_steam_boiler", holder -> new LargeBoilerMachine(holder, 4096000, 32))
             .rotationState(RotationState.ALL)
             .recipeType(GTRecipeTypes.LARGE_BOILER_RECIPES)
-            .tooltips(Component.translatable("gtlcore.machine.large_boiler.max_temperature", 4096000 + 274.15, 4096000))
-            .tooltips(Component.translatable("gtlcore.machine.large_boiler.heat_time_tooltip", 4096000 / 32 / 20))
-            .tooltips(Component.translatable("gtlcore.machine.available_recipe_map_1.tooltip",
+            .tooltips(Component.translatable("gtceu.multiblock.large_boiler.max_temperature", 4096000 + 274.15, 4096000))
+            .tooltips(Component.translatable("gtceu.multiblock.large_boiler.heat_time_tooltip", 4096000 / 32 / 20))
+            .tooltips(Component.translatable("gtceu.machine.available_recipe_map_1.tooltip",
                     Component.translatable("gtceu.large_boiler")))
             .recipeModifier(LargeBoilerMachine::recipeModifier)
             .appearanceBlock(GTBlocks.CASING_TUNGSTENSTEEL_ROBUST)
@@ -2298,7 +2298,7 @@ public class MultiBlockMachineA {
             .rotationState(RotationState.ALL)
             .recipeType(GTRecipeTypes.FURNACE_RECIPES)
             .tooltips(Component.translatable("gtlcore.machine.dimensionally_transcendent_dirt_forge.tooltip.0"))
-            .tooltips(Component.translatable("gtlcore.machine.available_recipe_map_1.tooltip",
+            .tooltips(Component.translatable("gtceu.machine.available_recipe_map_1.tooltip",
                     Component.translatable("compass.node.gtceu.steam/steam_furnace")))
             .recipeModifiers((machine, recipe, params, result) -> GTLRecipeModifiers.reduction(machine, recipe, 0.01, 1), (machine, recipe, params, result) -> LargeSteamParallelMultiblockMachine.recipeModifier(machine, recipe, 0))
             .appearanceBlock(GTBlocks.CASING_COKE_BRICKS)
@@ -2329,7 +2329,7 @@ public class MultiBlockMachineA {
             .tooltips(Component.translatable("gtlcore.machine.coil_parallel"))
             .tooltips(Component.translatable("gtlcore.machine.laser.tooltip"))
             .tooltips(Component.translatable("gtlcore.machine.multiple_recipes.tooltip"))
-            .tooltips(Component.translatable("gtlcore.machine.available_recipe_map_4.tooltip",
+            .tooltips(Component.translatable("gtceu.machine.available_recipe_map_4.tooltip",
                     Component.translatable("gtceu.liquefaction_furnace"), Component.translatable("gtceu.reaction_furnace"),
                     Component.translatable("gtceu.alloy_smelter"), Component.translatable("gtceu.electric_furnace")))
             .pattern(definition -> FactoryBlockPattern.start(RelativeDirection.FRONT, RelativeDirection.UP, RelativeDirection.RIGHT)
@@ -2393,10 +2393,10 @@ public class MultiBlockMachineA {
             .beforeWorking((machine, recipe) -> machine instanceof CoilWorkableElectricMultipleRecipesMultiblockMachine coilMachine && coilMachine.getCoilType().getCoilTemperature() >= recipe.data.getInt("ebf_temp"))
             .additionalDisplay((controller, components) -> {
                 if (controller instanceof CoilWorkableElectricMultipleRecipesMultiblockMachine coilMachine && controller.isFormed()) {
-                    components.add(Component.translatable("gtlcore.machine.blast_furnace.max_temperature",
+                    components.add(Component.translatable("gtceu.multiblock.blast_furnace.max_temperature",
                             Component.translatable(FormattingUtil.formatNumbers(coilMachine.getCoilType().getCoilTemperature()) + "K")
                                     .setStyle(Style.EMPTY.withColor(ChatFormatting.RED))));
-                    components.add(Component.translatable("gtlcore.machine.parallel", Component.literal(FormattingUtil.formatNumbers(coilMachine.getParallel())).withStyle(ChatFormatting.DARK_PURPLE)).withStyle(ChatFormatting.GRAY));
+                    components.add(Component.translatable("gtceu.multiblock.parallel", Component.literal(FormattingUtil.formatNumbers(coilMachine.getParallel())).withStyle(ChatFormatting.DARK_PURPLE)).withStyle(ChatFormatting.GRAY));
                 }
             })
             .register();
@@ -2408,8 +2408,8 @@ public class MultiBlockMachineA {
             .recipeType(GTRecipeTypes.CIRCUIT_ASSEMBLER_RECIPES)
             .tooltips(Component.translatable("gtlcore.machine.laser.tooltip"))
             .tooltips(Component.translatable("gtlcore.machine.multiple_recipes.tooltip"))
-            .tooltips(Component.translatable("gtlcore.machine.parallelizable.tooltip"))
-            .tooltips(Component.translatable("gtlcore.machine.available_recipe_map_3.tooltip",
+            .tooltips(Component.translatable("gtceu.multiblock.parallelizable.tooltip"))
+            .tooltips(Component.translatable("gtceu.machine.available_recipe_map_3.tooltip",
                     Component.translatable("gtceu.assembler"), Component.translatable("gtceu.precision_assembler"), Component.translatable("gtceu.circuit_assembler")))
             .recipeModifiers(GTRecipeModifiers.PARALLEL_HATCH, GTRecipeModifiers.ELECTRIC_OVERCLOCK.apply(OverclockingLogic.PERFECT_OVERCLOCK_SUBTICK))
             .appearanceBlock(GTLBlocks.IRIDIUM_CASING)

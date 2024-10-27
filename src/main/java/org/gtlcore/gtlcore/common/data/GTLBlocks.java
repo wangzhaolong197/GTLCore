@@ -44,7 +44,10 @@ import com.tterrag.registrate.util.nullness.NonNullSupplier;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
-import java.util.*;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Locale;
+import java.util.Map;
 import java.util.function.Supplier;
 
 import static com.gregtechceu.gtceu.common.data.GTBlocks.ALL_FUSION_CASINGS;
@@ -53,10 +56,10 @@ import static org.gtlcore.gtlcore.api.registries.GTLRegistration.REGISTRATE;
 @SuppressWarnings("unused")
 public class GTLBlocks {
 
-    public static Map<Integer, Supplier<Block>> scmap = new HashMap<>();
-    public static Map<Integer, Supplier<ActiveBlock>> sepmmap = new HashMap<>();
-    public static Map<Integer, Supplier<Block>> calmap = new HashMap<>();
-    public static Map<Integer, Supplier<Block>> mgmap = new HashMap<>();
+    public static final Map<Integer, Supplier<Block>> scmap = new HashMap<>();
+    public static final Map<Integer, Supplier<ActiveBlock>> sepmmap = new HashMap<>();
+    public static final Map<Integer, Supplier<Block>> calmap = new HashMap<>();
+    public static final Map<Integer, Supplier<Block>> mgmap = new HashMap<>();
 
     static {
         REGISTRATE.creativeModeTab(() -> GTLCreativeModeTabs.GTL_CORE);
@@ -653,7 +656,7 @@ public class GTLBlocks {
             "spacetimecontinuumripper", "block/variant/spacetimecontinuumripper");
     public static final BlockEntry<ActiveBlock> SPACETIMEBENDINGCORE = createActiveCasing("spacetimebendingcore",
             "block/variant/spacetimebendingcore");
-    public static final BlockEntry<ActiveBlock> QFT_COIL = createActiveCasing("qft_coil", "block/variant/qft_coil");
+    public static final BlockEntry<ActiveBlock> quantum_force_transformer_coil = createActiveCasing("quantum_force_transformer_coil", "block/variant/quantum_force_transformer_coil");
     public static final BlockEntry<ActiveBlock> FISSION_FUEL_ASSEMBLY = createActiveCasing("fission_fuel_assembly",
             "block/variant/fission_fuel_assembly");
     public static final BlockEntry<ActiveBlock> COOLER = createActiveCasing("cooler", "block/variant/cooler");

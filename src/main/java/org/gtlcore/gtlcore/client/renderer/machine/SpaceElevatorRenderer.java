@@ -56,9 +56,13 @@ public class SpaceElevatorRenderer extends WorkableCasingMachineRenderer {
 
     private void renderClimber(PoseStack poseStack, MultiBufferSource buffer) {
         float scale = 4F;
+        RendererModel(poseStack, buffer, scale, CLIMBER_MODEL);
+    }
+
+    static void RendererModel(PoseStack poseStack, MultiBufferSource buffer, float scale, ResourceLocation climberModel) {
         poseStack.pushPose();
         poseStack.scale(scale, scale, scale);
-        ClientUtil.modelRenderer().renderModel(poseStack.last(), buffer.getBuffer(RenderType.solid()), null, ClientUtil.getBakedModel(CLIMBER_MODEL), 1.0F, 1.0F, 1.0F, LightTexture.FULL_BRIGHT, OverlayTexture.NO_OVERLAY, ModelData.EMPTY, RenderType.solid());
+        ClientUtil.modelRenderer().renderModel(poseStack.last(), buffer.getBuffer(RenderType.solid()), null, ClientUtil.getBakedModel(climberModel), 1.0F, 1.0F, 1.0F, LightTexture.FULL_BRIGHT, OverlayTexture.NO_OVERLAY, ModelData.EMPTY, RenderType.solid());
         poseStack.popPose();
     }
 

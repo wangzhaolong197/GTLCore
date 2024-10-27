@@ -63,7 +63,7 @@ public class GCyMMachines {
                     .rotationState(RotationState.ALL)
                     .abilities(PartAbility.PARALLEL_HATCH)
                     .workableTieredHullRenderer(GTCEu.id("block/machines/parallel_hatch_mk" + (tier - 4)))
-                    .tooltips(Component.translatable("gtlcore.machine.parallel_hatch_mk" + (tier + 2) + ".tooltip"))
+                    .tooltips(Component.translatable("gtceu.multiblock.parallel_hatch_mk" + (tier + 2) + ".tooltip"))
                     .tooltipBuilder(GTLMachines.GTL_MODIFY)
                     .compassNode("parallel_hatch")
                     .register(),
@@ -74,8 +74,8 @@ public class GCyMMachines {
             .langValue("Large Maceration Tower")
             .tooltips(Component.translatable("gtlcore.machine.eut_multiplier.tooltip", 0.8))
             .tooltips(Component.translatable("gtlcore.machine.duration_multiplier.tooltip", 0.6))
-            .tooltips(Component.translatable("gtlcore.machine.parallelizable.tooltip"))
-            .tooltips(Component.translatable("gtlcore.machine.available_recipe_map_1.tooltip",
+            .tooltips(Component.translatable("gtceu.multiblock.parallelizable.tooltip"))
+            .tooltips(Component.translatable("gtceu.machine.available_recipe_map_1.tooltip",
                     Component.translatable("gtceu.macerator")))
             .tooltipBuilder(GTLMachines.GTL_MODIFY)
             .rotationState(RotationState.ALL)
@@ -107,8 +107,8 @@ public class GCyMMachines {
             .langValue("Large Chemical Bath")
             .tooltips(Component.translatable("gtlcore.machine.eut_multiplier.tooltip", 0.8))
             .tooltips(Component.translatable("gtlcore.machine.duration_multiplier.tooltip", 0.6))
-            .tooltips(Component.translatable("gtlcore.machine.parallelizable.tooltip"))
-            .tooltips(Component.translatable("gtlcore.machine.available_recipe_map_2.tooltip",
+            .tooltips(Component.translatable("gtceu.multiblock.parallelizable.tooltip"))
+            .tooltips(Component.translatable("gtceu.machine.available_recipe_map_2.tooltip",
                     Component.translatable("gtceu.ore_washer"), Component.translatable("gtceu.chemical_bath")))
             .tooltipBuilder(GTLMachines.GTL_MODIFY)
             .rotationState(RotationState.ALL)
@@ -142,8 +142,8 @@ public class GCyMMachines {
             .langValue("Large Centrifugal Unit")
             .tooltips(Component.translatable("gtlcore.machine.eut_multiplier.tooltip", 0.8))
             .tooltips(Component.translatable("gtlcore.machine.duration_multiplier.tooltip", 0.6))
-            .tooltips(Component.translatable("gtlcore.machine.parallelizable.tooltip"))
-            .tooltips(Component.translatable("gtlcore.machine.available_recipe_map_2.tooltip",
+            .tooltips(Component.translatable("gtceu.multiblock.parallelizable.tooltip"))
+            .tooltips(Component.translatable("gtceu.machine.available_recipe_map_2.tooltip",
                     Component.translatable("gtceu.centrifuge"), Component.translatable("gtceu.thermal_centrifuge")))
             .tooltipBuilder(GTLMachines.GTL_MODIFY)
             .rotationState(RotationState.ALL)
@@ -176,8 +176,8 @@ public class GCyMMachines {
             .langValue("Large Mixing Vessel")
             .tooltips(Component.translatable("gtlcore.machine.eut_multiplier.tooltip", 0.8))
             .tooltips(Component.translatable("gtlcore.machine.duration_multiplier.tooltip", 0.6))
-            .tooltips(Component.translatable("gtlcore.machine.parallelizable.tooltip"))
-            .tooltips(Component.translatable("gtlcore.machine.available_recipe_map_1.tooltip",
+            .tooltips(Component.translatable("gtceu.multiblock.parallelizable.tooltip"))
+            .tooltips(Component.translatable("gtceu.machine.available_recipe_map_1.tooltip",
                     Component.translatable("gtceu.mixer")))
             .tooltipBuilder(GTLMachines.GTL_MODIFY)
             .rotationState(RotationState.ALL)
@@ -212,8 +212,8 @@ public class GCyMMachines {
             .langValue("Large Electrolysis Chamber")
             .tooltips(Component.translatable("gtlcore.machine.eut_multiplier.tooltip", 0.8))
             .tooltips(Component.translatable("gtlcore.machine.duration_multiplier.tooltip", 0.6))
-            .tooltips(Component.translatable("gtlcore.machine.parallelizable.tooltip"))
-            .tooltips(Component.translatable("gtlcore.machine.available_recipe_map_1.tooltip",
+            .tooltips(Component.translatable("gtceu.multiblock.parallelizable.tooltip"))
+            .tooltips(Component.translatable("gtceu.machine.available_recipe_map_1.tooltip",
                     Component.translatable("gtceu.electrolyzer")))
             .tooltipBuilder(GTLMachines.GTL_MODIFY)
             .rotationState(RotationState.ALL)
@@ -243,8 +243,8 @@ public class GCyMMachines {
             .langValue("Large Electromagnet")
             .tooltips(Component.translatable("gtlcore.machine.eut_multiplier.tooltip", 0.8))
             .tooltips(Component.translatable("gtlcore.machine.duration_multiplier.tooltip", 0.6))
-            .tooltips(Component.translatable("gtlcore.machine.parallelizable.tooltip"))
-            .tooltips(Component.translatable("gtlcore.machine.available_recipe_map_2.tooltip",
+            .tooltips(Component.translatable("gtceu.multiblock.parallelizable.tooltip"))
+            .tooltips(Component.translatable("gtceu.machine.available_recipe_map_2.tooltip",
                     Component.translatable("gtceu.electromagnetic_separator"),
                     Component.translatable("gtceu.polarizer")))
             .tooltipBuilder(GTLMachines.GTL_MODIFY)
@@ -275,8 +275,8 @@ public class GCyMMachines {
             .langValue("Large Packaging Machine")
             .tooltips(Component.translatable("gtlcore.machine.eut_multiplier.tooltip", 0.8))
             .tooltips(Component.translatable("gtlcore.machine.duration_multiplier.tooltip", 0.6))
-            .tooltips(Component.translatable("gtlcore.machine.parallelizable.tooltip"))
-            .tooltips(Component.translatable("gtlcore.machine.available_recipe_map_2.tooltip",
+            .tooltips(Component.translatable("gtceu.multiblock.parallelizable.tooltip"))
+            .tooltips(Component.translatable("gtceu.machine.available_recipe_map_2.tooltip",
                     Component.translatable("gtceu.packer"), Component.translatable("gtceu.unpacker")))
             .tooltipBuilder(GTLMachines.GTL_MODIFY)
             .rotationState(RotationState.ALL)
@@ -309,8 +309,8 @@ public class GCyMMachines {
             .langValue("Large Assembling Factory")
             .tooltips(Component.translatable("gtlcore.machine.eut_multiplier.tooltip", 0.8))
             .tooltips(Component.translatable("gtlcore.machine.duration_multiplier.tooltip", 0.6))
-            .tooltips(Component.translatable("gtlcore.machine.parallelizable.tooltip"))
-            .tooltips(Component.translatable("gtlcore.machine.available_recipe_map_2.tooltip",
+            .tooltips(Component.translatable("gtceu.multiblock.parallelizable.tooltip"))
+            .tooltips(Component.translatable("gtceu.machine.available_recipe_map_2.tooltip",
                     Component.translatable("gtceu.assembler"), Component.translatable("gtceu.laminator")))
             .tooltipBuilder(GTLMachines.GTL_MODIFY)
             .rotationState(RotationState.ALL)
@@ -342,10 +342,10 @@ public class GCyMMachines {
             .langValue("Large Circuit Assembling Facility")
             .tooltips(Component.translatable("gtlcore.machine.eut_multiplier.tooltip", 0.8))
             .tooltips(Component.translatable("gtlcore.machine.duration_multiplier.tooltip", 0.6))
-            .tooltips(Component.translatable("gtlcore.machine.parallelizable.tooltip"))
-            .tooltips(Component.translatable("gtlcore.machine.available_recipe_map_1.tooltip",
+            .tooltips(Component.translatable("gtceu.multiblock.parallelizable.tooltip"))
+            .tooltips(Component.translatable("gtceu.machine.available_recipe_map_1.tooltip",
                     Component.translatable("gtceu.circuit_assembler")))
-            .tooltips(Component.translatable("gtlcore.machine.exact_hatch_1.tooltip"))
+            .tooltips(Component.translatable("gtceu.multiblock.exact_hatch_1.tooltip"))
             .tooltipBuilder(GTLMachines.GTL_MODIFY)
             .rotationState(RotationState.ALL)
             .recipeType(CIRCUIT_ASSEMBLER_RECIPES)
@@ -382,8 +382,8 @@ public class GCyMMachines {
             .tooltips(Component.translatable("gtlcore.machine.large_arc_smelter.tooltip.0"))
             .tooltips(Component.translatable("gtlcore.machine.eut_multiplier.tooltip", 0.8))
             .tooltips(Component.translatable("gtlcore.machine.duration_multiplier.tooltip", 0.6))
-            .tooltips(Component.translatable("gtlcore.machine.parallelizable.tooltip"))
-            .tooltips(Component.translatable("gtlcore.machine.available_recipe_map_2.tooltip",
+            .tooltips(Component.translatable("gtceu.multiblock.parallelizable.tooltip"))
+            .tooltips(Component.translatable("gtceu.machine.available_recipe_map_2.tooltip",
                     Component.translatable("gtceu.arc_furnace"), Component.translatable("gtceu.lightning_processor")))
             .tooltipBuilder(GTLMachines.GTL_MODIFY)
             .rotationState(RotationState.ALL)
@@ -425,8 +425,8 @@ public class GCyMMachines {
             .langValue("Large Engraving Laser")
             .tooltips(Component.translatable("gtlcore.machine.eut_multiplier.tooltip", 0.8))
             .tooltips(Component.translatable("gtlcore.machine.duration_multiplier.tooltip", 0.6))
-            .tooltips(Component.translatable("gtlcore.machine.parallelizable.tooltip"))
-            .tooltips(Component.translatable("gtlcore.machine.available_recipe_map_1.tooltip",
+            .tooltips(Component.translatable("gtceu.multiblock.parallelizable.tooltip"))
+            .tooltips(Component.translatable("gtceu.machine.available_recipe_map_1.tooltip",
                     Component.translatable("gtceu.laser_engraver")))
             .tooltipBuilder(GTLMachines.GTL_MODIFY)
             .rotationState(RotationState.ALL)
@@ -460,8 +460,8 @@ public class GCyMMachines {
             .langValue("Large Sifting Funnel")
             .tooltips(Component.translatable("gtlcore.machine.eut_multiplier.tooltip", 0.8))
             .tooltips(Component.translatable("gtlcore.machine.duration_multiplier.tooltip", 0.6))
-            .tooltips(Component.translatable("gtlcore.machine.parallelizable.tooltip"))
-            .tooltips(Component.translatable("gtlcore.machine.available_recipe_map_1.tooltip",
+            .tooltips(Component.translatable("gtceu.multiblock.parallelizable.tooltip"))
+            .tooltips(Component.translatable("gtceu.machine.available_recipe_map_1.tooltip",
                     Component.translatable("gtceu.sifter")))
             .tooltipBuilder(GTLMachines.GTL_MODIFY)
             .rotationState(RotationState.ALL)
@@ -494,10 +494,10 @@ public class GCyMMachines {
             .langValue("Alloy Blast Smelter")
             .tooltips(Component.translatable("gtlcore.machine.alloy_blast_smelter.tooltip.0"))
             .tooltips(Component.translatable("gtlcore.machine.alloy_blast_smelter.tooltip.1"))
-            .tooltips(Component.translatable("gtlcore.machine.electric_blast_furnace.tooltip.0"),
-                    Component.translatable("gtlcore.machine.electric_blast_furnace.tooltip.1"),
-                    Component.translatable("gtlcore.machine.electric_blast_furnace.tooltip.2"))
-            .tooltips(Component.translatable("gtlcore.machine.available_recipe_map_1.tooltip",
+            .tooltips(Component.translatable("gtceu.machine.electric_blast_furnace.tooltip.0"),
+                    Component.translatable("gtceu.machine.electric_blast_furnace.tooltip.1"),
+                    Component.translatable("gtceu.machine.electric_blast_furnace.tooltip.2"))
+            .tooltips(Component.translatable("gtceu.machine.available_recipe_map_1.tooltip",
                     Component.translatable("gtceu.alloy_blast_smelter")))
             .tooltipBuilder(GTLMachines.GTL_MODIFY)
             .rotationState(RotationState.ALL)
@@ -556,8 +556,8 @@ public class GCyMMachines {
             .langValue("Large Crystallization Chamber")
             .tooltips(Component.translatable("gtlcore.machine.eut_multiplier.tooltip", 0.8))
             .tooltips(Component.translatable("gtlcore.machine.duration_multiplier.tooltip", 0.6))
-            .tooltips(Component.translatable("gtlcore.machine.parallelizable.tooltip"))
-            .tooltips(Component.translatable("gtlcore.machine.available_recipe_map_1.tooltip",
+            .tooltips(Component.translatable("gtceu.multiblock.parallelizable.tooltip"))
+            .tooltips(Component.translatable("gtceu.machine.available_recipe_map_1.tooltip",
                     Component.translatable("gtceu.autoclave")))
             .tooltipBuilder(GTLMachines.GTL_MODIFY)
             .rotationState(RotationState.ALL)
@@ -589,8 +589,8 @@ public class GCyMMachines {
             .langValue("Large Material Press")
             .tooltips(Component.translatable("gtlcore.machine.eut_multiplier.tooltip", 0.8))
             .tooltips(Component.translatable("gtlcore.machine.duration_multiplier.tooltip", 0.6))
-            .tooltips(Component.translatable("gtlcore.machine.parallelizable.tooltip"))
-            .tooltips(Component.translatable("gtlcore.machine.available_recipe_map_3.tooltip",
+            .tooltips(Component.translatable("gtceu.multiblock.parallelizable.tooltip"))
+            .tooltips(Component.translatable("gtceu.machine.available_recipe_map_3.tooltip",
                     Component.translatable("gtceu.compressor"), Component.translatable("gtceu.forge_hammer"), Component.translatable("gtceu.forming_press")))
             .tooltipBuilder(GTLMachines.GTL_MODIFY)
             .rotationState(RotationState.ALL)
@@ -621,8 +621,8 @@ public class GCyMMachines {
             .langValue("Large Brewing Vat")
             .tooltips(Component.translatable("gtlcore.machine.eut_multiplier.tooltip", 0.8))
             .tooltips(Component.translatable("gtlcore.machine.duration_multiplier.tooltip", 0.6))
-            .tooltips(Component.translatable("gtlcore.machine.parallelizable.tooltip"))
-            .tooltips(Component.translatable("gtlcore.machine.available_recipe_map_3.tooltip",
+            .tooltips(Component.translatable("gtceu.multiblock.parallelizable.tooltip"))
+            .tooltips(Component.translatable("gtceu.machine.available_recipe_map_3.tooltip",
                     Component.translatable("gtceu.brewery"), Component.translatable("gtceu.fermenter"),
                     Component.translatable("gtceu.fluid_heater")))
             .tooltipBuilder(GTLMachines.GTL_MODIFY)
@@ -658,8 +658,8 @@ public class GCyMMachines {
             .langValue("Large Cutting Saw")
             .tooltips(Component.translatable("gtlcore.machine.eut_multiplier.tooltip", 0.8))
             .tooltips(Component.translatable("gtlcore.machine.duration_multiplier.tooltip", 0.6))
-            .tooltips(Component.translatable("gtlcore.machine.parallelizable.tooltip"))
-            .tooltips(Component.translatable("gtlcore.machine.available_recipe_map_2.tooltip",
+            .tooltips(Component.translatable("gtceu.multiblock.parallelizable.tooltip"))
+            .tooltips(Component.translatable("gtceu.machine.available_recipe_map_2.tooltip",
                     Component.translatable("gtceu.cutter"), Component.translatable("gtceu.lathe")))
             .tooltipBuilder(GTLMachines.GTL_MODIFY)
             .rotationState(RotationState.ALL)
@@ -692,8 +692,8 @@ public class GCyMMachines {
             .langValue("Large Fractionating Distillery")
             .tooltips(Component.translatable("gtlcore.machine.eut_multiplier.tooltip", 0.8))
             .tooltips(Component.translatable("gtlcore.machine.duration_multiplier.tooltip", 0.6))
-            .tooltips(Component.translatable("gtlcore.machine.parallelizable.tooltip"))
-            .tooltips(Component.translatable("gtlcore.machine.available_recipe_map_2.tooltip",
+            .tooltips(Component.translatable("gtceu.multiblock.parallelizable.tooltip"))
+            .tooltips(Component.translatable("gtceu.machine.available_recipe_map_2.tooltip",
                     Component.translatable("gtceu.distillation_tower"), Component.translatable("gtceu.distillery")))
             .tooltipBuilder(GTLMachines.GTL_MODIFY)
             .rotationState(RotationState.NON_Y_AXIS)
@@ -735,8 +735,8 @@ public class GCyMMachines {
             .langValue("Large Extraction Machine")
             .tooltips(Component.translatable("gtlcore.machine.eut_multiplier.tooltip", 0.8))
             .tooltips(Component.translatable("gtlcore.machine.duration_multiplier.tooltip", 0.6))
-            .tooltips(Component.translatable("gtlcore.machine.parallelizable.tooltip"))
-            .tooltips(Component.translatable("gtlcore.machine.available_recipe_map_2.tooltip",
+            .tooltips(Component.translatable("gtceu.multiblock.parallelizable.tooltip"))
+            .tooltips(Component.translatable("gtceu.machine.available_recipe_map_2.tooltip",
                     Component.translatable("gtceu.extractor"), Component.translatable("gtceu.canner")))
             .tooltipBuilder(GTLMachines.GTL_MODIFY)
             .rotationState(RotationState.ALL)
@@ -766,8 +766,8 @@ public class GCyMMachines {
             .langValue("Large Extrusion Machine")
             .tooltips(Component.translatable("gtlcore.machine.eut_multiplier.tooltip", 0.8))
             .tooltips(Component.translatable("gtlcore.machine.duration_multiplier.tooltip", 0.6))
-            .tooltips(Component.translatable("gtlcore.machine.parallelizable.tooltip"))
-            .tooltips(Component.translatable("gtlcore.machine.available_recipe_map_1.tooltip",
+            .tooltips(Component.translatable("gtceu.multiblock.parallelizable.tooltip"))
+            .tooltips(Component.translatable("gtceu.machine.available_recipe_map_1.tooltip",
                     Component.translatable("gtceu.extruder")))
             .tooltipBuilder(GTLMachines.GTL_MODIFY)
             .rotationState(RotationState.ALL)
@@ -801,8 +801,8 @@ public class GCyMMachines {
             .langValue("Large Solidification Array")
             .tooltips(Component.translatable("gtlcore.machine.eut_multiplier.tooltip", 0.8))
             .tooltips(Component.translatable("gtlcore.machine.duration_multiplier.tooltip", 0.6))
-            .tooltips(Component.translatable("gtlcore.machine.parallelizable.tooltip"))
-            .tooltips(Component.translatable("gtlcore.machine.available_recipe_map_1.tooltip",
+            .tooltips(Component.translatable("gtceu.multiblock.parallelizable.tooltip"))
+            .tooltips(Component.translatable("gtceu.machine.available_recipe_map_1.tooltip",
                     Component.translatable("gtceu.fluid_solidifier")))
             .tooltipBuilder(GTLMachines.GTL_MODIFY)
             .rotationState(RotationState.ALL)
@@ -835,8 +835,8 @@ public class GCyMMachines {
             .langValue("Large Wire Factory")
             .tooltips(Component.translatable("gtlcore.machine.eut_multiplier.tooltip", 0.8))
             .tooltips(Component.translatable("gtlcore.machine.duration_multiplier.tooltip", 0.6))
-            .tooltips(Component.translatable("gtlcore.machine.parallelizable.tooltip"))
-            .tooltips(Component.translatable("gtlcore.machine.available_recipe_map_2.tooltip",
+            .tooltips(Component.translatable("gtceu.multiblock.parallelizable.tooltip"))
+            .tooltips(Component.translatable("gtceu.machine.available_recipe_map_2.tooltip",
                     Component.translatable("gtceu.wiremill"), Component.translatable("gtceu.loom")))
             .tooltipBuilder(GTLMachines.GTL_MODIFY)
             .rotationState(RotationState.ALL)
@@ -867,11 +867,11 @@ public class GCyMMachines {
             .langValue("Rotary Hearth Furnace")
             .tooltips(Component.translatable("gtlcore.machine.eut_multiplier.tooltip", 0.8))
             .tooltips(Component.translatable("gtlcore.machine.duration_multiplier.tooltip", 0.6))
-            .tooltips(Component.translatable("gtlcore.machine.electric_blast_furnace.tooltip.0"),
-                    Component.translatable("gtlcore.machine.electric_blast_furnace.tooltip.1"),
-                    Component.translatable("gtlcore.machine.electric_blast_furnace.tooltip.2"))
-            .tooltips(Component.translatable("gtlcore.machine.parallelizable.tooltip"))
-            .tooltips(Component.translatable("gtlcore.machine.available_recipe_map_1.tooltip",
+            .tooltips(Component.translatable("gtceu.machine.electric_blast_furnace.tooltip.0"),
+                    Component.translatable("gtceu.machine.electric_blast_furnace.tooltip.1"),
+                    Component.translatable("gtceu.machine.electric_blast_furnace.tooltip.2"))
+            .tooltips(Component.translatable("gtceu.multiblock.parallelizable.tooltip"))
+            .tooltips(Component.translatable("gtceu.machine.available_recipe_map_1.tooltip",
                     Component.translatable("gtceu.electric_blast_furnace")))
             .tooltipBuilder(GTLMachines.GTL_MODIFY)
             .rotationState(RotationState.ALL)
@@ -1039,8 +1039,8 @@ public class GCyMMachines {
             .langValue("Bulk Blast Chiller")
             .tooltips(Component.translatable("gtlcore.machine.eut_multiplier.tooltip", 0.8))
             .tooltips(Component.translatable("gtlcore.machine.duration_multiplier.tooltip", 0.6))
-            .tooltips(Component.translatable("gtlcore.machine.parallelizable.tooltip"))
-            .tooltips(Component.translatable("gtlcore.machine.available_recipe_map_1.tooltip",
+            .tooltips(Component.translatable("gtceu.multiblock.parallelizable.tooltip"))
+            .tooltips(Component.translatable("gtceu.machine.available_recipe_map_1.tooltip",
                     Component.translatable("gtceu.vacuum_freezer")))
             .tooltipBuilder(GTLMachines.GTL_MODIFY)
             .rotationState(RotationState.ALL)

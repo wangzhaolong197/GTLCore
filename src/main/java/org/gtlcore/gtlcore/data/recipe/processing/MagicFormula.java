@@ -17,10 +17,10 @@ import static com.gregtechceu.gtceu.api.GTValues.*;
 import static com.gregtechceu.gtceu.api.data.tag.TagPrefix.*;
 import static com.gregtechceu.gtceu.common.data.GTMaterials.*;
 import static com.gregtechceu.gtceu.common.data.GTRecipeTypes.*;
-import static org.gtlcore.gtlcore.api.data.tag.GTLTagPrefix.*;
+import static org.gtlcore.gtlcore.api.data.tag.GTLTagPrefix.magiccrystal;
 import static org.gtlcore.gtlcore.common.data.GTLItems.*;
 import static org.gtlcore.gtlcore.common.data.GTLMaterials.*;
-import static org.gtlcore.gtlcore.common.data.GTLRecipeTypes.*;
+import static org.gtlcore.gtlcore.common.data.GTLRecipeTypes.DARK_PEARL_QIHUI;
 
 public class MagicFormula {
 

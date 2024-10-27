@@ -20,13 +20,12 @@ import java.util.Objects;
 
 public class Ae2BaseProcessingPattern {
 
-    public ItemStack patternStack; // 样板itemStack
-    public int scale; // scale是此样板相对于配方的倍数，不能乱改！！！
-    public ServerPlayer serverPlayer;
+    private ItemStack patternStack; // 样板itemStack
+    private final ServerPlayer serverPlayer;
     /*
      * 此处一个对象就是一个样板，因此过滤器决定某些物品/流体会不会在此样板中出现
      */
-    public List<Item> DefaultBlackItem = new ArrayList<>(List.of(
+    private final List<Item> DefaultBlackItem = new ArrayList<>(List.of(
             GTItems.INTEGRATED_CIRCUIT.asItem()));
 
     public void setDefaultFilter() {

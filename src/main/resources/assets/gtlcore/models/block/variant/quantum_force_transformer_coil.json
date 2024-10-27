@@ -1,6 +1,6 @@
 {
   "parent": "minecraft:block/cube_all",
   "textures": {
-    "all": "gtlcore:block/qft_coil"
+    "all": "gtlcore:block/quantum_force_transformer_coil"
   }
 }
