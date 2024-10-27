@@ -4,6 +4,7 @@ import org.gtlcore.gtlcore.common.data.material.MaterialAdd;
 import org.gtlcore.gtlcore.common.data.material.MaterialBuilder;
 import org.gtlcore.gtlcore.common.data.material.MaterialBuilderMachine;
 
+import com.gregtechceu.gtceu.GTCEu;
 import com.gregtechceu.gtceu.api.data.chemical.material.Material;
 import com.gregtechceu.gtceu.api.data.chemical.material.properties.OreProperty;
 import com.gregtechceu.gtceu.api.data.chemical.material.properties.PropertyKey;
@@ -20,6 +21,8 @@ import com.enderio.base.common.init.EIOItems;
 import earth.terrarium.adastra.common.registry.ModBlocks;
 import earth.terrarium.adastra.common.registry.ModItems;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.function.Supplier;
 
 import static com.gregtechceu.gtceu.common.data.GTMaterials.*;
@@ -27,6 +30,8 @@ import static committee.nova.mods.avaritia.init.registry.ModBlocks.infinity;
 import static committee.nova.mods.avaritia.init.registry.ModItems.*;
 
 public class GTLMaterials {
+
+    public static final List<String> ALL_MATERIAL = new ArrayList<>();
 
     public static Material Fluix;
     public static Material Desh;
@@ -982,5 +987,10 @@ public class GTLMaterials {
             TagPrefix.nugget.setIgnored(Infinity, infinity_nugget);
             TagPrefix.block.setIgnored(Infinity, infinity);
         }
+    }
+
+    public static Material.Builder builderMaterial(String name) {
+        ALL_MATERIAL.add(name);
+        return new Material.Builder(GTCEu.id(name));
     }
 }

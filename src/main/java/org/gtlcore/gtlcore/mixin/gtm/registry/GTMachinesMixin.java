@@ -84,7 +84,7 @@ public class GTMachinesMixin {
                                         tier == 0 ? new PartAbility[] { PartAbility.IMPORT_ITEMS, PartAbility.STEAM_IMPORT_ITEMS, GTLPartAbility.ITEMS_INPUT } :
                                                 new PartAbility[] { PartAbility.IMPORT_ITEMS, GTLPartAbility.ITEMS_INPUT })
                                 .overlayTieredHullRenderer("item_bus.import")
-                                .tooltips(Component.translatable("gtceu.machine.item_bus.import.tooltip"),
+                                .tooltips(Component.translatable("gtlcore.machine.item_bus.import.tooltip"),
                                         Component.translatable("gtceu.universal.tooltip.item_storage_capacity",
                                                 (1 + tier) * (1 + tier)))
                                 .register(),
@@ -100,7 +100,7 @@ public class GTMachinesMixin {
                                         tier == 0 ? new PartAbility[] { PartAbility.EXPORT_ITEMS, PartAbility.STEAM_EXPORT_ITEMS, GTLPartAbility.ITEMS_OUTPUT } :
                                                 new PartAbility[] { PartAbility.EXPORT_ITEMS, GTLPartAbility.ITEMS_OUTPUT })
                                 .overlayTieredHullRenderer("item_bus.export")
-                                .tooltips(Component.translatable("gtceu.machine.item_bus.export.tooltip"),
+                                .tooltips(Component.translatable("gtlcore.machine.item_bus.export.tooltip"),
                                         Component.translatable("gtceu.universal.tooltip.item_storage_capacity",
                                                 (1 + tier) * (1 + tier)))
                                 .register(),
@@ -116,7 +116,7 @@ public class GTMachinesMixin {
                                 .abilities(PartAbility.IMPORT_ITEMS)
                                 .overlayTieredHullRenderer("dual_hatch.import")
                                 .tooltips(
-                                        Component.translatable("gtceu.machine.dual_hatch.import.tooltip"),
+                                        Component.translatable("gtlcore.machine.dual_hatch.import.tooltip"),
                                         Component.translatable(
                                                 "gtceu.universal.tooltip.item_storage_capacity",
                                                 (1 + tier) * (1 + tier)),
@@ -140,7 +140,7 @@ public class GTMachinesMixin {
                                 .abilities(PartAbility.EXPORT_ITEMS)
                                 .overlayTieredHullRenderer("dual_hatch.export")
                                 .tooltips(
-                                        Component.translatable("gtceu.machine.dual_hatch.export.tooltip"),
+                                        Component.translatable("gtlcore.machine.dual_hatch.export.tooltip"),
                                         Component.translatable(
                                                 "gtceu.universal.tooltip.item_storage_capacity",
                                                 (1 + tier) * (1 + tier)),
@@ -162,7 +162,7 @@ public class GTMachinesMixin {
                                 .rotationState(RotationState.NONE)
                                 .tieredHullRenderer(GTCEu.id("block/machine/buffer"))
                                 .tooltips(
-                                        Component.translatable("gtceu.machine.buffer.tooltip"),
+                                        Component.translatable("gtlcore.machine.buffer.tooltip"),
                                         Component.translatable(
                                                 "gtceu.universal.tooltip.item_storage_capacity",
                                                 BufferMachine.getInventorySize(tier)),
@@ -185,8 +185,8 @@ public class GTMachinesMixin {
                         .langValue(VNF[tier] + " " + FormattingUtil.formatNumbers(amperage) + "A Laser " +
                                 FormattingUtil.toEnglishName(name) + " Hatch")
                         .rotationState(RotationState.ALL)
-                        .tooltips(Component.translatable("gtceu.machine.laser_hatch." + name + ".tooltip"),
-                                Component.translatable("gtceu.machine.laser_hatch.both.tooltip"),
+                        .tooltips(Component.translatable("gtlcore.machine.laser_hatch." + name + ".tooltip"),
+                                Component.translatable("gtlcore.machine.laser_hatch.both.tooltip"),
                                 Component.translatable("gtceu.universal.disabled"))
                         .abilities(ability)
                         .overlayTieredHullRenderer("laser_hatch." + name)
@@ -208,9 +208,9 @@ public class GTMachinesMixin {
                         .addOutputLimit(ItemRecipeCapability.CAP, 0)
                         .addOutputLimit(FluidRecipeCapability.CAP, 0)
                         .renderer(() -> new SimpleGeneratorMachineRenderer(tier, GTCEu.id("block/generators/" + name)))
-                        .tooltips(Component.translatable("gtceu.machine.efficiency.tooltip",
+                        .tooltips(Component.translatable("gtlcore.machine.efficiency.tooltip",
                                 GeneratorArrayMachine.getEfficiency(recipeType, tier)).append("%"))
-                        .tooltips(Component.translatable("gtceu.universal.tooltip.ampere_out",
+                        .tooltips(Component.translatable("gtlcore.universal.tooltip.ampere_out",
                                 GeneratorArrayMachine.getAmperage(tier)))
                         .tooltips(workableTiered(tier, GTValues.V[tier],
                                 GTValues.V[tier] * 64 * GeneratorArrayMachine.getAmperage(tier), recipeType,

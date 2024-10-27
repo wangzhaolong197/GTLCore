@@ -147,10 +147,10 @@ public class DysonSphereMachine extends WorkableElectricMultiblockMachine {
     public void addDisplayText(@NotNull List<Component> textList) {
         super.addDisplayText(textList);
         if (!this.isFormed) return;
-        textList.add(Component.translatable("gtceu.machine.dyson_sphere.number", getDysonSphereData()));
-        textList.add(Component.translatable("gtceu.machine.dyson_sphere.voltage",
+        textList.add(Component.translatable("gtlcore.machine.dyson_sphere.number", getDysonSphereData()));
+        textList.add(Component.translatable("gtlcore.machine.dyson_sphere.voltage",
                 (getDysonSphereData() > 0 ? getOverclockVoltage() : 0)));
-        textList.add(Component.translatable("gtceu.machine.fission_reactor.damaged",
+        textList.add(Component.translatable("gtlcore.machine.fission_reactor.damaged",
                 getDysonSpheredamageData()).append("%"));
     }
 }

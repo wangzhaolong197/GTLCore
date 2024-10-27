@@ -81,6 +81,6 @@ public class GreenhouseMachine extends WorkableElectricMultiblockMachine {
         if (getOffsetTimer() % 10 == 0) {
             getGreenhouseLight();
         }
-        textList.add(Component.translatable("gtceu.machine.greenhouse.SkyLight", SkyLight));
+        textList.add(Component.translatable("gtlcore.machine.greenhouse.SkyLight", SkyLight));
     }
 }

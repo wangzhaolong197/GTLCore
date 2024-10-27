@@ -132,6 +132,6 @@ public class blockConversionRoomMachine extends StorageMachine {
     @Override
     public void addDisplayText(@NotNull List<Component> textList) {
         super.addDisplayText(textList);
-        textList.add(Component.translatable("gtceu.machine.block_conversion_room.am", (getTier() * am - 7)));
+        textList.add(Component.translatable("gtlcore.machine.block_conversion_room.am", (getTier() * am - 7)));
     }
 }

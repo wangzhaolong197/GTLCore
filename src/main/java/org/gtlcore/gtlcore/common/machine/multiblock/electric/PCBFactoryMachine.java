@@ -66,8 +66,8 @@ public class PCBFactoryMachine extends StorageMachine {
             if (getOffsetTimer() % 10 == 0) {
                 getPCBReduction();
             }
-            textList.add(Component.translatable("gtceu.machine.eut_multiplier.tooltip", this.reductionEUt));
-            textList.add(Component.translatable("gtceu.machine.duration_multiplier.tooltip", this.reductionDuration));
+            textList.add(Component.translatable("gtlcore.machine.eut_multiplier.tooltip", this.reductionEUt));
+            textList.add(Component.translatable("gtlcore.machine.duration_multiplier.tooltip", this.reductionDuration));
         }
     }
 }

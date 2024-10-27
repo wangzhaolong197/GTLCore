@@ -7,6 +7,7 @@ import org.gtlcore.gtlcore.common.data.GTLCovers;
 import org.gtlcore.gtlcore.common.data.GTLElements;
 import org.gtlcore.gtlcore.common.data.GTLSoundEntries;
 import org.gtlcore.gtlcore.config.GTConfigModify;
+import org.gtlcore.gtlcore.data.GTLDatagen;
 import org.gtlcore.gtlcore.data.recipe.RemoveRecipe;
 
 import com.gregtechceu.gtceu.api.addon.GTAddon;
@@ -38,7 +39,9 @@ public class GTLGTAddon implements IGTAddon {
     }
 
     @Override
-    public void initializeAddon() {}
+    public void initializeAddon() {
+        GTLDatagen.init();
+    }
 
     @Override
     public void registerSounds() {

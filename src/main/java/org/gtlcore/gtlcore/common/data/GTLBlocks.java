@@ -145,7 +145,7 @@ public class GTLBlocks {
             @Override
             public void appendHoverText(@NotNull ItemStack stack, @Nullable BlockGetter level,
                                         @NotNull List<Component> tooltip, @NotNull TooltipFlag flag) {
-                tooltip.add(Component.translatable("gtceu.casings.tier", tier));
+                tooltip.add(Component.translatable("gtlcore.casings.tier", tier));
             }
         })
                 .initialProperties(() -> Blocks.IRON_BLOCK)
@@ -168,7 +168,7 @@ public class GTLBlocks {
             @Override
             public void appendHoverText(@NotNull ItemStack stack, @Nullable BlockGetter level,
                                         @NotNull List<Component> tooltip, @NotNull TooltipFlag flag) {
-                tooltip.add(Component.translatable("gtceu.casings.tier", tier));
+                tooltip.add(Component.translatable("gtlcore.casings.tier", tier));
             }
         })
                 .initialProperties(() -> Blocks.IRON_BLOCK)

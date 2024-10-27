@@ -78,9 +78,9 @@ public class SpaceElevatorMachine extends TierCasingMachine {
     public void addDisplayText(@NotNull List<Component> textList) {
         super.addDisplayText(textList);
         if (!this.isFormed) return;
-        textList.add(Component.translatable("gtceu.machine.module", getMAM()));
+        textList.add(Component.translatable("gtlcore.machine.module", getMAM()));
         textList.add(
-                ComponentPanelWidget.withButton(Component.translatable("gtceu.machine.space_elevator.set_out"),
+                ComponentPanelWidget.withButton(Component.translatable("gtlcore.machine.space_elevator.set_out"),
                         "set_out"));
     }
 

@@ -35,7 +35,7 @@ public class GTLPredicates {
                     var stats = entry.getKey();
                     Object currentCoil = blockWorldState.getMatchContext().getOrPut(tierType, stats);
                     if (!currentCoil.equals(stats)) {
-                        blockWorldState.setError(new PatternStringError("gtceu.multiblock.pattern.error.tier"));
+                        blockWorldState.setError(new PatternStringError("gtlcore.machine.pattern.error.tier"));
                         return false;
                     }
                     return true;
@@ -45,7 +45,7 @@ public class GTLPredicates {
         }, () -> map.values().stream()
                 .map(blockSupplier -> BlockInfo.fromBlockState(blockSupplier.get().defaultBlockState()))
                 .toArray(BlockInfo[]::new))
-                .addTooltips(Component.translatable("gtceu.multiblock.pattern.error.tier"));
+                .addTooltips(Component.translatable("gtlcore.machine.pattern.error.tier"));
     }
 
     public static TraceabilityPredicate tierActiveCasings(Map<Integer, Supplier<ActiveBlock>> map, String tierType) {
@@ -56,7 +56,7 @@ public class GTLPredicates {
                     var stats = entry.getKey();
                     Object currentCoil = blockWorldState.getMatchContext().getOrPut(tierType, stats);
                     if (!currentCoil.equals(stats)) {
-                        blockWorldState.setError(new PatternStringError("gtceu.multiblock.pattern.error.tier"));
+                        blockWorldState.setError(new PatternStringError("gtlcore.machine.pattern.error.tier"));
                         return false;
                     }
                     return true;
@@ -66,7 +66,7 @@ public class GTLPredicates {
         }, () -> map.values().stream()
                 .map(blockSupplier -> BlockInfo.fromBlockState(blockSupplier.get().defaultBlockState()))
                 .toArray(BlockInfo[]::new))
-                .addTooltips(Component.translatable("gtceu.multiblock.pattern.error.tier"));
+                .addTooltips(Component.translatable("gtlcore.machine.pattern.error.tier"));
     }
 
     public static TraceabilityPredicate countBlock(String name, Block... blocks) {

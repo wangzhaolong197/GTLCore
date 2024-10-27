@@ -28,10 +28,10 @@ public class hugeMultiBlockMachineB {
     public final static MultiblockMachineDefinition DIMENSIONAL_FOCUS_ENGRAVING_ARRAY = REGISTRATE.multiblock("dimensional_focus_engraving_array", CoilWorkableElectricParallelMultiblockMachine::new)
             .rotationState(RotationState.ALL)
             .recipeType(GTLRecipeTypes.DIMENSIONAL_FOCUS_ENGRAVING_ARRAY_RECIPES)
-            .tooltips(Component.translatable("gtceu.multiblock.coil_parallel"))
-            .tooltips(Component.translatable("gtceu.multiblock.laser.tooltip"))
-            .tooltips(Component.translatable("gtceu.machine.perfect_oc"))
-            .tooltips(Component.translatable("gtceu.machine.available_recipe_map_1.tooltip",
+            .tooltips(Component.translatable("gtlcore.machine.coil_parallel"))
+            .tooltips(Component.translatable("gtlcore.machine.laser.tooltip"))
+            .tooltips(Component.translatable("gtlcore.machine.perfect_oc"))
+            .tooltips(Component.translatable("gtlcore.machine.available_recipe_map_1.tooltip",
                     Component.translatable("gtceu.dimensional_focus_engraving_array")))
             .recipeModifiers(GTLRecipeModifiers.COIL_PARALLEL, GTRecipeModifiers.ELECTRIC_OVERCLOCK.apply(OverclockingLogic.PERFECT_OVERCLOCK_SUBTICK))
             .appearanceBlock(GCyMBlocks.CASING_LASER_SAFE_ENGRAVING)
@@ -151,10 +151,10 @@ public class hugeMultiBlockMachineB {
     public final static MultiblockMachineDefinition STAR_ULTIMATE_MATERIAL_FORGE_FACTORY = REGISTRATE.multiblock("star_ultimate_material_forge_factory", WorkableElectricMultiblockMachine::new)
             .rotationState(RotationState.ALL)
             .recipeType(GTLRecipeTypes.ULTIMATE_MATERIAL_FORGE_RECIPES)
-            .tooltips(Component.translatable("gtceu.machine.star_ultimate_material_forge_factory.tooltip.0"))
-            .tooltips(Component.translatable("gtceu.multiblock.laser.tooltip"))
-            .tooltips(Component.translatable("gtceu.machine.perfect_oc"))
-            .tooltips(Component.translatable("gtceu.machine.available_recipe_map_1.tooltip",
+            .tooltips(Component.translatable("gtlcore.machine.star_ultimate_material_forge_factory.tooltip.0"))
+            .tooltips(Component.translatable("gtlcore.machine.laser.tooltip"))
+            .tooltips(Component.translatable("gtlcore.machine.perfect_oc"))
+            .tooltips(Component.translatable("gtlcore.machine.available_recipe_map_1.tooltip",
                     Component.translatable("gtceu.ultimate_material_forge")))
             .recipeModifiers((machine, recipe, params, result) -> GTRecipeModifiers.accurateParallel(machine, recipe, 1000, false).getFirst(), GTRecipeModifiers.ELECTRIC_OVERCLOCK.apply(OverclockingLogic.PERFECT_OVERCLOCK_SUBTICK))
             .appearanceBlock(GTLBlocks.MOLECULAR_CASING)
@@ -234,7 +234,7 @@ public class hugeMultiBlockMachineB {
                     .build())
             .additionalDisplay((controller, components) -> {
                 if (controller.isFormed()) {
-                    components.add(Component.translatable("gtceu.multiblock.parallel", Component.literal("1000").withStyle(ChatFormatting.DARK_PURPLE)).withStyle(ChatFormatting.GRAY));
+                    components.add(Component.translatable("gtlcore.machine.parallel", Component.literal("1000").withStyle(ChatFormatting.DARK_PURPLE)).withStyle(ChatFormatting.GRAY));
                 }
             })
             .workableCasingRenderer(GTLCore.id("block/molecular_casing"), GTCEu.id("block/multiblock/fusion_reactor"))

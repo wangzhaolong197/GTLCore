@@ -160,9 +160,9 @@ public class ComputationProviderMachine extends WorkableElectricMultiblockMachin
         MultiblockDisplayText.builder(textList, isFormed())
                 .setWorkingStatus(true, allocatedCWUt > 0)
                 .setWorkingStatusKeys(
-                        "gtceu.multiblock.idling",
-                        "gtceu.multiblock.idling",
-                        "gtceu.multiblock.data_bank.providing")
+                        "gtlcore.machine.idling",
+                        "gtlcore.machine.idling",
+                        "gtlcore.machine.data_bank.providing")
                 .addCustom(tl -> {
                     if (isFormed()) {
                         Component cwutInfo = Component.literal(
@@ -171,7 +171,7 @@ public class ComputationProviderMachine extends WorkableElectricMultiblockMachin
                                 .append(Component.literal(" CWU/t"))
                                 .withStyle(ChatFormatting.AQUA);
                         tl.add(Component.translatable(
-                                "gtceu.multiblock.hpca.computation",
+                                "gtlcore.machine.hpca.computation",
                                 cwutInfo).withStyle(ChatFormatting.GRAY));
                     }
                 })

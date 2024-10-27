@@ -53,6 +53,6 @@ public class TierCasingMachine extends WorkableElectricMultiblockMachine {
     public void addDisplayText(@NotNull List<Component> textList) {
         super.addDisplayText(textList);
         if (!this.isFormed) return;
-        textList.add(Component.translatable("gtceu.casings.tier", casingTier));
+        textList.add(Component.translatable("gtlcore.casings.tier", casingTier));
     }
 }

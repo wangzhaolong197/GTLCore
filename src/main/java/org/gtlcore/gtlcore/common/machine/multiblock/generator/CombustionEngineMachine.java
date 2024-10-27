@@ -163,22 +163,22 @@ public class CombustionEngineMachine extends WorkableElectricMultiblockMachine i
             if (isBoostAllowed()) {
                 if (!isExtreme()) {
                     if (isOxygenBoosted) {
-                        textList.add(Component.translatable("gtceu.multiblock.large_combustion_engine.oxygen_boosted"));
+                        textList.add(Component.translatable("gtlcore.machine.large_combustion_engine.oxygen_boosted"));
                     } else {
                         textList.add(Component
-                                .translatable("gtceu.multiblock.large_combustion_engine.supply_oxygen_to_boost"));
+                                .translatable("gtlcore.machine.large_combustion_engine.supply_oxygen_to_boost"));
                     }
                 } else {
                     if (isOxygenBoosted) {
                         textList.add(Component
-                                .translatable("gtceu.multiblock.large_combustion_engine.liquid_oxygen_boosted"));
+                                .translatable("gtlcore.machine.large_combustion_engine.liquid_oxygen_boosted"));
                     } else {
                         textList.add(Component.translatable(
-                                "gtceu.multiblock.large_combustion_engine.supply_liquid_oxygen_to_boost"));
+                                "gtlcore.machine.large_combustion_engine.supply_liquid_oxygen_to_boost"));
                     }
                 }
             } else {
-                textList.add(Component.translatable("gtceu.multiblock.large_combustion_engine.boost_disallowed"));
+                textList.add(Component.translatable("gtlcore.machine.large_combustion_engine.boost_disallowed"));
             }
         }
     }
@@ -188,7 +188,7 @@ public class CombustionEngineMachine extends WorkableElectricMultiblockMachine i
         super.attachTooltips(tooltipsPanel);
         tooltipsPanel.attachTooltips(new Basic(
                 () -> GuiTextures.INDICATOR_NO_STEAM.get(false),
-                () -> List.of(Component.translatable("gtceu.multiblock.large_combustion_engine.obstructed")
+                () -> List.of(Component.translatable("gtlcore.machine.large_combustion_engine.obstructed")
                         .setStyle(Style.EMPTY.withColor(ChatFormatting.RED))),
                 this::isIntakesObstructed,
                 () -> null));

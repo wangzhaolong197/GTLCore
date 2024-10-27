@@ -248,11 +248,11 @@ public class GeneratorArrayMachine extends StorageMachine {
     public void addDisplayText(List<Component> textList) {
         super.addDisplayText(textList);
         if (!this.isFormed) return;
-        textList.add(Component.translatable("gtceu.machine.generator_array.wireless")
+        textList.add(Component.translatable("gtlcore.machine.generator_array.wireless")
                 .append(ComponentPanelWidget.withButton(Component.literal("[")
                         .append(this.isw ?
-                                Component.translatable("gtceu.machine.on") :
-                                Component.translatable("gtceu.machine.off"))
+                                Component.translatable("gtlcore.machine.on") :
+                                Component.translatable("gtlcore.machine.off"))
                         .append(Component.literal("]")), "wireless_switch")));
         if (isActive() && this.isw) {
             GTRecipe r = getRecipeLogic().getLastRecipe();

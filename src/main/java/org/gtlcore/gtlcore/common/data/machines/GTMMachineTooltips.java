@@ -12,11 +12,11 @@ public class GTMMachineTooltips {
 
     public static void init() {
         MachineDefinition hpca_computation_component = GTResearchMachines.HPCA_COMPUTATION_COMPONENT;
-        hpca_computation_component.setTooltipBuilder(hpca_computation_component.getTooltipBuilder().andThen((itemStack, components) -> components.set(3, Component.translatable("gtceu.machine.hpca.component_type.computation_cwut", 8))));
+        hpca_computation_component.setTooltipBuilder(hpca_computation_component.getTooltipBuilder().andThen((itemStack, components) -> components.set(3, Component.translatable("gtlcore.machine.hpca.component_type.computation_cwut", 8))));
         hpca_computation_component.setTooltipBuilder(hpca_computation_component.getTooltipBuilder().andThen(GTLMachines.GTL_MODIFY));
 
         MachineDefinition hpca_advanced_computation_component = GTResearchMachines.HPCA_ADVANCED_COMPUTATION_COMPONENT;
-        hpca_advanced_computation_component.setTooltipBuilder(hpca_advanced_computation_component.getTooltipBuilder().andThen((itemStack, components) -> components.set(3, Component.translatable("gtceu.machine.hpca.component_type.computation_cwut", 32))));
+        hpca_advanced_computation_component.setTooltipBuilder(hpca_advanced_computation_component.getTooltipBuilder().andThen((itemStack, components) -> components.set(3, Component.translatable("gtlcore.machine.hpca.component_type.computation_cwut", 32))));
         hpca_advanced_computation_component.setTooltipBuilder(hpca_advanced_computation_component.getTooltipBuilder().andThen(GTLMachines.GTL_MODIFY));
 
         MachineDefinition steamExportBus = GTMachines.STEAM_EXPORT_BUS;

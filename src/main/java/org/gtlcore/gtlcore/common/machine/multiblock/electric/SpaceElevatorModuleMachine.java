@@ -112,9 +112,9 @@ public class SpaceElevatorModuleMachine extends WorkableElectricMultiblockMachin
         if (getOffsetTimer() % 10 == 0) {
             getSpaceElevatorTier();
         }
-        textList.add(Component.translatable("gtceu.multiblock.parallel", Component.literal(FormattingUtil.formatNumbers(getParallel())).withStyle(ChatFormatting.DARK_PURPLE)).withStyle(ChatFormatting.GRAY));
+        textList.add(Component.translatable("gtlcore.machine.parallel", Component.literal(FormattingUtil.formatNumbers(getParallel())).withStyle(ChatFormatting.DARK_PURPLE)).withStyle(ChatFormatting.GRAY));
         textList.add(Component.literal((SpaceElevatorTier < 1 ? "未" : "已") + "连接正在运行的太空电梯"));
-        textList.add(Component.translatable("gtceu.machine.duration_multiplier.tooltip", FormattingUtil.formatNumbers(Math.pow(0.8, SpaceElevatorTier - 1))));
+        textList.add(Component.translatable("gtlcore.machine.duration_multiplier.tooltip", FormattingUtil.formatNumbers(Math.pow(0.8, SpaceElevatorTier - 1))));
     }
 
     @Override

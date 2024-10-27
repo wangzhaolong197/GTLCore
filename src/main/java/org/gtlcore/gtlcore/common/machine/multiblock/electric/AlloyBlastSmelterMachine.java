@@ -47,8 +47,8 @@ public class AlloyBlastSmelterMachine extends CoilWorkableElectricMultiblockMach
     public void addDisplayText(@NotNull List<Component> textList) {
         super.addDisplayText(textList);
         if (this.isFormed()) {
-            textList.add(Component.translatable("gtceu.machine.total_time", getRecipeLogic().getTotalContinuousRunningTime()));
-            textList.add(Component.translatable("gtceu.machine.alloy_blast_smelter.duration", FormattingUtil.formatNumbers(duration)));
+            textList.add(Component.translatable("gtlcore.machine.total_time", getRecipeLogic().getTotalContinuousRunningTime()));
+            textList.add(Component.translatable("gtlcore.machine.alloy_blast_smelter.duration", FormattingUtil.formatNumbers(duration)));
         }
     }
 }

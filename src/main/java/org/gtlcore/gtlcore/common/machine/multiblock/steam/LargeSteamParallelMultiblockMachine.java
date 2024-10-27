@@ -117,34 +117,34 @@ public class LargeSteamParallelMultiblockMachine extends WorkableMultiblockMachi
                     handlers.get(0) instanceof SteamEnergyRecipeHandler steamHandler) {
                 if (steamHandler.getCapacity() > 0) {
                     long steamStored = steamHandler.getStored();
-                    textList.add(Component.translatable("gtceu.multiblock.steam.steam_stored", steamStored,
+                    textList.add(Component.translatable("gtlcore.machine.steam.steam_stored", steamStored,
                             steamHandler.getCapacity()));
                 }
             }
 
             if (!isWorkingEnabled()) {
-                textList.add(Component.translatable("gtceu.multiblock.work_paused"));
+                textList.add(Component.translatable("gtlcore.machine.work_paused"));
 
             } else if (isActive()) {
-                textList.add(Component.translatable("gtceu.multiblock.running"));
+                textList.add(Component.translatable("gtlcore.machine.running"));
                 int currentProgress = (int) (recipeLogic.getProgressPercent() * 100);
-                textList.add(Component.translatable("gtceu.multiblock.parallel", this.max_parallels));
-                textList.add(Component.translatable("gtceu.multiblock.progress", currentProgress));
+                textList.add(Component.translatable("gtlcore.machine.parallel", this.max_parallels));
+                textList.add(Component.translatable("gtlcore.machine.progress", currentProgress));
             } else {
-                textList.add(Component.translatable("gtceu.multiblock.idling"));
+                textList.add(Component.translatable("gtlcore.machine.idling"));
             }
 
             if (recipeLogic.isWaiting()) {
-                textList.add(Component.translatable("gtceu.multiblock.steam.low_steam")
+                textList.add(Component.translatable("gtlcore.machine.steam.low_steam")
                         .setStyle(Style.EMPTY.withColor(ChatFormatting.RED)));
             }
 
             if (this.isOC) {
-                textList.add(Component.translatable("gtceu.multiblock.oc_amount", this.amountOC)
+                textList.add(Component.translatable("gtlcore.machine.oc_amount", this.amountOC)
                         .withStyle(Style.EMPTY.withHoverEvent(new HoverEvent(HoverEvent.Action.SHOW_TEXT,
-                                Component.translatable("gtceu.multiblock.steam_parallel_machine.oc")))));
+                                Component.translatable("gtlcore.machine.steam_parallel_machine.oc")))));
 
-                textList.add(Component.translatable("gtceu.multiblock.steam_parallel_machine.modification_oc")
+                textList.add(Component.translatable("gtlcore.machine.steam_parallel_machine.modification_oc")
                         .append(ComponentPanelWidget.withButton(Component.literal("[-] "), "ocSub"))
                         .append(ComponentPanelWidget.withButton(Component.literal("[+]"), "ocAdd")));
             }

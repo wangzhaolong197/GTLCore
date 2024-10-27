@@ -54,8 +54,8 @@ public class GeneratorMachine {
             .generator(true)
             .tooltips(Component.translatable("gtceu.universal.tooltip.base_production_eut", GTValues.V[GTValues.ZPM]),
                     Component.translatable("gtceu.universal.tooltip.uses_per_hour_lubricant", 10000),
-                    Component.translatable("gtceu.machine.chemical_energy_devourer.tooltip.0", GTValues.V[GTValues.UV]),
-                    Component.translatable("gtceu.machine.chemical_energy_devourer.tooltip.1", GTValues.V[GTValues.UHV]))
+                    Component.translatable("gtlcore.machine.chemical_energy_devourer.tooltip.0", GTValues.V[GTValues.UV]),
+                    Component.translatable("gtlcore.machine.chemical_energy_devourer.tooltip.1", GTValues.V[GTValues.UHV]))
             .recipeModifier(ChemicalEnergyDevourerMachine::recipeModifier, true)
             .appearanceBlock(GTBlocks.CASING_TUNGSTENSTEEL_ROBUST)
             .pattern(definition -> FactoryBlockPattern.start()
@@ -94,11 +94,11 @@ public class GeneratorMachine {
                 .rotationState(RotationState.ALL)
                 .recipeType(recipeType)
                 .generator(true)
-                .tooltips(Component.translatable("gtceu.machine.mega_turbine.tooltip.0"))
-                .tooltips(Component.translatable("gtceu.machine.mega_turbine.tooltip.1"))
-                .tooltips(Component.translatable("gtceu.machine.mega_turbine.tooltip.2"))
+                .tooltips(Component.translatable("gtlcore.machine.mega_turbine.tooltip.0"))
+                .tooltips(Component.translatable("gtlcore.machine.mega_turbine.tooltip.1"))
+                .tooltips(Component.translatable("gtlcore.machine.mega_turbine.tooltip.2"))
                 .tooltips(Component.translatable("gtceu.universal.tooltip.base_production_eut", GTValues.V[tier] * (special ? 12 : 8)))
-                .tooltips(Component.translatable("gtceu.multiblock.turbine.efficiency_tooltip", GTValues.VNF[tier]))
+                .tooltips(Component.translatable("gtlcore.machine.turbine.efficiency_tooltip", GTValues.VNF[tier]))
                 .recipeModifier(TurbineMachine::recipeModifier)
                 .appearanceBlock(casing)
                 .pattern(definition -> FactoryBlockPattern.start()
@@ -155,14 +155,14 @@ public class GeneratorMachine {
             .rotationState(RotationState.NON_Y_AXIS)
             .allowExtendedFacing(false)
             .recipeType(GTLRecipeTypes.DYSON_SPHERE_RECIPES)
-            .tooltips(Component.translatable("gtceu.machine.dyson_sphere.tooltip.0"))
-            .tooltips(Component.translatable("gtceu.machine.dyson_sphere.tooltip.1"))
-            .tooltips(Component.translatable("gtceu.machine.dyson_sphere.tooltip.2"))
-            .tooltips(Component.translatable("gtceu.machine.dyson_sphere.tooltip.3"))
-            .tooltips(Component.translatable("gtceu.machine.dyson_sphere.tooltip.4"))
-            .tooltips(Component.translatable("gtceu.machine.dyson_sphere.tooltip.5"))
-            .tooltips(Component.translatable("gtceu.machine.dyson_sphere.tooltip.6"))
-            .tooltips(Component.translatable("gtceu.machine.available_recipe_map_1.tooltip",
+            .tooltips(Component.translatable("gtlcore.machine.dyson_sphere.tooltip.0"))
+            .tooltips(Component.translatable("gtlcore.machine.dyson_sphere.tooltip.1"))
+            .tooltips(Component.translatable("gtlcore.machine.dyson_sphere.tooltip.2"))
+            .tooltips(Component.translatable("gtlcore.machine.dyson_sphere.tooltip.3"))
+            .tooltips(Component.translatable("gtlcore.machine.dyson_sphere.tooltip.4"))
+            .tooltips(Component.translatable("gtlcore.machine.dyson_sphere.tooltip.5"))
+            .tooltips(Component.translatable("gtlcore.machine.dyson_sphere.tooltip.6"))
+            .tooltips(Component.translatable("gtlcore.machine.available_recipe_map_1.tooltip",
                     Component.translatable("gtceu.dyson_sphere")))
             .recipeModifier((machine, recipe, params, result) -> DysonSphereMachine.recipeModifier(machine, recipe))
             .appearanceBlock(GTLBlocks.DYSON_RECEIVER_CASING)
@@ -235,8 +235,8 @@ public class GeneratorMachine {
             .rotationState(RotationState.NON_Y_AXIS)
             .allowExtendedFacing(false)
             .recipeType(GTLRecipeTypes.LARGE_NAQUADAH_REACTOR_RECIPES)
-            .tooltips(Component.translatable("gtceu.machine.perfect_oc"))
-            .tooltips(Component.translatable("gtceu.machine.available_recipe_map_1.tooltip",
+            .tooltips(Component.translatable("gtlcore.machine.perfect_oc"))
+            .tooltips(Component.translatable("gtlcore.machine.available_recipe_map_1.tooltip",
                     Component.translatable("gtceu.large_naquadah_reactor")))
             .generator(true)
             .recipeModifier((machine, recipe, params, result) -> GTLRecipeModifiers.standardOverclocking((WorkableElectricMultiblockMachine) machine, recipe))
@@ -266,10 +266,10 @@ public class GeneratorMachine {
             .rotationState(RotationState.NON_Y_AXIS)
             .allowExtendedFacing(false)
             .recipeType(GTLRecipeTypes.ADVANCED_HYPER_REACTOR_RECIPES)
-            .tooltips(Component.translatable("gtceu.machine.advanced_hyper_reactor.tooltip.0"))
-            .tooltips(Component.translatable("gtceu.machine.advanced_hyper_reactor.tooltip.1"))
-            .tooltips(Component.translatable("gtceu.machine.perfect_oc"))
-            .tooltips(Component.translatable("gtceu.machine.available_recipe_map_1.tooltip",
+            .tooltips(Component.translatable("gtlcore.machine.advanced_hyper_reactor.tooltip.0"))
+            .tooltips(Component.translatable("gtlcore.machine.advanced_hyper_reactor.tooltip.1"))
+            .tooltips(Component.translatable("gtlcore.machine.perfect_oc"))
+            .tooltips(Component.translatable("gtlcore.machine.available_recipe_map_1.tooltip",
                     Component.translatable("gtceu.advanced_hyper_reactor")))
             .generator(true)
             .recipeModifier((machine, recipe, params, result) -> {
@@ -315,11 +315,11 @@ public class GeneratorMachine {
     public final static MultiblockMachineDefinition HYPER_REACTOR = REGISTRATE.multiblock("hyper_reactor", WorkableElectricMultiblockMachine::new)
             .rotationState(RotationState.ALL)
             .recipeType(GTLRecipeTypes.HYPER_REACTOR_RECIPES)
-            .tooltips(Component.translatable("gtceu.machine.hyper_reactor.tooltip.0"))
-            .tooltips(Component.translatable("gtceu.machine.hyper_reactor.tooltip.1"))
-            .tooltips(Component.translatable("gtceu.machine.hyper_reactor.tooltip.2"))
-            .tooltips(Component.translatable("gtceu.machine.perfect_oc"))
-            .tooltips(Component.translatable("gtceu.machine.available_recipe_map_1.tooltip",
+            .tooltips(Component.translatable("gtlcore.machine.hyper_reactor.tooltip.0"))
+            .tooltips(Component.translatable("gtlcore.machine.hyper_reactor.tooltip.1"))
+            .tooltips(Component.translatable("gtlcore.machine.hyper_reactor.tooltip.2"))
+            .tooltips(Component.translatable("gtlcore.machine.perfect_oc"))
+            .tooltips(Component.translatable("gtlcore.machine.available_recipe_map_1.tooltip",
                     Component.translatable("gtceu.hyper_reactor")))
             .generator(true)
             .recipeModifier((machine, recipe, params, result) -> {
@@ -372,9 +372,9 @@ public class GeneratorMachine {
             .appearanceBlock(GTBlocks.CASING_STEEL_SOLID)
             .recipeType(GTRecipeTypes.DUMMY_RECIPES)
             .generator(true)
-            .tooltips(Component.translatable("gtceu.machine.generator_array.tooltip.0"))
-            .tooltips(Component.translatable("gtceu.machine.generator_array.tooltip.1"))
-            .tooltips(Component.translatable("gtceu.machine.available_recipe_map_6.tooltip",
+            .tooltips(Component.translatable("gtlcore.machine.generator_array.tooltip.0"))
+            .tooltips(Component.translatable("gtlcore.machine.generator_array.tooltip.1"))
+            .tooltips(Component.translatable("gtlcore.machine.available_recipe_map_6.tooltip",
                     Component.translatable("gtceu.steam_turbine"),
                     Component.translatable("gtceu.combustion_generator"),
                     Component.translatable("gtceu.gas_turbine"),
@@ -401,8 +401,8 @@ public class GeneratorMachine {
     public final static MultiblockMachineDefinition ANNIHILATE_GENERATOR = REGISTRATE.multiblock("annihilate_generator", WorkableElectricMultiblockMachine::new)
             .rotationState(RotationState.ALL)
             .recipeType(GTLRecipeTypes.ANNIHILATE_GENERATOR_RECIPES)
-            .tooltips(Component.translatable("gtceu.machine.perfect_oc"))
-            .tooltips(Component.translatable("gtceu.machine.available_recipe_map_1.tooltip",
+            .tooltips(Component.translatable("gtlcore.machine.perfect_oc"))
+            .tooltips(Component.translatable("gtlcore.machine.available_recipe_map_1.tooltip",
                     Component.translatable("gtceu.annihilate_generator")))
             .generator(true)
             .recipeModifier((machine, recipe, params, result) -> GTLRecipeModifiers.standardOverclocking((WorkableElectricMultiblockMachine) machine, recipe))
@@ -535,6 +535,7 @@ public class GeneratorMachine {
                     .where("R", Predicates.blocks(GTLBlocks.DYSON_RECEIVER_CASING.get()))
                     .where(" ", Predicates.any())
                     .build())
+            .multiblockPreviewRenderer(true, false)
             .renderer(AnnihilateGeneratorRenderer::new)
             .hasTESR(true)
             .register();

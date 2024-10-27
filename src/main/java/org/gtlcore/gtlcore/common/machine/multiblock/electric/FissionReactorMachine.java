@@ -235,10 +235,10 @@ public class FissionReactorMachine extends WorkableElectricMultiblockMachine imp
     public void addDisplayText(List<Component> textList) {
         super.addDisplayText(textList);
         if (isFormed()) {
-            textList.add(Component.translatable("gtceu.machine.fission_reactor.fuel", fuel, heatAdjacent - 1));
-            textList.add(Component.translatable("gtceu.machine.fission_reactor.cooler", cooler, coolerAdjacent));
-            textList.add(Component.translatable("gtceu.machine.fission_reactor.heat", heat));
-            textList.add(Component.translatable("gtceu.machine.fission_reactor.damaged", damaged).append("%"));
+            textList.add(Component.translatable("gtlcore.machine.fission_reactor.fuel", fuel, heatAdjacent - 1));
+            textList.add(Component.translatable("gtlcore.machine.fission_reactor.cooler", cooler, coolerAdjacent));
+            textList.add(Component.translatable("gtlcore.machine.fission_reactor.heat", heat));
+            textList.add(Component.translatable("gtlcore.machine.fission_reactor.damaged", damaged).append("%"));
         }
     }
 

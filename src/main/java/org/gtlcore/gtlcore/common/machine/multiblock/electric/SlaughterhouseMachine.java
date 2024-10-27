@@ -143,11 +143,11 @@ public class SlaughterhouseMachine extends StorageMachine {
     public void addDisplayText(List<Component> textList) {
         super.addDisplayText(textList);
         if (!this.isFormed) return;
-        textList.add(Component.translatable("gtceu.machine.slaughterhouse.is_spawn")
+        textList.add(Component.translatable("gtlcore.machine.slaughterhouse.is_spawn")
                 .append(ComponentPanelWidget.withButton(Component.literal("[")
                         .append(this.isSpawn ?
-                                Component.translatable("gtceu.machine.off") :
-                                Component.translatable("gtceu.machine.on"))
+                                Component.translatable("gtlcore.machine.off") :
+                                Component.translatable("gtlcore.machine.on"))
                         .append(Component.literal("]")), "spawn_switch")));
     }
 

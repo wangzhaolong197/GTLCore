@@ -55,7 +55,7 @@ public class VacuumCondition extends RecipeCondition {
 
     @Override
     public Component getTooltips() {
-        return Component.translatable("gtceu.vacuum.tier", tier);
+        return Component.translatable("gtlcore.recipe.vacuum.tier", tier);
     }
 
     @Override

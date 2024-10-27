@@ -41,9 +41,9 @@ public class DimensionallyTranscendentPlasmaForgeMachine extends CoilWorkableEle
         super.addDisplayText(textList);
         if (this.isFormed()) {
             int temp = getCoilType().getCoilTemperature();
-            textList.add(Component.translatable("gtceu.multiblock.blast_furnace.max_temperature", Component.literal(FormattingUtil.formatNumbers((temp == 273 ? 32000 : temp)) + "K").withStyle(ChatFormatting.BLUE)));
+            textList.add(Component.translatable("gtlcore.machine.blast_furnace.max_temperature", Component.literal(FormattingUtil.formatNumbers((temp == 273 ? 32000 : temp)) + "K").withStyle(ChatFormatting.BLUE)));
             if (getRecipeType() == GTLRecipeTypes.STELLAR_FORGE_RECIPES && temp != 273) {
-                textList.add(Component.translatable("gtceu.machine.dimensionally_transcendent_plasma_forge.coil").withStyle(ChatFormatting.RED));
+                textList.add(Component.translatable("gtlcore.machine.dimensionally_transcendent_plasma_forge.coil").withStyle(ChatFormatting.RED));
             }
         }
     }

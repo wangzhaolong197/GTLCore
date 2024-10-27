@@ -199,11 +199,11 @@ public class NeutronActivatorMachine extends NoEnergyMultiblockMachine implement
     public void addDisplayText(List<Component> textList) {
         super.addDisplayText(textList);
         if (isFormed()) {
-            textList.add(Component.translatable("gtceu.machine.neutron_activator.ev", NumberUtils.formatLong(eV)));
-            textList.add(Component.translatable("gtceu.machine.neutron_activator.efficiency",
+            textList.add(Component.translatable("gtlcore.machine.neutron_activator.ev", NumberUtils.formatLong(eV)));
+            textList.add(Component.translatable("gtlcore.machine.neutron_activator.efficiency",
                     FormattingUtil.formatNumbers(getEVtMultiplier())));
-            textList.add(Component.translatable("gtceu.machine.neutron_activator.height", height));
-            textList.add(Component.translatable("gtceu.machine.neutron_activator.time",
+            textList.add(Component.translatable("gtlcore.machine.neutron_activator.height", height));
+            textList.add(Component.translatable("gtlcore.machine.neutron_activator.time",
                     FormattingUtil.formatNumbers(getEfficiencyFactor() * 100)).append("%"));
         }
     }
