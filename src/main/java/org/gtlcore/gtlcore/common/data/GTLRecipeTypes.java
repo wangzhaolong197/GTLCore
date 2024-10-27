@@ -805,6 +805,55 @@ public class GTLRecipeTypes {
                         widgetGroup.getSize().width - 50, widgetGroup.getSize().height - 40, false, false));
             });
 
+    // 净化水厂
+    public static final GTRecipeType PURIFICATION_PLANT = register("purification_plant", MULTIBLOCK)
+            .setEUIO(IO.IN)
+            .setMaxIOSize(0, 0, 0, 0)
+            .setProgressBar(GuiTextures.PROGRESS_BAR_ARROW, LEFT_TO_RIGHT)
+            .setSound(GTSoundEntries.FORGE_HAMMER);
+
+    public static final GTRecipeType CLARIFIER_PURIFICATION = register("clarifier_purification", MULTIBLOCK)
+            .setEUIO(IO.NONE)
+            .setMaxIOSize(3, 3, 3, 3)
+            .setProgressBar(GuiTextures.PROGRESS_BAR_ARROW, LEFT_TO_RIGHT)
+            .setSound(GTSoundEntries.FORGE_HAMMER);
+    public static final GTRecipeType OZONATION_PURIFICATION = register("ozonation_purification", MULTIBLOCK)
+            .setEUIO(IO.NONE)
+            .setMaxIOSize(3, 3, 3, 3)
+            .setProgressBar(GuiTextures.PROGRESS_BAR_ARROW, LEFT_TO_RIGHT)
+            .setSound(GTSoundEntries.FORGE_HAMMER);
+    public static final GTRecipeType FLOCCULATION_PURIFICATION = register("flocculation_purification", MULTIBLOCK)
+            .setEUIO(IO.NONE)
+            .setMaxIOSize(3, 3, 3, 3)
+            .setProgressBar(GuiTextures.PROGRESS_BAR_ARROW, LEFT_TO_RIGHT)
+            .setSound(GTSoundEntries.FORGE_HAMMER);
+    public static final GTRecipeType PH_NEUTRALIZATION_PURIFICATION = register("ph_neutralization_purification", MULTIBLOCK)
+            .setEUIO(IO.NONE)
+            .setMaxIOSize(3, 3, 3, 3)
+            .setProgressBar(GuiTextures.PROGRESS_BAR_ARROW, LEFT_TO_RIGHT)
+            .setSound(GTSoundEntries.FORGE_HAMMER);
+
+    public static final GTRecipeType EXTREME_TEMPERATURE_FLUCTUATION_PURIFICATION = register("extreme_temperature_fluctuation_purification", MULTIBLOCK)
+            .setEUIO(IO.NONE)
+            .setMaxIOSize(3, 3, 3, 3)
+            .setProgressBar(GuiTextures.PROGRESS_BAR_ARROW, LEFT_TO_RIGHT)
+            .setSound(GTSoundEntries.FORGE_HAMMER);
+    public static final GTRecipeType HIGH_ENERGY_LASER_PURIFICATION = register("high_energy_laser_purification", MULTIBLOCK)
+            .setEUIO(IO.NONE)
+            .setMaxIOSize(3, 3, 3, 3)
+            .setProgressBar(GuiTextures.PROGRESS_BAR_ARROW, LEFT_TO_RIGHT)
+            .setSound(GTSoundEntries.FORGE_HAMMER);
+    public static final GTRecipeType RESIDUAL_DECONTAMINANT_DEGASSER_PURIFICATION = register("residual_decontaminant_degasser_purification", MULTIBLOCK)
+            .setEUIO(IO.NONE)
+            .setMaxIOSize(3, 3, 3, 3)
+            .setProgressBar(GuiTextures.PROGRESS_BAR_ARROW, LEFT_TO_RIGHT)
+            .setSound(GTSoundEntries.FORGE_HAMMER);
+    public static final GTRecipeType ABSOLUTE_BARYONIC_PERFECTION_PURIFICATION = register("absolute_baryonic_perfection_purification", MULTIBLOCK)
+            .setEUIO(IO.NONE)
+            .setMaxIOSize(3, 3, 3, 3)
+            .setProgressBar(GuiTextures.PROGRESS_BAR_ARROW, LEFT_TO_RIGHT)
+            .setSound(GTSoundEntries.FORGE_HAMMER);
+
     // 远古呼唤
     public static final GTRecipeType CALL_OF_THE_ANCIENTS = register("call_of_the_ancients", MULTIBLOCK)
             .setEUIO(IO.NONE)

@@ -18,7 +18,9 @@ import com.gregtechceu.gtceu.api.fluids.store.FluidStorageKeys;
 import static com.gregtechceu.gtceu.api.data.chemical.material.info.MaterialFlags.*;
 import static com.gregtechceu.gtceu.api.data.chemical.material.info.MaterialIconSet.*;
 import static com.gregtechceu.gtceu.api.data.chemical.material.properties.BlastProperty.GasTier.*;
+import static com.gregtechceu.gtceu.api.data.tag.TagPrefix.gem;
 import static com.gregtechceu.gtceu.common.data.GTMaterials.*;
+import static org.gtlcore.gtlcore.api.data.chemical.material.info.GTLMaterialFlags.*;
 import static org.gtlcore.gtlcore.common.data.GTLMaterials.*;
 
 public class MaterialBuilder {
@@ -2127,6 +2129,7 @@ public class MaterialBuilder {
 
         Mana = new Material.Builder(GTCEu.id("mana"))
                 .gas()
+                .liquid()
                 .color(0x9400d3)
                 .element(GTLElements.MANA)
                 .iconSet(DULL)
@@ -6051,5 +6054,38 @@ public class MaterialBuilder {
                 .color(0x008000)
                 .iconSet(GTLMaterialIconSet.LIMPID)
                 .buildAndRegister();
+
+        HexaphaseCopper = new Material.Builder(GTCEu.id("hexaphasecopper"))
+                .ingot()
+                .fluid()
+                .plasma()
+                .ore()
+                .element(GTLElements.HEXAPHASECOPPER)
+                .blastTemp(75000, HIGHER)
+                .color(0xec7916)
+                .iconSet(METALLIC)
+                .flags(GTLMaterialFlags.GENERATE_NANOSWARM, GENERATE_ROTOR, GENERATE_FRAME, GENERATE_GEAR, GENERATE_SMALL_GEAR, GENERATE_LONG_ROD)
+                .buildAndRegister();
+
+        Mercury194 = new Material.Builder(GTCEu.id("mercury194"))
+                .dust()
+                .element(GTLElements.MERCURY194)
+                .color(0xb3b1b5)
+                .iconSet(BRIGHT)
+                .buildAndRegister();
+
+        FluorosulfuricAcid = new Material.Builder(GTCEu.id("fluorosulfuric_acid"))
+                .fluid()
+                .color(0xffffff)
+                .components(Fluorine, 1, Hydrogen, 1, Oxygen, 3, Sulfur, 1)
+                .flags(DISABLE_DECOMPOSITION)
+                .iconSet(GTLMaterialIconSet.LIMPID)
+                .buildAndRegister();
+
+        MagicAcid = new Material.Builder(GTCEu.id("magic_acid"))
+                .fluid()
+                .color(0xffffff)
+                .iconSet(GTLMaterialIconSet.LIMPID)
+                .buildAndRegister().setFormula("SbF₅·HSO₃F");
     }
 }

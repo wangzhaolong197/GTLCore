@@ -47,6 +47,7 @@ public class MultiBlockMachineA {
         MultiBlockMachineB.init();
         hugeMultiBlockMachineA.init();
         hugeMultiBlockMachineB.init();
+        MagicMultiblock.init();
     }
 
     public final static MultiblockMachineDefinition PLASMA_CONDENSER = REGISTRATE.multiblock("plasma_condenser", WorkableElectricMultiblockMachine::new)

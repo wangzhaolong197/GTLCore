@@ -1298,6 +1298,10 @@
     "tagprefix.plutostone": "冥王星%s矿石",
     "tagprefix.titanstone": "土卫六%s矿石",
     "tagprefix.venus_stone": "金星石%s矿石",
+    "material.gtceu.hexaphasecopper": "六相铜",
+    "tagprefix.magiccrystal": "%s晶",
+    "material.gtceu.fluorosulfuric_acid": "氟硫酸"
     "tooltip.gtlcore.quantum_glass.0": "致密但透明",
     "tooltip.gtlcore.quantum_glass.1": "§b玻璃&优雅"
+
 }

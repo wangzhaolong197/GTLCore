@@ -123,7 +123,8 @@ public class GTLMachines {
         GeneratorMachine.init();
         MultiBlockMachineA.init();
         AdvancedMultiBlockMachineA.init();
-        // MagicMultiblock.init();
+        MagicMultiblock.init();
+
     }
 
     public static final FactoryBlockPattern DTPF = FactoryBlockPattern.start()

@@ -613,7 +613,9 @@ public class GTLBlocks {
     public static final BlockEntry<Block> NEUTRONIUM_ACTIVE_CASING = createCasingBlock(
             "neutronium_active_casing", GTLCore.id("block/neutronium_active_casing"));
     public static final BlockEntry<Block> STERILE_CASING = createCasingBlock(
-            "sterile-casing", GTLCore.id("block/sterile-casing"));
+
+            "sterile_casing", GTLCore.id("block/sterile_casing"));
+
     public static final BlockEntry<Block> QUARK_PIPE = createCasingBlock(
             "quark_pipe", GTLCore.id("block/quark_pipe"));
     public static final BlockEntry<Block> QUARK_EXCLUSION_CASING = createCasingBlock(
@@ -742,6 +744,7 @@ public class GTLBlocks {
             "focus_magic_crystals_block", GTLCore.id("block/magic/focus_magic_crystals_block"));
     public static final BlockEntry<Block> SHINING_MAGIC_CRYSTALS_BLOCK = createCasingBlock(
             "shining_magic_crystals_block", GTLCore.id("block/magic/shining_magic_crystals_block"));
+
     public static final BlockEntry<Block> NATURAL_MAGIC_CRYSTALS_BLOCK = createCasingBlock(
             "natural_magic_crystals_block", GTLCore.id("block/magic/natural_magic_crystals_block"));
     public static final BlockEntry<Block> OCEAN_MAGIC_CRYSTALS_BLOCK = createCasingBlock(
