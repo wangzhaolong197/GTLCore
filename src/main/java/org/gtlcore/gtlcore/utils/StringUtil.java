@@ -4,7 +4,19 @@ import net.minecraft.ChatFormatting;
 
 import static net.minecraft.ChatFormatting.*;
 
-public class TextUtil {
+public class StringUtil {
+
+    public static String[] decompose(String location) {
+        String[] astring = new String[] { "minecraft", location };
+        int i = location.indexOf(":");
+        if (i >= 0) {
+            astring[1] = location.substring(i + 1);
+            if (i >= 1) {
+                astring[0] = location.substring(0, i);
+            }
+        }
+        return astring;
+    }
 
     public static String formatting(String input, ChatFormatting[] colours, double delay) {
         StringBuilder sb = new StringBuilder(input.length() * 3);

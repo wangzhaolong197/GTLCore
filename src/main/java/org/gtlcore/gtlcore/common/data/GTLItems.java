@@ -3,7 +3,7 @@ package org.gtlcore.gtlcore.common.data;
 import org.gtlcore.gtlcore.GTLCore;
 import org.gtlcore.gtlcore.common.item.*;
 import org.gtlcore.gtlcore.integration.ae2.InfinityCell;
-import org.gtlcore.gtlcore.utils.TextUtil;
+import org.gtlcore.gtlcore.utils.StringUtil;
 
 import com.gregtechceu.gtceu.GTCEu;
 import com.gregtechceu.gtceu.api.GTValues;
@@ -167,13 +167,13 @@ public class GTLItems {
             .register();
     public static ItemEntry<ComponentItem> INSANELY_ULTIMATE_BATTERY = REGISTRATE
             .item("insanely_max_battery", ComponentItem::create)
-            .onRegister(attach(new TooltipBehavior(lines -> lines.add(Component.literal(TextUtil.dark_purplish_red("填满也就图一乐"))))))
+            .onRegister(attach(new TooltipBehavior(lines -> lines.add(Component.literal(StringUtil.dark_purplish_red("填满也就图一乐"))))))
             .onRegister(modelPredicate(GTCEu.id("battery"), ElectricStats::getStoredPredicate))
             .onRegister(attach(ElectricStats.createRechargeableBattery(Long.MAX_VALUE, GTValues.OpV)))
             .register();
     public static ItemEntry<ComponentItem> MEGA_ULTIMATE_BATTERY = REGISTRATE
             .item("mega_max_battery", ComponentItem::create)
-            .onRegister(attach(new TooltipBehavior(lines -> lines.add(Component.literal(TextUtil.full_color("填满电池 机械飞升"))))))
+            .onRegister(attach(new TooltipBehavior(lines -> lines.add(Component.literal(StringUtil.full_color("填满电池 机械飞升"))))))
             .onRegister(modelPredicate(GTCEu.id("battery"), ElectricStats::getStoredPredicate))
             .onRegister(attach(ElectricStats.createRechargeableBattery(Long.MAX_VALUE, GTValues.MAX)))
             .register();
@@ -767,5 +767,4 @@ public class GTLItems {
     public static ItemEntry<Item> BRIGHT_LARGE_PIECE_OF_MAGIC_CRYSTAL = registerMagic("bright_large_piece_of_magic_crystal");
     public static ItemEntry<Item> ARCANE_SIEVE = registerMagic("arcane_sieve");
     public static ItemEntry<Item> SATURATED_ARCANE_SIEVE = registerMagic("saturated_arcane_sieve");
-
 }

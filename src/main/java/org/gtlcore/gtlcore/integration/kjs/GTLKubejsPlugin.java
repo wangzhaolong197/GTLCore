@@ -2,7 +2,10 @@ package org.gtlcore.gtlcore.integration.kjs;
 
 import org.gtlcore.gtlcore.GTLCore;
 import org.gtlcore.gtlcore.api.machine.multiblock.GTLCleanroomType;
-import org.gtlcore.gtlcore.common.data.*;
+import org.gtlcore.gtlcore.common.data.GTLBlocks;
+import org.gtlcore.gtlcore.common.data.GTLItems;
+import org.gtlcore.gtlcore.common.data.GTLMachines;
+import org.gtlcore.gtlcore.common.data.GTLMaterials;
 import org.gtlcore.gtlcore.common.recipe.condition.GravityCondition;
 import org.gtlcore.gtlcore.common.recipe.condition.VacuumCondition;
 import org.gtlcore.gtlcore.utils.Registries;

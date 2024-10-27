@@ -8,10 +8,7 @@ import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.Blocks;
 
-import java.util.HashMap;
-import java.util.HashSet;
-import java.util.Map;
-import java.util.Set;
+import java.util.*;
 
 public class DebugBlockPattern {
 
@@ -19,7 +16,7 @@ public class DebugBlockPattern {
     public String[][] pattern;
     public int[][] aisleRepetitions;
     public Map<Character, Set<String>> symbolMap;
-    public Map<Block, Character> legend = new HashMap<>();
+    public Map<Block, Character> legend = new LinkedHashMap<>();
 
     public DebugBlockPattern() {
         symbolMap = new HashMap<>();

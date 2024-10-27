@@ -3,6 +3,7 @@ package org.gtlcore.gtlcore.common.machine.multiblock.electric;
 import org.gtlcore.gtlcore.api.machine.multiblock.StorageMachine;
 import org.gtlcore.gtlcore.config.GTLConfigHolder;
 import org.gtlcore.gtlcore.utils.MachineUtil;
+import org.gtlcore.gtlcore.utils.StringUtil;
 
 import com.gregtechceu.gtceu.api.machine.IMachineBlockEntity;
 
@@ -68,18 +69,6 @@ public class SlaughterhouseMachine extends StorageMachine {
         return MANAGED_FIELD_HOLDER;
     }
 
-    protected static String[] decompose(String location) {
-        String[] astring = new String[] { "minecraft", location };
-        int i = location.indexOf(":");
-        if (i >= 0) {
-            astring[1] = location.substring(i + 1);
-            if (i >= 1) {
-                astring[0] = location.substring(0, i);
-            }
-        }
-        return astring;
-    }
-
     @Override
     public void afterWorking() {
         Level level = getLevel();
@@ -129,7 +118,7 @@ public class SlaughterhouseMachine extends StorageMachine {
                             livingEntity.setPos(blockPos.getCenter());
                             serverLevel.addFreshEntity(livingEntity);
                         } else {
-                            String[] mobParts = decompose(mob);
+                            String[] mobParts = StringUtil.decompose(mob);
                             if (mobParts.length < 2) continue;
                             LootTable lootTable = serverLevel.getServer().getLootData()
                                     .getLootTable(new ResourceLocation(mobParts[0], "entities/" + mobParts[1]));

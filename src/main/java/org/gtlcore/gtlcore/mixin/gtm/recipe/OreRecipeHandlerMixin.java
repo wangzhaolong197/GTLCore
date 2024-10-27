@@ -37,7 +37,6 @@ import static com.gregtechceu.gtceu.api.data.tag.TagPrefix.*;
 import static com.gregtechceu.gtceu.common.data.GTMaterials.DistilledWater;
 import static com.gregtechceu.gtceu.common.data.GTMaterials.Stone;
 import static com.gregtechceu.gtceu.common.data.GTRecipeTypes.*;
-import static org.gtlcore.gtlcore.api.data.chemical.material.info.GTLMaterialFlags.GENERATE_MAGICCRYSTAL;
 import static org.gtlcore.gtlcore.common.data.GTLRecipeTypes.INTEGRATED_ORE_PROCESSOR;
 
 @Mixin(OreRecipeHandler.class)
@@ -96,8 +95,6 @@ public class OreRecipeHandlerMixin {
         Material byproductMaterial = GTUtil.selectItemInList(0, material, property.getOreByProducts(), Material.class);
         ItemStack ingotStack;
         ItemStack byproductStack = ChemicalHelper.get(gem, byproductMaterial);
-        if (material.hasFlag(GENERATE_MAGICCRYSTAL))
-            return;
         if (byproductStack.isEmpty()) byproductStack = ChemicalHelper.get(dust, byproductMaterial);
         Material smeltingMaterial = property.getDirectSmeltResult() == null ? material :
                 property.getDirectSmeltResult();

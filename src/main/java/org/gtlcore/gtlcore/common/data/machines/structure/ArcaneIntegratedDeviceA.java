@@ -1,4 +1,4 @@
-package org.gtlcore.gtlcore.common.data.machines;
+package org.gtlcore.gtlcore.common.data.machines.structure;
 
 public class ArcaneIntegratedDeviceA {
 

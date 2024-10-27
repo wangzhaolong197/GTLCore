@@ -613,7 +613,6 @@ public class GTLBlocks {
     public static final BlockEntry<Block> NEUTRONIUM_ACTIVE_CASING = createCasingBlock(
             "neutronium_active_casing", GTLCore.id("block/neutronium_active_casing"));
     public static final BlockEntry<Block> STERILE_CASING = createCasingBlock(
-
             "sterile_casing", GTLCore.id("block/sterile_casing"));
 
     public static final BlockEntry<Block> QUARK_PIPE = createCasingBlock(

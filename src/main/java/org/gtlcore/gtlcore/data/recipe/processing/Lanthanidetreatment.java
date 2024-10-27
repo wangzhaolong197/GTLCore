@@ -793,15 +793,5 @@ public class Lanthanidetreatment {
                     .EUt(122880)
                     .save(provider);
         }
-
-        BLAST_RECIPES.recipeBuilder(GTLCore.id("promethium_oxide73"))
-                .inputItems(dust, PromethiumOxide, 10)
-                .inputItems(dust, Carbon, 3)
-                .outputItems(dust, Promethium, 4)
-                .outputFluids(CarbonDioxide.getFluid(3000))
-                .duration(200)
-                .EUt(480)
-                .blastFurnaceTemp(2500)
-                .save(provider);
     }
 }

@@ -126,7 +126,7 @@ public class MagicFormula {
                 TwoResidue = MAGICAL_RESIDUE;
             } else {
                 TwoResidue = ARCANE_RESIDUE;
-            } ;
+            }
 
             MIXER_RECIPES.recipeBuilder(GTLCore.id("mixer_turbid_" + i))
                     .inputItems(dust, MagicStone, 1)

@@ -1,7 +1,8 @@
 package org.gtlcore.gtlcore.common.data.machines;
 
-import org.gtlcore.gtlcore.client.renderer.machine.AnnihilateGeneratorRenderer;
 import org.gtlcore.gtlcore.common.data.*;
+import org.gtlcore.gtlcore.common.data.machines.structure.ArcaneIntegratedDeviceA;
+import org.gtlcore.gtlcore.common.data.machines.structure.ArcaneIntegratedDeviceB;
 import org.gtlcore.gtlcore.utils.Registries;
 
 import com.gregtechceu.gtceu.GTCEu;
@@ -10,10 +11,13 @@ import com.gregtechceu.gtceu.api.machine.MultiblockMachineDefinition;
 import com.gregtechceu.gtceu.api.machine.multiblock.WorkableElectricMultiblockMachine;
 import com.gregtechceu.gtceu.api.pattern.FactoryBlockPattern;
 import com.gregtechceu.gtceu.api.pattern.Predicates;
+import com.gregtechceu.gtceu.common.block.StoneBlockType;
+import com.gregtechceu.gtceu.common.block.StoneTypes;
 import com.gregtechceu.gtceu.common.data.*;
 
 import net.minecraft.network.chat.Component;
 import net.minecraft.resources.ResourceLocation;
+import net.minecraft.world.level.block.Blocks;
 
 import static org.gtlcore.gtlcore.api.registries.GTLRegistration.REGISTRATE;
 
@@ -26,7 +30,7 @@ public class MagicMultiblock {
             .rotationState(RotationState.NON_Y_AXIS)
             .allowExtendedFacing(false)
             .recipeType(GTLRecipeTypes.CALL_OF_THE_ANCIENTS)
-            .appearanceBlock(GTBlocks.CASING_STAINLESS_CLEAN)
+            .appearanceBlock(() -> Blocks.STONE_BRICKS)
             .pattern(definition -> FactoryBlockPattern.start()
                     .aisle("                                            ", "             AAAAAAAHHHHAAAAAAA             ", "                   B    B                   ", "                                            ", "                                            ", "                                            ", "                                            ", "                                            ", "                                            ")
                     .aisle("             AAAAAAAAHHAAAAAAAA             ", "        AAAAACCCCCCCCCCCCCCCCCCAAAAA        ", "             DADADADAHHADADADAD             ", "             E E E EB  BE E E E             ", "                                            ", "                                            ", "                                            ", "                                            ", "                                            ")
@@ -41,18 +45,17 @@ public class MagicMultiblock {
                     .aisle("        AAAAA                  AAAAA        ", "    AAAACCCCC                  CCCCCAAAA    ", "        ADADA                  ADADA        ", "         E E                    E E         ", "                                            ", "                                            ", "                                            ", "                                            ", "                                            ")
                     .aisle("             AAAAAAAAHHAAAAAAAA             ", "        AAAAACCCCCCCCCCCCCCCCCCAAAAA        ", "             DADADADAHHADADADAD             ", "             E E E EB  BE E E E             ", "                                            ", "                                            ", "                                            ", "                                            ", "                                            ")
                     .aisle("                                            ", "             AAAAAAAHIHHAAAAAAA             ", "                   B    B                   ", "                                            ", "                                            ", "                                            ", "                                            ", "                                            ", "                                            ")
-                    .where("H", Predicates.blocks(Registries.getBlock("minecraft:stone_bricks"))
+                    .where("H", Predicates.blocks(Blocks.STONE_BRICKS)
                             .or(Predicates.autoAbilities(definition.getRecipeTypes())))
-                    .where("D", Predicates.blocks(Registries.getBlock("minecraft:soul_sand"))) // 别用这个 用
-                                                                                               // Blocks.SOUL_SAND
-                    .where("B", Predicates.blocks(Registries.getBlock("minecraft:candle")))
-                    .where("F", Predicates.blocks(Registries.getBlock("minecraft:reinforced_deepslate")))
-                    .where("A", Predicates.blocks(Registries.getBlock("minecraft:stone_bricks")))
-                    .where("E", Predicates.blocks(Registries.getBlock("minecraft:soul_fire")))
+                    .where("D", Predicates.blocks(Blocks.SOUL_SAND))
+                    .where("B", Predicates.blocks(Blocks.CANDLE))
+                    .where("F", Predicates.blocks(Blocks.REINFORCED_DEEPSLATE))
+                    .where("A", Predicates.blocks(Blocks.STONE_BRICKS))
+                    .where("E", Predicates.blocks(Blocks.SOUL_FIRE))
                     .where("I", Predicates.controller(Predicates.blocks(definition.get())))
                     .where("C", Predicates.blocks(GTLBlocks.MAGIC_COIL_LOW_BLOCK.get()))
                     .build())
-            .workableCasingRenderer(new ResourceLocation("minecraft:block/stone_bricks"), new ResourceLocation("minecraft:block/stone_bricks"))
+            .workableCasingRenderer(new ResourceLocation("minecraft", "block/stone_bricks"), new ResourceLocation("minecraft", "block/stone_bricks"))
             .register();
 
     /// *海洋祭坛*
@@ -60,7 +63,7 @@ public class MagicMultiblock {
             .rotationState(RotationState.NON_Y_AXIS)
             .allowExtendedFacing(false)
             .recipeType(GTLRecipeTypes.THE_OCEAN_CALLS)
-            .appearanceBlock(GTBlocks.CASING_STAINLESS_CLEAN)
+            .appearanceBlock(() -> Blocks.PRISMARINE_BRICKS)
             .pattern(definition -> FactoryBlockPattern.start()
                     .aisle("KKKKKKKKKKKKKKKK", "                ", "                ", "                ", "                ", "                ", "                ", "                ", "                ")
                     .aisle("KCCDCCDCCDCCDCCK", " CCCCCCCCCCCCCC ", "                ", "                ", "                ", "                ", "                ", "                ", "                ")
@@ -78,18 +81,18 @@ public class MagicMultiblock {
                     .aisle("KCEEEEEEEEEEEECK", " CFFFFFFFFFFFFC ", "  CCCCCCCCCCCC  ", "                ", "                ", "                ", "                ", "                ", "                ")
                     .aisle("KCCDCCDCCDCCDCCK", " CCCCCCCCCCCCCC ", "                ", "                ", "                ", "                ", "                ", "                ", "                ")
                     .aisle("GKKKKKKKKKKKKKKK", "                ", "                ", "                ", "                ", "                ", "                ", "                ", "                ")
-                    .where("E", Predicates.blocks(Registries.getBlock("gtlcore:magic_coil_low_block")))
-                    .where("H", Predicates.blocks(Registries.getBlock("gtlcore:non_attribute_magic_crystals_block")))
-                    .where("A", Predicates.blocks(Registries.getBlock("gtlcore:ocean_magic_crystals_block")))
+                    .where("E", Predicates.blocks(GTLBlocks.MAGIC_COIL_LOW_BLOCK.get()))
+                    .where("H", Predicates.blocks(GTLBlocks.NON_ATTRIBUTE_MAGIC_CRYSTALS_BLOCK.get()))
+                    .where("A", Predicates.blocks(GTLBlocks.OCEAN_MAGIC_CRYSTALS_BLOCK.get()))
                     .where("G", Predicates.controller(Predicates.blocks(definition.get())))
-                    .where("C", Predicates.blocks(Registries.getBlock("minecraft:prismarine_bricks")))
-                    .where("K", Predicates.blocks(Registries.getBlock("minecraft:prismarine_bricks"))
+                    .where("C", Predicates.blocks(Blocks.PRISMARINE_BRICKS))
+                    .where("K", Predicates.blocks(Blocks.PRISMARINE_BRICKS)
                             .or(Predicates.autoAbilities(definition.getRecipeTypes())))
-                    .where("F", Predicates.blocks(Registries.getBlock("gtlcore:magic_mechanical_low_cube")))
-                    .where("D", Predicates.blocks(Registries.getBlock("minecraft:sea_lantern")))
-                    .where("I", Predicates.blocks(Registries.getBlock("minecraft:prismarine")))
+                    .where("F", Predicates.blocks(GTLBlocks.MAGIC_MECHANICAL_LOW_CUBE.get()))
+                    .where("D", Predicates.blocks(Blocks.SEA_LANTERN))
+                    .where("I", Predicates.blocks(Blocks.PRISMARINE))
                     .build())
-            .workableCasingRenderer(new ResourceLocation("minecraft:block/prismarine_bricks"), new ResourceLocation("minecraft:block/prismarine_bricks"))
+            .workableCasingRenderer(new ResourceLocation("minecraft", "block/prismarine_bricks"), new ResourceLocation("minecraft", "block/prismarine_bricks"))
             .register();
 
     /// *秘法启示台*
@@ -120,22 +123,22 @@ public class MagicMultiblock {
                     .aisle("                     ", "                     ", "                     ", "                     ", "                     ", "                     ", "                     ", "                     ", "                     ", "                     ", "                     ", "         B B         ", "         DED         ", "         EEE         ", "         EEE         ", "         DED         ", "          D          ", "                     ", "                     ", "                     ", "                     ", "                     ", "                     ", "                     ", "                     ", "                     ", "                     ")
                     .aisle("                     ", "                     ", "                     ", "                     ", "                     ", "                     ", "                     ", "                     ", "                     ", "                     ", "                     ", "         B B         ", "         B B         ", "         BBB         ", "          E          ", "          B          ", "                     ", "                     ", "                     ", "                     ", "                     ", "                     ", "                     ", "                     ", "                     ", "                     ", "                     ")
                     .aisle("                     ", "                     ", "                     ", "                     ", "                     ", "                     ", "                     ", "                     ", "                     ", "                     ", "                     ", "                     ", "                     ", "          B          ", "          B          ", "          B          ", "                     ", "                     ", "                     ", "                     ", "                     ", "                     ", "                     ", "                     ", "                     ", "                     ", "                     ")
-                    .where("J", Predicates.blocks(Registries.getBlock("minecraft:dirt")))
-                    .where("K", Predicates.blocks(Registries.getBlock("gtceu:treated_wood_slab")))
-                    .where("F", Predicates.blocks(Registries.getBlock("minecraft:chiseled_stone_bricks")))
-                    .where("I", Predicates.blocks(Registries.getBlock("minecraft:stone_brick_slab")))
+                    .where("J", Predicates.blocks(Blocks.DIRT))
+                    .where("K", Predicates.blocks(GTBlocks.TREATED_WOOD_SLAB.get()))
+                    .where("F", Predicates.blocks(Blocks.CHISELED_STONE_BRICKS))
+                    .where("I", Predicates.blocks(Blocks.STONE_BRICK_SLAB))
                     .where("C", Predicates.controller(Predicates.blocks(definition.get())))
-                    .where("G", Predicates.blocks(Registries.getBlock("gtceu:treated_wood_stairs")))
-                    .where("E", Predicates.blocks(Registries.getBlock("minecraft:stone_bricks")))
-                    .where("H", Predicates.blocks(Registries.getBlock("minecraft:stone_slab")))
-                    .where("D", Predicates.blocks(Registries.getBlock("minecraft:stone_brick_stairs")))
-                    .where("N", Predicates.blocks(Registries.getBlock("minecraft:purple_stained_glass")))
-                    .where("B", Predicates.blocks(Registries.getBlock("minecraft:cobblestone_wall")))
-                    .where("M", Predicates.blocks(Registries.getBlock("minecraft:oak_fence")))
+                    .where("G", Predicates.blocks(GTBlocks.TREATED_WOOD_STAIRS.get()))
+                    .where("E", Predicates.blocks(Blocks.STONE_BRICKS))
+                    .where("H", Predicates.blocks(Blocks.STONE_SLAB))
+                    .where("D", Predicates.blocks(Blocks.STONE_BRICK_STAIRS))
+                    .where("N", Predicates.blocks(Blocks.PURPLE_STAINED_GLASS))
+                    .where("B", Predicates.blocks(Blocks.COBBLESTONE_WALL))
+                    .where("M", Predicates.blocks(Blocks.OAK_FENCE))
                     .where("A", Predicates.blocks(GTLBlocks.MAGIC_MECHANICAL_LOW_CUBE.get()))
-                    .where("L", Predicates.blocks(Registries.getBlock("minecraft:sea_lantern")))
+                    .where("L", Predicates.blocks(Blocks.SEA_LANTERN))
                     .build())
-            .workableCasingRenderer(new ResourceLocation("minecraft:block/stone_bricks"), GTCEu.id("block/multiblock/vacuum_freezer"))
+            .workableCasingRenderer(new ResourceLocation("minecraft", "block/stone_bricks"), GTCEu.id("block/multiblock/vacuum_freezer"))
             .register();
 
     /// *注魔祭坛*
@@ -172,10 +175,10 @@ public class MagicMultiblock {
                     .aisle("      ACCC       CCCA      ", "      BCCC       CCCA      ", "       DAAEEEEEEEABD       ", "          DDDDDDD          ", "                           ", "                           ", "                           ", "                           ", "                           ", "                           ", "                           ", "                           ")
                     .aisle("       AACCCCCCCCCAA       ", "       ABCCCCCCCCCAB       ", "         DAABABAAD         ", "                           ", "                           ", "                           ", "                           ", "                           ", "                           ", "                           ", "                           ", "                           ")
                     .aisle("         AAAABAAAA         ", "         AABAAABAB         ", "                           ", "                           ", "                           ", "                           ", "                           ", "                           ", "                           ", "                           ", "                           ", "                           ")
-                    .where("J", Predicates.blocks(Registries.getBlock("gtceu:red_granite_windmill_b")))
-                    .where("O", Predicates.blocks(Registries.getBlock("gtceu:ulv_output_hatch")))
-                    .where("F", Predicates.blocks(Registries.getBlock("gtceu:ulv_input_bus")))
-                    .where("I", Predicates.blocks(Registries.getBlock("gtceu:ulv_input_hatch")))
+                    .where("J", Predicates.blocks(GTBlocks.STONE_BLOCKS.get(StoneBlockType.WINDMILL_B, StoneTypes.RED_GRANITE).get()))
+                    .where("O", Predicates.blocks(GTMachines.ITEM_EXPORT_BUS[0].getBlock()))
+                    .where("F", Predicates.blocks(GTMachines.ITEM_IMPORT_BUS[0].getBlock()))
+                    .where("I", Predicates.blocks(GTMachines.FLUID_IMPORT_HATCH[0].getBlock()))
                     .where("E", Predicates.blocks(Registries.getBlock("gtlcore:magic_mechanical_low_cube")))
                     .where("K", Predicates.blocks(Registries.getBlock("gtceu:chiseled_red_granite")))
                     .where("D", Predicates.blocks(Registries.getBlock("minecraft:deepslate_brick_slab")))
@@ -190,7 +193,7 @@ public class MagicMultiblock {
                     .where("C", Predicates.blocks(Registries.getBlock("gtlcore:magic_coil_low_block")))
                     .where("H", Predicates.blocks(Registries.getBlock("gtceu:chiseled_marble")))
                     .build())
-            .workableCasingRenderer(new ResourceLocation("minecraft:block/deepslate_bricks"), GTCEu.id("block/multiblock/vacuum_freezer"))
+            .workableCasingRenderer(new ResourceLocation("minecraft", "block/deepslate_bricks"), GTCEu.id("block/multiblock/vacuum_freezer"))
             .register();
 
     /// *原始法师塔*
@@ -257,7 +260,6 @@ public class MagicMultiblock {
             .rotationState(RotationState.NON_Y_AXIS)
             .allowExtendedFacing(false)
             .recipeType(GTLRecipeTypes.INFUSION_RITUAL)
-            .generator(true)
             .tooltips(Component.translatable("gtlcore.machine.arcane_integrated_device.tooltip.1"))
             .pattern(definition -> FactoryBlockPattern.start()
                     .aisle(ArcaneIntegratedDeviceA.A_1)
@@ -351,18 +353,18 @@ public class MagicMultiblock {
                     .aisle(ArcaneIntegratedDeviceB.A_89)
                     .aisle(ArcaneIntegratedDeviceB.A_90)
                     .aisle(ArcaneIntegratedDeviceB.A_91)
-                    .where("E", Predicates.blocks(Registries.getBlock("gtlcore:echo_casing")))
+                    .where("E", Predicates.blocks(GTLBlocks.ECHO_CASING.get()))
                     .where("H", Predicates.blocks(Registries.getBlock("minecraft:bedrock")))
                     .where("B", Predicates.blocks(Registries.getBlock("minecraft:obsidian")))
                     .where("I", Predicates.blocks(Registries.getBlock("minecraft:end_gateway")))
                     .where("J", Predicates.controller(Predicates.blocks(definition.get())))
                     .where("D", Predicates.blocks(Registries.getBlock("minecraft:beacon")))
                     .where("G", Predicates.blocks(Registries.getBlock("gtlcore:quantum_glass")))
-                    .where("F", Predicates.blocks(Registries.getBlock("gtlcore:omni_purpose_infinity_fused_glass")))
+                    .where("F", Predicates.blocks(GTLBlocks.OMNI_PURPOSE_INFINITY_FUSED_GLASS.get()))
                     .where("C", Predicates.blocks(Registries.getBlock("gtlcore:chemical_grade_glass")))
                     .where("A", Predicates.blocks(Registries.getBlock("minecraft:quartz_block")))
                     .build())
-            .renderer(AnnihilateGeneratorRenderer::new)
+            .multiblockPreviewRenderer(true, false)
             .workableCasingRenderer(GTCEu.id("block/casings/signs/machine_casing_magichazard"), GTCEu.id("block/multiblock/vacuum_freezer"))
             .register();
 }

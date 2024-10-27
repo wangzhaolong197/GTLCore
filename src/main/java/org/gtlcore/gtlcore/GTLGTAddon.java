@@ -2,9 +2,12 @@ package org.gtlcore.gtlcore;
 
 import org.gtlcore.gtlcore.api.data.tag.GTLTagPrefix;
 import org.gtlcore.gtlcore.api.registries.GTLRegistration;
-import org.gtlcore.gtlcore.common.data.*;
+import org.gtlcore.gtlcore.common.data.GTLBedrockFluids;
+import org.gtlcore.gtlcore.common.data.GTLCovers;
+import org.gtlcore.gtlcore.common.data.GTLElements;
+import org.gtlcore.gtlcore.common.data.GTLSoundEntries;
 import org.gtlcore.gtlcore.config.GTConfigModify;
-import org.gtlcore.gtlcore.data.recipe.*;
+import org.gtlcore.gtlcore.data.recipe.RemoveRecipe;
 
 import com.gregtechceu.gtceu.api.addon.GTAddon;
 import com.gregtechceu.gtceu.api.addon.IGTAddon;

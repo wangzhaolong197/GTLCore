@@ -3,8 +3,6 @@ package org.gtlcore.gtlcore.common.data;
 import org.gtlcore.gtlcore.common.data.material.MaterialAdd;
 import org.gtlcore.gtlcore.common.data.material.MaterialBuilder;
 import org.gtlcore.gtlcore.common.data.material.MaterialBuilderMachine;
-import org.gtlcore.gtlcore.common.data.material.MaterialBuilderbatch;
-
 
 import com.gregtechceu.gtceu.api.data.chemical.material.Material;
 import com.gregtechceu.gtceu.api.data.chemical.material.properties.OreProperty;
@@ -878,6 +876,7 @@ public class GTLMaterials {
     public static Material MagicSource;
     public static Material HighMagicSource;
     public static Material ConcentratedMagicSource;
+    public static Material CondensedMagicSource;
     public static Material Mercury194;
     public static Material FluorosulfuricAcid;
     public static Material MagicAcid;

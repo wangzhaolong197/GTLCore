@@ -2,6 +2,7 @@ package org.gtlcore.gtlcore.common.item;
 
 import org.gtlcore.gtlcore.GTLCore;
 import org.gtlcore.gtlcore.api.pattern.DebugBlockPattern;
+import org.gtlcore.gtlcore.utils.StringUtil;
 
 import com.gregtechceu.gtceu.api.gui.GuiTextures;
 import com.gregtechceu.gtceu.api.item.ComponentItem;
@@ -32,6 +33,8 @@ import net.minecraft.world.item.context.UseOnContext;
 import net.minecraft.world.level.Level;
 
 import com.google.common.base.Joiner;
+
+import java.util.Objects;
 
 public class StructureWriteBehavior implements IItemUIFactory {
 
@@ -126,8 +129,20 @@ public class StructureWriteBehavior implements IItemUIFactory {
             builder.append(".where(\"~\", Predicates.controller(Predicates.blocks(definition.get())))\n");
             blockPattern.legend.forEach((b, c) -> {
                 if (c.equals(' ')) return;
+                String id = b.kjs$getId();
+                String[] parts = StringUtil.decompose(id);
+                if (Objects.equals(parts[0], "gtlcore")) {
+                    builder.append(".where(\"").append(c).append("\", Predicates.blocks(GTLBlocks.")
+                            .append(parts[1].toUpperCase()).append(".get()))\n");
+                    return;
+                }
+                if (Objects.equals(parts[0], "minecraft")) {
+                    builder.append(".where(\"").append(c).append("\", Predicates.blocks(Blocks.")
+                            .append(parts[1].toUpperCase()).append("))\n");
+                    return;
+                }
                 builder.append(".where(\"").append(c).append("\", Predicates.blocks(Registries.getBlock(\"")
-                        .append(b.kjs$getId()).append("\")))\n");
+                        .append(id).append("\")))\n");
             });
             GTLCore.LOGGER.info(builder.toString());
         }
