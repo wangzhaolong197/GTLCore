@@ -78,7 +78,7 @@ public class NeutronSensorPartMachine extends MultiblockPartMachine {
             public void updateScreen() {
                 super.updateScreen();
                 setHoverTooltips(List.copyOf(LangHandler.getMultiLang(
-                        "gui.gtceu.neutron_sensor.invert." + (isPressed ? "enabled" : "disabled"))));
+                        "gtlcore.machine.neutron_sensor.invert." + (isPressed ? "enabled" : "disabled"))));
             }
         });
         return group;
