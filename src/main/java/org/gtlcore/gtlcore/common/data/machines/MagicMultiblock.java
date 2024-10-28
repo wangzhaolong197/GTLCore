@@ -1,6 +1,7 @@
 package org.gtlcore.gtlcore.common.data.machines;
 
-import org.gtlcore.gtlcore.common.data.*;
+import org.gtlcore.gtlcore.common.data.GTLBlocks;
+import org.gtlcore.gtlcore.common.data.GTLRecipeTypes;
 import org.gtlcore.gtlcore.common.data.machines.structure.ArcaneIntegratedDeviceA;
 import org.gtlcore.gtlcore.common.data.machines.structure.ArcaneIntegratedDeviceB;
 import org.gtlcore.gtlcore.utils.Registries;
@@ -13,7 +14,8 @@ import com.gregtechceu.gtceu.api.pattern.FactoryBlockPattern;
 import com.gregtechceu.gtceu.api.pattern.Predicates;
 import com.gregtechceu.gtceu.common.block.StoneBlockType;
 import com.gregtechceu.gtceu.common.block.StoneTypes;
-import com.gregtechceu.gtceu.common.data.*;
+import com.gregtechceu.gtceu.common.data.GTBlocks;
+import com.gregtechceu.gtceu.common.data.GTMachines;
 
 import net.minecraft.network.chat.Component;
 import net.minecraft.resources.ResourceLocation;

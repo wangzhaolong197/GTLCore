@@ -284,7 +284,7 @@ public class GTLMachines {
                             .rotationState(RotationState.ALL)
                             .renderer(() -> new OverlayTieredMachineRenderer(tier, GTCEu.id("block/machine/part/" + model)))
                             .abilities(abilities)
-                            .tooltips(Component.translatable("gtlcore.machine." + tooltip + ".tooltip"));
+                            .tooltips(Component.translatable("gtceu.machine." + tooltip + ".tooltip"));
                     builder.tooltips(Component.translatable("gtceu.universal.tooltip.fluid_storage_capacity_mult",
                             tier, FormattingUtil.formatNumbers(Integer.MAX_VALUE)));
                     return builder.register();
@@ -299,7 +299,7 @@ public class GTLMachines {
                         .langValue(GTValues.VNF[tier] + " " + FormattingUtil.formatNumbers(amperage) + "A Laser " +
                                 FormattingUtil.toEnglishName(name) + " Hatch")
                         .rotationState(RotationState.ALL)
-                        .tooltips(Component.translatable("gtlcore.machine.laser_hatch." + name + ".tooltip"),
+                        .tooltips(Component.translatable("gtceu.machine.laser_hatch." + name + ".tooltip"),
                                 Component.translatable("gtceu.machine.laser_hatch.both.tooltip"),
                                 Component.translatable("gtceu.universal.disabled"))
                         .abilities(ability)
@@ -581,7 +581,7 @@ public class GTLMachines {
                     .rotationState(RotationState.ALL)
                     .abilities(PartAbility.ROTOR_HOLDER)
                     .renderer(() -> new RotorHolderMachineRenderer(tier))
-                    .tooltips(LangHandler.getFromMultiLang("gtlcore.machine.rotor_holder.tooltip", 0), LangHandler.getFromMultiLang("gtlcore.machine.rotor_holder.tooltip", 1), Component.translatable("gtceu.universal.disabled"))
+                    .tooltips(LangHandler.getFromMultiLang("gtceu.machine.rotor_holder.tooltip", 0), LangHandler.getFromMultiLang("gtlcore.machine.rotor_holder.tooltip", 1), Component.translatable("gtceu.universal.disabled"))
                     .register(),
             GTValues.UHV, GTValues.UEV);
 

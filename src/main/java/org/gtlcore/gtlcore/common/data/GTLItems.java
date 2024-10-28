@@ -14,6 +14,9 @@ import com.gregtechceu.gtceu.common.data.GTItems;
 import com.gregtechceu.gtceu.common.item.CoverPlaceBehavior;
 import com.gregtechceu.gtceu.common.item.TooltipBehavior;
 import com.gregtechceu.gtceu.data.recipe.CustomTags;
+import com.gregtechceu.gtceu.utils.FormattingUtil;
+
+import com.lowdragmc.lowdraglib.utils.LocalizationUtils;
 
 import net.minecraft.ChatFormatting;
 import net.minecraft.core.registries.BuiltInRegistries;
@@ -149,31 +152,36 @@ public class GTLItems {
 
     public static final ItemEntry<ComponentItem> REALLY_ULTIMATE_BATTERY = REGISTRATE
             .item("really_max_battery", ComponentItem::create)
-            .onRegister(attach(new TooltipBehavior(lines -> lines.add(Component.literal("填满就能通关GregTechCEu Modern").withStyle(ChatFormatting.GRAY)))))
+            .lang("Really MAX Battery")
+            .onRegister(attach(new TooltipBehavior(lines -> lines.add(Component.translatable("gtlcore.tooltip.item.really_max_battery").withStyle(ChatFormatting.GRAY)))))
             .onRegister(modelPredicate(GTCEu.id("battery"), ElectricStats::getStoredPredicate))
             .onRegister(attach(ElectricStats.createRechargeableBattery(Long.MAX_VALUE, GTValues.UEV)))
             .register();
     public static final ItemEntry<ComponentItem> TRANSCENDENT_ULTIMATE_BATTERY = REGISTRATE
             .item("transcendent_max_battery", ComponentItem::create)
-            .onRegister(attach(new TooltipBehavior(lines -> lines.add(Component.literal("填满就能通关GregTech Leisure").withStyle(ChatFormatting.GRAY)))))
+            .lang("Transcendent MAX Battery")
+            .onRegister(attach(new TooltipBehavior(lines -> lines.add(Component.translatable("gtlcore.tooltip.item.transcendent_max_battery").withStyle(ChatFormatting.GRAY)))))
             .onRegister(modelPredicate(GTCEu.id("battery"), ElectricStats::getStoredPredicate))
             .onRegister(attach(ElectricStats.createRechargeableBattery(Long.MAX_VALUE, GTValues.UIV)))
             .register();
     public static final ItemEntry<ComponentItem> EXTREMELY_ULTIMATE_BATTERY = REGISTRATE
             .item("extremely_max_battery", ComponentItem::create)
-            .onRegister(attach(new TooltipBehavior(lines -> lines.add(Component.literal("有生之年将它填满").withStyle(ChatFormatting.GRAY)))))
+            .lang("Extremely MAX Battery")
+            .onRegister(attach(new TooltipBehavior(lines -> lines.add(Component.translatable("gtlcore.tooltip.item.extremely_max_battery").withStyle(ChatFormatting.GRAY)))))
             .onRegister(modelPredicate(GTCEu.id("battery"), ElectricStats::getStoredPredicate))
             .onRegister(attach(ElectricStats.createRechargeableBattery(Long.MAX_VALUE, GTValues.UXV)))
             .register();
     public static final ItemEntry<ComponentItem> INSANELY_ULTIMATE_BATTERY = REGISTRATE
             .item("insanely_max_battery", ComponentItem::create)
-            .onRegister(attach(new TooltipBehavior(lines -> lines.add(Component.literal(StringUtil.dark_purplish_red("填满也就图一乐"))))))
+            .lang("Insanely MAX Battery")
+            .onRegister(attach(new TooltipBehavior(lines -> lines.add(Component.literal(StringUtil.dark_purplish_red(LocalizationUtils.format("gtlcore.tooltip.item.insanely_max_battery")))))))
             .onRegister(modelPredicate(GTCEu.id("battery"), ElectricStats::getStoredPredicate))
             .onRegister(attach(ElectricStats.createRechargeableBattery(Long.MAX_VALUE, GTValues.OpV)))
             .register();
     public static final ItemEntry<ComponentItem> MEGA_ULTIMATE_BATTERY = REGISTRATE
             .item("mega_max_battery", ComponentItem::create)
-            .onRegister(attach(new TooltipBehavior(lines -> lines.add(Component.literal(StringUtil.full_color("填满电池 机械飞升"))))))
+            .lang("Mega MAX Battery")
+            .onRegister(attach(new TooltipBehavior(lines -> lines.add(Component.literal(StringUtil.full_color(LocalizationUtils.format("gtlcore.tooltip.item.mega_max_battery")))))))
             .onRegister(modelPredicate(GTCEu.id("battery"), ElectricStats::getStoredPredicate))
             .onRegister(attach(ElectricStats.createRechargeableBattery(Long.MAX_VALUE, GTValues.MAX)))
             .register();
@@ -182,6 +190,7 @@ public class GTLItems {
 
     public static final ItemEntry<ComponentItem> ELECTRIC_PUMP_MAX = REGISTRATE
             .item("max_electric_pump", ComponentItem::create)
+            .lang("MAX Electric Pump")
             .onRegister(attach(new CoverPlaceBehavior(GTLCovers.ELECTRIC_PUMP_MAX)))
             .onRegister(attach(new TooltipBehavior(lines -> {
                 lines.add(Component.translatable("item.gtceu.electric.pump.tooltip"));
@@ -192,6 +201,7 @@ public class GTLItems {
 
     public static final ItemEntry<ComponentItem> CONVEYOR_MODULE_MAX = REGISTRATE
             .item("max_conveyor_module", ComponentItem::create)
+            .lang("MAX Conveyor Module")
             .onRegister(attach(new CoverPlaceBehavior(GTLCovers.CONVEYOR_MODULE_MAX)))
             .onRegister(attach(new TooltipBehavior(lines -> {
                 lines.add(Component.translatable("item.gtceu.conveyor.module.tooltip"));
@@ -200,6 +210,7 @@ public class GTLItems {
             .register();
 
     public static final ItemEntry<ComponentItem> ROBOT_ARM_MAX = REGISTRATE.item("max_robot_arm", ComponentItem::create)
+            .lang("MAX Robot Arm")
             .onRegister(attach(new CoverPlaceBehavior(GTLCovers.ROBOT_ARM_MAX)))
             .onRegister(attach(new TooltipBehavior(lines -> {
                 lines.add(Component.translatable("item.gtceu.robot.arm.tooltip"));
@@ -207,10 +218,10 @@ public class GTLItems {
             })))
             .register();
 
-    public static final ItemEntry<Item> ELECTRIC_PISTON_MAX = register("max_electric_piston");
-    public static final ItemEntry<Item> FIELD_GENERATOR_MAX = register("max_field_generator");
-    public static final ItemEntry<Item> EMITTER_MAX = register("max_emitter");
-    public static final ItemEntry<Item> SENSOR_MAX = register("max_sensor");
+    public static final ItemEntry<Item> ELECTRIC_PISTON_MAX = registerLang("max_electric_piston", "MAX Electric Piston");
+    public static final ItemEntry<Item> FIELD_GENERATOR_MAX = registerLang("max_field_generator", "MAX Field Generator");
+    public static final ItemEntry<Item> EMITTER_MAX = registerLang("max_emitter", "MAX Emitte");
+    public static final ItemEntry<Item> SENSOR_MAX = registerLang("max_sensor", "MAX Sensor");
 
     public static final ItemEntry<ComponentItem> PRIMITIVE_ROBOT_ARM = REGISTRATE
             .item("primitive_robot_arm", ComponentItem::create)
@@ -234,6 +245,7 @@ public class GTLItems {
         return REGISTRATE
                 .item(GTValues.VN[GTValues.MAX].toLowerCase(Locale.ROOT) + "_" +
                         (amperage == 1 ? "" : amperage + "a_") + "wireless_energy_receive_cover", ComponentItem::create)
+                .lang(GTValues.VNF[GTValues.MAX] + " " + (amperage == 1 ? "" : amperage + "A ") + "Wireless Energy Receive Cover")
                 .onRegister(attach(new TooltipBehavior(lines -> {
                     lines.add(Component.translatable("item.gtmthings.wireless_energy_receive_cover.tooltip.1"));
                     lines.add(Component.translatable("item.gtmthings.wireless_energy_receive_cover.tooltip.2"));
@@ -273,6 +285,7 @@ public class GTLItems {
 
     public static final ItemEntry<ComponentItem> CFG_COPY = REGISTRATE
             .item("cfg_copy", ComponentItem::create)
+            .lang("Configuration Copy")
             .onRegister(attach(ConfigurationCopyBehavior.INSTANCE))
             .model(NonNullBiConsumer.noop())
             .register();
@@ -281,10 +294,15 @@ public class GTLItems {
         return REGISTRATE.item(id, p -> new KineticRotorItem(p, durability, min, max, material)).register();
     }
 
-    public static ItemEntry<Item>[] registerCircuits(String id, int[] tiers) {
+    public static ItemEntry<Item>[] registerCircuits(String name, int[] tiers) {
         ItemEntry<Item>[] entries = new ItemEntry[GTValues.TIER_COUNT];
         for (int tier : tiers) {
-            ItemEntry<Item> register = registerCircuit(id + "_" + GTValues.VN[tier].toLowerCase(), CustomTags.CIRCUITS_ARRAY[tier]);
+            String id = name + "_" + GTValues.VN[tier].toLowerCase();
+            ItemEntry<Item> register = REGISTRATE.item(id, Item::new)
+                    .model((ctx, prov) -> prov.generated(ctx, GTLCore.id("item/circuit/" + id)))
+                    .lang(FormattingUtil.toEnglishName(name) + " " + GTValues.VN[tier])
+                    .tag(CustomTags.CIRCUITS_ARRAY[tier])
+                    .register();
             entries[tier] = register;
         }
         return entries;
@@ -316,6 +334,11 @@ public class GTLItems {
         return REGISTRATE.item(id, Item::new)
                 .model((ctx, prov) -> prov.generated(ctx, GTLCore.id("item/" + texture)))
                 .register();
+    }
+
+    private static ItemEntry<Item> registerLang(String id, String lang) {
+        return REGISTRATE.item(id, Item::new)
+                .lang(lang).register();
     }
 
     private static ItemEntry<Item> registerMagic(String id) {
@@ -362,65 +385,65 @@ public class GTLItems {
 
     public static final ItemEntry<Item> BIOWARE_CIRCUIT_BOARD = register("bioware_circuit_board");
     public static final ItemEntry<Item> BIOWARE_PRINTED_CIRCUIT_BOARD = register("bioware_printed_circuit_board");
-    public static final ItemEntry<Item> SMD_CAPACITOR_BIOWARE = register("smd_capacitor_bioware");
-    public static final ItemEntry<Item> SMD_DIODE_BIOWARE = register("smd_diode_bioware");
-    public static final ItemEntry<Item> SMD_RESISTOR_BIOWARE = register("smd_resistor_bioware");
-    public static final ItemEntry<Item> SMD_TRANSISTOR_BIOWARE = register("smd_transistor_bioware");
-    public static final ItemEntry<Item> SMD_INDUCTOR_BIOWARE = register("smd_inductor_bioware");
+    public static final ItemEntry<Item> SMD_CAPACITOR_BIOWARE = registerLang("smd_capacitor_bioware", "Bioware Capacitor");
+    public static final ItemEntry<Item> SMD_DIODE_BIOWARE = registerLang("smd_diode_bioware", "Bioware Diode");
+    public static final ItemEntry<Item> SMD_RESISTOR_BIOWARE = registerLang("smd_resistor_bioware", "Bioware Resistor");
+    public static final ItemEntry<Item> SMD_TRANSISTOR_BIOWARE = registerLang("smd_transistor_bioware", "Bioware Transistor");
+    public static final ItemEntry<Item> SMD_INDUCTOR_BIOWARE = registerLang("smd_inductor_bioware", "Bioware Inductor");
 
     public static final ItemEntry<Item> OPTICAL_CIRCUIT_BOARD = register("optical_circuit_board");
     public static final ItemEntry<Item> OPTICAL_PRINTED_CIRCUIT_BOARD = register("optical_printed_circuit_board");
     public static final ItemEntry<Item> OPTICAL_RAM_WAFER = register("optical_ram_wafer");
     public static final ItemEntry<Item> OPTICAL_RAM_CHIP = register("optical_ram_chip");
-    public static final ItemEntry<Item> SMD_CAPACITOR_OPTICAL = register("smd_capacitor_optical");
-    public static final ItemEntry<Item> SMD_DIODE_OPTICAL = register("smd_diode_optical");
-    public static final ItemEntry<Item> SMD_RESISTOR_OPTICAL = register("smd_resistor_optical");
-    public static final ItemEntry<Item> SMD_TRANSISTOR_OPTICAL = register("smd_transistor_optical");
-    public static final ItemEntry<Item> SMD_INDUCTOR_OPTICAL = register("smd_inductor_optical");
+    public static final ItemEntry<Item> SMD_CAPACITOR_OPTICAL = registerLang("smd_capacitor_optical", "Optical Capacitor");
+    public static final ItemEntry<Item> SMD_DIODE_OPTICAL = registerLang("smd_diode_optical", "Optical Diode");
+    public static final ItemEntry<Item> SMD_RESISTOR_OPTICAL = registerLang("smd_resistor_optical", "Optical Resistor");
+    public static final ItemEntry<Item> SMD_TRANSISTOR_OPTICAL = registerLang("smd_transistor_optical", "Optical Transistor");
+    public static final ItemEntry<Item> SMD_INDUCTOR_OPTICAL = registerLang("smd_inductor_optical", "Optical Inductor");
 
     public static final ItemEntry<Item> EXOTIC_CIRCUIT_BOARD = register("exotic_circuit_board");
     public static final ItemEntry<Item> EXOTIC_PRINTED_CIRCUIT_BOARD = register("exotic_printed_circuit_board");
     public static final ItemEntry<Item> EXOTIC_RAM_WAFER = register("exotic_ram_wafer");
     public static final ItemEntry<Item> EXOTIC_RAM_CHIP = register("exotic_ram_chip");
-    public static final ItemEntry<Item> SMD_CAPACITOR_EXOTIC = register("smd_capacitor_exotic");
-    public static final ItemEntry<Item> SMD_DIODE_EXOTIC = register("smd_diode_exotic");
-    public static final ItemEntry<Item> SMD_RESISTOR_EXOTIC = register("smd_resistor_exotic");
-    public static final ItemEntry<Item> SMD_TRANSISTOR_EXOTIC = register("smd_transistor_exotic");
-    public static final ItemEntry<Item> SMD_INDUCTOR_EXOTIC = register("smd_inductor_exotic");
+    public static final ItemEntry<Item> SMD_CAPACITOR_EXOTIC = registerLang("smd_capacitor_exotic", "Exotic Capacitor");
+    public static final ItemEntry<Item> SMD_DIODE_EXOTIC = registerLang("smd_diode_exotic", "Exotic Diode");
+    public static final ItemEntry<Item> SMD_RESISTOR_EXOTIC = registerLang("smd_resistor_exotic", "Exotic Resistor");
+    public static final ItemEntry<Item> SMD_TRANSISTOR_EXOTIC = registerLang("smd_transistor_exotic", "Exotic Transistor");
+    public static final ItemEntry<Item> SMD_INDUCTOR_EXOTIC = registerLang("smd_inductor_exotic", "Exotic Inductor");
 
     public static final ItemEntry<Item> COSMIC_CIRCUIT_BOARD = register("cosmic_circuit_board");
     public static final ItemEntry<Item> COSMIC_PRINTED_CIRCUIT_BOARD = register("cosmic_printed_circuit_board");
     public static final ItemEntry<Item> COSMIC_RAM_WAFER = register("cosmic_ram_wafer");
     public static final ItemEntry<Item> COSMIC_RAM_CHIP = register("cosmic_ram_chip");
-    public static final ItemEntry<Item> SMD_CAPACITOR_COSMIC = register("smd_capacitor_cosmic");
-    public static final ItemEntry<Item> SMD_DIODE_COSMIC = register("smd_diode_cosmic");
-    public static final ItemEntry<Item> SMD_RESISTOR_COSMIC = register("smd_resistor_cosmic");
-    public static final ItemEntry<Item> SMD_TRANSISTOR_COSMIC = register("smd_transistor_cosmic");
-    public static final ItemEntry<Item> SMD_INDUCTOR_COSMIC = register("smd_inductor_cosmic");
+    public static final ItemEntry<Item> SMD_CAPACITOR_COSMIC = registerLang("smd_capacitor_cosmic", "Cosmic Capacitor");
+    public static final ItemEntry<Item> SMD_DIODE_COSMIC = registerLang("smd_diode_cosmic", "Cosmic Diode");
+    public static final ItemEntry<Item> SMD_RESISTOR_COSMIC = registerLang("smd_resistor_cosmic", "Cosmic Resistor");
+    public static final ItemEntry<Item> SMD_TRANSISTOR_COSMIC = registerLang("smd_transistor_cosmic", "Cosmic Transistor");
+    public static final ItemEntry<Item> SMD_INDUCTOR_COSMIC = registerLang("smd_inductor_cosmic", "Cosmic Inductor");
 
     public static final ItemEntry<Item> SUPRACAUSAL_CIRCUIT_BOARD = register("supracausal_circuit_board");
     public static final ItemEntry<Item> SUPRACAUSAL_PRINTED_CIRCUIT_BOARD = register("supracausal_printed_circuit_board");
     public static final ItemEntry<Item> SUPRACAUSAL_RAM_WAFER = register("supracausal_ram_wafer");
     public static final ItemEntry<Item> SUPRACAUSAL_RAM_CHIP = register("supracausal_ram_chip");
-    public static final ItemEntry<Item> SMD_CAPACITOR_SUPRACAUSAL = register("smd_capacitor_supracausal");
-    public static final ItemEntry<Item> SMD_DIODE_SUPRACAUSAL = register("smd_diode_supracausal");
-    public static final ItemEntry<Item> SMD_RESISTOR_SUPRACAUSAL = register("smd_resistor_supracausal");
-    public static final ItemEntry<Item> SMD_TRANSISTOR_SUPRACAUSAL = register("smd_transistor_supracausal");
-    public static final ItemEntry<Item> SMD_INDUCTOR_SUPRACAUSAL = register("smd_inductor_supracausal");
+    public static final ItemEntry<Item> SMD_CAPACITOR_SUPRACAUSAL = registerLang("smd_capacitor_supracausal", "Supracausal Capacitor");
+    public static final ItemEntry<Item> SMD_DIODE_SUPRACAUSAL = registerLang("smd_diode_supracausal", "Supracausal Diode");
+    public static final ItemEntry<Item> SMD_RESISTOR_SUPRACAUSAL = registerLang("smd_resistor_supracausal", "Supracausal Resistor");
+    public static final ItemEntry<Item> SMD_TRANSISTOR_SUPRACAUSAL = registerLang("smd_transistor_supracausal", "Supracausal Transistor");
+    public static final ItemEntry<Item> SMD_INDUCTOR_SUPRACAUSAL = registerLang("smd_inductor_supracausal", "Supracausal Inductor");
 
-    public static final ItemEntry<Item> UHV_VOLTAGE_COIL = register("uhv_voltage_coil");
-    public static final ItemEntry<Item> UEV_VOLTAGE_COIL = register("uev_voltage_coil");
-    public static final ItemEntry<Item> UIV_VOLTAGE_COIL = register("uiv_voltage_coil");
-    public static final ItemEntry<Item> UXV_VOLTAGE_COIL = register("uxv_voltage_coil");
-    public static final ItemEntry<Item> OPV_VOLTAGE_COIL = register("opv_voltage_coil");
-    public static final ItemEntry<Item> MAX_VOLTAGE_COIL = register("max_voltage_coil");
+    public static final ItemEntry<Item> UHV_VOLTAGE_COIL = registerLang("uhv_voltage_coil", "UHV Voltage Coil");
+    public static final ItemEntry<Item> UEV_VOLTAGE_COIL = registerLang("uev_voltage_coil", "UEV Voltage Coil");
+    public static final ItemEntry<Item> UIV_VOLTAGE_COIL = registerLang("uiv_voltage_coil", "UIV Voltage Coil");
+    public static final ItemEntry<Item> UXV_VOLTAGE_COIL = registerLang("uxv_voltage_coil", "UXV Voltage Coil");
+    public static final ItemEntry<Item> OPV_VOLTAGE_COIL = registerLang("opv_voltage_coil", "OpV Voltage Coil");
+    public static final ItemEntry<Item> MAX_VOLTAGE_COIL = registerLang("max_voltage_coil", "MAX Voltage Coil");
 
-    public static final ItemEntry<Item> SPACE_DRONE_MK1 = register("space_drone_mk1");
-    public static final ItemEntry<Item> SPACE_DRONE_MK2 = register("space_drone_mk2");
-    public static final ItemEntry<Item> SPACE_DRONE_MK3 = register("space_drone_mk3");
-    public static final ItemEntry<Item> SPACE_DRONE_MK4 = register("space_drone_mk4");
-    public static final ItemEntry<Item> SPACE_DRONE_MK5 = register("space_drone_mk5");
-    public static final ItemEntry<Item> SPACE_DRONE_MK6 = register("space_drone_mk6");
+    public static final ItemEntry<Item> SPACE_DRONE_MK1 = registerLang("space_drone_mk1", "Space Drone MK1");
+    public static final ItemEntry<Item> SPACE_DRONE_MK2 = registerLang("space_drone_mk2", "Space Drone MK2");
+    public static final ItemEntry<Item> SPACE_DRONE_MK3 = registerLang("space_drone_mk3", "Space Drone MK3");
+    public static final ItemEntry<Item> SPACE_DRONE_MK4 = registerLang("space_drone_mk4", "Space Drone MK4");
+    public static final ItemEntry<Item> SPACE_DRONE_MK5 = registerLang("space_drone_mk5", "Space Drone MK5");
+    public static final ItemEntry<Item> SPACE_DRONE_MK6 = registerLang("space_drone_mk6", "Space Drone MK6");
 
     public static final ItemEntry<Item> ENTANGLED_SINGULARITY = registerCustomModel("entangled_singularity");
     public static final ItemEntry<Item> COSMIC_SINGULARITY = registerCustomModel("cosmic_singularity");

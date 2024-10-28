@@ -33,7 +33,7 @@ public class KineticRotorItem extends Item {
     @Override
     public void appendHoverText(ItemStack itemstack, @Nullable Level world, List<Component> list, TooltipFlag flag) {
         super.appendHoverText(itemstack, world, list, flag);
-        list.add(Component.translatable("item.kinetic_rotor.min", MinWind));
-        list.add(Component.translatable("item.kinetic_rotor.max", MaxWind));
+        list.add(Component.translatable("gtlcore.tooltip.item.kinetic_rotor.min", MinWind));
+        list.add(Component.translatable("gtlcore.tooltip.item.kinetic_rotor.max", MaxWind));
     }
 }

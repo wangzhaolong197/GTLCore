@@ -706,8 +706,8 @@ public class GTLBlocks {
                 @Override
                 public void appendHoverText(@NotNull ItemStack stack, @Nullable BlockGetter level,
                                             @NotNull List<Component> tooltip, @NotNull TooltipFlag flag) {
-                    tooltip.add(Component.translatable("tooltip.gtlcore.quantum_glass.0"));
-                    tooltip.add(Component.translatable("tooltip.gtlcore.quantum_glass.1"));
+                    tooltip.add(Component.translatable("gtlcore.tooltip.block.quantum_glass.0"));
+                    tooltip.add(Component.translatable("gtlcore.tooltip.block.quantum_glass.1"));
                 }
             },
             GTLCore.id("block/casings/quantum_glass"), () -> Blocks.GLASS, () -> RenderType::translucent);

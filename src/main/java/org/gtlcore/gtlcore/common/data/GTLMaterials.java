@@ -21,8 +21,8 @@ import com.enderio.base.common.init.EIOItems;
 import earth.terrarium.adastra.common.registry.ModBlocks;
 import earth.terrarium.adastra.common.registry.ModItems;
 
-import java.util.ArrayList;
-import java.util.List;
+import java.util.HashSet;
+import java.util.Set;
 import java.util.function.Supplier;
 
 import static com.gregtechceu.gtceu.common.data.GTMaterials.*;
@@ -31,7 +31,7 @@ import static committee.nova.mods.avaritia.init.registry.ModItems.*;
 
 public class GTLMaterials {
 
-    public static final List<String> ALL_MATERIAL = new ArrayList<>();
+    public static final Set<String> ALL_MATERIAL = new HashSet<>();
 
     public static Material Fluix;
     public static Material Desh;

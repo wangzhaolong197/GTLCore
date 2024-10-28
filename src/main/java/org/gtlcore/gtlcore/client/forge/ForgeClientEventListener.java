@@ -1,13 +1,12 @@
 package org.gtlcore.gtlcore.client.forge;
 
 import org.gtlcore.gtlcore.GTLCore;
-import org.gtlcore.gtlcore.common.data.GTLBlocks;
+import org.gtlcore.gtlcore.client.Tooltips;
 import org.gtlcore.gtlcore.common.data.GTLItems;
 import org.gtlcore.gtlcore.common.item.StructureWriteBehavior;
 import org.gtlcore.gtlcore.utils.StringUtil;
 
 import com.gregtechceu.gtceu.api.GTValues;
-import com.gregtechceu.gtceu.common.data.GTItems;
 import com.gregtechceu.gtceu.common.data.GTMachines;
 
 import com.lowdragmc.lowdraglib.client.utils.RenderBufferUtils;
@@ -29,105 +28,49 @@ import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
 import net.minecraftforge.client.event.RenderLevelStageEvent;
 import net.minecraftforge.event.entity.player.ItemTooltipEvent;
-import net.minecraftforge.event.server.ServerStartedEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod;
 
 import com.mojang.blaze3d.platform.GlStateManager;
 import com.mojang.blaze3d.systems.RenderSystem;
 import com.mojang.blaze3d.vertex.*;
-import com.tterrag.registrate.util.entry.RegistryEntry;
-
-import java.util.*;
 
 @Mod.EventBusSubscriber(modid = GTLCore.MOD_ID, bus = Mod.EventBusSubscriber.Bus.FORGE, value = Dist.CLIENT)
 @OnlyIn(Dist.CLIENT)
 public class ForgeClientEventListener {
-
-    private static final Map<Item, String[]> tooltipMap = new HashMap<>();
-    private static final Set<Item> suprachronalCircuitSet = new HashSet<>();
-    private static final Set<Item> magnetoresonaticcircuitSet = new HashSet<>();
-
-    @SubscribeEvent
-    public static void addTooltip(ServerStartedEvent event) {
-        suprachronalCircuitSet.addAll(Arrays.stream(GTLItems.SUPRACHRONAL_CIRCUIT).map(RegistryEntry::get).toList());
-        magnetoresonaticcircuitSet.addAll(Arrays.stream(GTLItems.MAGNETO_RESONATIC_CIRCUIT).filter(Objects::nonNull).map(RegistryEntry::get).toList());
-        tooltipMap.put(GTItems.VACUUM_TUBE.get(), new String[] { "手持粗真空管右击真空等级大于0的真空提供机器获取" });
-        tooltipMap.put(GTLItems.WARPED_ENDER_PEAL.get(), new String[] { "潜行右键可设置个人传送点，右键传送到传送点" });
-        tooltipMap.put(GTLBlocks.NAQUADRIA_CHARGE.asItem(), new String[] { "可由" + I18n.get(GTItems.QUANTUM_STAR.get().getDescriptionId()) + "激活" });
-        tooltipMap.put(GTLBlocks.LEPTONIC_CHARGE.asItem(), new String[] { "可由" + I18n.get(GTItems.GRAVI_STAR.get().getDescriptionId()) + "激活" });
-        tooltipMap.put(GTLBlocks.QUANTUM_CHROMODYNAMIC_CHARGE.asItem(), new String[] { "可由" + I18n.get(GTLItems.UNSTABLE_STAR.get().getDescriptionId()) + "激活" });
-        tooltipMap.put(GTLBlocks.COIL_URUIUM.asItem(), new String[] { "可为超维度等离子锻炉提供32000K炉温", "恒星锻炉模式仅可使用该线圈" });
-        tooltipMap.put(GTLBlocks.ESSENCE_BLOCK.asItem(), new String[] { "将骨块放置在转换室获得" });
-        tooltipMap.put(GTLBlocks.DRACONIUM_BLOCK_CHARGED.asItem(), new String[] { "将注入龙力的黑曜石放置在转换室获得" });
-        tooltipMap.put(GTLItems.HYPER_STABLE_SELF_HEALING_ADHESIVE.get(), new String[] { "§7选择性完全粘合，即使在撕裂或损坏时也有效" });
-        tooltipMap.put(GTLItems.BLACK_BODY_NAQUADRIA_SUPERSOLID.get(), new String[] { "§7如液体般流动，不反射任何电磁波，完美地将其吸收与传递" });
-        tooltipMap.put(GTLItems.HUI_CIRCUIT_1.get(), new String[] { "§793015-T浮点运算/秒" });
-        tooltipMap.put(GTLItems.HUI_CIRCUIT_2.get(), new String[] { "§776M处理单元" });
-        tooltipMap.put(GTLItems.HUI_CIRCUIT_3.get(), new String[] { "§7无效RSA算法" });
-        tooltipMap.put(GTLItems.HUI_CIRCUIT_4.get(), new String[] { "§7第56梅森素数" });
-        tooltipMap.put(GTLItems.HUI_CIRCUIT_5.get(), new String[] { "§7佯谬" });
-        tooltipMap.put(GTLItems.BIOWARE_PRINTED_CIRCUIT_BOARD.get(), new String[] { "§7生物基因突变的电路基板" });
-        tooltipMap.put(GTLItems.OPTICAL_PRINTED_CIRCUIT_BOARD.get(), new String[] { "§7光学注入的电路基板" });
-        tooltipMap.put(GTLItems.EXOTIC_PRINTED_CIRCUIT_BOARD.get(), new String[] { "§7量子电路基板" });
-        tooltipMap.put(GTLItems.COSMIC_PRINTED_CIRCUIT_BOARD.get(), new String[] { "§7承载宇宙的电路基板" });
-        tooltipMap.put(GTLItems.SUPRACAUSAL_PRINTED_CIRCUIT_BOARD.get(), new String[] { "§7最终的电路基板" });
-    }
-
-    private static void updateTooltipMap() {
-        tooltipMap.put(GTLItems.CREATE_ULTIMATE_BATTERY.get(), new String[] { "§7能凭空产生能量", "§2等级-§r" + StringUtil.white_blue("未知") });
-        tooltipMap.put(GTLItems.SUPRACHRONAL_MAINFRAME_COMPLEX.get(), new String[] { "§7能凭空产生算力", "§2等级-§r" + StringUtil.white_blue("未知") });
-        tooltipMap.put(GTLItems.SUPRACAUSAL_MAINFRAME.get(), new String[] { "§7未卜先知", StringUtil.full_color("MAX级电路") });
-        tooltipMap.put(GTLItems.SUPRACAUSAL_COMPUTER.get(), new String[] { "§7利用虫洞的优势", StringUtil.full_color("OpV级电路") });
-        tooltipMap.put(GTLItems.SUPRACAUSAL_ASSEMBLY.get(), new String[] { "§7巨量的奇点", StringUtil.full_color("UXV级电路") });
-        tooltipMap.put(GTLItems.SUPRACAUSAL_PROCESSOR.get(), new String[] { "§7黑洞之力", StringUtil.full_color("UIV级电路") });
-        tooltipMap.put(GTLItems.COSMIC_ASSEMBLY.get(), new String[] { "§7于握揽微微转动", StringUtil.dark_purplish_red("UIV级电路") });
-        tooltipMap.put(GTLItems.COSMIC_COMPUTER.get(), new String[] { "§7密度趋近于奇点的小东西", StringUtil.dark_purplish_red("UXV级电路") });
-        tooltipMap.put(GTLItems.COSMIC_MAINFRAME.get(), new String[] { "§7寰宇之力，震慑古今！", StringUtil.dark_purplish_red("OpV级电路") });
-        tooltipMap.put(GTLItems.COSMIC_PROCESSOR.get(), new String[] { "§7手握星辰", StringUtil.dark_purplish_red("UEV级电路") });
-        tooltipMap.put(GTLItems.EXOTIC_ASSEMBLY.get(), new String[] { "§7量子随机游走", StringUtil.purplish_red("UEV级电路") });
-        tooltipMap.put(GTLItems.EXOTIC_COMPUTER.get(), new String[] { "§7以自旋控制一切", StringUtil.purplish_red("UIV级电路") });
-        tooltipMap.put(GTLItems.EXOTIC_MAINFRAME.get(), new String[] { "§7来自未来的电路", StringUtil.purplish_red("UXV级电路") });
-        tooltipMap.put(GTLItems.EXOTIC_PROCESSOR.get(), new String[] { "§7超级磁性半导体电路", StringUtil.purplish_red("UHV级电路") });
-        tooltipMap.put(GTLItems.OPTICAL_ASSEMBLY.get(), new String[] { "§7激光之力！", StringUtil.golden("UHV级电路") });
-        tooltipMap.put(GTLItems.OPTICAL_COMPUTER.get(), new String[] { "§7就在眨眼之间", StringUtil.golden("UEV级电路") });
-        tooltipMap.put(GTLItems.OPTICAL_MAINFRAME.get(), new String[] { "§7还能更快吗？", StringUtil.golden("UIV级电路") });
-        tooltipMap.put(GTLItems.OPTICAL_PROCESSOR.get(), new String[] { "§7光速计算", StringUtil.golden("UV级电路") });
-        tooltipMap.put(GTLItems.BIOWARE_ASSEMBLY.get(), new String[] { "§7似乎能听到窃窃私语", StringUtil.dark_green("UV级电路") });
-        tooltipMap.put(GTLItems.BIOWARE_COMPUTER.get(), new String[] { "§7金属之间布满了黏菌", StringUtil.dark_green("UHV级电路") });
-        tooltipMap.put(GTLItems.BIOWARE_MAINFRAME.get(), new String[] { "§7菌群意识网络", StringUtil.dark_green("UEV级电路") });
-        tooltipMap.put(GTLItems.BIOWARE_PROCESSOR.get(), new String[] { "§7粘稠的有机浆液附着于表面", StringUtil.dark_green("ZPM级电路") });
-    }
 
     @SubscribeEvent
     public static void onTooltipEvent(ItemTooltipEvent event) {
         Player player = event.getEntity();
         if (player == null) return;
         if (player.tickCount % 2 == 0) {
-            updateTooltipMap();
+            Tooltips.updateTooltipMap();
         }
         Item item = event.getItemStack().getItem();
-        if (tooltipMap.containsKey(item)) {
-            for (String text : tooltipMap.get(item)) {
-                event.getToolTip().add(Component.literal(text));
+        if (Tooltips.TOOL_TIPS_MAP.containsKey(item)) {
+            for (int i = 0; i < Tooltips.TOOL_TIPS_MAP.get(item).length; i++) {
+                event.getToolTip().add(Component.translatable("gtlcore.tooltip.item." + item.kjs$getIdLocation().getPath() + "." + i));
+            }
+            if (Tooltips.FLICKER_TOOL_TIPS_MAP.containsKey(item)) {
+                event.getToolTip().add(Component.literal(Tooltips.FLICKER_TOOL_TIPS_MAP.get(item)));
             }
             return;
         }
-        if (suprachronalCircuitSet.contains(item)) {
+        if (Tooltips.suprachronalCircuitSet.contains(item)) {
             for (int tier : GTMachines.ALL_TIERS) {
                 if (GTLItems.SUPRACHRONAL_CIRCUIT[tier].is(item)) {
-                    event.getToolTip().add(Component.literal("运行在已知时空之外").withStyle(ChatFormatting.GRAY));
-                    event.getToolTip().add(Component.literal(StringUtil.white_blue(GTValues.VN[tier] + "级电路")));
+                    event.getToolTip().add(Component.translatable("gtlcore.tooltip.item.suprachronal_circuit").withStyle(ChatFormatting.GRAY));
+                    event.getToolTip().add(Component.literal(StringUtil.white_blue(I18n.get("gtlcore.tooltip.item.tier_circuit", GTValues.VN[tier]))));
                     return;
                 }
             }
         }
-        if (magnetoresonaticcircuitSet.contains(item)) {
+        if (Tooltips.magnetoresonaticcircuitSet.contains(item)) {
             for (int tier : GTMachines.ALL_TIERS) {
                 if (tier > GTValues.UIV) return;
                 if (GTLItems.MAGNETO_RESONATIC_CIRCUIT[tier].is(item)) {
-                    event.getToolTip().add(Component.literal("利用磁共振仪器产生的强大磁场来运行").withStyle(ChatFormatting.GRAY));
-                    event.getToolTip().add(Component.literal(GTValues.VN[tier] + "级电路").withStyle(ChatFormatting.LIGHT_PURPLE));
+                    event.getToolTip().add(Component.translatable("gtlcore.tooltip.item.magneto_resonatic_circuit").withStyle(ChatFormatting.GRAY));
+                    event.getToolTip().add(Component.translatable("gtlcore.tooltip.item.tier_circuit", GTValues.VN[tier]).withStyle(ChatFormatting.LIGHT_PURPLE));
                     return;
                 }
             }

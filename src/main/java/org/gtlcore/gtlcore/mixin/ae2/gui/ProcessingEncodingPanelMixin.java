@@ -43,28 +43,28 @@ public abstract class ProcessingEncodingPanelMixin extends EncodingModePanel {
     @Inject(method = "<init>", at = @At("TAIL"))
     public void init(PatternEncodingTermScreen<?> screen, WidgetContainer widgets, CallbackInfo ci) {
         gTLCore$multipleTow = new ModifyIconButton(b -> ((PatterEncodingTermMenuModify) this.menu).gTLCore$modifyPatter(2), ModifyIcon.MULTIPLY_2,
-                Component.literal("样板配方 x 2"),
-                Component.literal("将样板材料和配方数量 x 2"));
+                Component.translatable("gtlcore.pattern.multiply", 2),
+                Component.translatable("gtlcore.pattern.tooltip.multiply", 2));
 
         gTLCore$multipleThree = new ModifyIconButton(b -> ((PatterEncodingTermMenuModify) this.menu).gTLCore$modifyPatter(3), ModifyIcon.MULTIPLY_3,
-                Component.literal("样板配方 x 3"),
-                Component.literal("将样板材料和配方数量 x 3"));
+                Component.translatable("gtlcore.pattern.multiply", 3),
+                Component.translatable("gtlcore.pattern.tooltip.multiply", 3));
 
         gTLCore$multipleFive = new ModifyIconButton(b -> ((PatterEncodingTermMenuModify) this.menu).gTLCore$modifyPatter(5), ModifyIcon.MULTIPLY_5,
-                Component.literal("样板配方 x 5"),
-                Component.literal("将样板材料和配方数量 x 5"));
+                Component.translatable("gtlcore.pattern.multiply", 5),
+                Component.translatable("gtlcore.pattern.tooltip.multiply", 5));
 
         gTLCore$dividingTow = new ModifyIconButton(b -> ((PatterEncodingTermMenuModify) this.menu).gTLCore$modifyPatter(-2), ModifyIcon.DIVISION_2,
-                Component.literal("样板配方 ÷ 2"),
-                Component.literal("将样板材料和配方数量 ÷ 2"));
+                Component.translatable("gtlcore.pattern.divide", 2),
+                Component.translatable("gtlcore.pattern.tooltip.divide", 2));
 
         gTLCore$dividingThree = new ModifyIconButton(b -> ((PatterEncodingTermMenuModify) this.menu).gTLCore$modifyPatter(-3), ModifyIcon.DIVISION_3,
-                Component.literal("样板配方 ÷ 3"),
-                Component.literal("将样板材料和配方数量 ÷ 3"));
+                Component.translatable("gtlcore.pattern.divide", 3),
+                Component.translatable("gtlcore.pattern.tooltip.divide", 3));
 
         gTLCore$dividingFive = new ModifyIconButton(b -> ((PatterEncodingTermMenuModify) this.menu).gTLCore$modifyPatter(-5), ModifyIcon.DIVISION_5,
-                Component.literal("样板配方 ÷ 5"),
-                Component.literal("将样板材料和配方数量 ÷ 5"));
+                Component.translatable("gtlcore.pattern.divide", 5),
+                Component.translatable("gtlcore.pattern.tooltip.divide", 5));
 
         widgets.add("modify1", gTLCore$multipleTow);
         widgets.add("modify2", gTLCore$multipleThree);

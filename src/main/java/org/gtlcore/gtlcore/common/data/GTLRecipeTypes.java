@@ -26,14 +26,16 @@ import net.minecraft.sounds.SoundSource;
 import net.minecraft.world.item.ItemStack;
 
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 import static com.gregtechceu.gtceu.common.data.GTRecipeTypes.*;
 import static com.lowdragmc.lowdraglib.gui.texture.ProgressTexture.FillDirection.LEFT_TO_RIGHT;
 
 public class GTLRecipeTypes {
 
-    public static final List<String> ALL_RECIPE_TYPE = new ArrayList<>();
+    public static final Set<String> ALL_RECIPE_TYPE = new HashSet<>();
 
     public static final GTRecipeType RADIATION_HATCH_RECIPES = registerRecipeType("radiation_hatch", MULTIBLOCK)
             .setMaxIOSize(1, 0, 0, 0)

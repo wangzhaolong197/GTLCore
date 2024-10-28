@@ -185,7 +185,7 @@ public class GTMachinesMixin {
                         .langValue(VNF[tier] + " " + FormattingUtil.formatNumbers(amperage) + "A Laser " +
                                 FormattingUtil.toEnglishName(name) + " Hatch")
                         .rotationState(RotationState.ALL)
-                        .tooltips(Component.translatable("gtlcore.machine.laser_hatch." + name + ".tooltip"),
+                        .tooltips(Component.translatable("gtceu.machine.laser_hatch." + name + ".tooltip"),
                                 Component.translatable("gtceu.machine.laser_hatch.both.tooltip"),
                                 Component.translatable("gtceu.universal.disabled"))
                         .abilities(ability)

@@ -22,7 +22,7 @@ import com.mojang.blaze3d.vertex.PoseStack;
 import com.mojang.blaze3d.vertex.VertexConsumer;
 import com.mojang.math.Axis;
 
-import java.util.*;
+import java.util.List;
 
 public class WindMillTurbineRenderer extends SimpleGeneratorMachineRenderer {
 

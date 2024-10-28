@@ -218,10 +218,10 @@ public class ForgeCommonEventListener {
                             server.kjs$runCommandSilent("execute in minecraft:the_nether as " + name + " run tp 0 128 0");
                             server.kjs$runCommandSilent("execute in minecraft:the_nether run fill 0 127 0 0 127 0 gtlcore:reactor_core");
                         } else {
-                            player.displayClientMessage(Component.literal("需要手持数据"), true);
+                            player.displayClientMessage(Component.translatable("gtlcore.handheld_data_required"), true);
                         }
                     } else {
-                        player.displayClientMessage(Component.literal("结构错误"), true);
+                        player.displayClientMessage(Component.translatable("gtlcore.structural_error"), true);
                     }
                 }
             }
@@ -265,7 +265,7 @@ public class ForgeCommonEventListener {
                 data.putInt("pearl_z_" + pearl, (int) player.getZ());
                 data.putString("pearl_dim_" + pearl, level.kjs$getDimension().toString());
                 server.kjs$runCommandSilent("playsound minecraft:entity.enderman.ambient ambient " + name + " " + player.getX() + " " + player.getY() + " " + player.getZ());
-                player.displayClientMessage(Component.literal("坐标已保存至该槽位"), true);
+                player.displayClientMessage(Component.translatable("gtlcore.position_are_saved_to_this_slot"), true);
             } else {
                 server.kjs$runCommandSilent("execute in " + data.getString("pearl_dim_" + pearl) + " run tp " + name + " " + data.getInt("pearl_x_" + pearl) + " " + data.getInt("pearl_y_" + pearl) + " " + data.getInt("pearl_z_" + pearl));
                 server.kjs$runCommandSilent("playsound minecraft:entity.enderman.teleport ambient " + name + " " + player.getX() + " " + player.getY() + " " + player.getZ());
@@ -288,10 +288,10 @@ public class ForgeCommonEventListener {
             CompoundTag behaviours = tag.getCompound("GT.Behaviours");
             if (behaviours.getByte("RelocateMinedBlocks") == 1) {
                 behaviours.remove("RelocateMinedBlocks");
-                player.displayClientMessage(Component.literal("磁力吸引：关闭"), true);
+                player.displayClientMessage(Component.translatable("gtlcore.relocate_mined_blocks", Component.translatable("gtlcore.machine.off")), true);
             } else {
                 behaviours.putByte("RelocateMinedBlocks", (byte) 1);
-                player.displayClientMessage(Component.literal("磁力吸引：打开"), true);
+                player.displayClientMessage(Component.translatable("gtlcore.relocate_mined_blocks", Component.translatable("gtlcore.machine.on")), true);
             }
         }
     }

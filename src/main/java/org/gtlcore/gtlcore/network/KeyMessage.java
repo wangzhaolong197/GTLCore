@@ -87,16 +87,16 @@ public class KeyMessage {
         int speedFactor = data.getInt("fly_speed");
         if (player.isShiftKeyDown()) {
             player.getAbilities().setFlyingSpeed(0.05F);
-            player.displayClientMessage(Component.literal("飞行速度重置"), true);
+            player.displayClientMessage(Component.translatable("gtlcore.fly_speed_reset"), true);
             data.putInt("fly_speed", 1);
         } else {
             float currentSpeed = player.getAbilities().getFlyingSpeed();
             if (currentSpeed < speed) {
                 player.getAbilities().setFlyingSpeed(0.05F * speedFactor);
                 data.putInt("fly_speed", speedFactor + 1);
-                player.displayClientMessage(Component.literal("飞行速度x" + (speedFactor + 1)), true);
+                player.displayClientMessage(Component.translatable("gtlcore.fly_speed", (speedFactor + 1)), true);
             } else {
-                player.displayClientMessage(Component.literal("达到极限"), true);
+                player.displayClientMessage(Component.translatable("gtlcore.reach_limit"), true);
             }
         }
     }
@@ -112,9 +112,9 @@ public class KeyMessage {
 
             if (nightVisionEnabled) {
                 player.removeEffect(MobEffects.NIGHT_VISION);
-                player.displayClientMessage(Component.literal("夜视关闭"), true);
+                player.displayClientMessage(Component.translatable("metaarmor.message.nightvision.disabled"), true);
             } else {
-                player.displayClientMessage(Component.literal("夜视开启"), true);
+                player.displayClientMessage(Component.translatable("metaarmor.message.nightvision.enabled"), true);
             }
         }
     }
@@ -129,7 +129,7 @@ public class KeyMessage {
                 pearl = (pearl == 10) ? 0 : pearl + 1;
             }
             data.putInt("pearl_slot", pearl);
-            player.displayClientMessage(Component.literal("坐标槽位：" + pearl), true);
+            player.displayClientMessage(Component.translatable("monitor.gui.title.slot" + pearl), true);
         }
     }
 
@@ -140,7 +140,7 @@ public class KeyMessage {
             float speed = itemStack.getTag().getCompound("GT.Tool").getFloat("ToolSpeed");
             float newSpeed = adjustToolSpeed(speed, value);
             itemStack.getTag().getCompound("GT.Tool").putFloat("ToolSpeed", newSpeed);
-            player.displayClientMessage(Component.literal("速度：" + newSpeed), true);
+            player.displayClientMessage(Component.translatable("gtlcore.speed", newSpeed), true);
         }
     }
 
