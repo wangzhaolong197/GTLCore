@@ -38,7 +38,6 @@ public class SpaceElevatorRenderer extends WorkableCasingMachineRenderer {
                        int combinedLight, int combinedOverlay) {
         if (blockEntity instanceof IMachineBlockEntity machineBlockEntity &&
                 machineBlockEntity.getMetaMachine() instanceof SpaceElevatorMachine machine && machine.isFormed()) {
-            float tick = machine.getOffsetTimer() + partialTicks;
             double x = 0.5, y = 1, z = 0.5;
             switch (machine.getFrontFacing()) {
                 case NORTH -> z = 3.5;
@@ -48,7 +47,7 @@ public class SpaceElevatorRenderer extends WorkableCasingMachineRenderer {
             }
             poseStack.pushPose();
             RenderBufferHelper.renderCylinder(poseStack, buffer.getBuffer(GTRenderTypes.getLightRing()), (float) x, (float) (y - 2), (float) z, 0.3F, 360, 10, 0, 0, 0, 255);
-            poseStack.translate(x, y + 180 + (140 * Math.sin(tick / 160)), z);
+            poseStack.translate(x, y + machine.getHigh(), z);
             renderClimber(poseStack, buffer);
             poseStack.popPose();
         }

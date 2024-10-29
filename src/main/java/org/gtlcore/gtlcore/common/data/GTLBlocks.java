@@ -56,10 +56,10 @@ import static org.gtlcore.gtlcore.api.registries.GTLRegistration.REGISTRATE;
 @SuppressWarnings("unused")
 public class GTLBlocks {
 
-    public static final Map<Integer, Supplier<Block>> scmap = new HashMap<>();
-    public static final Map<Integer, Supplier<ActiveBlock>> sepmmap = new HashMap<>();
-    public static final Map<Integer, Supplier<Block>> calmap = new HashMap<>();
-    public static final Map<Integer, Supplier<Block>> mgmap = new HashMap<>();
+    public static final Map<Integer, Supplier<?>> scmap = new HashMap<>();
+    public static final Map<Integer, Supplier<?>> sepmmap = new HashMap<>();
+    public static final Map<Integer, Supplier<?>> calmap = new HashMap<>();
+    public static final Map<Integer, Supplier<?>> mgmap = new HashMap<>();
 
     static {
         REGISTRATE.creativeModeTab(() -> GTLCreativeModeTabs.GTL_CORE);
@@ -131,7 +131,7 @@ public class GTLBlocks {
     public static BlockEntry<ActiveBlock> createActiveCasing(String name, String baseModelPath) {
         return REGISTRATE.block(name, ActiveBlock::new)
                 .initialProperties(() -> Blocks.IRON_BLOCK)
-                .addLayer(() -> RenderType::solid)
+                .addLayer(() -> RenderType::cutoutMipped)
                 .blockstate(GTModels.createActiveModel(GTLCore.id(baseModelPath)))
                 .tag(GTToolType.WRENCH.harvestTags.get(0), BlockTags.MINEABLE_WITH_PICKAXE)
                 .item(BlockItem::new)
@@ -142,7 +142,7 @@ public class GTLBlocks {
 
     @SuppressWarnings("all")
     public static BlockEntry<Block> createTierCasings(String name, ResourceLocation texture,
-                                                      Map<Integer, Supplier<Block>> map, int tier) {
+                                                      Map<Integer, Supplier<?>> map, int tier) {
         BlockEntry<Block> Block = REGISTRATE.block(name, p -> (Block) new Block(p) {
 
             @Override
@@ -165,7 +165,7 @@ public class GTLBlocks {
 
     @SuppressWarnings("all")
     public static BlockEntry<ActiveBlock> createActiveTierCasing(String name, String baseModelPath,
-                                                                 Map<Integer, Supplier<ActiveBlock>> map, int tier) {
+                                                                 Map<Integer, Supplier<?>> map, int tier) {
         BlockEntry<ActiveBlock> Block = REGISTRATE.block("%s".formatted(name), p -> (ActiveBlock) new ActiveBlock(p) {
 
             @Override
@@ -175,7 +175,7 @@ public class GTLBlocks {
             }
         })
                 .initialProperties(() -> Blocks.IRON_BLOCK)
-                .addLayer(() -> RenderType::solid)
+                .addLayer(() -> RenderType::cutoutMipped)
                 .blockstate(GTModels.createActiveModel(GTLCore.id(baseModelPath)))
                 .tag(GTToolType.WRENCH.harvestTags.get(0), BlockTags.MINEABLE_WITH_PICKAXE)
                 .item(BlockItem::new)
@@ -314,7 +314,7 @@ public class GTLBlocks {
                 .block("%s_coil_block".formatted(coilType.getName()), p -> new CoilBlock(p, coilType))
                 .initialProperties(() -> Blocks.IRON_BLOCK)
                 .properties(p -> p.isValidSpawn((state, level, pos, ent) -> false))
-                .addLayer(() -> RenderType::solid)
+                .addLayer(() -> RenderType::cutoutMipped)
                 .blockstate((ctx, prov) -> {
                     ActiveBlock block = ctx.getEntry();
                     ModelFile inactive = prov.models().getExistingFile(coilType.getTexture());
@@ -567,8 +567,8 @@ public class GTLBlocks {
 
     public static final BlockEntry<Block> PRESSURE_CONTAINMENT_CASING = createCasingBlock(
             "pressure_containment_casing", GTLCore.id("block/casings/pressure_containment_casing"));
-    public static final BlockEntry<Block> DRACONIUMAWAKENED_CASING = createCasingBlock(
-            "draconiumawakened_casing", GTLCore.id("block/casings/draconiumawakened_casing"));
+    public static final BlockEntry<Block> AWAKENED_DRACONIUM_CASING = createCasingBlock(
+            "awakened_draconium_casing", GTLCore.id("block/casings/awakened_draconium_casing"));
     public static final BlockEntry<Block> ANTIMATTER_ANNIHILATION_MATRIX = createCasingBlock(
             "antimatter_annihilation_matrix", GTLCore.id("block/antimatter_annihilation_matrix"));
     public static final BlockEntry<Block> BOUNDLESS_GRAVITATIONALLY_SEVERED_STRUCTURE_CASING = createCasingBlock(

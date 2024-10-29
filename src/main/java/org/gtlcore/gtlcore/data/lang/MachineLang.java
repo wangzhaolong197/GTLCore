@@ -34,7 +34,7 @@ public class MachineLang {
         provider.add("gtlcore.machine.create_aggregation.tooltip.0", "Provides MAX tier voltage and MAX tier computing power in the creation dimension and sets the circuit to 1 to start running");
         provider.add("gtlcore.machine.create_computation.tooltip.0", "Input Voltage: §4§lMAX§r");
         provider.add("gtlcore.machine.dimensionally_transcendent_dirt_forge.tooltip.0", "Has a maximum parallelism of 524288, directly completing the recipe");
-        provider.add("gtlcore.machine.dimensionally_transcendent_mixer.tooltip.0", "Time multiplication factor for running the mixer recipe is 0.2");
+        provider.add("gtlcore.machine.dimensionally_transcendent_mixer.tooltip.0", "Time multiplication factor for running the mixer recipe is 0.1");
         provider.add("gtlcore.machine.dimensionally_transcendent_plasma_forge.coil", "Current recipe mode cannot use this coil");
         provider.add("gtlcore.machine.dissolving_tank.tooltip.0", "Must ensure the ratio of input fluid to recipe fluid is the same, otherwise no product output");
         provider.add("gtlcore.machine.door_of_create.tooltip.0", "Provides MAX tier voltage in the main world and sets the circuit to 1 to start running");
@@ -181,10 +181,12 @@ public class MachineLang {
         provider.add("gtlcore.machine.slaughterhouse.tooltip.4", "Entity generation mode is based on actual drops from player kills, performance is lower, can gain experience");
         provider.add("gtlcore.machine.slaughterhouse.tooltip.5", "Non-entity generation mode is virtual drops; if a spawner exists, it uses parallel processing");
         provider.add("gtlcore.machine.space_elevator.set_out", "Set Off");
+        provider.add("gtlcore.machine.space_elevator.connected", "Connected To A Running SpaceElevator");
+        provider.add("gtlcore.machine.space_elevator.not_connected", "Not Connected To A Running SpaceElevator");
         provider.add("gtlcore.machine.space_elevator.tooltip.0", "Can install up to 8 expansion modules");
         provider.add("gtlcore.machine.space_elevator.tooltip.1", "Increasing voltage tier can provide Duration reductions for modules");
         provider.add("gtlcore.machine.space_elevator.tooltip.2", "Circuit must be set to 1 before running, and provide 128 computing power");
-        provider.add("gtlcore.machine.space_probe_surface_reception.tooltip.0", "Do not obstruct");
+        provider.add("gtlcore.machine.space_probe_surface_reception.tooltip.0", "It Can Only Operate On Space Station");
         provider.add("gtlcore.machine.star_ultimate_material_forge_factory.tooltip.0", "Maximum Parallelism: 1000");
         provider.add("gtlcore.machine.steam_parallel_machine.modification_oc", "Modify Overclocking Times: ");
         provider.add("gtlcore.machine.steam_parallel_machine.oc", "Each time of overclocking will reduce time by 2 times and increase steam consumption by 3 times");

@@ -194,7 +194,7 @@ public class GeneratorArrayMachine extends StorageMachine {
     public static int getAmperage(int tier) {
         if (tier == 0) return 1;
         if (tier > GTValues.HV) {
-            return 16 - (2 * tier);
+            return 8 - tier;
         }
         return 10 - (2 * tier);
     }

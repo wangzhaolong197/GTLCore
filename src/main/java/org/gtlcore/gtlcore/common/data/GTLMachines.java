@@ -3,6 +3,7 @@ package org.gtlcore.gtlcore.common.data;
 import org.gtlcore.gtlcore.GTLCore;
 import org.gtlcore.gtlcore.api.machine.multiblock.GTLPartAbility;
 import org.gtlcore.gtlcore.api.machine.multiblock.IParallelMachine;
+import org.gtlcore.gtlcore.api.pattern.GTLPredicates;
 import org.gtlcore.gtlcore.client.renderer.machine.BallHatchRenderer;
 import org.gtlcore.gtlcore.client.renderer.machine.WindMillTurbineRenderer;
 import org.gtlcore.gtlcore.common.data.machines.AdvancedMultiBlockMachineA;
@@ -28,7 +29,6 @@ import com.gregtechceu.gtceu.api.capability.recipe.ItemRecipeCapability;
 import com.gregtechceu.gtceu.api.data.RotationState;
 import com.gregtechceu.gtceu.api.machine.*;
 import com.gregtechceu.gtceu.api.machine.feature.multiblock.IMultiController;
-import com.gregtechceu.gtceu.api.machine.feature.multiblock.IRotorHolderMachine;
 import com.gregtechceu.gtceu.api.machine.multiblock.CleanroomType;
 import com.gregtechceu.gtceu.api.machine.multiblock.CoilWorkableElectricMultiblockMachine;
 import com.gregtechceu.gtceu.api.machine.multiblock.MultiblockControllerMachine;
@@ -36,8 +36,6 @@ import com.gregtechceu.gtceu.api.machine.multiblock.PartAbility;
 import com.gregtechceu.gtceu.api.machine.steam.SimpleSteamMachine;
 import com.gregtechceu.gtceu.api.pattern.FactoryBlockPattern;
 import com.gregtechceu.gtceu.api.pattern.Predicates;
-import com.gregtechceu.gtceu.api.pattern.TraceabilityPredicate;
-import com.gregtechceu.gtceu.api.pattern.predicates.SimplePredicate;
 import com.gregtechceu.gtceu.api.recipe.GTRecipeType;
 import com.gregtechceu.gtceu.api.recipe.OverclockingLogic;
 import com.gregtechceu.gtceu.api.registry.registrate.GTRegistrate;
@@ -53,7 +51,6 @@ import com.gregtechceu.gtceu.data.lang.LangHandler;
 import com.gregtechceu.gtceu.utils.FormattingUtil;
 
 import com.lowdragmc.lowdraglib.side.fluid.FluidHelper;
-import com.lowdragmc.lowdraglib.utils.BlockInfo;
 
 import net.minecraft.ChatFormatting;
 import net.minecraft.network.chat.Component;
@@ -484,7 +481,8 @@ public class GTLMachines {
                         .where('S', Predicates.controller(Predicates.blocks(definition.getBlock())))
                         .where('G', Predicates.blocks(gear.get()))
                         .where('C', Predicates.blocks(casing.get()))
-                        .where('R', new TraceabilityPredicate(new SimplePredicate(state -> MetaMachine.getMachine(state.getWorld(), state.getPos()) instanceof IRotorHolderMachine rotorHolder && state.getWorld().getBlockState(state.getPos().relative(rotorHolder.self().getFrontFacing())).isAir(), () -> PartAbility.ROTOR_HOLDER.getAllBlocks().stream().map(BlockInfo::fromBlock).toArray(BlockInfo[]::new))).addTooltips(Component.translatable("gtceu.multiblock.pattern.clear_amount_3")).addTooltips(Component.translatable("gtceu.machine.large_combustion_engine.tooltip.boost_regular", GTValues.VN[tier])).setExactLimit(1).or(Predicates.abilities(PartAbility.OUTPUT_ENERGY)).setExactLimit(1))
+                        .where('R', GTLPredicates.RotorBlock(tier).setExactLimit(1)
+                                .or(Predicates.abilities(PartAbility.OUTPUT_ENERGY)).setExactLimit(1))
                         .where('H', Predicates.blocks(casing.get()).or(Predicates.autoAbilities(definition.getRecipeTypes(), false, false, true, true, true, true).or(Predicates.autoAbilities(true, true, false))))
                         .build())
                 .workableCasingRenderer(casingTexture, overlayModel)
@@ -581,7 +579,9 @@ public class GTLMachines {
                     .rotationState(RotationState.ALL)
                     .abilities(PartAbility.ROTOR_HOLDER)
                     .renderer(() -> new RotorHolderMachineRenderer(tier))
-                    .tooltips(LangHandler.getFromMultiLang("gtceu.machine.rotor_holder.tooltip", 0), LangHandler.getFromMultiLang("gtlcore.machine.rotor_holder.tooltip", 1), Component.translatable("gtceu.universal.disabled"))
+                    .tooltips(LangHandler.getFromMultiLang("gtceu.machine.rotor_holder.tooltip", 0),
+                            LangHandler.getFromMultiLang("gtceu.machine.rotor_holder.tooltip", 1),
+                            Component.translatable("gtceu.universal.disabled"))
                     .register(),
             GTValues.UHV, GTValues.UEV);
 

@@ -74,7 +74,7 @@ public class KeyMessage {
     private static void handleFlightSpeed(Player player) {
         float speed;
         String armorSlots = player.getArmorSlots().toString();
-        if (armorSlots.contains("magnetohydrodynamicallyconstrainedstarmatter_")) {
+        if (armorSlots.contains("magneto_hydro_dynamically_con_strained_star_matter_")) {
             speed = 0.4F;
         } else if (armorSlots.contains("fermium_")) {
             speed = 0.2F;
@@ -104,7 +104,7 @@ public class KeyMessage {
     private static void toggleNightVision(Player player) {
         String armorSlots = player.getArmorSlots().toString();
         if (Objects.equals(armorSlots, "[1 fermium_boots, 1 fermium_leggings, 1 fermium_chestplate, 1 fermium_helmet]") ||
-                Objects.equals(armorSlots, "[1 magnetohydrodynamicallyconstrainedstarmatter_boots, 1 magnetohydrodynamicallyconstrainedstarmatter_leggings, 1 magnetohydrodynamicallyconstrainedstarmatter_chestplate, 1 magnetohydrodynamicallyconstrainedstarmatter_helmet]") ||
+                Objects.equals(armorSlots, "[1 magneto_hydro_dynamically_con_strained_star_matter_boots, 1 magneto_hydro_dynamically_con_strained_star_matter_leggings, 1 magneto_hydro_dynamically_con_strained_star_matter_chestplate, 1 magneto_hydro_dynamically_con_strained_star_matter_helmet]") ||
                 Objects.equals(armorSlots, "[1 space_fermium_boots, 1 space_fermium_leggings, 1 space_fermium_chestplate, 1 space_fermium_helmet]")) {
             CompoundTag data = player.getPersistentData();
             boolean nightVisionEnabled = data.getBoolean("night_vision");
@@ -129,7 +129,7 @@ public class KeyMessage {
                 pearl = (pearl == 10) ? 0 : pearl + 1;
             }
             data.putInt("pearl_slot", pearl);
-            player.displayClientMessage(Component.translatable("monitor.gui.title.slot" + pearl), true);
+            player.displayClientMessage(Component.translatable("monitor.gui.title.slot").append(String.valueOf(pearl)), true);
         }
     }
 

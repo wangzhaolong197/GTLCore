@@ -210,13 +210,13 @@ public class MaterialBuilder {
                 .iconSet(BRIGHT)
                 .buildAndRegister();
 
-        HighEnergyMixture = builderMaterial("highenergymixture")
+        HighEnergyMixture = builderMaterial("high_energy_mixture")
                 .dust()
                 .color(0xdbd69c)
                 .iconSet(SAND)
                 .buildAndRegister();
 
-        Luminessence = builderMaterial("luminessence")
+        LuminEssence = builderMaterial("lumin_essence")
                 .dust()
                 .components(HighEnergyMixture, 1, PhosphoricAcid, 1)
                 .color(0x838914)
@@ -332,7 +332,7 @@ public class MaterialBuilder {
                 .flags(DISABLE_DECOMPOSITION)
                 .buildAndRegister();
 
-        ArtheriumSn = builderMaterial("artherium_sn")
+        ArtheriumTin = builderMaterial("artherium_tin")
                 .ingot()
                 .fluid()
                 .color(0x551a8b)
@@ -428,7 +428,7 @@ public class MaterialBuilder {
                 .cableProperties(GTValues.V[GTValues.UXV], 2, 64)
                 .buildAndRegister();
 
-        Crystalmatrix = builderMaterial("crystalmatrix")
+        CrystalMatrix = builderMaterial("crystal_matrix")
                 .ingot()
                 .fluid()
                 .plasma()
@@ -440,13 +440,13 @@ public class MaterialBuilder {
                 .cableProperties(GTValues.V[GTValues.OpV], 2, 128)
                 .buildAndRegister();
 
-        CosmicNeutronium = builderMaterial("cosmicneutronium")
+        CosmicNeutronium = builderMaterial("cosmic_neutronium")
                 .ingot()
                 .liquid(new FluidBuilder().temperature(1000000).customStill())
                 .blastTemp(24800, HIGHEST)
                 .element(GTLElements.COSMICNEUTRONIUM)
                 .color(0x000d1a)
-                .iconSet(new MaterialIconSet("cosmicneutronium", BRIGHT))
+                .iconSet(new MaterialIconSet("cosmic_neutronium", BRIGHT))
                 .flags(GTLMaterialFlags.GENERATE_NANOSWARM, GENERATE_SPRING, GENERATE_FINE_WIRE,
                         GENERATE_SPRING_SMALL)
                 .cableProperties(Integer.MAX_VALUE, 2, 128)
@@ -478,12 +478,12 @@ public class MaterialBuilder {
                 .cableProperties(GTValues.V[GTValues.UXV], 64, 0, true)
                 .buildAndRegister();
 
-        DraconiumAwakened = builderMaterial("draconiumawakened")
+        AwakenedDraconium = builderMaterial("awakened_draconium")
                 .ingot()
                 .fluid()
                 .plasma()
                 .blastTemp(22600, HIGHEST)
-                .element(GTLElements.DRACONIUMAWAKENED)
+                .element(GTLElements.AWAKENEDDRACONIUM)
                 .color(0xcc6600)
                 .iconSet(RADIOACTIVE)
                 .flags(GENERATE_FINE_WIRE)
@@ -632,18 +632,18 @@ public class MaterialBuilder {
                 .flags(DISABLE_DECOMPOSITION)
                 .buildAndRegister();
 
-        QuantumChromodynamicallyConfinedMatter = builderMaterial("quantumchromodynamically_confined_matter")
+        QuantumChromoDynamicallyConfinedMatter = builderMaterial("quantum_chromo_dynamically_confined_matter")
                 .ingot()
                 .fluid()
                 .plasma()
-                .element(GTLElements.QUANTUMCHROMODYNAMICALLY_CONFINED_MATTER)
+                .element(GTLElements.QUANTUM_CHROMO_DYNAMICALLY_CONFINED_MATTER)
                 .blastTemp(13100, HIGHER)
                 .color(0xd08c38)
                 .iconSet(RADIOACTIVE)
                 .flags(GENERATE_FRAME, GENERATE_PLATE)
                 .buildAndRegister();
 
-        TranscendentMetal = builderMaterial("transcendentmetal")
+        TranscendentMetal = builderMaterial("transcendent_metal")
                 .ingot()
                 .fluid()
                 .element(GTLElements.TRANSCENDENTMETAL)
@@ -666,11 +666,11 @@ public class MaterialBuilder {
                 .cableProperties(Integer.MAX_VALUE, 16, 536870912)
                 .buildAndRegister();
 
-        MagnetohydrodynamicallyConstrainedStarMatter = builderMaterial("magnetohydrodynamicallyconstrainedstarmatter")
+        MagnetohydrodynamicallyConstrainedStarMatter = builderMaterial("magneto_hydro_dynamically_con_strained_star_matter")
                 .ingot()
                 .liquid(new FluidBuilder().temperature(100).customStill())
                 .element(GTLElements.RAW_STAR_MATTER)
-                .iconSet(new MaterialIconSet("magnetohydrodynamicallyconstrainedstarmatter"))
+                .iconSet(new MaterialIconSet("magneto_hydro_dynamically_con_strained_star_matter"))
                 .flags(GENERATE_FRAME, GENERATE_FOIL, NO_UNIFICATION)
                 .buildAndRegister();
 
@@ -692,7 +692,7 @@ public class MaterialBuilder {
                 .iconSet(BRIGHT)
                 .buildAndRegister();
 
-        AstralTitanium = builderMaterial("astraltitanium")
+        AstralTitanium = builderMaterial("astral_titanium")
                 .ingot()
                 .fluid()
                 .plasma()
@@ -702,7 +702,7 @@ public class MaterialBuilder {
                 .iconSet(BRIGHT)
                 .buildAndRegister();
 
-        CelestialTungsten = builderMaterial("celestialtungsten")
+        CelestialTungsten = builderMaterial("celestial_tungsten")
                 .ingot()
                 .fluid()
                 .plasma()
@@ -760,7 +760,7 @@ public class MaterialBuilder {
                 .cableProperties(GTValues.V[GTValues.UEV], 4, 64)
                 .buildAndRegister();
 
-        Highurabilityompoundteel = builderMaterial("highurabilityompoundteel")
+        HighDurabilityCompoundSteel = builderMaterial("high_durability_compound_steel")
                 .ingot()
                 .fluid()
                 .blastTemp(12600, HIGHER, GTValues.VA[GTValues.UV], 1600)
@@ -770,7 +770,7 @@ public class MaterialBuilder {
                 .flags(GENERATE_BOLT_SCREW, GENERATE_PLATE, DISABLE_DECOMPOSITION)
                 .buildAndRegister();
 
-        GermaniumTungstenNitride = builderMaterial("germaniumtungstennitride")
+        GermaniumTungstenNitride = builderMaterial("germanium_tungsten_nitride")
                 .ingot()
                 .fluid()
                 .blastTemp(8200, HIGHER, GTValues.VA[GTValues.LuV], 800)
@@ -1007,7 +1007,7 @@ public class MaterialBuilder {
                 .ingot()
                 .fluid()
                 .blastTemp(5400, HIGH)
-                .components(SterlingSilver, 2, TinAlloy, 4, Luminessence, 2)
+                .components(SterlingSilver, 2, TinAlloy, 4, LuminEssence, 2)
                 .flags(DISABLE_DECOMPOSITION)
                 .color(0xd9e222)
                 .iconSet(METALLIC)
@@ -5319,7 +5319,7 @@ public class MaterialBuilder {
                 .iconSet(BRIGHT)
                 .buildAndRegister().setFormula("??Sm??");
 
-        SamariumRrareEearthTurbidLiquid = builderMaterial("samarium_rrare_eearth_turbid_liquid")
+        SamariumRrareEearthTurbidLiquid = builderMaterial("samarium_rare_earth_turbid_liquid")
                 .fluid()
                 .color(0xcfc883)
                 .iconSet(GTLMaterialIconSet.LIMPID)

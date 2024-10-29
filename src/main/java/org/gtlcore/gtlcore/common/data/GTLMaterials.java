@@ -199,7 +199,7 @@ public class GTLMaterials {
     public static Material Thaumium;
     public static Material AstralSilver;
     public static Material HighEnergyMixture;
-    public static Material Luminessence;
+    public static Material LuminEssence;
     public static Material Sunnarium;
     public static Material UuAmplifier;
     public static Material Celestine;
@@ -213,7 +213,7 @@ public class GTLMaterials {
     public static Material Quantanium;
     public static Material Vibranium;
     public static Material Indalloy140;
-    public static Material ArtheriumSn;
+    public static Material ArtheriumTin;
     public static Material Tairitsu;
     public static Material Draconium;
     public static Material Chaos;
@@ -222,11 +222,11 @@ public class GTLMaterials {
     public static Material Shirabon;
     public static Material Mithril;
     public static Material Taranium;
-    public static Material Crystalmatrix;
+    public static Material CrystalMatrix;
     public static Material CosmicNeutronium;
     public static Material Echoite;
     public static Material Legendarium;
-    public static Material DraconiumAwakened;
+    public static Material AwakenedDraconium;
     public static Material Adamantine;
     public static Material Starmetal;
     public static Material Orichalcum;
@@ -241,7 +241,7 @@ public class GTLMaterials {
     public static Material Inconel625;
     public static Material HastelloyN75;
     public static Material MetastableOganesson;
-    public static Material QuantumChromodynamicallyConfinedMatter;
+    public static Material QuantumChromoDynamicallyConfinedMatter;
     public static Material TranscendentMetal;
     public static Material Uruium;
     public static Material MagnetohydrodynamicallyConstrainedStarMatter;
@@ -253,7 +253,7 @@ public class GTLMaterials {
     public static Material NaquadriaticTaranium;
     public static Material AbyssalAlloy;
     public static Material TitanSteel;
-    public static Material Highurabilityompoundteel;
+    public static Material HighDurabilityCompoundSteel;
     public static Material GermaniumTungstenNitride;
     public static Material BlackTitanium;
     public static Material TriniumTitanium;
@@ -982,7 +982,7 @@ public class GTLMaterials {
             TagPrefix.nugget.setIgnored(EndSteel, (Supplier<? extends ItemLike>) EIOItems.END_STEEL_NUGGET);
             TagPrefix.block.setIgnored(EndSteel, (Supplier<? extends ItemLike>) EIOBlocks.END_STEEL_BLOCK);
 
-            TagPrefix.ingot.setIgnored(Crystalmatrix, crystal_matrix_ingot);
+            TagPrefix.ingot.setIgnored(CrystalMatrix, crystal_matrix_ingot);
             TagPrefix.ingot.setIgnored(Infinity, infinity_ingot);
             TagPrefix.nugget.setIgnored(Infinity, infinity_nugget);
             TagPrefix.block.setIgnored(Infinity, infinity);

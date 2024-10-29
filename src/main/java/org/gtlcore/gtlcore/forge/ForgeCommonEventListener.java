@@ -325,7 +325,7 @@ public class ForgeCommonEventListener {
             String armorSlots = player.getArmorSlots().toString();
             boolean sfa = Objects.equals(armorSlots, "[1 space_fermium_boots, 1 space_fermium_leggings, 1 space_fermium_chestplate, 1 space_fermium_helmet]");
             boolean fa = Objects.equals(armorSlots, "[1 fermium_boots, 1 fermium_leggings, 1 fermium_chestplate, 1 fermium_helmet]");
-            boolean ma = Objects.equals(armorSlots, "[1 magnetohydrodynamicallyconstrainedstarmatter_boots, 1 magnetohydrodynamicallyconstrainedstarmatter_leggings, 1 magnetohydrodynamicallyconstrainedstarmatter_chestplate, 1 magnetohydrodynamicallyconstrainedstarmatter_helmet]");
+            boolean ma = Objects.equals(armorSlots, "[1 magneto_hydro_dynamically_con_strained_star_matter_boots, 1 magneto_hydro_dynamically_con_strained_star_matter_leggings, 1 magneto_hydro_dynamically_con_strained_star_matter_chestplate, 1 magneto_hydro_dynamically_con_strained_star_matter_helmet]");
             if (level.kjs$getDimension().toString().equals("kubejs:create")) {
                 if (!ma) {
                     server.kjs$runCommandSilent("execute in minecraft:overworld as " + name + " run tp 0 100 0");

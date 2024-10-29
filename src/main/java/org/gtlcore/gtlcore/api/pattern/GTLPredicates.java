@@ -3,21 +3,23 @@ package org.gtlcore.gtlcore.api.pattern;
 import org.gtlcore.gtlcore.api.pattern.util.IValueContainer;
 import org.gtlcore.gtlcore.api.pattern.util.SimpleValueContainer;
 
-import com.gregtechceu.gtceu.api.block.ActiveBlock;
+import com.gregtechceu.gtceu.api.block.MetaMachineBlock;
 import com.gregtechceu.gtceu.api.machine.MetaMachine;
-import com.gregtechceu.gtceu.api.machine.feature.ITieredMachine;
+import com.gregtechceu.gtceu.api.machine.feature.multiblock.IRotorHolderMachine;
 import com.gregtechceu.gtceu.api.machine.multiblock.PartAbility;
 import com.gregtechceu.gtceu.api.pattern.MultiblockState;
 import com.gregtechceu.gtceu.api.pattern.Predicates;
 import com.gregtechceu.gtceu.api.pattern.TraceabilityPredicate;
 import com.gregtechceu.gtceu.api.pattern.error.PatternStringError;
-import com.gregtechceu.gtceu.api.pattern.predicates.PredicateBlocks;
 import com.gregtechceu.gtceu.api.pattern.predicates.SimplePredicate;
 
 import com.lowdragmc.lowdraglib.utils.BlockInfo;
 
+import net.minecraft.core.BlockPos;
 import net.minecraft.network.chat.Component;
+import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.Block;
+import net.minecraft.world.level.block.state.BlockState;
 
 import java.util.Arrays;
 import java.util.Map;
@@ -27,14 +29,20 @@ import java.util.function.Supplier;
 
 public class GTLPredicates {
 
-    public static TraceabilityPredicate tierCasings(Map<Integer, Supplier<Block>> map, String tierType) {
+    public static TraceabilityPredicate createTierPredicate(Map<Integer, Supplier<?>> map, String tierType) {
+        BlockInfo[] blockInfos = new BlockInfo[map.size()];
+        int index = 0;
+        for (Supplier<?> blockSupplier : map.values()) {
+            Block block = (Block) blockSupplier.get();
+            blockInfos[index++] = BlockInfo.fromBlockState(block.defaultBlockState());
+        }
         return new TraceabilityPredicate(blockWorldState -> {
-            var blockState = blockWorldState.getBlockState();
-            for (var entry : map.entrySet()) {
-                if (blockState.is(entry.getValue().get())) {
-                    var stats = entry.getKey();
-                    Object currentCoil = blockWorldState.getMatchContext().getOrPut(tierType, stats);
-                    if (!currentCoil.equals(stats)) {
+            BlockState blockState = blockWorldState.getBlockState();
+            for (Map.Entry<Integer, Supplier<?>> entry : map.entrySet()) {
+                if (blockState.is((Block) entry.getValue().get())) {
+                    int tier = entry.getKey();
+                    int type = blockWorldState.getMatchContext().getOrPut(tierType, tier);
+                    if (type != tier) {
                         blockWorldState.setError(new PatternStringError("gtlcore.machine.pattern.error.tier"));
                         return false;
                     }
@@ -42,31 +50,7 @@ public class GTLPredicates {
                 }
             }
             return false;
-        }, () -> map.values().stream()
-                .map(blockSupplier -> BlockInfo.fromBlockState(blockSupplier.get().defaultBlockState()))
-                .toArray(BlockInfo[]::new))
-                .addTooltips(Component.translatable("gtlcore.machine.pattern.error.tier"));
-    }
-
-    public static TraceabilityPredicate tierActiveCasings(Map<Integer, Supplier<ActiveBlock>> map, String tierType) {
-        return new TraceabilityPredicate(blockWorldState -> {
-            var blockState = blockWorldState.getBlockState();
-            for (var entry : map.entrySet()) {
-                if (blockState.is(entry.getValue().get())) {
-                    var stats = entry.getKey();
-                    Object currentCoil = blockWorldState.getMatchContext().getOrPut(tierType, stats);
-                    if (!currentCoil.equals(stats)) {
-                        blockWorldState.setError(new PatternStringError("gtlcore.machine.pattern.error.tier"));
-                        return false;
-                    }
-                    return true;
-                }
-            }
-            return false;
-        }, () -> map.values().stream()
-                .map(blockSupplier -> BlockInfo.fromBlockState(blockSupplier.get().defaultBlockState()))
-                .toArray(BlockInfo[]::new))
-                .addTooltips(Component.translatable("gtlcore.machine.pattern.error.tier"));
+        }, () -> blockInfos).addTooltips(Component.translatable("gtlcore.machine.pattern.error.tier"));
     }
 
     public static TraceabilityPredicate countBlock(String name, Block... blocks) {
@@ -89,31 +73,20 @@ public class GTLPredicates {
         return new TraceabilityPredicate(new SimplePredicate(predicate, () -> candidates));
     }
 
-    public static TraceabilityPredicate RotorBlock() {
+    public static TraceabilityPredicate RotorBlock(int tier) {
         return new TraceabilityPredicate(
-                new PredicateBlocks(
-                        PartAbility.ROTOR_HOLDER.getAllBlocks().toArray(Block[]::new)) {
-
-                    @Override
-                    public boolean test(MultiblockState blockWorldState) {
-                        if (super.test(blockWorldState)) {
-                            var level = blockWorldState.getWorld();
-                            var pos = blockWorldState.getPos();
-                            var machine = MetaMachine.getMachine(level, pos);
-                            if (machine instanceof ITieredMachine tieredMachine) {
-                                int tier = blockWorldState
-                                        .getMatchContext()
-                                        .getOrPut("ReinforcedRotor", tieredMachine.getTier());
-                                if (tier != tieredMachine.getTier()) {
-                                    return false;
-                                }
-                                return level
-                                        .getBlockState(pos.relative(machine.getFrontFacing()))
-                                        .isAir();
-                            }
-                        }
-                        return false;
+                new SimplePredicate(state -> {
+                    Level world = state.getWorld();
+                    BlockPos pos = state.getPos();
+                    if (MetaMachine.getMachine(world, pos) instanceof IRotorHolderMachine holder) {
+                        return world.getBlockState(pos.relative(holder.self().getFrontFacing())).isAir();
                     }
-                });
+                    return false;
+                }, () -> PartAbility.ROTOR_HOLDER.getAllBlocks()
+                        .stream()
+                        .filter(b -> b instanceof MetaMachineBlock metaMachineBlock && metaMachineBlock.getDefinition().getTier() >= tier)
+                        .map(BlockInfo::fromBlock)
+                        .toArray(BlockInfo[]::new)))
+                .addTooltips(Component.translatable("gtceu.multiblock.pattern.clear_amount_3"));
     }
 }

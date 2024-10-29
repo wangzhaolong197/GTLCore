@@ -18,7 +18,7 @@ import java.util.Set;
 public class TagPrefixItemRendererMixin {
 
     @Unique
-    private static final Set<String> SPECIAL_ICON_SETS = Set.of("infinity", "cosmic", "cosmicneutronium", "eternity", "magmatter");
+    private static final Set<String> SPECIAL_ICON_SETS = Set.of("infinity", "cosmic", "cosmic_neutronium", "eternity", "magmatter");
 
     @Inject(method = "create", at = @At("HEAD"), remap = false, cancellable = true)
     private static void create(Item item, MaterialIconType type, MaterialIconSet iconSet, CallbackInfo ci) {

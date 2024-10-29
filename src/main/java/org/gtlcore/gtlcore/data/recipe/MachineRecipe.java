@@ -89,7 +89,7 @@ public class MachineRecipe {
                 .outputItems(GTMachines.HULL[12]).save(provider);
         ASSEMBLER_RECIPES.recipeBuilder(GTLCore.id("hull_opv")).duration(50).EUt(16)
                 .inputItems(GTBlocks.MACHINE_CASING_OpV.asStack())
-                .inputItems(cableGtSingle, GTLMaterials.Crystalmatrix, 2)
+                .inputItems(cableGtSingle, GTLMaterials.CrystalMatrix, 2)
                 .inputFluids(GTLMaterials.FullerenePolymerMatrixPulp.getFluid(L * 2))
                 .outputItems(GTMachines.HULL[13]).save(provider);
         ASSEMBLER_RECIPES.recipeBuilder(GTLCore.id("hull_max")).duration(50).EUt(16)

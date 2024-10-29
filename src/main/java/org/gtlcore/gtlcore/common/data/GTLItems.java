@@ -538,7 +538,7 @@ public class GTLItems {
 
     public static final ItemEntry<Item> NEUTRONIUM_ANTIMATTER_FUEL_ROD = register("neutronium_antimatter_fuel_rod", "antimatter_fuel_rod");
     public static final ItemEntry<Item> DRACONIUM_ANTIMATTER_FUEL_ROD = register("draconium_antimatter_fuel_rod", "antimatter_fuel_rod");
-    public static final ItemEntry<Item> COSMICNEUTRONIUM_ANTIMATTER_FUEL_ROD = register("cosmicneutronium_antimatter_fuel_rod", "antimatter_fuel_rod");
+    public static final ItemEntry<Item> COSMIC_NEUTRONIUM_ANTIMATTER_FUEL_ROD = register("cosmic_neutronium_antimatter_fuel_rod", "antimatter_fuel_rod");
     public static final ItemEntry<Item> INFINITY_ANTIMATTER_FUEL_ROD = register("infinity_antimatter_fuel_rod", "antimatter_fuel_rod");
 
     public static final ItemEntry<Item> SPACE_ESSENCE = register("space_essence");
@@ -591,7 +591,7 @@ public class GTLItems {
     public static final ItemEntry<Item> PERIODICALLY_POLED_LITHIUM_NIOBATE_BOULE = register("periodically_poled_lithium_niobate_boule");
     public static final ItemEntry<Item> NEUTRON_PLASMA_CONTAINMENT_CELL = register("neutron_plasma_containment_cell");
     public static final ItemEntry<Item> CRYSTALMATRIX_PLASMA_CONTAINMENT_CELL = register("crystalmatrix_plasma_containment_cell");
-    public static final ItemEntry<Item> DRACONIUMAWAKENED_PLASMA_CONTAINMENT_CELL = register("draconiumawakened_plasma_containment_cell");
+    public static final ItemEntry<Item> AWAKENED_DRACONIUM_PLASMA_CONTAINMENT_CELL = register("awakened_draconium_plasma_containment_cell");
     public static final ItemEntry<Item> HIGHLY_REFLECTIVE_MIRROR = register("highly_reflective_mirror");
     public static final ItemEntry<Item> LOW_FREQUENCY_LASER = register("low_frequency_laser");
     public static final ItemEntry<Item> MEDIUM_FREQUENCY_LASER = register("medium_frequency_laser");

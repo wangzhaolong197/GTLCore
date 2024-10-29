@@ -106,14 +106,6 @@ public class ProcessingPlantMachine extends StorageMachine implements IParallelM
         return null;
     }
 
-    @Nullable
-    public MachineDefinition getMachineDefinition() {
-        if (machineStorage.storage.getStackInSlot(0).getItem() instanceof MetaMachineItem metaMachineItem) {
-            return metaMachineItem.getDefinition();
-        }
-        return null;
-    }
-
     @Override
     public GTRecipeType[] getRecipeTypes() {
         return recipeTypeCache;
@@ -136,6 +128,12 @@ public class ProcessingPlantMachine extends StorageMachine implements IParallelM
     }
 
     @Override
+    public void onStructureFormed() {
+        super.onStructureFormed();
+        update();
+    }
+
+    @Override
     public void onLoad() {
         super.onLoad();
         if (!isRemote()) {
@@ -151,26 +149,30 @@ public class ProcessingPlantMachine extends StorageMachine implements IParallelM
         if (mismatched) textList.add(Component.translatable("gtlcore.machine.processing_plant.mismatched").withStyle(ChatFormatting.RED));
     }
 
-    protected void onMachineChanged() {
+    private void update() {
         recipeTypeCache = new GTRecipeType[] { GTRecipeTypes.DUMMY_RECIPES };
         machineTier = 0;
         mismatched = false;
+        if (machineStorage.storage.getStackInSlot(0).getItem() instanceof MetaMachineItem metaMachineItem) {
+            MachineDefinition definition = metaMachineItem.getDefinition();
+            if (GTUtil.getFloorTierByVoltage(super.getMaxVoltage()) == definition.getTier()) {
+                machineTier = definition.getTier();
+            } else {
+                mismatched = true;
+            }
+            recipeTypeCache = definition.getRecipeTypes();
+        }
+        tier = machineTier;
+    }
+
+    protected void onMachineChanged() {
         if (isFormed) {
             if (getRecipeLogic().getLastRecipe() != null) {
                 getRecipeLogic().markLastRecipeDirty();
             }
             getRecipeLogic().updateTickSubscription();
-            MachineDefinition definition = getMachineDefinition();
-            if (definition != null) {
-                if (GTUtil.getFloorTierByVoltage(super.getMaxVoltage()) == definition.getTier()) {
-                    machineTier = definition.getTier();
-                } else {
-                    mismatched = true;
-                }
-                recipeTypeCache = definition.getRecipeTypes();
-            }
+            update();
         }
-        tier = machineTier;
     }
 
     @Override

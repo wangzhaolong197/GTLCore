@@ -329,7 +329,7 @@ public class Lanthanidetreatment {
                 .EUt(1920)
                 .save(provider);
 
-        DIGESTION_TREATMENT.recipeBuilder(GTLCore.id("samarium_rrare_eearth_turbid_liquid35"))
+        DIGESTION_TREATMENT.recipeBuilder(GTLCore.id("samarium_rare_earth_turbid_liquid35"))
                 .inputItems(dust, SamariumRefinedPowder, 16)
                 .inputFluids(NitricAcid.getFluid(200))
                 .outputItems(dust, ThoriumPhosphateRefinedPowder, 1)
@@ -339,7 +339,7 @@ public class Lanthanidetreatment {
                 .blastFurnaceTemp(2680)
                 .save(provider);
 
-        DISSOLUTION_TREATMENT.recipeBuilder(GTLCore.id("samarium_rrare_eearth_turbid_liquid36"))
+        DISSOLUTION_TREATMENT.recipeBuilder(GTLCore.id("samarium_rare_earth_turbid_liquid36"))
                 .inputFluids(SamariumRrareEearthTurbidLiquid.getFluid(10000))
                 .inputFluids(NitricAcid.getFluid(10000))
                 .chancedOutput(dust, CeriumRichMixturePowder, 10, 6000, 0)

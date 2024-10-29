@@ -67,7 +67,7 @@ public final class CraftingComponentAddition {
                 { 10, new UnificationEntry(TagPrefix.wireGtQuadruple, GTLMaterials.Mithril) },
                 { 11, new UnificationEntry(TagPrefix.wireGtQuadruple, GTMaterials.Neutronium) },
                 { 12, new UnificationEntry(TagPrefix.wireGtQuadruple, GTLMaterials.Taranium) },
-                { 13, new UnificationEntry(TagPrefix.wireGtQuadruple, GTLMaterials.Crystalmatrix) },
+                { 13, new UnificationEntry(TagPrefix.wireGtQuadruple, GTLMaterials.CrystalMatrix) },
                 { 14, new UnificationEntry(TagPrefix.wireGtQuadruple, GTLMaterials.CosmicNeutronium) },
 
         }).collect(Collectors.toMap(data -> (Integer) data[0], data -> data[1])));
@@ -76,7 +76,7 @@ public final class CraftingComponentAddition {
                 { 10, new UnificationEntry(TagPrefix.wireGtOctal, GTLMaterials.Mithril) },
                 { 11, new UnificationEntry(TagPrefix.wireGtOctal, GTMaterials.Neutronium) },
                 { 12, new UnificationEntry(TagPrefix.wireGtOctal, GTLMaterials.Taranium) },
-                { 13, new UnificationEntry(TagPrefix.wireGtOctal, GTLMaterials.Crystalmatrix) },
+                { 13, new UnificationEntry(TagPrefix.wireGtOctal, GTLMaterials.CrystalMatrix) },
                 { 14, new UnificationEntry(TagPrefix.wireGtOctal, GTLMaterials.CosmicNeutronium) },
 
         }).collect(Collectors.toMap(data -> (Integer) data[0], data -> data[1])));
@@ -85,7 +85,7 @@ public final class CraftingComponentAddition {
                 { 10, new UnificationEntry(TagPrefix.wireGtHex, GTLMaterials.Mithril) },
                 { 11, new UnificationEntry(TagPrefix.wireGtHex, GTMaterials.Neutronium) },
                 { 12, new UnificationEntry(TagPrefix.wireGtHex, GTLMaterials.Taranium) },
-                { 13, new UnificationEntry(TagPrefix.wireGtHex, GTLMaterials.Crystalmatrix) },
+                { 13, new UnificationEntry(TagPrefix.wireGtHex, GTLMaterials.CrystalMatrix) },
                 { 14, new UnificationEntry(TagPrefix.wireGtHex, GTLMaterials.CosmicNeutronium) },
 
         }).collect(Collectors.toMap(data -> (Integer) data[0], data -> data[1])));
@@ -94,7 +94,7 @@ public final class CraftingComponentAddition {
                 { 10, new UnificationEntry(TagPrefix.cableGtSingle, GTLMaterials.Mithril) },
                 { 11, new UnificationEntry(TagPrefix.cableGtSingle, GTMaterials.Neutronium) },
                 { 12, new UnificationEntry(TagPrefix.cableGtSingle, GTLMaterials.Taranium) },
-                { 13, new UnificationEntry(TagPrefix.cableGtSingle, GTLMaterials.Crystalmatrix) },
+                { 13, new UnificationEntry(TagPrefix.cableGtSingle, GTLMaterials.CrystalMatrix) },
                 { 14, new UnificationEntry(TagPrefix.cableGtSingle, GTLMaterials.CosmicNeutronium) },
 
         }).collect(Collectors.toMap(data -> (Integer) data[0], data -> data[1])));
@@ -103,7 +103,7 @@ public final class CraftingComponentAddition {
                 { 10, new UnificationEntry(TagPrefix.cableGtDouble, GTLMaterials.Mithril) },
                 { 11, new UnificationEntry(TagPrefix.cableGtDouble, GTMaterials.Neutronium) },
                 { 12, new UnificationEntry(TagPrefix.cableGtDouble, GTLMaterials.Taranium) },
-                { 13, new UnificationEntry(TagPrefix.cableGtDouble, GTLMaterials.Crystalmatrix) },
+                { 13, new UnificationEntry(TagPrefix.cableGtDouble, GTLMaterials.CrystalMatrix) },
                 { 14, new UnificationEntry(TagPrefix.cableGtDouble, GTLMaterials.CosmicNeutronium) },
 
         }).collect(Collectors.toMap(data -> (Integer) data[0], data -> data[1])));
@@ -112,7 +112,7 @@ public final class CraftingComponentAddition {
                 { 10, new UnificationEntry(TagPrefix.cableGtDouble, GTLMaterials.Mithril) },
                 { 11, new UnificationEntry(TagPrefix.cableGtDouble, GTMaterials.Neutronium) },
                 { 12, new UnificationEntry(TagPrefix.cableGtDouble, GTLMaterials.Taranium) },
-                { 13, new UnificationEntry(TagPrefix.cableGtDouble, GTLMaterials.Crystalmatrix) },
+                { 13, new UnificationEntry(TagPrefix.cableGtDouble, GTLMaterials.CrystalMatrix) },
                 { 14, new UnificationEntry(TagPrefix.cableGtDouble, GTLMaterials.CosmicNeutronium) },
 
         }).collect(Collectors.toMap(data -> (Integer) data[0], data -> data[1])));
@@ -121,7 +121,7 @@ public final class CraftingComponentAddition {
                 { 10, new UnificationEntry(TagPrefix.cableGtQuadruple, GTLMaterials.Mithril) },
                 { 11, new UnificationEntry(TagPrefix.cableGtQuadruple, GTMaterials.Neutronium) },
                 { 12, new UnificationEntry(TagPrefix.cableGtQuadruple, GTLMaterials.Taranium) },
-                { 13, new UnificationEntry(TagPrefix.cableGtQuadruple, GTLMaterials.Crystalmatrix) },
+                { 13, new UnificationEntry(TagPrefix.cableGtQuadruple, GTLMaterials.CrystalMatrix) },
                 { 14, new UnificationEntry(TagPrefix.cableGtQuadruple, GTLMaterials.CosmicNeutronium) },
 
         }).collect(Collectors.toMap(data -> (Integer) data[0], data -> data[1])));
@@ -130,7 +130,7 @@ public final class CraftingComponentAddition {
                 { 10, new UnificationEntry(TagPrefix.cableGtOctal, GTLMaterials.Mithril) },
                 { 11, new UnificationEntry(TagPrefix.cableGtOctal, GTMaterials.Neutronium) },
                 { 12, new UnificationEntry(TagPrefix.cableGtOctal, GTLMaterials.Taranium) },
-                { 13, new UnificationEntry(TagPrefix.cableGtOctal, GTLMaterials.Crystalmatrix) },
+                { 13, new UnificationEntry(TagPrefix.cableGtOctal, GTLMaterials.CrystalMatrix) },
                 { 14, new UnificationEntry(TagPrefix.cableGtOctal, GTLMaterials.CosmicNeutronium) },
 
         }).collect(Collectors.toMap(data -> (Integer) data[0], data -> data[1])));
@@ -139,7 +139,7 @@ public final class CraftingComponentAddition {
                 { 10, new UnificationEntry(TagPrefix.cableGtHex, GTLMaterials.Mithril) },
                 { 11, new UnificationEntry(TagPrefix.cableGtHex, GTMaterials.Neutronium) },
                 { 12, new UnificationEntry(TagPrefix.cableGtHex, GTLMaterials.Taranium) },
-                { 13, new UnificationEntry(TagPrefix.cableGtHex, GTLMaterials.Crystalmatrix) },
+                { 13, new UnificationEntry(TagPrefix.cableGtHex, GTLMaterials.CrystalMatrix) },
                 { 14, new UnificationEntry(TagPrefix.cableGtHex, GTLMaterials.CosmicNeutronium) },
 
         }).collect(Collectors.toMap(data -> (Integer) data[0], data -> data[1])));
@@ -148,7 +148,7 @@ public final class CraftingComponentAddition {
                 { 9, new UnificationEntry(TagPrefix.cableGtSingle, GTLMaterials.Mithril) },
                 { 10, new UnificationEntry(TagPrefix.cableGtSingle, GTMaterials.Neutronium) },
                 { 11, new UnificationEntry(TagPrefix.cableGtSingle, GTLMaterials.Taranium) },
-                { 12, new UnificationEntry(TagPrefix.cableGtSingle, GTLMaterials.Crystalmatrix) },
+                { 12, new UnificationEntry(TagPrefix.cableGtSingle, GTLMaterials.CrystalMatrix) },
                 { 13, new UnificationEntry(TagPrefix.cableGtSingle, GTLMaterials.CosmicNeutronium) },
                 { 14, new UnificationEntry(TagPrefix.wireGtSingle, GTLMaterials.SpaceTime) },
 
@@ -158,7 +158,7 @@ public final class CraftingComponentAddition {
                 { 9, new UnificationEntry(TagPrefix.cableGtDouble, GTLMaterials.Mithril) },
                 { 10, new UnificationEntry(TagPrefix.cableGtDouble, GTMaterials.Neutronium) },
                 { 11, new UnificationEntry(TagPrefix.cableGtDouble, GTLMaterials.Taranium) },
-                { 12, new UnificationEntry(TagPrefix.cableGtDouble, GTLMaterials.Crystalmatrix) },
+                { 12, new UnificationEntry(TagPrefix.cableGtDouble, GTLMaterials.CrystalMatrix) },
                 { 13, new UnificationEntry(TagPrefix.cableGtDouble, GTLMaterials.CosmicNeutronium) },
                 { 14, new UnificationEntry(TagPrefix.wireGtDouble, GTLMaterials.SpaceTime) },
 
@@ -168,7 +168,7 @@ public final class CraftingComponentAddition {
                 { 9, new UnificationEntry(TagPrefix.cableGtQuadruple, GTLMaterials.Mithril) },
                 { 10, new UnificationEntry(TagPrefix.cableGtQuadruple, GTMaterials.Neutronium) },
                 { 11, new UnificationEntry(TagPrefix.cableGtQuadruple, GTLMaterials.Taranium) },
-                { 12, new UnificationEntry(TagPrefix.cableGtQuadruple, GTLMaterials.Crystalmatrix) },
+                { 12, new UnificationEntry(TagPrefix.cableGtQuadruple, GTLMaterials.CrystalMatrix) },
                 { 13, new UnificationEntry(TagPrefix.cableGtQuadruple, GTLMaterials.CosmicNeutronium) },
                 { 14, new UnificationEntry(TagPrefix.wireGtQuadruple, GTLMaterials.SpaceTime) },
 
@@ -178,7 +178,7 @@ public final class CraftingComponentAddition {
                 { 9, new UnificationEntry(TagPrefix.cableGtOctal, GTLMaterials.Mithril) },
                 { 10, new UnificationEntry(TagPrefix.cableGtOctal, GTMaterials.Neutronium) },
                 { 11, new UnificationEntry(TagPrefix.cableGtOctal, GTLMaterials.Taranium) },
-                { 12, new UnificationEntry(TagPrefix.cableGtOctal, GTLMaterials.Crystalmatrix) },
+                { 12, new UnificationEntry(TagPrefix.cableGtOctal, GTLMaterials.CrystalMatrix) },
                 { 13, new UnificationEntry(TagPrefix.cableGtOctal, GTLMaterials.CosmicNeutronium) },
                 { 14, new UnificationEntry(TagPrefix.wireGtOctal, GTLMaterials.SpaceTime) },
 
@@ -188,7 +188,7 @@ public final class CraftingComponentAddition {
                 { 9, new UnificationEntry(TagPrefix.cableGtHex, GTLMaterials.Mithril) },
                 { 10, new UnificationEntry(TagPrefix.cableGtHex, GTMaterials.Neutronium) },
                 { 11, new UnificationEntry(TagPrefix.cableGtHex, GTLMaterials.Taranium) },
-                { 12, new UnificationEntry(TagPrefix.cableGtHex, GTLMaterials.Crystalmatrix) },
+                { 12, new UnificationEntry(TagPrefix.cableGtHex, GTLMaterials.CrystalMatrix) },
                 { 13, new UnificationEntry(TagPrefix.cableGtHex, GTLMaterials.CosmicNeutronium) },
                 { 14, new UnificationEntry(TagPrefix.wireGtHex, GTLMaterials.SpaceTime) },
 
@@ -301,8 +301,8 @@ public final class CraftingComponentAddition {
                 { 10, new UnificationEntry(TagPrefix.wireGtOctal, GTLMaterials.Mithril) },
                 { 11, new UnificationEntry(TagPrefix.wireGtHex, GTLMaterials.Mithril) },
                 { 12, new UnificationEntry(TagPrefix.wireGtHex, GTLMaterials.Mithril) },
-                { 13, new UnificationEntry(TagPrefix.wireGtOctal, GTLMaterials.Crystalmatrix) },
-                { 14, new UnificationEntry(TagPrefix.wireGtHex, GTLMaterials.Crystalmatrix) },
+                { 13, new UnificationEntry(TagPrefix.wireGtOctal, GTLMaterials.CrystalMatrix) },
+                { 14, new UnificationEntry(TagPrefix.wireGtHex, GTLMaterials.CrystalMatrix) },
 
         }).collect(Collectors.toMap(data -> (Integer) data[0], data -> data[1])));
 
@@ -311,7 +311,7 @@ public final class CraftingComponentAddition {
                 { 10, new UnificationEntry(TagPrefix.spring, GTLMaterials.Mithril) },
                 { 11, new UnificationEntry(TagPrefix.spring, GTMaterials.Neutronium) },
                 { 12, new UnificationEntry(TagPrefix.spring, GTLMaterials.Taranium) },
-                { 13, new UnificationEntry(TagPrefix.spring, GTLMaterials.Crystalmatrix) },
+                { 13, new UnificationEntry(TagPrefix.spring, GTLMaterials.CrystalMatrix) },
                 { 14, new UnificationEntry(TagPrefix.spring, GTLMaterials.CosmicNeutronium) },
 
         }).collect(Collectors.toMap(data -> (Integer) data[0], data -> data[1])));
@@ -366,7 +366,7 @@ public final class CraftingComponentAddition {
                 { 10, new UnificationEntry(TagPrefix.spring, GTLMaterials.Mithril) },
                 { 11, new UnificationEntry(TagPrefix.spring, GTMaterials.Neutronium) },
                 { 12, new UnificationEntry(TagPrefix.spring, GTLMaterials.Taranium) },
-                { 13, new UnificationEntry(TagPrefix.spring, GTLMaterials.Crystalmatrix) },
+                { 13, new UnificationEntry(TagPrefix.spring, GTLMaterials.CrystalMatrix) },
                 { 14, new UnificationEntry(TagPrefix.spring, GTLMaterials.CosmicNeutronium) },
 
         }).collect(Collectors.toMap(data -> (Integer) data[0], data -> data[1])));

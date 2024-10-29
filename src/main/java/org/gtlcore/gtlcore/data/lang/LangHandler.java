@@ -25,7 +25,7 @@ public class LangHandler {
         provider.add("gtceu.primitive_void_ore", "Primitive Void Ore");
 
         for (int tier = GTValues.UHV; tier <= 16; tier++) {
-            provider.add("gtceu.multiblock.parallel_hatch_mk" + tier + ".tooltip", "Allows to run up to " + ((int) Math.pow(4, tier - 4)) + " recipes in parallel.");
+            provider.add("gtceu.machine.parallel_hatch_mk" + tier + ".tooltip", "Allows to run up to " + ((int) Math.pow(4, tier - 4)) + " recipes in parallel.");
         }
 
         provider.add("gtceu.machine.available_recipe_map_5.tooltip", "Available Recipe Types: %s, %s, %s, %s, %s");

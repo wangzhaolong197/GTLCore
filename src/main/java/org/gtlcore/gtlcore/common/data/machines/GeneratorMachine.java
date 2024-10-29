@@ -116,7 +116,7 @@ public class GeneratorMachine {
                                 .or(Predicates.abilities(PartAbility.MAINTENANCE).setExactLimit(1))
                                 .or(Predicates.abilities(PartAbility.IMPORT_FLUIDS).setMaxGlobalLimited(8))
                                 .or(Predicates.abilities(PartAbility.EXPORT_FLUIDS).setMaxGlobalLimited(2)))
-                        .where("B", GTLPredicates.RotorBlock())
+                        .where("B", GTLPredicates.RotorBlock(tier))
                         .where("C", Predicates.blocks(casing.get()).or(Predicates.blocks(GTLMachines.ROTOR_HATCH.getBlock()).setMaxGlobalLimited(1)))
                         .where("D", Predicates.blocks(gear.get()))
                         .where("E", Predicates.abilities(PartAbility.OUTPUT_ENERGY).or(Predicates.abilities(PartAbility.SUBSTATION_OUTPUT_ENERGY)))

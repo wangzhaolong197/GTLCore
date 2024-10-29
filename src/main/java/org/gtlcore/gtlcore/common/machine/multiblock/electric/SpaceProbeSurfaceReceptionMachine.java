@@ -22,14 +22,14 @@ public class SpaceProbeSurfaceReceptionMachine extends WorkableElectricMultibloc
     public boolean beforeWorking(@Nullable GTRecipe recipe) {
         Level level = getLevel();
         if (level == null) return false;
-        final BlockPos pos = MachineUtil.getOffsetPos(4, 9, getFrontFacing(), getPos());
-        for (int i = -5; i < 6; i++) {
-            for (int j = -5; j < 6; j++) {
+        BlockPos pos = MachineUtil.getOffsetPos(8, 28, getFrontFacing(), getPos());
+        for (int i = -4; i < 5; i++) {
+            for (int j = -4; j < 5; j++) {
                 if (level.getBrightness(LightLayer.SKY, pos.offset(i, 0, j)) == 0) {
                     return false;
                 }
             }
         }
-        return super.beforeWorking(recipe);
+        return level.kjs$getDimension().toString().contains("_orbit") && super.beforeWorking(recipe);
     }
 }
