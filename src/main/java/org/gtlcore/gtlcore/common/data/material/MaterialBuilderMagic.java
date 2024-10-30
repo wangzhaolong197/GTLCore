@@ -7,7 +7,7 @@ import com.gregtechceu.gtceu.api.data.chemical.material.info.MaterialIconSet;
 import static com.gregtechceu.gtceu.api.data.chemical.material.info.MaterialIconSet.*;
 import static org.gtlcore.gtlcore.common.data.GTLMaterials.*;
 
-public class MaterialBuilderMachine {
+public class MaterialBuilderMagic {
 
     public static void init() {
         // 魔法注册
@@ -321,6 +321,12 @@ public class MaterialBuilderMachine {
         ConcentratedMagicSource = builderMaterial("concentrated_magic_source")
                 .fluid()
                 .color(0x9955AA)
+                .iconSet(FLUID)
+                .buildAndRegister();
+
+        ImpureArcaneEssence = builderMaterial("impure_arcane_essence")
+                .fluid()
+                .color(0x9955ff)
                 .iconSet(FLUID)
                 .buildAndRegister();
     }

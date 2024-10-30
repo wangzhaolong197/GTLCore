@@ -21,6 +21,7 @@ import static org.gtlcore.gtlcore.api.data.tag.GTLTagPrefix.magiccrystal;
 import static org.gtlcore.gtlcore.common.data.GTLItems.*;
 import static org.gtlcore.gtlcore.common.data.GTLMaterials.*;
 import static org.gtlcore.gtlcore.common.data.GTLRecipeTypes.DARK_PEARL_QIHUI;
+import static org.gtlcore.gtlcore.common.data.GTLRecipeTypes.DIGESTION_TREATMENT;
 
 public class MagicFormula {
 
@@ -229,10 +230,84 @@ public class MagicFormula {
                     .chancedOutput(new ItemStack(IMPURE_ARCANE_ELEMENTIUM_CRYSTAL, 1), 1500, 0)
                     .chancedOutput(new ItemStack(CRYSTALS_CONTAINING_THE_BREATH_OF_THE_ABYSS, 1), 500, 0)
                     .chancedOutput(new ItemStack(CRYSTALS_CONTAINING_THE_BREATH_OF_THE_SUN, 1), 500, 0)
-                    .chancedOutput(new ItemStack(MAGICAL_RESIDUE, 1), 4000, 0)
+                    .chancedOutput(new ItemStack(MAGICAL_RESIDUE, 1), 1000, 0)
+                    .chancedOutput(new ItemStack(ARCANE_RESIDUE, 1), 100, 0)
                     .duration(400)
                     .EUt(VA[HV])
                     .save(provider);
+
+            DARK_PEARL_QIHUI.recipeBuilder(GTLCore.id("anzhu_qihui_brightlargepiecemagiccrystal"))
+                    .inputItems(CONCENTRATED_MAGIC_ESSENCE_CRYSTAL, 1)
+                    .outputItems(BRIGHT_LARGE_PIECE_OF_MAGIC_CRYSTAL, 1)
+                    .duration(2000)
+                    .save(provider);
+
+            CHEMICAL_BATH_RECIPES.recipeBuilder(GTLCore.id("chemical_bath_brightlargepiecemagiccrystal"))
+                    .inputItems(BRIGHT_LARGE_PIECE_OF_MAGIC_CRYSTAL, 1)
+                    .inputFluids(OxalicAcid.getFluid(2000))
+                    .chancedOutput(magiccrystal, NonattributeMagicCrystals, 8, 9000, 0)
+                    .chancedOutput(magiccrystal, ChargeMagicCrystals, 4, 6000, 0)
+                    .chancedOutput(magiccrystal, FocusMagicCrystals, 2, 4000, 0)
+                    .chancedOutput(magiccrystal, ShiningMagicCrystals, 1, 2000, 0)
+                    .duration(200)
+                    .EUt(VA[HV])
+                    .save(provider);
+
+            LARGE_CHEMICAL_RECIPES.recipeBuilder(GTLCore.id("make_fluorosulfuric_acid_1"))
+                    .inputFluids(HydrofluoricAcid.getFluid(1000))
+                    .inputFluids(SulfurTrioxide.getFluid(1000))
+                    .outputFluids(FluorosulfuricAcid.getFluid(2000))
+                    .duration(100)
+                    .EUt(VA[IV])
+                    .save(provider);
+
+            MIXER_RECIPES.recipeBuilder(GTLCore.id("make_magic_acid_1"))
+                    .inputFluids(FluorosulfuricAcid.getFluid(10000))
+                    .inputFluids(AntimonyPentafluoride.getFluid(3000))
+                    .outputFluids(MagicAcid.getFluid(13000))
+                    .duration(1000)
+                    .EUt(VA[LuV])
+                    .save(provider);
+
+            ASSEMBLER_RECIPES.recipeBuilder(GTLCore.id("make_arcane_sieve"))
+                    .inputItems(wireFine, BorosilicateGlass, 8)
+                    .inputItems(dust, LimitlessGuideMagic, 50)
+                    .inputItems(dust, Wax, 1)
+                    .outputItems(ARCANE_SIEVE, 1)
+                    .duration(400)
+                    .EUt(VA[IV])
+                    .save(provider);
+
+            DIGESTION_TREATMENT.recipeBuilder(GTLCore.id("make_impure_arcane_essence"))
+                    .inputItems(IMPURE_ARCANE_ELEMENTIUM_CRYSTAL, 1)
+                    .inputFluids(MagicAcid.getFluid(1000))
+                    .outputItems(MAGICAL_RESIDUE, 1)
+                    .outputFluids(ImpureArcaneEssence.getFluid(1000))
+                    .duration(2400)
+                    .EUt(VA[LuV])
+                    .save(provider);
+
+            MIXER_RECIPES.recipeBuilder(GTLCore.id("make_arcane_essence"))
+                    .inputFluids(ImpureArcaneEssence.getFluid(1000))
+                    .inputItems(ARCANE_SIEVE, 1)
+                    .outputFluids(HighMagicSource.getFluid(50))
+                    .outputItems(SATURATED_ARCANE_SIEVE, 1)
+                    .duration(2400)
+                    .EUt(VA[LuV])
+                    .blastFurnaceTemp(5000)
+                    .save(provider);
+
+            CENTRIFUGE_RECIPES.recipeBuilder(GTLCore.id("centrifuge_arcane_sieve"))
+                    .inputItems(SATURATED_ARCANE_SIEVE, 1)
+                    .outputItems(wireFine, BorosilicateGlass, 8)
+                    .outputItems(dust, LimitlessGuideMagic, 40)
+                    .chancedOutput(new ItemStack(ARCANE_RESIDUE, 1), 2000, 0)
+                    .outputFluids(SulfuricAcid.getFluid(500))
+                    .outputFluids(FluoroantimonicAcid.getFluid(500))
+                    .duration(100)
+                    .EUt(VA[EV])
+                    .save(provider);
+
         }
     }
 }
