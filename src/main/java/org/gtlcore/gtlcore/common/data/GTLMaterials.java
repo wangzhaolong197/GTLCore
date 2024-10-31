@@ -2,7 +2,7 @@ package org.gtlcore.gtlcore.common.data;
 
 import org.gtlcore.gtlcore.common.data.material.MaterialAdd;
 import org.gtlcore.gtlcore.common.data.material.MaterialBuilder;
-import org.gtlcore.gtlcore.common.data.material.MaterialBuilderMachine;
+import org.gtlcore.gtlcore.common.data.material.MaterialBuilderMagic;
 
 import com.gregtechceu.gtceu.GTCEu;
 import com.gregtechceu.gtceu.api.data.chemical.material.Material;
@@ -885,11 +885,12 @@ public class GTLMaterials {
     public static Material Mercury194;
     public static Material FluorosulfuricAcid;
     public static Material MagicAcid;
+    public static Material ImpureArcaneEssence;
 
     public static void init() {
         MaterialAdd.init();
         MaterialBuilder.init();
-        MaterialBuilderMachine.init();
+        MaterialBuilderMagic.init();
 
         OreProperty oreProp = Bastnasite.getProperty(PropertyKey.ORE);
         oreProp.getOreByProducts().clear();
