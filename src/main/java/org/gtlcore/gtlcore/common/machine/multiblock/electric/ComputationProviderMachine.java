@@ -26,8 +26,6 @@ import java.util.List;
 
 import javax.annotation.ParametersAreNonnullByDefault;
 
-import static org.gtlcore.gtlcore.utils.MachineUtil.inputEU;
-
 @MethodsReturnNonnullByDefault
 @ParametersAreNonnullByDefault
 public class ComputationProviderMachine extends WorkableElectricMultiblockMachine
@@ -57,8 +55,8 @@ public class ComputationProviderMachine extends WorkableElectricMultiblockMachin
 
     private int allocatedCWUt(int cwut, boolean simulate) {
         if (totalCWU < getMaxCWUt()) {
-            if (inf && inputEU(this, Integer.MAX_VALUE)) return Integer.MAX_VALUE;
-            if (inputEU(this, getOverclockVoltage()))
+            if (inf && MachineUtil.inputEU(this, Integer.MAX_VALUE)) return Integer.MAX_VALUE;
+            if (MachineUtil.inputEU(this, getOverclockVoltage()))
                 totalCWU += (long) Math.pow(2, getTier());
             maxCWUt = 0;
         }

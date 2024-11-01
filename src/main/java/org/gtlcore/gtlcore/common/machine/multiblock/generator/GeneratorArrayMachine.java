@@ -61,8 +61,8 @@ public class GeneratorArrayMachine extends StorageMachine {
     @Persisted
     private long eut = 0;
 
-    public GeneratorArrayMachine(IMachineBlockEntity holder, Object... args) {
-        super(holder, 16);
+    public GeneratorArrayMachine(IMachineBlockEntity holder) {
+        super(holder, 16, GeneratorArrayMachine::filter);
     }
 
     @Override
@@ -70,8 +70,7 @@ public class GeneratorArrayMachine extends StorageMachine {
         return MANAGED_FIELD_HOLDER;
     }
 
-    @Override
-    protected boolean filter(ItemStack itemStack) {
+    private static boolean filter(ItemStack itemStack) {
         if (itemStack.getItem() instanceof MetaMachineItem metaMachineItem) {
             MachineDefinition definition = metaMachineItem.getDefinition();
 

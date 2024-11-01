@@ -1,8 +1,10 @@
 package org.gtlcore.gtlcore.common.machine.multiblock.electric;
 
+import org.gtlcore.gtlcore.api.data.tag.GTLTagPrefix;
 import org.gtlcore.gtlcore.api.machine.multiblock.StorageMachine;
 import org.gtlcore.gtlcore.common.data.GTLRecipeModifiers;
 
+import com.gregtechceu.gtceu.api.data.chemical.ChemicalHelper;
 import com.gregtechceu.gtceu.api.machine.IMachineBlockEntity;
 import com.gregtechceu.gtceu.api.machine.MetaMachine;
 import com.gregtechceu.gtceu.api.recipe.GTRecipe;
@@ -29,7 +31,7 @@ import javax.annotation.ParametersAreNonnullByDefault;
 public class PCBFactoryMachine extends StorageMachine {
 
     public PCBFactoryMachine(IMachineBlockEntity holder) {
-        super(holder, 64);
+        super(holder, 64, i -> ChemicalHelper.getPrefix(i.getItem()) == GTLTagPrefix.nanoswarm);
     }
 
     private double reductionEUt = 1, reductionDuration = 1;

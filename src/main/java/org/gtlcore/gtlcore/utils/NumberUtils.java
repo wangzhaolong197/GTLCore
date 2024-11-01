@@ -6,6 +6,7 @@ import net.minecraft.network.chat.MutableComponent;
 import com.google.common.math.LongMath;
 
 import java.text.DecimalFormat;
+import java.util.Random;
 
 public class NumberUtils {
 
@@ -38,5 +39,16 @@ public class NumberUtils {
 
     public static long getVoltageFromFakeTier(int tier) {
         return LongMath.pow(4L, tier + 1) * 2;
+    }
+
+    public static int chanceOccurrences(int count, int chance) {
+        Random random = new Random();
+        int occurrences = 0;
+        for (int i = 0; i < count; i++) {
+            if (random.nextInt(chance) == 0) {
+                occurrences++;
+            }
+        }
+        return occurrences;
     }
 }

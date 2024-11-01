@@ -54,6 +54,11 @@ public class MiscRecipe {
                 'T', GLASS_TUBE.asStack(),
                 'W', new UnificationEntry(wireGtSingle, Copper));
 
+        PHOTOVOLTAIC_POWER.recipeBuilder(GTLCore.id("a"))
+                .circuitMeta(1)
+                .duration(20)
+                .save(provider);
+
         VACUUM_PUMP_RECIPES.recipeBuilder(GTLCore.id("a"))
                 .notConsumable(pipeHugeFluid, Bronze)
                 .EUt(7).duration(200)

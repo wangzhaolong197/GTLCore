@@ -4488,6 +4488,18 @@ public class MaterialBuilder {
                 .iconSet(GTLMaterialIconSet.LIMPID)
                 .buildAndRegister();
 
+        PolyAluminiumChloride = builderMaterial("poly_aluminium_chloride")
+                .fluid()
+                .color(0xf3ffe5)
+                .iconSet(DULL)
+                .buildAndRegister();
+
+        FlocculationWasteSolution = builderMaterial("flocculation_waste_solution")
+                .fluid()
+                .color(0xc7cac1)
+                .iconSet(DULL)
+                .buildAndRegister();
+
         PotassiumPyrosulfate = builderMaterial("potassium_pyrosulfate")
                 .dust()
                 .components(Potassium, 2, Sulfur, 2, Oxygen, 7)

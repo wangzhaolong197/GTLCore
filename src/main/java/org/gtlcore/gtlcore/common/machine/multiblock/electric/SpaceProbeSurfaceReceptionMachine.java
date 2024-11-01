@@ -8,8 +8,8 @@ import com.gregtechceu.gtceu.api.recipe.GTRecipe;
 
 import net.minecraft.core.BlockPos;
 import net.minecraft.world.level.Level;
-import net.minecraft.world.level.LightLayer;
 
+import earth.terrarium.adastra.api.planets.PlanetApi;
 import org.jetbrains.annotations.Nullable;
 
 public class SpaceProbeSurfaceReceptionMachine extends WorkableElectricMultiblockMachine {
@@ -25,11 +25,11 @@ public class SpaceProbeSurfaceReceptionMachine extends WorkableElectricMultibloc
         BlockPos pos = MachineUtil.getOffsetPos(8, 28, getFrontFacing(), getPos());
         for (int i = -4; i < 5; i++) {
             for (int j = -4; j < 5; j++) {
-                if (level.getBrightness(LightLayer.SKY, pos.offset(i, 0, j)) == 0) {
+                if (!level.canSeeSky(pos.offset(i, 0, j))) {
                     return false;
                 }
             }
         }
-        return level.kjs$getDimension().toString().contains("_orbit") && super.beforeWorking(recipe);
+        return PlanetApi.API.isSpace(level) && super.beforeWorking(recipe);
     }
 }

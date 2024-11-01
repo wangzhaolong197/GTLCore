@@ -4,27 +4,30 @@ import org.gtlcore.gtlcore.api.machine.multiblock.IParallelMachine;
 import org.gtlcore.gtlcore.api.pattern.util.IValueContainer;
 import org.gtlcore.gtlcore.common.data.GTLBlocks;
 import org.gtlcore.gtlcore.common.data.GTLMaterials;
+import org.gtlcore.gtlcore.common.machine.multiblock.part.SensorPartMachine;
 import org.gtlcore.gtlcore.utils.MachineUtil;
 
 import com.gregtechceu.gtceu.api.machine.ConditionalSubscriptionHandler;
 import com.gregtechceu.gtceu.api.machine.IMachineBlockEntity;
 import com.gregtechceu.gtceu.api.machine.MetaMachine;
 import com.gregtechceu.gtceu.api.machine.feature.IExplosionMachine;
+import com.gregtechceu.gtceu.api.machine.feature.multiblock.IMultiPart;
 import com.gregtechceu.gtceu.api.machine.multiblock.WorkableElectricMultiblockMachine;
 import com.gregtechceu.gtceu.api.machine.multiblock.WorkableMultiblockMachine;
 import com.gregtechceu.gtceu.api.recipe.GTRecipe;
 import com.gregtechceu.gtceu.common.data.GTMaterials;
 import com.gregtechceu.gtceu.common.data.GTRecipeModifiers;
 
+import com.lowdragmc.lowdraglib.side.fluid.FluidStack;
 import com.lowdragmc.lowdraglib.syncdata.annotation.Persisted;
 import com.lowdragmc.lowdraglib.syncdata.field.ManagedFieldHolder;
 
 import net.minecraft.MethodsReturnNonnullByDefault;
 import net.minecraft.core.BlockPos;
-import net.minecraft.core.Direction;
 import net.minecraft.network.chat.Component;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.Block;
+import net.minecraft.world.level.material.Fluid;
 
 import com.mojang.datafixers.util.Pair;
 import org.jetbrains.annotations.NotNull;
@@ -41,6 +44,12 @@ public class FissionReactorMachine extends WorkableElectricMultiblockMachine imp
     protected static final ManagedFieldHolder MANAGED_FIELD_HOLDER = new ManagedFieldHolder(
             FissionReactorMachine.class, WorkableMultiblockMachine.MANAGED_FIELD_HOLDER);
 
+    private static final Fluid DistilledWater = GTMaterials.DistilledWater.getFluid();
+    private static final Fluid Steam = GTMaterials.Steam.getFluid();
+    private static final Fluid SodiumPotassium = GTMaterials.SodiumPotassium.getFluid();
+    private static final Fluid HotSodiumPotassium = GTLMaterials.HotSodiumPotassium.getFluid();
+    private static final Fluid SupercriticalSodiumPotassium = GTLMaterials.SupercriticalSodiumPotassium.getFluid();
+
     @Persisted
     private BlockPos centrePos = null;
     @Persisted
@@ -54,6 +63,8 @@ public class FissionReactorMachine extends WorkableElectricMultiblockMachine imp
     private int fuel = 0, cooler = 0, heatAdjacent = 1, coolerAdjacent = 0;
 
     private final ConditionalSubscriptionHandler HeatSubs;
+
+    private SensorPartMachine sensorMachine;
 
     public FissionReactorMachine(IMachineBlockEntity holder, Object... args) {
         super(holder, args);
@@ -84,8 +95,6 @@ public class FissionReactorMachine extends WorkableElectricMultiblockMachine imp
     @Override
     public void onStructureFormed() {
         super.onStructureFormed();
-        heatAdjacent = 0;
-        cooler = 0;
         Level level = getLevel();
         int heatA = 0;
         int coolerA = 0;
@@ -116,7 +125,20 @@ public class FissionReactorMachine extends WorkableElectricMultiblockMachine imp
         if (CoolerContainer.getValue() instanceof Integer Cooler) {
             this.cooler = Cooler;
         }
-        HeatSubs.initialize(getLevel());
+        for (IMultiPart part : getParts()) {
+            if (part instanceof SensorPartMachine sensorPartMachine) {
+                sensorMachine = sensorPartMachine;
+            }
+        }
+        HeatSubs.initialize(level);
+    }
+
+    @Override
+    public void onStructureInvalid() {
+        super.onStructureInvalid();
+        fuel = 0;
+        cooler = 0;
+        sensorMachine = null;
     }
 
     @Override
@@ -137,64 +159,31 @@ public class FissionReactorMachine extends WorkableElectricMultiblockMachine imp
         }
     }
 
-    private boolean inputWater(long amount) {
-        boolean value = MachineUtil.inputFluid(this, GTMaterials.DistilledWater.getFluid(amount * 800));
-        double steamMultiplier = heat > 373 ? 160 : 160 / Math.pow(1.4, 373 - heat);
-        if (value) value = MachineUtil.outputFluid(this, GTMaterials.Steam.getFluid((long) (amount * 800 * steamMultiplier)));
-        return value;
-    }
-
-    private boolean inputSodiumPotassium(long amount) {
-        boolean value = MachineUtil.inputFluid(this, GTMaterials.SodiumPotassium.getFluid(amount * 20));
-        if (heat > 825) {
-            if (value) value = MachineUtil.outputFluid(this, GTLMaterials.SupercriticalSodiumPotassium.getFluid(amount * 20));
-        } else if (value) value = MachineUtil.outputFluid(this, GTLMaterials.HotSodiumPotassium.getFluid(amount * 20));
-        return value;
-    }
-
-    protected void HeatUpdate() {
+    private void HeatUpdate() {
         if (getOffsetTimer() % 20 == 0) {
-            if (heat > 1500) {
-                if (damaged > 99) {
-                    doExplosion(centrePos, fuel);
-                } else {
-                    damaged += Math.max(1, heatAdjacent / 6);
-                }
-            }
             if (getRecipeLogic().isWorking()) {
-                int required = recipeHeat * parallel * heat / 1500;
-                int surplus = ((cooler - (coolerAdjacent / 3)) * 8) - required;
                 boolean isCooler = false;
-                if (surplus >= 0) {
-                    if (inputWater(required)) {
-                        while (surplus >= required && getProgress() < getMaxProgress()) {
-                            if (inputWater(required)) {
-                                surplus = surplus - required;
-                                getRecipeLogic().setProgress(getProgress() + 20);
-                            } else {
-                                break;
-                            }
-                        }
-                        if (heat > 298 && surplus >= required && inputWater(required)) {
-                            heat--;
-                        }
-                        isCooler = true;
-                    } else if (inputSodiumPotassium(required)) {
-                        while (surplus >= required && getProgress() < getMaxProgress()) {
-                            if (inputSodiumPotassium(required)) {
-                                surplus = surplus - required;
-                                getRecipeLogic().setProgress(getProgress() + 20);
-                            } else {
-                                break;
-                            }
-                        }
-                        if (heat > 298 && surplus >= required && inputSodiumPotassium(required)) {
-                            heat--;
-                        }
-                        isCooler = true;
+                int required = recipeHeat * parallel * heat / 1500;
+                long[] a = MachineUtil.getFluidAmount(this, DistilledWater, SodiumPotassium);
+                long capacity = Math.min(Math.max(a[0] / 800, a[1] / 20), (cooler - (coolerAdjacent / 3L)) * 8);
+                if (capacity - required >= 0) {
+                    if (MachineUtil.inputFluid(this, FluidStack.create(DistilledWater, a[0]))) {
+                        isCooler = MachineUtil.outputFluid(this, FluidStack.create(Steam, (long) (capacity * 800 * (heat > 373 ? 160 : 160 / Math.pow(1.4, 373 - heat)))));
+                    } else if (MachineUtil.inputFluid(this, FluidStack.create(SodiumPotassium, a[1]))) {
+                        if (heat > 825) {
+                            isCooler = MachineUtil.outputFluid(this, FluidStack.create(SupercriticalSodiumPotassium, capacity * 20));
+                        } else isCooler = MachineUtil.outputFluid(this, FluidStack.create(HotSodiumPotassium, capacity * 20));
                     }
                 }
-                if (!isCooler) {
+                if (isCooler) {
+                    int progress = (int) (getProgress() + 20 * capacity / required);
+                    int surplusProgress = progress - getMaxProgress();
+                    if (surplusProgress > 0) {
+                        if (heat > 298) heat -= surplusProgress / 20;
+                    } else {
+                        getRecipeLogic().setProgress(progress);
+                    }
+                } else {
                     heat += recipeHeat * heatAdjacent;
                 }
             } else {
@@ -203,6 +192,16 @@ public class FissionReactorMachine extends WorkableElectricMultiblockMachine imp
                 } else if (damaged > 0) {
                     damaged--;
                 }
+            }
+            if (heat > 1500) {
+                if (damaged > 99) {
+                    doExplosion(centrePos, fuel);
+                } else {
+                    damaged += Math.max(1, heatAdjacent / 6);
+                }
+            }
+            if (sensorMachine != null) {
+                sensorMachine.update(heat);
             }
         }
     }
@@ -218,11 +217,6 @@ public class FissionReactorMachine extends WorkableElectricMultiblockMachine imp
             return recipe1;
         }
         return null;
-    }
-
-    @Override
-    public int getOutputSignal(@Nullable Direction side) {
-        return 22500 / heat;
     }
 
     @Override

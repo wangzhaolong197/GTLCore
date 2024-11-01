@@ -31,8 +31,5 @@ public class BlockLang {
         provider.add("block.gtceu.max_4096a_laser_target_hatch", "4096A §c§lMAX§r Laser Target Hatch");
 
         provider.add("block.gtlcore.primitive_void_ore", "Primitive Void Ore");
-
-        provider.add("gtlcore.tooltip.block.quantum_glass.0", "Dense but Transparent");
-        provider.add("gtlcore.tooltip.block.quantum_glass.1", "§bGlass & Elegance");
     }
 }

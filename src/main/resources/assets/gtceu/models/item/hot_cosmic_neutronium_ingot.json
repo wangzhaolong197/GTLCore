@@ -1,5 +1,5 @@
 {
-  "parent":"gtceu:item/material_sets/cosmicneutronium/ingot",
+  "parent":"gtceu:item/material_sets/cosmic_neutronium/ingot",
   "textures": {
     "halo": "avaritia:misc/halo_noise"
   },

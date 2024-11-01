@@ -55,13 +55,8 @@ public class SlaughterhouseMachine extends StorageMachine {
     private final String[] mobList2 = GTLConfigHolder.INSTANCE.mobList2;
 
     public SlaughterhouseMachine(IMachineBlockEntity holder) {
-        super(holder, 1);
+        super(holder, 1, i -> i.is(MachineBlocks.POWERED_SPAWNER.asItem()));
         this.uuid = UUID.randomUUID();
-    }
-
-    @Override
-    protected boolean filter(ItemStack itemStack) {
-        return itemStack.is(MachineBlocks.POWERED_SPAWNER.asItem());
     }
 
     @Override

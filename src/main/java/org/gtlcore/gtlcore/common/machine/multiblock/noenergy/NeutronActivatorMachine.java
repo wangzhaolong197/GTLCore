@@ -4,7 +4,7 @@ import org.gtlcore.gtlcore.api.machine.multiblock.NoEnergyMultiblockMachine;
 import org.gtlcore.gtlcore.api.pattern.util.IValueContainer;
 import org.gtlcore.gtlcore.common.data.GTLRecipeModifiers;
 import org.gtlcore.gtlcore.common.machine.multiblock.part.NeutronAcceleratorPartMachine;
-import org.gtlcore.gtlcore.common.machine.multiblock.part.NeutronSensorPartMachine;
+import org.gtlcore.gtlcore.common.machine.multiblock.part.SensorPartMachine;
 import org.gtlcore.gtlcore.utils.NumberUtils;
 
 import com.gregtechceu.gtceu.api.capability.recipe.IO;
@@ -36,7 +36,6 @@ import org.jetbrains.annotations.Nullable;
 
 import java.util.HashSet;
 import java.util.List;
-import java.util.Objects;
 import java.util.Set;
 
 import javax.annotation.ParametersAreNonnullByDefault;
@@ -65,11 +64,11 @@ public class NeutronActivatorMachine extends NoEnergyMultiblockMachine implement
 
     private final ConditionalSubscriptionHandler neutronEnergySubs;
 
-    private Set<NeutronSensorPartMachine> sensorMachines;
+    private SensorPartMachine sensorMachine;
 
-    private Set<ItemBusPartMachine> busMachines;
+    private final Set<ItemBusPartMachine> busMachines = new HashSet<>();
 
-    private Set<NeutronAcceleratorPartMachine> acceleratorMachines;
+    private final Set<NeutronAcceleratorPartMachine> acceleratorMachines = new HashSet<>();
 
     public NeutronActivatorMachine(IMachineBlockEntity holder, Object... args) {
         super(holder, args);
@@ -86,16 +85,11 @@ public class NeutronActivatorMachine extends NoEnergyMultiblockMachine implement
         }
         for (IMultiPart part : getParts()) {
             if (part instanceof ItemBusPartMachine itemBusPartMachine) {
-                busMachines = Objects.requireNonNullElseGet(busMachines, HashSet::new);
                 busMachines.add(itemBusPartMachine);
-            }
-            if (part instanceof NeutronSensorPartMachine neutronSensorMachine) {
-                sensorMachines = Objects.requireNonNullElseGet(sensorMachines, HashSet::new);
-                sensorMachines.add(neutronSensorMachine);
-            }
-            if (part instanceof NeutronAcceleratorPartMachine neutronAccelerator) {
-                acceleratorMachines = Objects.requireNonNullElseGet(acceleratorMachines, HashSet::new);
+            } else if (part instanceof NeutronAcceleratorPartMachine neutronAccelerator) {
                 acceleratorMachines.add(neutronAccelerator);
+            } else if (part instanceof SensorPartMachine sensorPartMachine) {
+                sensorMachine = sensorPartMachine;
             }
         }
         neutronEnergySubs.initialize(getLevel());
@@ -105,10 +99,9 @@ public class NeutronActivatorMachine extends NoEnergyMultiblockMachine implement
     public void onStructureInvalid() {
         super.onStructureInvalid();
         height = 0;
-        sensorMachines = null;
-        busMachines = null;
-        acceleratorMachines = null;
-        neutronEnergySubs.unsubscribe();
+        sensorMachine = null;
+        busMachines.clear();
+        acceleratorMachines.clear();
     }
 
     private double getEfficiencyFactor() {
@@ -173,8 +166,8 @@ public class NeutronActivatorMachine extends NoEnergyMultiblockMachine implement
             this.eV = Math.max(eV - 72 * 1000, 0);
         }
         if (this.eV < 0) this.eV = 0;
-        if (sensorMachines == null) return;
-        sensorMachines.forEach(sensor -> sensor.update(eV));
+        if (sensorMachine == null) return;
+        sensorMachine.update((float) eV / 1000000);
     }
 
     private void absorptionUpdate() {

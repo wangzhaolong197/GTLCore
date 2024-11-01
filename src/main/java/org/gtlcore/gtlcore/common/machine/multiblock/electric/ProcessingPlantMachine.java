@@ -76,11 +76,10 @@ public class ProcessingPlantMachine extends StorageMachine implements IParallelM
     private boolean mismatched = false;
 
     public ProcessingPlantMachine(IMachineBlockEntity holder) {
-        super(holder, 1);
+        super(holder, 1, ProcessingPlantMachine::filter);
     }
 
-    @Override
-    protected boolean filter(ItemStack itemStack) {
+    private static boolean filter(ItemStack itemStack) {
         if (itemStack.getItem() instanceof MetaMachineItem metaMachineItem) {
             MachineDefinition definition = metaMachineItem.getDefinition();
             if (definition instanceof MultiblockMachineDefinition) {

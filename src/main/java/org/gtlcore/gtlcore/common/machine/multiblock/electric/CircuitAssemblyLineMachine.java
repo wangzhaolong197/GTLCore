@@ -24,7 +24,7 @@ public class CircuitAssemblyLineMachine extends StorageMachine {
     private int parallel;
 
     public CircuitAssemblyLineMachine(IMachineBlockEntity holder) {
-        super(holder, 64);
+        super(holder, 64, i -> i.kjs$getId().contains("precision_circuit_assembly_robot_mk"));
     }
 
     @Override

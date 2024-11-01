@@ -65,6 +65,7 @@ public class Tooltips {
         TOOL_TIPS_MAP.put(GTLItems.BIOWARE_COMPUTER.get(), new String[] { "§7Covered in slime between metals" });
         TOOL_TIPS_MAP.put(GTLItems.BIOWARE_MAINFRAME.get(), new String[] { "§7Network of microbial consciousness" });
         TOOL_TIPS_MAP.put(GTLItems.BIOWARE_PROCESSOR.get(), new String[] { "§7Viscous organic slurry adheres to the surface" });
+        TOOL_TIPS_MAP.put(GTLBlocks.QUANTUM_GLASS.asItem(), new String[] { "Dense but Transparent", "§bGlass & Elegance" });
     }
 
     public static void updateTooltipMap() {

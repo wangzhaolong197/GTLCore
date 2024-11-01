@@ -2,6 +2,7 @@ package org.gtlcore.gtlcore.common.data.machines;
 
 import org.gtlcore.gtlcore.GTLCore;
 import org.gtlcore.gtlcore.api.machine.multiblock.CoilWorkableElectricParallelMultiblockMachine;
+import org.gtlcore.gtlcore.client.renderer.machine.DimensionalFocusEngravingArrayRenderer;
 import org.gtlcore.gtlcore.common.data.GTLBlocks;
 import org.gtlcore.gtlcore.common.data.GTLMachines;
 import org.gtlcore.gtlcore.common.data.GTLRecipeModifiers;
@@ -31,7 +32,8 @@ public class hugeMultiBlockMachineB {
     public static void init() {}
 
     public final static MultiblockMachineDefinition DIMENSIONAL_FOCUS_ENGRAVING_ARRAY = REGISTRATE.multiblock("dimensional_focus_engraving_array", CoilWorkableElectricParallelMultiblockMachine::new)
-            .rotationState(RotationState.ALL)
+            .rotationState(RotationState.NON_Y_AXIS)
+            .allowExtendedFacing(false)
             .recipeType(GTLRecipeTypes.DIMENSIONAL_FOCUS_ENGRAVING_ARRAY_RECIPES)
             .tooltips(Component.translatable("gtlcore.machine.coil_parallel"))
             .tooltips(Component.translatable("gtlcore.machine.laser.tooltip"))
@@ -138,19 +140,20 @@ public class hugeMultiBlockMachineB {
                     .where("E", Predicates.blocks(GTLBlocks.CONTAINMENT_FIELD_GENERATOR.get()))
                     .where("F", Predicates.blocks(GTLBlocks.IMPROVED_SUPERCONDUCTOR_COIL.get()))
                     .where("G", Predicates.blocks(GCyMBlocks.CASING_LASER_SAFE_ENGRAVING.get())
-                            .or(Predicates.abilities(PartAbility.IMPORT_ITEMS).setMaxGlobalLimited(24))
-                            .or(Predicates.abilities(PartAbility.IMPORT_FLUIDS).setMaxGlobalLimited(2))
-                            .or(Predicates.abilities(PartAbility.INPUT_ENERGY).setMaxGlobalLimited(2))
+                            .or(Predicates.abilities(PartAbility.IMPORT_ITEMS).setMaxGlobalLimited(24).setPreviewCount(1))
+                            .or(Predicates.abilities(PartAbility.IMPORT_FLUIDS).setMaxGlobalLimited(2).setPreviewCount(1))
+                            .or(Predicates.abilities(PartAbility.INPUT_ENERGY).setMaxGlobalLimited(2).setPreviewCount(1))
                             .or(Predicates.abilities(PartAbility.MAINTENANCE).setExactLimit(1))
                             .or(Predicates.abilities(PartAbility.OPTICAL_DATA_RECEPTION).setExactLimit(1))
-                            .or(Predicates.abilities(PartAbility.EXPORT_ITEMS).setMaxGlobalLimited(2))
+                            .or(Predicates.abilities(PartAbility.EXPORT_ITEMS).setMaxGlobalLimited(2).setPreviewCount(1))
                             .or(Predicates.abilities(PartAbility.INPUT_LASER).setMaxGlobalLimited(1))
                             .or(Predicates.abilities(PartAbility.COMPUTATION_DATA_RECEPTION).setExactLimit(1)))
                     .where("H", Predicates.heatingCoils())
                     .where(" ", Predicates.any())
                     .build())
             .additionalDisplay(GTLMachines.COIL_PARALLEL)
-            .workableCasingRenderer(GTCEu.id("block/casings/gcym/laser_safe_engraving_casing"), GTCEu.id("block/multiblock/fusion_reactor"))
+            .renderer(DimensionalFocusEngravingArrayRenderer::new)
+            .hasTESR(true)
             .register();
 
     public final static MultiblockMachineDefinition STAR_ULTIMATE_MATERIAL_FORGE_FACTORY = REGISTRATE.multiblock("star_ultimate_material_forge_factory", WorkableElectricMultiblockMachine::new)

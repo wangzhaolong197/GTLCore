@@ -763,6 +763,8 @@ public class GTLItems {
     public static final ItemEntry<Item> SHEWANELLA_PETRI_DISH = register("shewanella_petri_dish", "germ");
 
     public static final ItemEntry<Item> CONVERSION_SIMULATE_CARD = register("conversion_simulate_card");
+    public static final ItemEntry<Item> ACTIVATED_CARBON_FILTER_MESH = register("activated_carbon_filter_mesh");
+    public static final ItemEntry<Item> USED_ACTIVATED_CARBON_FILTER_MESH = register("used_activated_carbon_filter_mesh", "activated_carbon_filter_mesh");
     public static final ItemEntry<Item> EMPTY_QUARK_RELEASE_CATALYST_HOUSING = register("empty_quark_release_catalyst_housing");
     public static final ItemEntry<Item> UNALIGNED_QUARK_RELEASING_CATALYST = register("unaligned_quark_releasing_catalyst");
     public static final ItemEntry<Item> UP_QUARK_RELEASING_CATALYST = register("up_quark_releasing_catalyst");

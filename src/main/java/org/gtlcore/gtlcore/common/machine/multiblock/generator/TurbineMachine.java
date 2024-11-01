@@ -1,6 +1,6 @@
 package org.gtlcore.gtlcore.common.machine.multiblock.generator;
 
-import org.gtlcore.gtlcore.common.machine.multiblock.part.RotorHatchPartMachine;
+import org.gtlcore.gtlcore.api.machine.part.ItemHatchPartMachine;
 
 import com.gregtechceu.gtceu.api.GTValues;
 import com.gregtechceu.gtceu.api.capability.recipe.EURecipeCapability;
@@ -77,7 +77,7 @@ public class TurbineMachine extends WorkableElectricMultiblockMachine implements
 
     private Set<RotorHolderPartMachine> rotorHolderMachines;
 
-    private RotorHatchPartMachine rotorHatchPartMachine = null;
+    private ItemHatchPartMachine rotorHatchPartMachine = null;
 
     private final ConditionalSubscriptionHandler rotorSubs;
 
@@ -110,7 +110,7 @@ public class TurbineMachine extends WorkableElectricMultiblockMachine implements
                 rotorHolderMachines = Objects.requireNonNullElseGet(rotorHolderMachines, HashSet::new);
                 rotorHolderMachines.add(rotorHolderMachine);
             }
-            if (part instanceof RotorHatchPartMachine rotorHatchPart) {
+            if (part instanceof ItemHatchPartMachine rotorHatchPart) {
                 rotorHatchPartMachine = rotorHatchPart;
             }
         }

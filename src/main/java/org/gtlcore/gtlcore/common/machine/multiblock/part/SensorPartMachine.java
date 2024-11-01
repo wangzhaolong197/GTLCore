@@ -5,7 +5,7 @@ import com.gregtechceu.gtceu.api.gui.widget.ToggleButtonWidget;
 import com.gregtechceu.gtceu.api.machine.IMachineBlockEntity;
 import com.gregtechceu.gtceu.api.machine.multiblock.part.MultiblockPartMachine;
 import com.gregtechceu.gtceu.data.lang.LangHandler;
-import com.gregtechceu.gtceu.utils.RedstoneUtil;
+import com.gregtechceu.gtceu.utils.FormattingUtil;
 
 import com.lowdragmc.lowdraglib.gui.widget.TextBoxWidget;
 import com.lowdragmc.lowdraglib.gui.widget.TextFieldWidget;
@@ -32,15 +32,15 @@ import javax.annotation.ParametersAreNonnullByDefault;
 
 @ParametersAreNonnullByDefault
 @MethodsReturnNonnullByDefault
-public class NeutronSensorPartMachine extends MultiblockPartMachine {
+public class SensorPartMachine extends MultiblockPartMachine {
 
     protected static final ManagedFieldHolder MANAGED_FIELD_HOLDER = new ManagedFieldHolder(
-            NeutronSensorPartMachine.class, MultiblockPartMachine.MANAGED_FIELD_HOLDER);
+            SensorPartMachine.class, MultiblockPartMachine.MANAGED_FIELD_HOLDER);
 
     @Setter
     @Persisted
     @DescSynced
-    private int min, max;
+    private float min, max;
 
     @Persisted
     @Setter
@@ -49,28 +49,23 @@ public class NeutronSensorPartMachine extends MultiblockPartMachine {
 
     @Getter
     @Persisted
-    protected int redstoneSignalOutput = 0;
+    private int redstoneSignalOutput = 0;
 
-    public NeutronSensorPartMachine(IMachineBlockEntity holder) {
+    private final int m;
+
+    public SensorPartMachine(IMachineBlockEntity holder, int m) {
         super(holder);
+        this.m = m;
     }
 
     @Override
     public Widget createUIWidget() {
         var group = new WidgetGroup(Position.ORIGIN, new Size(176, 112));
+        group.addWidget(new TextBoxWidget(12, 35, 65, List.of(LocalizationUtils.format("cover.advanced_energy_detector.min") + ":")));
+        group.addWidget(new TextBoxWidget(12, 80, 65, List.of(LocalizationUtils.format("cover.advanced_energy_detector.max") + ":")));
+        group.addWidget(new TextFieldWidget(80, 26, 85, 18, () -> FormattingUtil.formatNumbers(min), stringValue -> setMin(Mth.clamp(Float.parseFloat(stringValue), 0, max))).setNumbersOnly(0, max));
 
-        group.addWidget(new TextBoxWidget(8, 35, 65,
-                List.of(LocalizationUtils.format("最小中子动能\n(%s)", "MeV"))));
-
-        group.addWidget(new TextBoxWidget(8, 80, 65,
-                List.of(LocalizationUtils.format("最大中子动能\n(%s)", "MeV"))));
-
-        group.addWidget(new TextFieldWidget(80, 35, 85, 18, () -> toText(min),
-                stringValue -> setMin(Mth.clamp(fromText(stringValue), 0, max))).setNumbersOnly(0, max));
-
-        group.addWidget(new TextFieldWidget(80, 80, 85, 18, () -> toText(max),
-                stringValue -> setMax(Mth.clamp(fromText(stringValue), min, 1200000))).setNumbersOnly(min, 1200000));
-
+        group.addWidget(new TextFieldWidget(80, 71, 85, 18, () -> FormattingUtil.formatNumbers(max), stringValue -> setMax(Mth.clamp(Float.parseFloat(stringValue), min, m))).setNumbersOnly(min, m));
         group.addWidget(new ToggleButtonWidget(8, 8, 20, 20,
                 GuiTextures.INVERT_REDSTONE_BUTTON, this::isInverted, this::setInverted) {
 
@@ -78,22 +73,28 @@ public class NeutronSensorPartMachine extends MultiblockPartMachine {
             public void updateScreen() {
                 super.updateScreen();
                 setHoverTooltips(List.copyOf(LangHandler.getMultiLang(
-                        "gtlcore.machine.neutron_sensor.invert." + (isPressed ? "enabled" : "disabled"))));
+                        "gtlcore.machine.sensor.invert." + (isPressed ? "enabled" : "disabled"))));
             }
         });
         return group;
     }
 
-    public void update(int energy) {
-        int output = RedstoneUtil.computeRedstoneBetweenValues(energy, max * 1000000, min * 1000000, isInverted());
+    public void update(float a) {
+        int output = computeRedstoneBetweenValues(a, max, min, isInverted());
         if (redstoneSignalOutput != output) {
-            setRedstoneSignalOutput(output);
+            redstoneSignalOutput = output;
+            updateSignal();
         }
     }
 
-    private void setRedstoneSignalOutput(int redstoneSignalOutput) {
-        this.redstoneSignalOutput = redstoneSignalOutput;
-        updateSignal();
+    private static int computeRedstoneBetweenValues(float value, float maxValue, float minValue, boolean isInverted) {
+        if (value < minValue) {
+            return isInverted ? 15 : 0;
+        }
+        if (value > maxValue) {
+            return isInverted ? 0 : 15;
+        }
+        return Math.round(15 * (isInverted ? (maxValue - value) : (value - minValue)) / (maxValue - minValue));
     }
 
     @Override
@@ -106,15 +107,7 @@ public class NeutronSensorPartMachine extends MultiblockPartMachine {
 
     @Override
     public boolean canConnectRedstone(Direction side) {
-        return false;
-    }
-
-    private String toText(int num) {
-        return String.valueOf(num);
-    }
-
-    private int fromText(String num) {
-        return Integer.parseInt(num);
+        return side == getFrontFacing();
     }
 
     @Override

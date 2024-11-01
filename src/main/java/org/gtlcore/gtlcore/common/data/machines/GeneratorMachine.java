@@ -6,10 +6,7 @@ import org.gtlcore.gtlcore.client.renderer.machine.AnnihilateGeneratorRenderer;
 import org.gtlcore.gtlcore.common.data.*;
 import org.gtlcore.gtlcore.common.data.machines.structure.AnnihilateGeneratorA;
 import org.gtlcore.gtlcore.common.data.machines.structure.AnnihilateGeneratorB;
-import org.gtlcore.gtlcore.common.machine.multiblock.generator.ChemicalEnergyDevourerMachine;
-import org.gtlcore.gtlcore.common.machine.multiblock.generator.DysonSphereMachine;
-import org.gtlcore.gtlcore.common.machine.multiblock.generator.GeneratorArrayMachine;
-import org.gtlcore.gtlcore.common.machine.multiblock.generator.TurbineMachine;
+import org.gtlcore.gtlcore.common.machine.multiblock.generator.*;
 import org.gtlcore.gtlcore.utils.MachineUtil;
 
 import com.gregtechceu.gtceu.GTCEu;
@@ -31,6 +28,8 @@ import net.minecraft.network.chat.Component;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.level.block.Block;
 
+import com.tterrag.registrate.util.entry.BlockEntry;
+
 import java.util.function.Supplier;
 
 import static org.gtlcore.gtlcore.api.registries.GTLRegistration.REGISTRATE;
@@ -39,6 +38,38 @@ import static org.gtlcore.gtlcore.api.registries.GTLRegistration.REGISTRATE;
 public class GeneratorMachine {
 
     public static void init() {}
+
+    public static final MultiblockMachineDefinition PHOTOVOLTAIC_POWER_STATION_ENERGETIC = registerPhotovoltaicPowerStation("energetic", 1, GTBlocks.CASING_STEEL_SOLID, GTLBlocks.ENERGETIC_PHOTOVOLTAIC_BLOCK, GTCEu.id("block/casings/solid/machine_casing_solid_steel"));
+    public static final MultiblockMachineDefinition PHOTOVOLTAIC_POWER_STATION_PULSATING = registerPhotovoltaicPowerStation("pulsating", 4, GTBlocks.CASING_TITANIUM_STABLE, GTLBlocks.PULSATING_PHOTOVOLTAIC_BLOCK, GTCEu.id("block/casings/solid/machine_casing_stable_titanium"));
+    public static final MultiblockMachineDefinition PHOTOVOLTAIC_POWER_STATION_VIBRANT = registerPhotovoltaicPowerStation("vibrant", 16, GTBlocks.CASING_TUNGSTENSTEEL_ROBUST, GTLBlocks.VIBRANT_PHOTOVOLTAIC_BLOCK, GTCEu.id("block/casings/solid/machine_casing_robust_tungstensteel"));
+
+    private static MultiblockMachineDefinition registerPhotovoltaicPowerStation(String name, int basicRate, Supplier<? extends Block> casing, BlockEntry<?> photovoltaicBlock, ResourceLocation texture) {
+        return REGISTRATE.multiblock(name + "_photovoltaic_power_station", holder -> new PhotovoltaicPowerStationMachine(holder, basicRate))
+                .rotationState(RotationState.NON_Y_AXIS)
+                .generator(true)
+                .recipeType(GTLRecipeTypes.PHOTOVOLTAIC_POWER)
+                .tooltips(Component.translatable("gtlcore.machine.photovoltaic_power_station.tooltip.0"))
+                .tooltips(Component.translatable("gtlcore.machine.photovoltaic_power_station.tooltip.1"))
+                .recipeModifier(PhotovoltaicPowerStationMachine::recipeModifier)
+                .appearanceBlock(casing)
+                .pattern(definition -> FactoryBlockPattern.start()
+                        .aisle("AAAAAAA")
+                        .aisle("ABBBBBA")
+                        .aisle("ABBBBBA")
+                        .aisle("ABBBBBA")
+                        .aisle("ABBBBBA")
+                        .aisle("ABBBBBA")
+                        .aisle("AAA~AAA")
+                        .where("~", Predicates.controller(Predicates.blocks(definition.get())))
+                        .where("A", Predicates.blocks(casing.get())
+                                .or(Predicates.abilities(PartAbility.IMPORT_FLUIDS).setMaxGlobalLimited(1))
+                                .or(Predicates.abilities(PartAbility.IMPORT_ITEMS).setExactLimit(1))
+                                .or(Predicates.abilities(PartAbility.OUTPUT_ENERGY).setMaxGlobalLimited(2)))
+                        .where("B", Predicates.blocks(photovoltaicBlock.get()))
+                        .build())
+                .workableCasingRenderer(texture, GTCEu.id("block/multiblock/generator/large_steam_turbine"))
+                .register();
+    }
 
     public static final MultiblockMachineDefinition LARGE_SEMI_FLUID_GENERATOR = GTLMachines.registerLargeCombustionEngine(REGISTRATE,
             "large_semi_fluid_generator", GTValues.EV, GTLRecipeTypes.SEMI_FLUID_GENERATOR_FUELS,
@@ -204,7 +235,7 @@ public class GeneratorMachine {
                             .or(Predicates.abilities(PartAbility.IMPORT_ITEMS).setMaxGlobalLimited(1))
                             .or(Predicates.abilities(PartAbility.IMPORT_FLUIDS).setMaxGlobalLimited(1))
                             .or(Predicates.abilities(PartAbility.INPUT_ENERGY).setMaxGlobalLimited(2))
-                            .or(Predicates.abilities(PartAbility.COMPUTATION_DATA_RECEPTION).setMaxGlobalLimited(2))
+                            .or(Predicates.abilities(PartAbility.COMPUTATION_DATA_RECEPTION).setExactLimit(1))
                             .or(Predicates.abilities(PartAbility.OUTPUT_ENERGY).setMaxGlobalLimited(1))
                             .or(Predicates.abilities(PartAbility.OUTPUT_LASER).setMaxGlobalLimited(1))
                             .or(Predicates.abilities(PartAbility.MAINTENANCE).setExactLimit(1)))

@@ -2,7 +2,7 @@ package org.gtlcore.gtlcore.client.renderer.machine;
 
 import org.gtlcore.gtlcore.GTLCore;
 import org.gtlcore.gtlcore.client.ClientUtil;
-import org.gtlcore.gtlcore.common.machine.multiblock.electric.HarmonyMachine;
+import org.gtlcore.gtlcore.common.machine.multiblock.noenergy.HarmonyMachine;
 
 import com.gregtechceu.gtceu.GTCEu;
 import com.gregtechceu.gtceu.api.machine.IMachineBlockEntity;

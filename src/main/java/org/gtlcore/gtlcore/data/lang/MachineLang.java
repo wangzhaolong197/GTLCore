@@ -152,12 +152,12 @@ public class MachineLang {
         provider.add("gtlcore.machine.neutron_activator.tooltip.2", "Time reduction and acceleration efficiency is 0.95^Number of Additional Blocks");
         provider.add("gtlcore.machine.neutron_activator.tooltip.3", "When no neutron accelerator is running, neutron kinetic energy decreases by §e72KeV§r per second");
         provider.add("gtlcore.machine.neutron_activator.tooltip.4", "Input graphite/beryllium powder can immediately absorb §e10MeV§r neutron kinetic energy");
-        provider.add("gtlcore.machine.neutron_sensor.invert.disabled.0", "Redstone Output: Normal");
-        provider.add("gtlcore.machine.neutron_sensor.invert.disabled.1", "Click to toggle inverted redstone logic");
-        provider.add("gtlcore.machine.neutron_sensor.invert.disabled.2", "When neutron kinetic energy is between the set minimum and maximum values, the sensor will emit a redstone signal; below the minimum value it will stop emitting a redstone signal");
-        provider.add("gtlcore.machine.neutron_sensor.invert.enabled.0", "Redstone Output: Inverted");
-        provider.add("gtlcore.machine.neutron_sensor.invert.enabled.1", "Click to switch to normal redstone logic");
-        provider.add("gtlcore.machine.neutron_sensor.invert.enabled.2", "When neutron kinetic energy is outside the set minimum and maximum values, the sensor will emit a redstone signal; below the minimum value it will emit a redstone signal");
+        provider.add("gtlcore.machine.sensor.invert.disabled.0", "Redstone Output: Normal");
+        provider.add("gtlcore.machine.sensor.invert.disabled.1", "Click to toggle inverted redstone logic");
+        provider.add("gtlcore.machine.sensor.invert.disabled.2", "When neutron kinetic energy is between the set minimum and maximum values, the sensor will emit a redstone signal");
+        provider.add("gtlcore.machine.sensor.invert.enabled.0", "Redstone Output: Inverted");
+        provider.add("gtlcore.machine.sensor.invert.enabled.1", "Click to switch to normal redstone logic");
+        provider.add("gtlcore.machine.sensor.invert.enabled.2", "When neutron kinetic energy is outside the set minimum and maximum values, the sensor will emit a redstone signal");
         provider.add("gtlcore.machine.neutron_sensor.tooltip.0", "Outputs redstone signals based on §6Neutron Kinetic Energy§7, right-click to open GUI for settings");
         provider.add("gtlcore.machine.oc_amount", "Overclocking Times: %s");
         provider.add("gtlcore.machine.off", "Off");
@@ -211,5 +211,8 @@ public class MachineLang {
         provider.add("gtlcore.machine.wind_mill_turbine.tooltip.0", "The rotor cannot operate below the minimum wind speed, and it will be damaged quickly above the maximum wind speed");
         provider.add("gtlcore.machine.wind_mill_turbine.tooltip.1", "Wind Speed Bonus: x1.5 for rainy days, x2 for thunderstorms, the wind speed determines the maximum rotation speed");
         provider.add("gtlcore.machine.wind_mill_turbine.wind", "Current Wind Speed: %s");
+        provider.add("gtlcore.machine.photovoltaic_power_station.tooltip.0", "Output EU based on dimensions and weather, Need to set up circuit 1");
+        provider.add("gtlcore.machine.photovoltaic_power_station.tooltip.1", "The space station can maintain full power operation, requires a distilled water supply of Power/4 mB per second");
+        provider.add("gtlcore.machine.water_purification_plant.bind", "Bound Machine:");
     }
 }

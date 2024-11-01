@@ -1,4 +1,4 @@
-package org.gtlcore.gtlcore.common.machine.multiblock.electric;
+package org.gtlcore.gtlcore.common.machine.multiblock.noenergy;
 
 import org.gtlcore.gtlcore.api.machine.multiblock.NoEnergyMultiblockMachine;
 import org.gtlcore.gtlcore.utils.MachineUtil;
@@ -13,6 +13,7 @@ import com.gregtechceu.gtceu.api.recipe.logic.OCResult;
 import com.gregtechceu.gtceu.common.data.GTMaterials;
 import com.gregtechceu.gtceu.utils.FormattingUtil;
 
+import com.lowdragmc.lowdraglib.side.fluid.FluidStack;
 import com.lowdragmc.lowdraglib.syncdata.annotation.Persisted;
 import com.lowdragmc.lowdraglib.syncdata.field.ManagedFieldHolder;
 
@@ -20,6 +21,7 @@ import net.minecraft.MethodsReturnNonnullByDefault;
 import net.minecraft.network.chat.Component;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.entity.player.Player;
+import net.minecraft.world.level.material.Fluid;
 import net.minecraft.world.phys.BlockHitResult;
 
 import com.hepdd.gtmthings.api.misc.WirelessEnergyManager;
@@ -38,6 +40,9 @@ public class HarmonyMachine extends NoEnergyMultiblockMachine {
 
     public static final ManagedFieldHolder MANAGED_FIELD_HOLDER = new ManagedFieldHolder(
             HarmonyMachine.class, WorkableMultiblockMachine.MANAGED_FIELD_HOLDER);
+
+    private static final Fluid HYDROGEN = GTMaterials.Hydrogen.getFluid();
+    private static final Fluid HELIUM = GTMaterials.Helium.getFluid();
 
     @Persisted
     private int oc = 0;
@@ -58,25 +63,23 @@ public class HarmonyMachine extends NoEnergyMultiblockMachine {
         return MANAGED_FIELD_HOLDER;
     }
 
-    protected void StartupUpdate() {
+    private void StartupUpdate() {
         if (getOffsetTimer() % 20 == 0) {
             oc = 0;
-            if (MachineUtil.inputFluid(this, GTMaterials.Hydrogen.getFluid(100000000))) {
-                hydrogen += 100000000;
+            long[] a = MachineUtil.getFluidAmount(this, HYDROGEN, HELIUM);
+            if (MachineUtil.inputFluid(this, FluidStack.create(HYDROGEN, a[0]))) {
+                hydrogen += a[0];
             }
-            if (MachineUtil.inputFluid(this, GTMaterials.Helium.getFluid(100000000))) {
-                helium += 100000000;
+            if (MachineUtil.inputFluid(this, FluidStack.create(HELIUM, a[1]))) {
+                helium += a[1];
             }
             if (MachineUtil.notConsumableCircuit(this, 4)) {
                 oc = 4;
-            }
-            if (MachineUtil.notConsumableCircuit(this, 3)) {
+            } else if (MachineUtil.notConsumableCircuit(this, 3)) {
                 oc = 3;
-            }
-            if (MachineUtil.notConsumableCircuit(this, 2)) {
+            } else if (MachineUtil.notConsumableCircuit(this, 2)) {
                 oc = 2;
-            }
-            if (MachineUtil.notConsumableCircuit(this, 1)) {
+            } else if (MachineUtil.notConsumableCircuit(this, 1)) {
                 oc = 1;
             }
         }

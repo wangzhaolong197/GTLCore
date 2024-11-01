@@ -1,0 +1,7 @@
+{
+  "variants": {
+    "": {
+      "model": "gtlcore:block/pulsating_photovoltaic_block"
+    }
+  }
+}

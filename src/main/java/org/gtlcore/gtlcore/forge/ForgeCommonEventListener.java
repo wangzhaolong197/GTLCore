@@ -2,8 +2,10 @@ package org.gtlcore.gtlcore.forge;
 
 import org.gtlcore.gtlcore.GTLCore;
 import org.gtlcore.gtlcore.api.machine.IVacuumMachine;
+import org.gtlcore.gtlcore.api.machine.multiblock.IWaterPurificationMachine;
 import org.gtlcore.gtlcore.common.data.GTLBlocks;
 import org.gtlcore.gtlcore.common.data.GTLItems;
+import org.gtlcore.gtlcore.common.machine.multiblock.water.WaterPurificationPlantMachine;
 import org.gtlcore.gtlcore.config.GTLConfigHolder;
 import org.gtlcore.gtlcore.utils.GTLExplosion;
 
@@ -117,6 +119,22 @@ public class ForgeCommonEventListener {
             GTLExplosion nukeExplosion = new GTLExplosion(pos, level, 1000);
             nukeExplosion.setBreakBedrock(true);
             nukeExplosion.finalizeExplosion(false);
+            return;
+        }
+
+        if (item == GTItems.TOOL_DATA_STICK.get() && player.isShiftKeyDown()) {
+            CompoundTag nbt = itemStack.getOrCreateTag();
+            MetaMachine machine = MetaMachine.getMachine(level, pos);
+            if (machine instanceof WaterPurificationPlantMachine waterPurificationPlantMachine) {
+                int[] poss = nbt.getIntArray("poss");
+                nbt.remove("poss");
+                BlockPos waterPos = new BlockPos(poss[0], poss[1], poss[2]);
+                waterPurificationPlantMachine.getPoss().add(waterPos);
+                if (waterPurificationPlantMachine.addWaterPurificationMachine(waterPos, level)) player.displayClientMessage(Component.literal("bind"), true);;
+            } else if (machine instanceof IWaterPurificationMachine) {
+                nbt.putIntArray("poss", new int[] { machine.getPos().getX(), machine.getPos().getY(), machine.getPos().getZ() });
+                player.displayClientMessage(Component.literal("saved"), true);
+            }
             return;
         }
 

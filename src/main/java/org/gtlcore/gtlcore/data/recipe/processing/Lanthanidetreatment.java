@@ -21,9 +21,9 @@ public class Lanthanidetreatment {
     public static void init(Consumer<FinishedRecipe> provider) {
         EXTRACTOR_RECIPES.recipeBuilder("monazite_extraction")
                 .inputItems(gemExquisite, Monazite)
-                .outputItems(dustSmall, RareEarth)
+                .outputItems(dustSmall, RareEarth, 10)
                 .outputFluids(Helium.getFluid(1000))
-                .duration(64).EUt(64).save(provider);
+                .duration(640).EUt(256).save(provider);
 
         DIGESTION_TREATMENT.recipeBuilder(GTLCore.id("monazite_rare_earth_turbid_liquid1"))
                 .inputItems(dust, Monazite, 2)

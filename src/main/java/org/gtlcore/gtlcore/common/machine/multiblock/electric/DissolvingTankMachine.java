@@ -3,8 +3,6 @@ package org.gtlcore.gtlcore.common.machine.multiblock.electric;
 import org.gtlcore.gtlcore.utils.MachineUtil;
 
 import com.gregtechceu.gtceu.api.capability.recipe.FluidRecipeCapability;
-import com.gregtechceu.gtceu.api.capability.recipe.IO;
-import com.gregtechceu.gtceu.api.capability.recipe.IRecipeHandler;
 import com.gregtechceu.gtceu.api.machine.IMachineBlockEntity;
 import com.gregtechceu.gtceu.api.machine.MetaMachine;
 import com.gregtechceu.gtceu.api.machine.multiblock.WorkableElectricMultiblockMachine;
@@ -27,9 +25,7 @@ import lombok.Getter;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
-import java.util.Collections;
 import java.util.List;
-import java.util.Objects;
 
 @Getter
 public class DissolvingTankMachine extends WorkableElectricMultiblockMachine {
@@ -87,28 +83,16 @@ public class DissolvingTankMachine extends WorkableElectricMultiblockMachine {
             List<Content> fluidList = recipe.inputs.getOrDefault(FluidRecipeCapability.CAP, null);
             FluidStack fluidStack1 = FluidRecipeCapability.CAP.of(fluidList.get(0).getContent()).getStacks()[0];
             FluidStack fluidStack2 = FluidRecipeCapability.CAP.of(fluidList.get(1).getContent()).getStacks()[0];
-            double a = 0, b = 0;
-            for (IRecipeHandler<?> handler : Objects.requireNonNullElseGet(dissolvingTankMachine.getCapabilitiesProxy().get(IO.IN, FluidRecipeCapability.CAP), Collections::<IRecipeHandler<?>>emptyList)) {
-                for (Object contents : handler.getContents()) {
-                    if (contents instanceof FluidStack fluidStack) {
-                        if (fluidStack.getFluid() == fluidStack1.getFluid()) {
-                            a += fluidStack.getAmount();
-                        }
-                        if (fluidStack.getFluid() == fluidStack2.getFluid()) {
-                            b += fluidStack.getAmount();
-                        }
-
+            long[] a = MachineUtil.getFluidAmount(dissolvingTankMachine, fluidStack1.getFluid(), fluidStack2.getFluid());
+            if (a[1] > 0) {
+                GTRecipe recipe1 = GTRecipeModifiers.hatchParallel(machine, recipe, false, params, result);
+                if (recipe1 != null) {
+                    GTRecipe recipe2 = RecipeHelper.applyOverclock(OverclockingLogic.NON_PERFECT_OVERCLOCK_SUBTICK, recipe1, dissolvingTankMachine.getOverclockVoltage(), params, result);
+                    if ((double) a[0] / a[1] != ((double) fluidStack1.getAmount()) / fluidStack2.getAmount()) {
+                        recipe2.outputs.clear();
                     }
+                    return recipe2;
                 }
-            }
-            if (b == 0) return null;
-            GTRecipe recipe1 = GTRecipeModifiers.hatchParallel(machine, recipe, false, params, result);
-            if (recipe1 != null) {
-                GTRecipe recipe2 = RecipeHelper.applyOverclock(OverclockingLogic.NON_PERFECT_OVERCLOCK_SUBTICK, recipe1, dissolvingTankMachine.getOverclockVoltage(), params, result);
-                if (a / b != ((double) fluidStack1.getAmount()) / fluidStack2.getAmount()) {
-                    recipe2.outputs.clear();
-                }
-                return recipe2;
             }
         }
         return null;

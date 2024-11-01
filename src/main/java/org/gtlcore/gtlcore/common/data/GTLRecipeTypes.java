@@ -11,6 +11,7 @@ import com.gregtechceu.gtceu.api.capability.recipe.IO;
 import com.gregtechceu.gtceu.api.gui.GuiTextures;
 import com.gregtechceu.gtceu.api.recipe.GTRecipeType;
 import com.gregtechceu.gtceu.api.sound.ExistingSoundEntry;
+import com.gregtechceu.gtceu.common.data.GTRecipeTypes;
 import com.gregtechceu.gtceu.common.data.GTSoundEntries;
 import com.gregtechceu.gtceu.utils.FormattingUtil;
 import com.gregtechceu.gtceu.utils.ResearchManager;
@@ -809,54 +810,12 @@ public class GTLRecipeTypes {
                         widgetGroup.getSize().width - 50, widgetGroup.getSize().height - 40, false, false));
             });
 
-    // 净化水厂
-    public static final GTRecipeType PURIFICATION_PLANT = registerRecipeType("purification_plant", MULTIBLOCK)
-            .setEUIO(IO.IN)
-            .setMaxIOSize(0, 0, 0, 0)
-            .setProgressBar(GuiTextures.PROGRESS_BAR_ARROW, LEFT_TO_RIGHT)
-            .setSound(GTSoundEntries.FORGE_HAMMER);
-
-    public static final GTRecipeType CLARIFIER_PURIFICATION = registerRecipeType("clarifier_purification", MULTIBLOCK)
-            .setEUIO(IO.NONE)
-            .setMaxIOSize(3, 3, 3, 3)
-            .setProgressBar(GuiTextures.PROGRESS_BAR_ARROW, LEFT_TO_RIGHT)
-            .setSound(GTSoundEntries.FORGE_HAMMER);
-    public static final GTRecipeType OZONATION_PURIFICATION = registerRecipeType("ozonation_purification", MULTIBLOCK)
-            .setEUIO(IO.NONE)
-            .setMaxIOSize(3, 3, 3, 3)
-            .setProgressBar(GuiTextures.PROGRESS_BAR_ARROW, LEFT_TO_RIGHT)
-            .setSound(GTSoundEntries.FORGE_HAMMER);
-    public static final GTRecipeType FLOCCULATION_PURIFICATION = registerRecipeType("flocculation_purification", MULTIBLOCK)
-            .setEUIO(IO.NONE)
-            .setMaxIOSize(3, 3, 3, 3)
-            .setProgressBar(GuiTextures.PROGRESS_BAR_ARROW, LEFT_TO_RIGHT)
-            .setSound(GTSoundEntries.FORGE_HAMMER);
-    public static final GTRecipeType PH_NEUTRALIZATION_PURIFICATION = registerRecipeType("ph_neutralization_purification", MULTIBLOCK)
-            .setEUIO(IO.NONE)
-            .setMaxIOSize(3, 3, 3, 3)
-            .setProgressBar(GuiTextures.PROGRESS_BAR_ARROW, LEFT_TO_RIGHT)
-            .setSound(GTSoundEntries.FORGE_HAMMER);
-
-    public static final GTRecipeType EXTREME_TEMPERATURE_FLUCTUATION_PURIFICATION = registerRecipeType("extreme_temperature_fluctuation_purification", MULTIBLOCK)
-            .setEUIO(IO.NONE)
-            .setMaxIOSize(3, 3, 3, 3)
-            .setProgressBar(GuiTextures.PROGRESS_BAR_ARROW, LEFT_TO_RIGHT)
-            .setSound(GTSoundEntries.FORGE_HAMMER);
-    public static final GTRecipeType HIGH_ENERGY_LASER_PURIFICATION = registerRecipeType("high_energy_laser_purification", MULTIBLOCK)
-            .setEUIO(IO.NONE)
-            .setMaxIOSize(3, 3, 3, 3)
-            .setProgressBar(GuiTextures.PROGRESS_BAR_ARROW, LEFT_TO_RIGHT)
-            .setSound(GTSoundEntries.FORGE_HAMMER);
-    public static final GTRecipeType RESIDUAL_DECONTAMINANT_DEGASSER_PURIFICATION = registerRecipeType("residual_decontaminant_degasser_purification", MULTIBLOCK)
-            .setEUIO(IO.NONE)
-            .setMaxIOSize(3, 3, 3, 3)
-            .setProgressBar(GuiTextures.PROGRESS_BAR_ARROW, LEFT_TO_RIGHT)
-            .setSound(GTSoundEntries.FORGE_HAMMER);
-    public static final GTRecipeType ABSOLUTE_BARYONIC_PERFECTION_PURIFICATION = registerRecipeType("absolute_baryonic_perfection_purification", MULTIBLOCK)
-            .setEUIO(IO.NONE)
-            .setMaxIOSize(3, 3, 3, 3)
-            .setProgressBar(GuiTextures.PROGRESS_BAR_ARROW, LEFT_TO_RIGHT)
-            .setSound(GTSoundEntries.FORGE_HAMMER);
+    public static final GTRecipeType PHOTOVOLTAIC_POWER = GTRecipeTypes.register("photovoltaic_power", MULTIBLOCK)
+            .setMaxIOSize(1, 0, 0, 0)
+            .setEUIO(IO.OUT)
+            .setXEIVisible(false)
+            .setSlotOverlay(false, false, GuiTextures.SOLIDIFIER_OVERLAY)
+            .setProgressBar(GuiTextures.PROGRESS_BAR_ARROW_MULTIPLE, ProgressTexture.FillDirection.LEFT_TO_RIGHT);
 
     // 远古呼唤
     public static final GTRecipeType CALL_OF_THE_ANCIENTS = registerRecipeType("call_of_the_ancients", MULTIBLOCK)

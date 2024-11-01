@@ -64,14 +64,9 @@ public class blockConversionRoomMachine extends StorageMachine {
     private BlockBusPartMachine blockBusPartMachine = null;
 
     public blockConversionRoomMachine(IMachineBlockEntity holder, boolean isLarge) {
-        super(holder, 1);
+        super(holder, 1, i -> i.getItem() == GTLItems.CONVERSION_SIMULATE_CARD.get());
         this.am = isLarge ? 64 : 4;
         this.poses = isLarge ? poses2 : poses1;
-    }
-
-    @Override
-    protected boolean filter(@NotNull ItemStack itemStack) {
-        return itemStack.getItem() == GTLItems.CONVERSION_SIMULATE_CARD.get();
     }
 
     @Override

@@ -79,6 +79,7 @@ public class largeSteamCircuitAssemblerMachine extends LargeSteamParallelMultibl
 
     @Override
     public void handleDisplayClick(String componentData, ClickData clickData) {
+        super.handleDisplayClick(componentData, clickData);
         if (!clickData.isRemote && componentData.equals("engraveCircuit")) {
             for (IMultiPart part : getParts()) {
                 if (part instanceof ItemBusPartMachine bus) {

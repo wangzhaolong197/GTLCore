@@ -727,6 +727,8 @@ public class GTLMaterials {
     public static Material Azafullerene;
     public static Material AbsoluteEthanol;
     public static Material PiranhaSolution;
+    public static Material PolyAluminiumChloride;
+    public static Material FlocculationWasteSolution;
 
     public static Material SamariumRefinedPowder;
     public static Material SamariumRrareEearthTurbidLiquid;
@@ -991,6 +993,7 @@ public class GTLMaterials {
     }
 
     public static Material.Builder builderMaterial(String name) {
+        if (ALL_MATERIAL.contains(name)) throw new IllegalArgumentException("Material " + name + " already exists");
         ALL_MATERIAL.add(name);
         return new Material.Builder(GTCEu.id(name));
     }

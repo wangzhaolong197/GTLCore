@@ -3,6 +3,7 @@ package org.gtlcore.gtlcore.common.data;
 import org.gtlcore.gtlcore.GTLCore;
 import org.gtlcore.gtlcore.api.machine.multiblock.GTLPartAbility;
 import org.gtlcore.gtlcore.api.machine.multiblock.IParallelMachine;
+import org.gtlcore.gtlcore.api.machine.part.ItemHatchPartMachine;
 import org.gtlcore.gtlcore.api.pattern.GTLPredicates;
 import org.gtlcore.gtlcore.client.renderer.machine.BallHatchRenderer;
 import org.gtlcore.gtlcore.client.renderer.machine.WindMillTurbineRenderer;
@@ -27,6 +28,8 @@ import com.gregtechceu.gtceu.api.capability.recipe.FluidRecipeCapability;
 import com.gregtechceu.gtceu.api.capability.recipe.IO;
 import com.gregtechceu.gtceu.api.capability.recipe.ItemRecipeCapability;
 import com.gregtechceu.gtceu.api.data.RotationState;
+import com.gregtechceu.gtceu.api.data.chemical.ChemicalHelper;
+import com.gregtechceu.gtceu.api.data.tag.TagPrefix;
 import com.gregtechceu.gtceu.api.machine.*;
 import com.gregtechceu.gtceu.api.machine.feature.multiblock.IMultiController;
 import com.gregtechceu.gtceu.api.machine.multiblock.CleanroomType;
@@ -44,6 +47,7 @@ import com.gregtechceu.gtceu.api.registry.registrate.MultiblockMachineBuilder;
 import com.gregtechceu.gtceu.client.renderer.machine.*;
 import com.gregtechceu.gtceu.client.util.TooltipHelper;
 import com.gregtechceu.gtceu.common.data.*;
+import com.gregtechceu.gtceu.common.item.TurbineRotorBehaviour;
 import com.gregtechceu.gtceu.common.machine.multiblock.part.EnergyHatchPartMachine;
 import com.gregtechceu.gtceu.common.machine.multiblock.part.LaserHatchPartMachine;
 import com.gregtechceu.gtceu.common.machine.multiblock.part.RotorHolderPartMachine;
@@ -739,17 +743,30 @@ public class GTLMachines {
             GTMachines.ALL_TIERS);
 
     public final static MachineDefinition NEUTRON_SENSOR = REGISTRATE
-            .machine("neutron_sensor", NeutronSensorPartMachine::new)
-            .langValue("Neutron Sensor")
+            .machine("neutron_sensor", h -> new SensorPartMachine(h, 1200))
             .tier(GTValues.IV)
             .rotationState(RotationState.ALL)
             .tooltips(Component.translatable("gtlcore.machine.neutron_sensor.tooltip.0"))
             .overlayTieredHullRenderer("neutron_sensor")
             .register();
 
+    public final static MachineDefinition PH_SENSOR = REGISTRATE
+            .machine("ph_sensor", h -> new SensorPartMachine(h, 14))
+            .langValue("pH Sensor")
+            .tier(GTValues.EV)
+            .rotationState(RotationState.ALL)
+            .overlayTieredHullRenderer("neutron_sensor")
+            .register();
+
+    public final static MachineDefinition HEAT_SENSOR = REGISTRATE
+            .machine("heat_sensor", h -> new SensorPartMachine(h, 1000000))
+            .tier(GTValues.MV)
+            .rotationState(RotationState.ALL)
+            .overlayTieredHullRenderer("neutron_sensor")
+            .register();
+
     public static final MachineDefinition GRIND_BALL_HATCH = REGISTRATE
             .machine("grind_ball_hatch", BallHatchPartMachine::new)
-            .langValue("Grind Ball Hatch")
             .tier(GTValues.IV)
             .rotationState(RotationState.ALL)
             .renderer(BallHatchRenderer::new)
@@ -757,7 +774,6 @@ public class GTLMachines {
 
     public static final MachineDefinition RADIATION_HATCH = REGISTRATE
             .machine("radiation_hatch", RadiationHatchPartMachine::new)
-            .langValue("Radiation Hatch")
             .tier(GTValues.ZPM)
             .recipeType(GTLRecipeTypes.RADIATION_HATCH_RECIPES)
             .rotationState(RotationState.ALL)
@@ -765,8 +781,7 @@ public class GTLMachines {
             .register();
 
     public static final MachineDefinition ROTOR_HATCH = REGISTRATE
-            .machine("rotor_hatch", RotorHatchPartMachine::new)
-            .langValue("Rotor Hatch")
+            .machine("rotor_hatch", h -> new ItemHatchPartMachine(h, 1, i -> TurbineRotorBehaviour.getBehaviour(i) != null))
             .tier(GTValues.EV)
             .rotationState(RotationState.ALL)
             .overlayTieredHullRenderer("rotor_hatch")
@@ -777,5 +792,26 @@ public class GTLMachines {
             .tier(GTValues.LuV)
             .rotationState(RotationState.ALL)
             .renderer(() -> new OverlayTieredMachineRenderer(GTValues.LuV, GTCEu.id("block/machine/part/item_bus.import")))
+            .register();
+
+    public static final MachineDefinition LENS_HOUSING = REGISTRATE
+            .machine("lens_housing", h -> new ItemHatchPartMachine(h, 1, i -> ChemicalHelper.getPrefix(i.getItem()) == TagPrefix.lens))
+            .tier(GTValues.EV)
+            .rotationState(RotationState.ALL)
+            .renderer(() -> new OverlayTieredMachineRenderer(GTValues.EV, GTCEu.id("block/machine/part/item_bus.import")))
+            .register();
+
+    public final static MachineDefinition LENS_INDICATOR_HATCH = REGISTRATE
+            .machine("lens_indicator_hatch", IndicatorHatchPartMachine::new)
+            .tier(GTValues.HV)
+            .rotationState(RotationState.ALL)
+            .overlayTieredHullRenderer("neutron_sensor")
+            .register();
+
+    public final static MachineDefinition DEGASSING_CONTROL_HATCH = REGISTRATE
+            .machine("degassing_control_hatch", IndicatorHatchPartMachine::new)
+            .tier(GTValues.LuV)
+            .rotationState(RotationState.ALL)
+            .overlayTieredHullRenderer("neutron_sensor")
             .register();
 }

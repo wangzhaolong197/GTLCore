@@ -14,21 +14,40 @@ import com.gregtechceu.gtceu.common.data.GTRecipeModifiers;
 import com.gregtechceu.gtceu.common.data.GTRecipeTypes;
 import com.gregtechceu.gtceu.data.recipe.builder.GTRecipeBuilder;
 
+import com.lowdragmc.lowdraglib.side.fluid.FluidStack;
+import com.lowdragmc.lowdraglib.syncdata.annotation.Persisted;
+import com.lowdragmc.lowdraglib.syncdata.field.ManagedFieldHolder;
+
+import net.minecraft.world.level.material.Fluid;
+import net.minecraft.world.level.material.Fluids;
+
 import com.mojang.datafixers.util.Pair;
 import org.jetbrains.annotations.NotNull;
 
 public class HeatExchangerMachine extends NoEnergyMultiblockMachine {
 
+    protected static final ManagedFieldHolder MANAGED_FIELD_HOLDER = new ManagedFieldHolder(
+            HeatExchangerMachine.class, NoEnergyMultiblockMachine.MANAGED_FIELD_HOLDER);
+
+    @Override
+    public @NotNull ManagedFieldHolder getFieldHolder() {
+        return MANAGED_FIELD_HOLDER;
+    }
+
+    private static final Fluid SupercriticalSteam = GTLMaterials.SupercriticalSteam.getFluid();
+    private static final Fluid DistilledWater = GTMaterials.DistilledWater.getFluid();
+
     public HeatExchangerMachine(IMachineBlockEntity holder, Object... args) {
         super(holder, args);
     }
 
+    @Persisted
     private long count = 0;
 
     public static GTRecipe recipeModifier(MetaMachine machine, @NotNull GTRecipe recipe) {
         if (machine instanceof HeatExchangerMachine hMachine) {
             if (FluidRecipeCapability.CAP.of(recipe.inputs.get(FluidRecipeCapability.CAP)
-                    .get(1).getContent()).getStacks()[0].getFluid() == GTMaterials.Water.getFluid()) {
+                    .get(1).getContent()).getStacks()[0].getFluid() == Fluids.WATER) {
                 return GTRecipeModifiers.accurateParallel(machine, recipe, Integer.MAX_VALUE, false).getFirst();
             }
             final Pair<GTRecipe, Integer> result = GTRecipeModifiers.accurateParallel(machine, new GTRecipeBuilder(GTLCore.id("heat_exchanger"), GTRecipeTypes.DUMMY_RECIPES)
@@ -39,7 +58,7 @@ public class HeatExchangerMachine extends NoEnergyMultiblockMachine {
                     .duration(200)
                     .buildRawRecipe(), Integer.MAX_VALUE, false);
             long count = result.getSecond() * recipe.data.getLong("eu");
-            if (MachineUtil.inputFluid(hMachine, GTMaterials.DistilledWater.getFluid(count / 160))) {
+            if (MachineUtil.inputFluid(hMachine, FluidStack.create(DistilledWater, count / 160))) {
                 hMachine.count = count / 16;
                 return result.getFirst();
             }
@@ -50,8 +69,7 @@ public class HeatExchangerMachine extends NoEnergyMultiblockMachine {
     @Override
     public void afterWorking() {
         if (count != 0) {
-            MachineUtil.outputFluid(this, GTLMaterials.SupercriticalSteam
-                    .getFluid(count));
+            MachineUtil.outputFluid(this, FluidStack.create(SupercriticalSteam, count));
         }
         count = 0;
         super.afterWorking();

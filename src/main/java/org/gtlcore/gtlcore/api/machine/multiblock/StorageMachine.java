@@ -18,6 +18,7 @@ import net.minecraft.MethodsReturnNonnullByDefault;
 import net.minecraft.world.item.ItemStack;
 
 import java.util.List;
+import java.util.function.Function;
 
 import javax.annotation.ParametersAreNonnullByDefault;
 
@@ -31,12 +32,12 @@ public class StorageMachine extends WorkableElectricMultiblockMachine implements
     @Persisted
     public final NotifiableItemStackHandler machineStorage;
 
-    public StorageMachine(IMachineBlockEntity holder, int slot) {
+    public StorageMachine(IMachineBlockEntity holder, int slot, Function<ItemStack, Boolean> filter) {
         super(holder);
-        this.machineStorage = createMachineStorage(slot);
+        this.machineStorage = createMachineStorage(slot, filter);
     }
 
-    protected NotifiableItemStackHandler createMachineStorage(int value) {
+    protected NotifiableItemStackHandler createMachineStorage(int value, Function<ItemStack, Boolean> filter) {
         NotifiableItemStackHandler storage = new NotifiableItemStackHandler(
                 this, 1, IO.NONE, IO.BOTH, slots -> new ItemStackTransfer(1) {
 
@@ -45,12 +46,8 @@ public class StorageMachine extends WorkableElectricMultiblockMachine implements
                         return value;
                     }
                 });
-        storage.setFilter(this::filter);
+        storage.setFilter(filter);
         return storage;
-    }
-
-    protected boolean filter(ItemStack itemStack) {
-        return true;
     }
 
     @Override

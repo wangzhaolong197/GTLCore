@@ -36,6 +36,8 @@ import appeng.block.crafting.AbstractCraftingUnitBlock;
 import appeng.block.crafting.CraftingUnitBlock;
 import appeng.blockentity.AEBaseBlockEntity;
 import appeng.blockentity.crafting.CraftingBlockEntity;
+import com.tterrag.registrate.providers.DataGenContext;
+import com.tterrag.registrate.providers.RegistrateBlockstateProvider;
 import com.tterrag.registrate.util.entry.BlockEntityEntry;
 import com.tterrag.registrate.util.entry.BlockEntry;
 import com.tterrag.registrate.util.nullness.NonNullBiConsumer;
@@ -204,25 +206,29 @@ public class GTLBlocks {
 
     private static BlockEntry<Block> createGlassCasingBlock(String name, ResourceLocation texture,
                                                             Supplier<Supplier<RenderType>> type) {
-        return createCasingBlock(name, GlassBlock::new, texture, () -> Blocks.GLASS, type);
+        return createCasingBlock(name, GTModels.cubeAllModel(name, texture), GlassBlock::new, () -> Blocks.GLASS, type);
     }
 
     public static BlockEntry<Block> createCasingBlock(String name, ResourceLocation texture) {
-        return createCasingBlock(name, Block::new, texture, () -> Blocks.IRON_BLOCK,
+        return createCasingBlock(name, GTModels.cubeAllModel(name, texture), Block::new, () -> Blocks.IRON_BLOCK,
+                () -> RenderType::solid);
+    }
+
+    public static BlockEntry<Block> createCustomModelCasingBlock(String name) {
+        return createCasingBlock(name, NonNullBiConsumer.noop(), Block::new, () -> Blocks.IRON_BLOCK,
                 () -> RenderType::solid);
     }
 
     @SuppressWarnings("all")
-    public static BlockEntry<Block> createCasingBlock(String name,
+    public static BlockEntry<Block> createCasingBlock(String name, NonNullBiConsumer<DataGenContext<Block, Block>, RegistrateBlockstateProvider> cons,
                                                       NonNullFunction<BlockBehaviour.Properties, Block> blockSupplier,
-                                                      ResourceLocation texture,
                                                       NonNullSupplier<? extends Block> properties,
                                                       Supplier<Supplier<RenderType>> type) {
         return REGISTRATE.block(name, blockSupplier)
                 .initialProperties(properties)
                 .properties(p -> p.isValidSpawn((state, level, pos, ent) -> false))
                 .addLayer(type)
-                .blockstate(GTModels.cubeAllModel(name, texture))
+                .blockstate(cons)
                 .tag(GTToolType.WRENCH.harvestTags.get(0), BlockTags.MINEABLE_WITH_PICKAXE)
                 .item(BlockItem::new)
                 .build()
@@ -664,6 +670,7 @@ public class GTLBlocks {
             "advanced_assembly_line_unit", "block/variant/advanced_assembly_line_unit");
     public static final BlockEntry<ActiveBlock> SPACE_ELEVATOR_SUPPORT = createActiveCasing("space_elevator_support",
             "block/variant/space_elevator_support");
+    public static final BlockEntry<ActiveBlock> MAGIC_CORE = createActiveCasing("magic_core", "block/variant/magic_core");
 
     public static final BlockEntry<Block> STELLAR_CONTAINMENT_CASING = createTierCasings(
             "stellar_containment_casing", GTLCore.id("block/stellar_containment_casing"), scmap, 1);
@@ -699,18 +706,12 @@ public class GTLBlocks {
             "chemical_grade_glass", GTLCore.id("block/casings/chemical_grade_glass"), () -> RenderType::translucent);
     public static final BlockEntry<Block> ANTIMATTER_CONTAINMENT_CASING = createGlassCasingBlock(
             "antimatter_containment_casing", GTLCore.id("block/antimatter_containment_casing"), () -> RenderType::translucent);
+    public static final BlockEntry<Block> QUANTUM_GLASS = createGlassCasingBlock(
+            "quantum_glass", GTLCore.id("block/casings/quantum_glass"), () -> RenderType::translucent);
 
-    public static final BlockEntry<Block> QUANTUM_GLASS = createCasingBlock("quantum_glass",
-            arg -> new GlassBlock(arg) {
-
-                @Override
-                public void appendHoverText(@NotNull ItemStack stack, @Nullable BlockGetter level,
-                                            @NotNull List<Component> tooltip, @NotNull TooltipFlag flag) {
-                    tooltip.add(Component.translatable("gtlcore.tooltip.block.quantum_glass.0"));
-                    tooltip.add(Component.translatable("gtlcore.tooltip.block.quantum_glass.1"));
-                }
-            },
-            GTLCore.id("block/casings/quantum_glass"), () -> Blocks.GLASS, () -> RenderType::translucent);
+    public static final BlockEntry<Block> ENERGETIC_PHOTOVOLTAIC_BLOCK = createCustomModelCasingBlock("energetic_photovoltaic_block");
+    public static final BlockEntry<Block> PULSATING_PHOTOVOLTAIC_BLOCK = createCustomModelCasingBlock("pulsating_photovoltaic_block");
+    public static final BlockEntry<Block> VIBRANT_PHOTOVOLTAIC_BLOCK = createCustomModelCasingBlock("vibrant_photovoltaic_block");
 
     /// *魔法线方块*
     public static final BlockEntry<Block> MAGIC_MECHANICAL_LOW_CUBE = createTierCasings(
