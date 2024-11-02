@@ -8,6 +8,7 @@ import org.gtlcore.gtlcore.common.data.GTLItems;
 import org.gtlcore.gtlcore.common.machine.multiblock.water.WaterPurificationPlantMachine;
 import org.gtlcore.gtlcore.config.GTLConfigHolder;
 import org.gtlcore.gtlcore.utils.GTLExplosion;
+import org.gtlcore.gtlcore.utils.NumberUtils;
 
 import com.gregtechceu.gtceu.api.data.chemical.ChemicalHelper;
 import com.gregtechceu.gtceu.api.data.tag.TagPrefix;
@@ -127,13 +128,18 @@ public class ForgeCommonEventListener {
             MetaMachine machine = MetaMachine.getMachine(level, pos);
             if (machine instanceof WaterPurificationPlantMachine waterPurificationPlantMachine) {
                 int[] poss = nbt.getIntArray("poss");
+                if (poss.length < 3) return;
                 nbt.remove("poss");
                 BlockPos waterPos = new BlockPos(poss[0], poss[1], poss[2]);
                 waterPurificationPlantMachine.getPoss().add(waterPos);
-                if (waterPurificationPlantMachine.addWaterPurificationMachine(waterPos, level)) player.displayClientMessage(Component.literal("bind"), true);;
+                if (NumberUtils.calculateDistance(waterPos, pos) > 32) {
+                    player.displayClientMessage(Component.translatable("chat.wireless_connect.out_of_range"), true);
+                } else if (waterPurificationPlantMachine.addWaterPurificationMachine(waterPos, level)) {
+                    player.displayClientMessage(Component.translatable("chat.wireless_bind", poss[0], poss[1], poss[2]), true);
+                }
             } else if (machine instanceof IWaterPurificationMachine) {
                 nbt.putIntArray("poss", new int[] { machine.getPos().getX(), machine.getPos().getY(), machine.getPos().getZ() });
-                player.displayClientMessage(Component.literal("saved"), true);
+                player.displayClientMessage(Component.translatable("ldlib.gui.compass.save_success"), true);
             }
             return;
         }

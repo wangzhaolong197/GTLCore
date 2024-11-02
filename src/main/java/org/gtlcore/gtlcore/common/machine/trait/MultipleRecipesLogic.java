@@ -11,13 +11,12 @@ import com.gregtechceu.gtceu.api.recipe.content.Content;
 import com.gregtechceu.gtceu.api.recipe.content.ContentModifier;
 import com.gregtechceu.gtceu.data.recipe.builder.GTRecipeBuilder;
 
-import lombok.Getter;
+import com.mojang.datafixers.util.Pair;
 import org.jetbrains.annotations.Nullable;
 
 import java.util.ArrayList;
 import java.util.List;
 
-@Getter
 public class MultipleRecipesLogic extends RecipeLogic {
 
     public MultipleRecipesLogic(WorkableElectricMultipleRecipesMachine machine) {
@@ -50,8 +49,10 @@ public class MultipleRecipesLogic extends RecipeLogic {
         recipe.outputs.put(FluidRecipeCapability.CAP, new ArrayList<>());
         long totalEu = 0;
         int parallel = getMachine().getParallel();
-        for (int i = 0; i < 64; i++) {
-            match = parallelRecipe(match, parallel);
+        for (int i = 0; parallel > 0 && i < 64; i++) {
+            Pair<GTRecipe, Integer> result = parallelRecipe(match, parallel);
+            parallel -= result.getSecond();
+            match = result.getFirst();
             GTRecipe input = buildEmptyRecipe();
             input.inputs.putAll(match.inputs);
             if (input.matchRecipe(machine).isSuccess() && input.handleRecipeIO(IO.IN, machine, getChanceCaches())) {
@@ -71,7 +72,7 @@ public class MultipleRecipesLogic extends RecipeLogic {
         if (recipe.outputs.get(ItemRecipeCapability.CAP).equals(new ArrayList<>()) && recipe.outputs.get(FluidRecipeCapability.CAP).equals(new ArrayList<>())) return null;
         long maxEUt = getMachine().getOverclockVoltage();
         double d = (double) totalEu / maxEUt;
-        long eut = d > 20 ? maxEUt : (long) (maxEUt * d / 20);
+        long eut = d > 19 ? maxEUt : (long) (maxEUt * d / 19);
         recipe.tickInputs.put(EURecipeCapability.CAP, List.of(new Content(eut, ChanceLogic.getMaxChancedValue(), ChanceLogic.getMaxChancedValue(), 0, null, null)));
         recipe.duration = (int) Math.max(d, 20);
         return recipe;
@@ -85,7 +86,7 @@ public class MultipleRecipesLogic extends RecipeLogic {
         return GTRecipeBuilder.ofRaw().buildRawRecipe();
     }
 
-    private GTRecipe parallelRecipe(GTRecipe recipe, int max) {
+    private Pair<GTRecipe, Integer> parallelRecipe(GTRecipe recipe, int max) {
         int maxMultipliers = Integer.MAX_VALUE;
         for (RecipeCapability<?> cap : recipe.inputs.keySet()) {
             if (cap.doMatchInRecipe()) {
@@ -97,8 +98,10 @@ public class MultipleRecipesLogic extends RecipeLogic {
         }
         if (maxMultipliers > 0) {
             recipe = recipe.copy(ContentModifier.multiplier(maxMultipliers), false);
+        } else {
+            maxMultipliers = 1;
         }
-        return recipe;
+        return Pair.of(recipe, maxMultipliers);
     }
 
     @Override

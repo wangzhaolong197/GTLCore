@@ -1,5 +1,6 @@
 package org.gtlcore.gtlcore.utils;
 
+import net.minecraft.core.BlockPos;
 import net.minecraft.network.chat.Component;
 import net.minecraft.network.chat.MutableComponent;
 
@@ -50,5 +51,12 @@ public class NumberUtils {
             }
         }
         return occurrences;
+    }
+
+    public static double calculateDistance(BlockPos pos1, BlockPos pos2) {
+        int deltaX = pos2.getX() - pos1.getX();
+        int deltaY = pos2.getY() - pos1.getY();
+        int deltaZ = pos2.getZ() - pos1.getZ();
+        return Math.sqrt(deltaX * deltaX + deltaY * deltaY + deltaZ * deltaZ);
     }
 }

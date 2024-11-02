@@ -71,15 +71,7 @@ public class WaterPurificationPlantMachine extends WorkableElectricMultiblockMac
         }
     }
 
-    private static double calculateDistance(BlockPos pos1, BlockPos pos2) {
-        int deltaX = pos2.getX() - pos1.getX();
-        int deltaY = pos2.getY() - pos1.getY();
-        int deltaZ = pos2.getZ() - pos1.getZ();
-        return Math.sqrt(deltaX * deltaX + deltaY * deltaY + deltaZ * deltaZ);
-    }
-
     public boolean addWaterPurificationMachine(BlockPos pos, Level level) {
-        if (calculateDistance(pos, getPos()) > 32) return false;
         MetaMachine machine = MetaMachine.getMachine(level, pos);
         if (machine instanceof IWaterPurificationMachine waterPurificationMachine && waterPurificationMachine.getMachine().isFormed()) {
             return waterPurificationMachines.add(waterPurificationMachine);

@@ -84,8 +84,11 @@ public class NeutronActivatorMachine extends NoEnergyMultiblockMachine implement
             height = integer;
         }
         for (IMultiPart part : getParts()) {
-            if (part instanceof ItemBusPartMachine itemBusPartMachine) {
-                busMachines.add(itemBusPartMachine);
+            if (part instanceof ItemBusPartMachine itemBusPart) {
+                IO io = itemBusPart.getInventory().getHandlerIO();
+                if (io == IO.IN || io == IO.BOTH) {
+                    busMachines.add(itemBusPart);
+                }
             } else if (part instanceof NeutronAcceleratorPartMachine neutronAccelerator) {
                 acceleratorMachines.add(neutronAccelerator);
             } else if (part instanceof SensorPartMachine sensorPartMachine) {
@@ -149,7 +152,6 @@ public class NeutronActivatorMachine extends NoEnergyMultiblockMachine implement
     }
 
     private void neutronEnergyUpdate() {
-        if (acceleratorMachines == null) return;
         for (var accelerator : acceleratorMachines) {
             long increase = accelerator.consumeEnergy();
             if (increase > 0) {
@@ -171,18 +173,15 @@ public class NeutronActivatorMachine extends NoEnergyMultiblockMachine implement
     }
 
     private void absorptionUpdate() {
-        if (busMachines == null || eV <= 0 && getOffsetTimer() % 10 != 0) return;
-        for (var bus : busMachines) {
+        if (eV <= 0 && getOffsetTimer() % 10 != 0) return;
+        for (ItemBusPartMachine bus : busMachines) {
             var inv = bus.getInventory();
-            var io = inv.getHandlerIO();
-            if (io == IO.IN || io == IO.BOTH) {
-                for (int i = 0; i < inv.getSlots(); i++) {
-                    var stack = inv.getStackInSlot(i);
-                    if (stack.is(dustBeryllium) || stack.is(dustGraphite)) {
-                        int consume = Math.min(Math.max(eV / (10 * 1000000), 1), stack.getCount());
-                        inv.extractItemInternal(i, consume, false);
-                        this.eV -= 10 * 1000000 * consume;
-                    }
+            for (int i = 0; i < inv.getSlots(); i++) {
+                var stack = inv.getStackInSlot(i);
+                if (stack.is(dustBeryllium) || stack.is(dustGraphite)) {
+                    int consume = Math.min(Math.max(eV / (10 * 1000000), 1), stack.getCount());
+                    inv.extractItemInternal(i, consume, false);
+                    this.eV -= 10 * 1000000 * consume;
                 }
             }
         }
