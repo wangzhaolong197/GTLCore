@@ -25,7 +25,6 @@ import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.item.ItemEntity;
 import net.minecraft.world.item.ItemStack;
-import net.minecraft.world.level.Level;
 import net.minecraft.world.level.storage.loot.LootParams;
 import net.minecraft.world.level.storage.loot.LootTable;
 import net.minecraft.world.level.storage.loot.parameters.LootContextParams;
@@ -51,8 +50,6 @@ public class SlaughterhouseMachine extends StorageMachine {
     @Persisted
     private boolean isSpawn;
     private final UUID uuid;
-    private final String[] mobList1 = GTLConfigHolder.INSTANCE.mobList1;
-    private final String[] mobList2 = GTLConfigHolder.INSTANCE.mobList2;
 
     public SlaughterhouseMachine(IMachineBlockEntity holder) {
         super(holder, 1, i -> i.is(MachineBlocks.POWERED_SPAWNER.asItem()));
@@ -66,20 +63,18 @@ public class SlaughterhouseMachine extends StorageMachine {
 
     @Override
     public void afterWorking() {
-        Level level = getLevel();
-        BlockPos blockPos = MachineUtil.getOffsetPos(3, 1, getFrontFacing(), getPos());
-        ItemStack itemStack = getMachineStorageItem();
-        boolean isFixed = itemStack.getTag() != null;
-
-        if (level instanceof ServerLevel serverLevel) {
+        if (getLevel() instanceof ServerLevel serverLevel) {
+            BlockPos blockPos = MachineUtil.getOffsetPos(3, 1, getFrontFacing(), getPos());
+            ItemStack itemStack = getMachineStorageItem();
+            boolean isFixed = !itemStack.isEmpty();
             FakePlayer fakePlayer = new FakePlayer(serverLevel, new GameProfile(uuid, "slaughter"));
-            String[] mobList = isFixed ? null : MachineUtil.notConsumableCircuit(this, 1) ? this.mobList1 : this.mobList2;
+            String[] mobList = isFixed ? null : MachineUtil.notConsumableCircuit(this, 1) ? GTLConfigHolder.INSTANCE.mobList1 : GTLConfigHolder.INSTANCE.mobList2;
             int tierMultiplier = (getTier() - 2) * 8;
 
-            DamageSource source = new DamageSource(level.registryAccess().registryOrThrow(Registries.DAMAGE_TYPE)
+            DamageSource source = new DamageSource(serverLevel.registryAccess().registryOrThrow(Registries.DAMAGE_TYPE)
                     .getHolderOrThrow(DamageTypes.GENERIC_KILL), fakePlayer);
 
-            List<Entity> entities = level.getEntitiesOfClass(Entity.class, new AABB(
+            List<Entity> entities = serverLevel.getEntitiesOfClass(Entity.class, new AABB(
                     blockPos.getX() - 3,
                     blockPos.getY() - 1,
                     blockPos.getZ() - 3,
@@ -100,34 +95,29 @@ public class SlaughterhouseMachine extends StorageMachine {
             }
 
             for (int i = 0; i <= tierMultiplier; i++) {
-                String mob = isFixed ? itemStack.getTag().getCompound("BlockEntityTag")
+                String mob = isFixed ? itemStack.getOrCreateTag().getCompound("BlockEntityTag")
                         .getCompound("EntityStorage").getCompound("Entity").getString("id") : mobList[(int) (Math.random() * mobList.length)];
-
                 Optional<EntityType<?>> entityType = EntityType.byString(mob);
-                if (entityType.isPresent()) {
-                    EntityType<?> type = entityType.get();
-                    Entity entity = type.create(serverLevel);
+                if (entityType.isEmpty()) return;
+                Entity entity = entityType.get().create(serverLevel);
+                if (!(entity instanceof LivingEntity)) return;
+                if (!this.isSpawn) {
+                    entity.setPos(blockPos.getCenter());
+                    serverLevel.addFreshEntity(entity);
+                } else {
+                    String[] mobParts = StringUtil.decompose(mob);
+                    if (mobParts.length < 2) continue;
+                    LootTable lootTable = serverLevel.getServer().getLootData()
+                            .getLootTable(new ResourceLocation(mobParts[0], "entities/" + mobParts[1]));
+                    LootParams lootParams = new LootParams.Builder(serverLevel)
+                            .withParameter(LootContextParams.LAST_DAMAGE_PLAYER, fakePlayer)
+                            .withParameter(LootContextParams.THIS_ENTITY, entity)
+                            .withParameter(LootContextParams.DAMAGE_SOURCE, source)
+                            .withParameter(LootContextParams.ORIGIN, blockPos.getCenter())
+                            .create(lootTable.getParamSet());
 
-                    if (entity instanceof LivingEntity livingEntity) {
-                        if (!this.isSpawn) {
-                            livingEntity.setPos(blockPos.getCenter());
-                            serverLevel.addFreshEntity(livingEntity);
-                        } else {
-                            String[] mobParts = StringUtil.decompose(mob);
-                            if (mobParts.length < 2) continue;
-                            LootTable lootTable = serverLevel.getServer().getLootData()
-                                    .getLootTable(new ResourceLocation(mobParts[0], "entities/" + mobParts[1]));
-                            LootParams lootParams = new LootParams.Builder(serverLevel)
-                                    .withParameter(LootContextParams.LAST_DAMAGE_PLAYER, fakePlayer)
-                                    .withParameter(LootContextParams.THIS_ENTITY, livingEntity)
-                                    .withParameter(LootContextParams.DAMAGE_SOURCE, source)
-                                    .withParameter(LootContextParams.ORIGIN, blockPos.getCenter())
-                                    .create(lootTable.getParamSet());
-
-                            lootTable.getRandomItems(lootParams).forEach(stack -> MachineUtil.outputItem(this, isFixed ? stack.copyWithCount(tierMultiplier) : stack));
-                            if (isFixed) break;
-                        }
-                    }
+                    lootTable.getRandomItems(lootParams).forEach(stack -> MachineUtil.outputItem(this, isFixed ? stack.copyWithCount(tierMultiplier) : stack));
+                    if (isFixed) break;
                 }
             }
         }

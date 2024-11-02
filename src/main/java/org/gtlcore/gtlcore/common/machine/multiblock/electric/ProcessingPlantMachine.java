@@ -5,7 +5,6 @@ import org.gtlcore.gtlcore.api.machine.multiblock.StorageMachine;
 import org.gtlcore.gtlcore.common.data.GTLRecipeModifiers;
 import org.gtlcore.gtlcore.common.data.GTLRecipeTypes;
 
-import com.gregtechceu.gtceu.api.GTValues;
 import com.gregtechceu.gtceu.api.item.MetaMachineItem;
 import com.gregtechceu.gtceu.api.machine.IMachineBlockEntity;
 import com.gregtechceu.gtceu.api.machine.MachineDefinition;
@@ -65,13 +64,13 @@ public class ProcessingPlantMachine extends StorageMachine implements IParallelM
             GTRecipeTypes.MIXER_RECIPES,
             GTRecipeTypes.CHEMICAL_BATH_RECIPES,
             GTRecipeTypes.ORE_WASHER_RECIPES,
+            GTRecipeTypes.CHEMICAL_RECIPES,
+            GTRecipeTypes.FLUID_SOLIDFICATION_RECIPES,
             GTLRecipeTypes.LOOM_RECIPES,
             GTLRecipeTypes.LAMINATOR_RECIPES);
 
     @Nullable
     private GTRecipeType[] recipeTypeCache = new GTRecipeType[] { GTRecipeTypes.DUMMY_RECIPES };
-
-    private int machineTier = 0;
 
     private boolean mismatched = false;
 
@@ -110,20 +109,9 @@ public class ProcessingPlantMachine extends StorageMachine implements IParallelM
         return recipeTypeCache;
     }
 
-    @NotNull
     @Override
     public GTRecipeType getRecipeType() {
         return getRecipeTypes()[getActiveRecipeType()];
-    }
-
-    @Override
-    public long getMaxVoltage() {
-        return GTValues.V[machineTier];
-    }
-
-    @Override
-    public int getTier() {
-        return machineTier;
     }
 
     @Override
@@ -150,26 +138,24 @@ public class ProcessingPlantMachine extends StorageMachine implements IParallelM
 
     private void update() {
         recipeTypeCache = new GTRecipeType[] { GTRecipeTypes.DUMMY_RECIPES };
-        machineTier = 0;
         mismatched = false;
         if (machineStorage.storage.getStackInSlot(0).getItem() instanceof MetaMachineItem metaMachineItem) {
             MachineDefinition definition = metaMachineItem.getDefinition();
-            if (GTUtil.getFloorTierByVoltage(super.getMaxVoltage()) == definition.getTier()) {
-                machineTier = definition.getTier();
-            } else {
+            if (tier != definition.getTier()) {
+                tier = 0;
                 mismatched = true;
             }
             recipeTypeCache = definition.getRecipeTypes();
         }
-        tier = machineTier;
     }
 
-    protected void onMachineChanged() {
+    private void onMachineChanged() {
         if (isFormed) {
             if (getRecipeLogic().getLastRecipe() != null) {
                 getRecipeLogic().markLastRecipeDirty();
             }
             getRecipeLogic().updateTickSubscription();
+            tier = GTUtil.getFloorTierByVoltage(getMaxVoltage());
             update();
         }
     }
