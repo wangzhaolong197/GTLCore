@@ -196,6 +196,7 @@ public class MachineLang {
         provider.add("gtlcore.machine.super_computation.tooltip.3", "Providing §eUXV§r tier voltage requires placing §bExotic Processor Mainframe§r, and providing 2048CWU/t");
         provider.add("gtlcore.machine.super_computation.tooltip.4", "Providing §9§lOpV§r tier voltage requires placing §bCosmic Processor Mainframe§r, and providing 4096CWU/t");
         provider.add("gtlcore.machine.super_computation.tooltip.5", "Providing §4§lMAX§r tier voltage requires placing §bSupra Causal Processor Mainframe§r, and providing 8192CWU/t");
+        provider.add("gtlcore.machine.super_incubator.tooltip.0", "Ignores radiation and cleanliness requirements");
         provider.add("gtlcore.machine.suprachronal_assembly_line.tooltip.0", "§8§lInvisibly Touch§r");
         provider.add("gtlcore.machine.suprachronal_assembly_line.tooltip.1", "Modules can be expanded on both sides, sharing parallelism with the mainframe.");
         provider.add("gtlcore.machine.suprachronal_assembly_line_module.tooltip.0", "Installed on both sides of the Supra-Temporal Assembly Line");
@@ -224,7 +225,7 @@ public class MachineLang {
         provider.add("gtlcore.machine.absolute_baryonic_perfection_purification_unit_8.tooltip", "§a§oThe final stage of purification transcends subatomic particles, identifying the smallest possible defects within baryons.");
         provider.add("gtlcore.machine.absolute_baryonic_perfection_purification_unit_9.tooltip", "§a§oBy correctly identifying the required Quark Releasing Catalysts, the device will activate the catalysts and stabilize off-kilter particles.");
         provider.add("gtlcore.machine.absolute_baryonic_perfection_purification_unit_a.tooltip", "§a§oThis ultimately creates not just stable baryonic matter, but most importantly, absolutely purified water.");
-        provider.add("gtlcore.machine.absolute_baryonic_perfection_purification_unit.items", "Current combination for this cycle:\n %s, %s");
+        provider.add("gtlcore.machine.absolute_baryonic_perfection_purification_unit.items", "Current combination for this cycle:\n%s, %s");
         provider.add("gtlcore.machine.clarifier_purification_unit_1.tooltip", "§aPurified Water Level§r: §f1§r");
         provider.add("gtlcore.machine.clarifier_purification_unit_2.tooltip", "Requires water input amount / 1000 units of §bActivated Carbon§r filters to operate, with a §420%§r probability of exhausting the §bFilters§r each cycle, which will be output.");
         provider.add("gtlcore.machine.clarifier_purification_unit_3.tooltip", "Base output probability is 70%, inputting a small amount of the same level purified water increases the chance by 15%, and higher levels increase by an additional 5% per level, reaching 100% at the maximum of 4 levels.");
@@ -281,7 +282,7 @@ public class MachineLang {
         provider.add("gtlcore.machine.ph_neutralization_purification_unit_a.tooltip", "§a§oThe fourth step of water purification is to neutralize the solution and adjust its pH value precisely to 7, making the solution inert with no hydrogen ion activity other than that of water.");
         provider.add("gtlcore.machine.ph_neutralization_purification_unit_b.tooltip", "§a§oAcids and bases in soil and geology can cause natural alkalinity variations in water, possibly leading to corrosion reactions with sensitive materials.");
         provider.add("gtlcore.machine.ph_neutralization_purification_unit_c.tooltip", "§a§oThus, appropriate neutralizers need to be used to balance the pH value of the water.");
-        provider.add("gtlcore.machine.residual_decontaminant_degasser_purification_unit.fluids", "Current cycle requirements:\n %s");
+        provider.add("gtlcore.machine.residual_decontaminant_degasser_purification_unit.fluids", "Current cycle requirements:\n%s");
         provider.add("gtlcore.machine.residual_decontaminant_degasser_purification_unit_1.tooltip", "§aPurified Water Level§r: §f7§r");
         provider.add("gtlcore.machine.residual_decontaminant_degasser_purification_unit_2.tooltip", "To successfully complete the recipe, materials must be inputted as required.");
         provider.add("gtlcore.machine.residual_decontaminant_degasser_purification_unit_3.tooltip", "At the operation start, the degassing control chamber will output a redstone signal, and the machine will consume all input materials every second.");

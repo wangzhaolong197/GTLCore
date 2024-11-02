@@ -4,6 +4,7 @@ import org.gtlcore.gtlcore.api.pattern.util.IValueContainer;
 import org.gtlcore.gtlcore.api.pattern.util.SimpleValueContainer;
 
 import com.gregtechceu.gtceu.api.block.MetaMachineBlock;
+import com.gregtechceu.gtceu.api.capability.recipe.EURecipeCapability;
 import com.gregtechceu.gtceu.api.machine.MetaMachine;
 import com.gregtechceu.gtceu.api.machine.feature.multiblock.IRotorHolderMachine;
 import com.gregtechceu.gtceu.api.machine.multiblock.PartAbility;
@@ -12,6 +13,7 @@ import com.gregtechceu.gtceu.api.pattern.Predicates;
 import com.gregtechceu.gtceu.api.pattern.TraceabilityPredicate;
 import com.gregtechceu.gtceu.api.pattern.error.PatternStringError;
 import com.gregtechceu.gtceu.api.pattern.predicates.SimplePredicate;
+import com.gregtechceu.gtceu.api.recipe.GTRecipeType;
 
 import com.lowdragmc.lowdraglib.utils.BlockInfo;
 
@@ -28,6 +30,26 @@ import java.util.function.Predicate;
 import java.util.function.Supplier;
 
 public class GTLPredicates {
+
+    public static TraceabilityPredicate autoLaserAbilities(GTRecipeType... recipeType) {
+        TraceabilityPredicate predicate = Predicates.autoAbilities(recipeType, false, false, true, true, true, true);
+        for (GTRecipeType type : recipeType) {
+            if (type.getMaxInputs(EURecipeCapability.CAP) > 0) {
+                predicate = predicate.or(Predicates.abilities(PartAbility.INPUT_ENERGY)
+                        .setMaxGlobalLimited(2).setPreviewCount(1))
+                        .or(Predicates.abilities(PartAbility.INPUT_LASER))
+                        .setMaxGlobalLimited(1).setPreviewCount(1);
+                break;
+            } else if (type.getMaxOutputs(EURecipeCapability.CAP) > 0) {
+                predicate = predicate.or(Predicates.abilities(PartAbility.OUTPUT_ENERGY)
+                        .setMaxGlobalLimited(2).setPreviewCount(1))
+                        .or(Predicates.abilities(PartAbility.OUTPUT_LASER))
+                        .setMaxGlobalLimited(1).setPreviewCount(1);
+                break;
+            }
+        }
+        return predicate;
+    }
 
     public static TraceabilityPredicate createTierPredicate(Map<Integer, Supplier<?>> map, String tierType) {
         BlockInfo[] blockInfos = new BlockInfo[map.size()];

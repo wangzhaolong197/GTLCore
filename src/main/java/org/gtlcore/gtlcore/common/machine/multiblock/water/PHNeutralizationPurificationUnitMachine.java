@@ -22,7 +22,9 @@ import net.minecraft.network.chat.Component;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.material.Fluid;
 
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 import javax.annotation.ParametersAreNonnullByDefault;
 
@@ -47,7 +49,7 @@ public class PHNeutralizationPurificationUnitMachine extends NoEnergyMultiblockM
     @Persisted
     private int inputCount;
 
-    private SensorPartMachine sensorMachine;
+    private final Set<SensorPartMachine> sensorPartMachines = new HashSet<>();
 
     public PHNeutralizationPurificationUnitMachine(IMachineBlockEntity holder, Object... args) {
         super(holder, args);
@@ -58,7 +60,7 @@ public class PHNeutralizationPurificationUnitMachine extends NoEnergyMultiblockM
         super.onStructureFormed();
         for (IMultiPart part : getParts()) {
             if (part instanceof SensorPartMachine sensorPartMachine) {
-                sensorMachine = sensorPartMachine;
+                sensorPartMachines.add(sensorPartMachine);
             }
         }
     }
@@ -66,7 +68,7 @@ public class PHNeutralizationPurificationUnitMachine extends NoEnergyMultiblockM
     @Override
     public void onStructureInvalid() {
         super.onStructureInvalid();
-        sensorMachine = null;
+        sensorPartMachines.clear();
     }
 
     @Override
@@ -89,9 +91,7 @@ public class PHNeutralizationPurificationUnitMachine extends NoEnergyMultiblockM
             if (MachineUtil.inputFluid(this, FluidStack.create(HydrochloricAcid, hc))) {
                 ph = Math.max(0.01F, ph - hc * 0.001F);
             }
-            if (sensorMachine != null) {
-                sensorMachine.update(ph);
-            }
+            sensorPartMachines.forEach(s -> s.update(ph));
         }
         return result;
     }

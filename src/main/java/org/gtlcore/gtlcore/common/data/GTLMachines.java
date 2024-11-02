@@ -743,7 +743,7 @@ public class GTLMachines {
             GTMachines.ALL_TIERS);
 
     public final static MachineDefinition NEUTRON_SENSOR = REGISTRATE
-            .machine("neutron_sensor", h -> new SensorPartMachine(h, 1200))
+            .machine("neutron_sensor", SensorPartMachine::new)
             .tier(GTValues.IV)
             .rotationState(RotationState.ALL)
             .tooltips(Component.translatable("gtlcore.machine.neutron_sensor.tooltip.0"))
@@ -751,7 +751,7 @@ public class GTLMachines {
             .register();
 
     public final static MachineDefinition PH_SENSOR = REGISTRATE
-            .machine("ph_sensor", h -> new SensorPartMachine(h, 14))
+            .machine("ph_sensor", SensorPartMachine::new)
             .langValue("pH Sensor")
             .tier(GTValues.EV)
             .rotationState(RotationState.ALL)
@@ -759,7 +759,7 @@ public class GTLMachines {
             .register();
 
     public final static MachineDefinition HEAT_SENSOR = REGISTRATE
-            .machine("heat_sensor", h -> new SensorPartMachine(h, 1000000))
+            .machine("heat_sensor", SensorPartMachine::new)
             .tier(GTValues.MV)
             .rotationState(RotationState.ALL)
             .overlayTieredHullRenderer("neutron_sensor")

@@ -1,14 +1,14 @@
 package org.gtlcore.gtlcore.common.machine.multiblock.part;
 
+import org.gtlcore.gtlcore.api.gui.FloatInputWidget;
+
 import com.gregtechceu.gtceu.api.gui.GuiTextures;
 import com.gregtechceu.gtceu.api.gui.widget.ToggleButtonWidget;
 import com.gregtechceu.gtceu.api.machine.IMachineBlockEntity;
 import com.gregtechceu.gtceu.api.machine.multiblock.part.MultiblockPartMachine;
 import com.gregtechceu.gtceu.data.lang.LangHandler;
-import com.gregtechceu.gtceu.utils.FormattingUtil;
 
 import com.lowdragmc.lowdraglib.gui.widget.TextBoxWidget;
-import com.lowdragmc.lowdraglib.gui.widget.TextFieldWidget;
 import com.lowdragmc.lowdraglib.gui.widget.Widget;
 import com.lowdragmc.lowdraglib.gui.widget.WidgetGroup;
 import com.lowdragmc.lowdraglib.syncdata.annotation.DescSynced;
@@ -20,7 +20,6 @@ import com.lowdragmc.lowdraglib.utils.Size;
 
 import net.minecraft.MethodsReturnNonnullByDefault;
 import net.minecraft.core.Direction;
-import net.minecraft.util.Mth;
 
 import lombok.Getter;
 import lombok.Setter;
@@ -30,6 +29,7 @@ import java.util.List;
 
 import javax.annotation.ParametersAreNonnullByDefault;
 
+@Getter
 @ParametersAreNonnullByDefault
 @MethodsReturnNonnullByDefault
 public class SensorPartMachine extends MultiblockPartMachine {
@@ -44,28 +44,23 @@ public class SensorPartMachine extends MultiblockPartMachine {
 
     @Persisted
     @Setter
-    @Getter
     private boolean isInverted;
 
-    @Getter
     @Persisted
     private int redstoneSignalOutput = 0;
 
-    private final int m;
-
-    public SensorPartMachine(IMachineBlockEntity holder, int m) {
+    public SensorPartMachine(IMachineBlockEntity holder) {
         super(holder);
-        this.m = m;
     }
 
     @Override
     public Widget createUIWidget() {
-        var group = new WidgetGroup(Position.ORIGIN, new Size(176, 112));
-        group.addWidget(new TextBoxWidget(12, 35, 65, List.of(LocalizationUtils.format("cover.advanced_energy_detector.min") + ":")));
-        group.addWidget(new TextBoxWidget(12, 80, 65, List.of(LocalizationUtils.format("cover.advanced_energy_detector.max") + ":")));
-        group.addWidget(new TextFieldWidget(80, 26, 85, 18, () -> FormattingUtil.formatNumbers(min), stringValue -> setMin(Mth.clamp(Float.parseFloat(stringValue), 0, max))).setNumbersOnly(0, max));
+        WidgetGroup group = new WidgetGroup(Position.ORIGIN, new Size(176, 112));
+        group.addWidget(new TextBoxWidget(35, 28, 65, List.of(LocalizationUtils.format("cover.advanced_energy_detector.min") + ":")));
+        group.addWidget(new TextBoxWidget(35, 74, 65, List.of(LocalizationUtils.format("cover.advanced_energy_detector.max") + ":")));
 
-        group.addWidget(new TextFieldWidget(80, 71, 85, 18, () -> FormattingUtil.formatNumbers(max), stringValue -> setMax(Mth.clamp(Float.parseFloat(stringValue), min, m))).setNumbersOnly(min, m));
+        group.addWidget(new FloatInputWidget(80, 26, 85, 18, this::getMin, this::setMin));
+        group.addWidget(new FloatInputWidget(80, 72, 85, 18, this::getMax, this::setMax));
         group.addWidget(new ToggleButtonWidget(8, 8, 20, 20,
                 GuiTextures.INVERT_REDSTONE_BUTTON, this::isInverted, this::setInverted) {
 
@@ -87,7 +82,7 @@ public class SensorPartMachine extends MultiblockPartMachine {
         }
     }
 
-    private static int computeRedstoneBetweenValues(float value, float maxValue, float minValue, boolean isInverted) {
+    private int computeRedstoneBetweenValues(float value, float maxValue, float minValue, boolean isInverted) {
         if (value < minValue) {
             return isInverted ? 15 : 0;
         }

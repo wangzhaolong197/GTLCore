@@ -67,11 +67,7 @@ public class GTLBlocks {
         REGISTRATE.creativeModeTab(() -> GTLCreativeModeTabs.GTL_CORE);
     }
 
-    public static void init() {
-        for (int i = 1; i < 15; i++) {
-            createTierCasings("component_assembly_line_casing_" + GTValues.VN[i].toLowerCase(), GTLCore.id("block/casings/component_assembly_line/component_assembly_line_casing_" + GTValues.VN[i].toLowerCase()), calmap, i);
-        }
-    }
+    public static void init() {}
 
     private static BlockEntry<CraftingUnitBlock> registerCraftingUnitBlock(int tier, CraftingUnitType Type) {
         return REGISTRATE
@@ -651,7 +647,7 @@ public class GTLBlocks {
             "hsss_reinforced_borosilicate_glass", GTLCore.id("block/casings/hsss_reinforced_borosilicate_glass"), () -> RenderType::translucent);
 
     public static final BlockEntry<ActiveBlock> POWER_CORE = createActiveCasing("power_core",
-            "block/variant/hyper_core");
+            "block/variant/power_core");
     public static final BlockEntry<ActiveBlock> HYPER_CORE = createActiveCasing("hyper_core",
             "block/variant/hyper_core");
     public static final BlockEntry<ActiveBlock> SUPER_COMPUTATION_COMPONENT = createActiveCasing(
@@ -680,6 +676,35 @@ public class GTLBlocks {
     public static final BlockEntry<Block> ULTIMATE_STELLAR_CONTAINMENT_CASING = createTierCasings(
             "ultimate_stellar_containment_casing", GTLCore.id("block/stellar_containment_casing"),
             scmap, 3);
+
+    public static final BlockEntry<Block> COMPONENT_ASSEMBLY_LINE_CASING_LV = createTierCasings(
+            "component_assembly_line_casing_lv", GTLCore.id("block/casings/component_assembly_line/component_assembly_line_casing_lv"), calmap, 1);
+    public static final BlockEntry<Block> COMPONENT_ASSEMBLY_LINE_CASING_MV = createTierCasings(
+            "component_assembly_line_casing_mv", GTLCore.id("block/casings/component_assembly_line/component_assembly_line_casing_mv"), calmap, 2);
+    public static final BlockEntry<Block> COMPONENT_ASSEMBLY_LINE_CASING_HV = createTierCasings(
+            "component_assembly_line_casing_hv", GTLCore.id("block/casings/component_assembly_line/component_assembly_line_casing_hv"), calmap, 3);
+    public static final BlockEntry<Block> COMPONENT_ASSEMBLY_LINE_CASING_EV = createTierCasings(
+            "component_assembly_line_casing_ev", GTLCore.id("block/casings/component_assembly_line/component_assembly_line_casing_ev"), calmap, 4);
+    public static final BlockEntry<Block> COMPONENT_ASSEMBLY_LINE_CASING_IV = createTierCasings(
+            "component_assembly_line_casing_iv", GTLCore.id("block/casings/component_assembly_line/component_assembly_line_casing_iv"), calmap, 5);
+    public static final BlockEntry<Block> COMPONENT_ASSEMBLY_LINE_CASING_LUV = createTierCasings(
+            "component_assembly_line_casing_luv", GTLCore.id("block/casings/component_assembly_line/component_assembly_line_casing_luv"), calmap, 6);
+    public static final BlockEntry<Block> COMPONENT_ASSEMBLY_LINE_CASING_ZPM = createTierCasings(
+            "component_assembly_line_casing_zpm", GTLCore.id("block/casings/component_assembly_line/component_assembly_line_casing_zpm"), calmap, 7);
+    public static final BlockEntry<Block> COMPONENT_ASSEMBLY_LINE_CASING_UV = createTierCasings(
+            "component_assembly_line_casing_uv", GTLCore.id("block/casings/component_assembly_line/component_assembly_line_casing_uv"), calmap, 8);
+    public static final BlockEntry<Block> COMPONENT_ASSEMBLY_LINE_CASING_UHV = createTierCasings(
+            "component_assembly_line_casing_uhv", GTLCore.id("block/casings/component_assembly_line/component_assembly_line_casing_uhv"), calmap, 9);
+    public static final BlockEntry<Block> COMPONENT_ASSEMBLY_LINE_CASING_UEV = createTierCasings(
+            "component_assembly_line_casing_uev", GTLCore.id("block/casings/component_assembly_line/component_assembly_line_casing_uev"), calmap, 10);
+    public static final BlockEntry<Block> COMPONENT_ASSEMBLY_LINE_CASING_UIV = createTierCasings(
+            "component_assembly_line_casing_uiv", GTLCore.id("block/casings/component_assembly_line/component_assembly_line_casing_uiv"), calmap, 11);
+    public static final BlockEntry<Block> COMPONENT_ASSEMBLY_LINE_CASING_UXV = createTierCasings(
+            "component_assembly_line_casing_uxv", GTLCore.id("block/casings/component_assembly_line/component_assembly_line_casing_uxv"), calmap, 12);
+    public static final BlockEntry<Block> COMPONENT_ASSEMBLY_LINE_CASING_OPV = createTierCasings(
+            "component_assembly_line_casing_opv", GTLCore.id("block/casings/component_assembly_line/component_assembly_line_casing_opv"), calmap, 13);
+    public static final BlockEntry<Block> COMPONENT_ASSEMBLY_LINE_CASING_MAX = createTierCasings(
+            "component_assembly_line_casing_max", GTLCore.id("block/casings/component_assembly_line/component_assembly_line_casing_max"), calmap, 14);
 
     public static final BlockEntry<ActiveBlock> POWER_MODULE = createActiveTierCasing("power_module",
             "block/variant/power_module", sepmmap, 1);

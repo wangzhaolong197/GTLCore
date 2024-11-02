@@ -115,7 +115,7 @@ public class AbsoluteBaryonicPerfectionPurificationUnitMachine extends NoEnergyM
                 int slots = inv.getSlots();
                 for (int i = 0; i < slots; i++) {
                     ItemStack stack = inv.getStackInSlot(i);
-                    if (!stack.isEmpty() && MachineUtil.inputFluid(this, FluidStack.create(QUARK_GLUON, stack.getCount() * 144L))) {
+                    if (CATALYST.contains(stack) && MachineUtil.inputFluid(this, FluidStack.create(QUARK_GLUON, stack.getCount() * 144L))) {
                         if (i < slots - 1 && stack.getItem() == catalyst1) {
                             ItemStack stack1 = inv.getStackInSlot(i + 1);
                             if (!stack1.isEmpty() && MachineUtil.inputFluid(this, FluidStack.create(QUARK_GLUON, stack1.getCount() * 144L))) {
