@@ -1,13 +1,10 @@
 package org.gtlcore.gtlcore.common.machine.multiblock.water;
 
-import org.gtlcore.gtlcore.api.machine.multiblock.IWaterPurificationMachine;
 import org.gtlcore.gtlcore.common.data.GTLItems;
 import org.gtlcore.gtlcore.utils.MachineUtil;
 import org.gtlcore.gtlcore.utils.NumberUtils;
 
 import com.gregtechceu.gtceu.api.machine.IMachineBlockEntity;
-import com.gregtechceu.gtceu.api.machine.multiblock.WorkableMultiblockMachine;
-import com.gregtechceu.gtceu.api.recipe.GTRecipe;
 import com.gregtechceu.gtceu.data.recipe.builder.GTRecipeBuilder;
 
 import com.lowdragmc.lowdraglib.side.fluid.FluidStack;
@@ -19,16 +16,15 @@ import javax.annotation.ParametersAreNonnullByDefault;
 
 @ParametersAreNonnullByDefault
 @MethodsReturnNonnullByDefault
-public class ClarifierPurificationUnitMachine extends WorkableMultiblockMachine implements IWaterPurificationMachine {
-
-    private GTRecipe recipe;
+public class ClarifierPurificationUnitMachine extends WaterPurificationUnitMachine {
 
     public ClarifierPurificationUnitMachine(IMachineBlockEntity holder, Object... args) {
         super(holder, args);
     }
 
     @Override
-    public long test() {
+    long before() {
+        eut = 0;
         int inputCount = (int) Math.min(Integer.MAX_VALUE, Math.min(MachineUtil.getFluidAmount(this, Fluids.WATER)[0], MachineUtil.getItemAmount(this, GTLItems.ACTIVATED_CARBON_FILTER_MESH.get())[0] * 1000));
         int outputCount = inputCount * 9 / 10;
         int filterCount = NumberUtils.chanceOccurrences(inputCount / 1000, 5);
@@ -45,9 +41,9 @@ public class ClarifierPurificationUnitMachine extends WorkableMultiblockMachine 
         }
         recipe = builder.buildRawRecipe();
         if (recipe.matchRecipe(this).isSuccess()) {
-            return inputCount;
+            eut = inputCount;
         }
-        return 0;
+        return eut;
     }
 
     private int getChance(int count) {
@@ -61,15 +57,5 @@ public class ClarifierPurificationUnitMachine extends WorkableMultiblockMachine 
             return 85;
         }
         return 70;
-    }
-
-    @Override
-    public void run() {
-        getRecipeLogic().setupRecipe(recipe);
-    }
-
-    @Override
-    public WorkableMultiblockMachine getMachine() {
-        return this;
     }
 }

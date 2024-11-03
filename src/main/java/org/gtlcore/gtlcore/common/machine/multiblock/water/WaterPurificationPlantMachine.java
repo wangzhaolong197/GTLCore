@@ -1,8 +1,8 @@
 package org.gtlcore.gtlcore.common.machine.multiblock.water;
 
-import org.gtlcore.gtlcore.api.machine.multiblock.IWaterPurificationMachine;
 import org.gtlcore.gtlcore.common.data.GTLMaterials;
 
+import com.gregtechceu.gtceu.api.GTValues;
 import com.gregtechceu.gtceu.api.machine.IMachineBlockEntity;
 import com.gregtechceu.gtceu.api.machine.MetaMachine;
 import com.gregtechceu.gtceu.api.machine.multiblock.WorkableElectricMultiblockMachine;
@@ -10,6 +10,7 @@ import com.gregtechceu.gtceu.api.machine.trait.RecipeLogic;
 import com.gregtechceu.gtceu.api.recipe.GTRecipe;
 import com.gregtechceu.gtceu.data.recipe.builder.GTRecipeBuilder;
 import com.gregtechceu.gtceu.utils.FormattingUtil;
+import com.gregtechceu.gtceu.utils.GTUtil;
 
 import com.lowdragmc.lowdraglib.syncdata.annotation.Persisted;
 import com.lowdragmc.lowdraglib.syncdata.field.ManagedFieldHolder;
@@ -56,31 +57,33 @@ public class WaterPurificationPlantMachine extends WorkableElectricMultiblockMac
     @Persisted
     private final Set<BlockPos> poss = new HashSet<>();
 
-    private final Set<IWaterPurificationMachine> waterPurificationMachines = new HashSet<>();
-    private final Map<IWaterPurificationMachine, Long> runMachines = new HashMap<>();
+    private final Map<WaterPurificationUnitMachine, Boolean> waterPurificationUnitMachineMap = new HashMap<>();
 
     public WaterPurificationPlantMachine(IMachineBlockEntity holder, Object... args) {
         super(holder, args);
     }
 
     private void run() {
-        for (IWaterPurificationMachine machine : runMachines.keySet()) {
-            machine.getMachine().getRecipeLogic().resetRecipeLogic();
-            machine.run();
+        for (Map.Entry<WaterPurificationUnitMachine, Boolean> entry : waterPurificationUnitMachineMap.entrySet()) {
+            if (entry.getValue()) {
+                entry.getKey().getRecipeLogic().resetRecipeLogic();
+                entry.getKey().getRecipeLogic().setupRecipe(entry.getKey().recipe);
+            }
         }
     }
 
     public boolean addWaterPurificationMachine(BlockPos pos, Level level) {
         MetaMachine machine = MetaMachine.getMachine(level, pos);
-        if (machine instanceof IWaterPurificationMachine waterPurificationMachine && waterPurificationMachine.getMachine().isFormed()) {
-            return waterPurificationMachines.add(waterPurificationMachine);
+        if (machine instanceof WaterPurificationUnitMachine waterPurificationMachine && !waterPurificationUnitMachineMap.containsKey(waterPurificationMachine) && waterPurificationMachine.isFormed()) {
+            waterPurificationUnitMachineMap.put(waterPurificationMachine, false);
+            return true;
         }
         return false;
     }
 
     private void update(@Nullable Level level) {
         if (level == null) return;
-        waterPurificationMachines.clear();
+        waterPurificationUnitMachineMap.clear();
         poss.removeIf(pos -> !addWaterPurificationMachine(pos, level));
     }
 
@@ -92,10 +95,21 @@ public class WaterPurificationPlantMachine extends WorkableElectricMultiblockMac
 
     @Override
     public void onWaiting() {
-        super.onWaiting();
-        for (IWaterPurificationMachine machine : runMachines.keySet()) {
-            machine.getMachine().getRecipeLogic().setWaiting(null);
+        for (Map.Entry<WaterPurificationUnitMachine, Boolean> entry : waterPurificationUnitMachineMap.entrySet()) {
+            if (entry.getValue()) {
+                entry.getKey().getRecipeLogic().resetRecipeLogic();
+            }
         }
+        super.onWaiting();
+    }
+
+    @Override
+    public void setWorkingEnabled(boolean isWorkingAllowed) {
+        for (Map.Entry<WaterPurificationUnitMachine, Boolean> entry : waterPurificationUnitMachineMap.entrySet()) {
+            entry.getKey().setWorking(isWorkingAllowed);
+            waterPurificationUnitMachineMap.put(entry.getKey(), isWorkingAllowed);
+        }
+        super.setWorkingEnabled(isWorkingAllowed);
     }
 
     @Override
@@ -107,10 +121,10 @@ public class WaterPurificationPlantMachine extends WorkableElectricMultiblockMac
     public void addDisplayText(List<Component> textList) {
         super.addDisplayText(textList);
         textList.add(Component.translatable("gtlcore.machine.water_purification_plant.bind"));
-        for (IWaterPurificationMachine machine : waterPurificationMachines) {
-            MutableComponent component = Component.translatable(machine.getMachine().getBlockState().getBlock().getDescriptionId()).append(" ");
-            if (machine.getMachine().getRecipeLogic().isWorking()) {
-                component.append(Component.translatable("gtceu.multiblock.running").append(" ").append(Component.translatable("gtceu.recipe.eu", FormattingUtil.formatNumbers(runMachines.get(machine)))));
+        for (Map.Entry<WaterPurificationUnitMachine, Boolean> entry : waterPurificationUnitMachineMap.entrySet()) {
+            MutableComponent component = Component.translatable(entry.getKey().getBlockState().getBlock().getDescriptionId()).append(" ");
+            if (entry.getValue()) {
+                component.append(Component.translatable("gtceu.multiblock.running").append("\n").append(Component.translatable("gtceu.multiblock.energy_consumption", FormattingUtil.formatNumbers(entry.getKey().eut), Component.literal(GTValues.VNF[GTUtil.getTierByVoltage(entry.getKey().eut)]))));
             } else {
                 component.append(Component.translatable("gtceu.multiblock.idling"));
             }
@@ -140,30 +154,6 @@ public class WaterPurificationPlantMachine extends WorkableElectricMultiblockMac
         }
 
         @Override
-        public void setWorkingEnabled(boolean isWorkingAllowed) {
-            if (!isWorkingAllowed) {
-                setStatus(Status.SUSPEND);
-                for (IWaterPurificationMachine machine : runMachines.keySet()) {
-                    machine.getMachine().getRecipeLogic().setStatus(Status.SUSPEND);
-                }
-            } else {
-                if (lastRecipe != null && duration > 0) {
-                    setStatus(Status.WORKING);
-                    for (IWaterPurificationMachine machine : runMachines.keySet()) {
-                        if (machine.getMachine().getRecipeLogic().getLastRecipe() != null && machine.getMachine().getRecipeLogic().getDuration() > 0) {
-                            machine.getMachine().getRecipeLogic().setStatus(Status.IDLE);
-                        }
-                    }
-                } else {
-                    setStatus(Status.IDLE);
-                    for (IWaterPurificationMachine machine : runMachines.keySet()) {
-                        machine.getMachine().getRecipeLogic().setStatus(Status.IDLE);
-                    }
-                }
-            }
-        }
-
-        @Override
         public void findAndHandleRecipe() {
             lastRecipe = null;
             GTRecipe match = getRecipe();
@@ -177,28 +167,27 @@ public class WaterPurificationPlantMachine extends WorkableElectricMultiblockMac
 
         @Nullable
         private GTRecipe getRecipe() {
-            if (machine.hasProxies() && !waterPurificationMachines.isEmpty()) {
-                update(getLevel());
-                long eut = 0;
-                for (IWaterPurificationMachine machine : waterPurificationMachines) {
-                    if (machine.getMachine().isFormed() && machine.getMachine().getRecipeLogic().isIdle()) {
-                        long eu = machine.test();
-                        if (eu > 0) {
-                            runMachines.put(machine, eu);
-                            eut += eu;
-                        }
+            if (!machine.hasProxies()) return null;
+            update(getLevel());
+            if (waterPurificationUnitMachineMap.isEmpty()) return null;
+            long eut = 0;
+            for (WaterPurificationUnitMachine machine : waterPurificationUnitMachineMap.keySet()) {
+                if (machine.isFormed() && machine.getRecipeLogic().isIdle()) {
+                    long eu = machine.before();
+                    if (eu > 0) {
+                        waterPurificationUnitMachineMap.put(machine, true);
+                        eut += eu;
                     }
                 }
-                GTRecipeBuilder builder = GTRecipeBuilder.ofRaw().duration(DURATION);
-                if (eut > 0) return builder.EUt(eut).buildRawRecipe();
             }
+            GTRecipeBuilder builder = GTRecipeBuilder.ofRaw().duration(DURATION);
+            if (eut > 0) return builder.EUt(eut).buildRawRecipe();
             return null;
         }
 
         @Override
         public void onRecipeFinish() {
             machine.afterWorking();
-            runMachines.clear();
             GTRecipe match = getRecipe();
             if (match != null) {
                 if (match.matchTickRecipe(this.machine).isSuccess()) {

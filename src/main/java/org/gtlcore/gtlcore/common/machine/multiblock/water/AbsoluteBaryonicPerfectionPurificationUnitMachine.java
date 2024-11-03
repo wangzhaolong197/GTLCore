@@ -1,7 +1,5 @@
 package org.gtlcore.gtlcore.common.machine.multiblock.water;
 
-import org.gtlcore.gtlcore.api.machine.multiblock.IWaterPurificationMachine;
-import org.gtlcore.gtlcore.api.machine.multiblock.NoEnergyMultiblockMachine;
 import org.gtlcore.gtlcore.common.data.GTLItems;
 import org.gtlcore.gtlcore.common.data.GTLMaterials;
 import org.gtlcore.gtlcore.utils.MachineUtil;
@@ -10,9 +8,7 @@ import com.gregtechceu.gtceu.api.capability.recipe.IO;
 import com.gregtechceu.gtceu.api.fluids.store.FluidStorageKeys;
 import com.gregtechceu.gtceu.api.machine.IMachineBlockEntity;
 import com.gregtechceu.gtceu.api.machine.feature.multiblock.IMultiPart;
-import com.gregtechceu.gtceu.api.machine.multiblock.WorkableMultiblockMachine;
 import com.gregtechceu.gtceu.api.machine.trait.NotifiableItemStackHandler;
-import com.gregtechceu.gtceu.api.recipe.GTRecipe;
 import com.gregtechceu.gtceu.common.machine.multiblock.part.ItemBusPartMachine;
 import com.gregtechceu.gtceu.data.recipe.builder.GTRecipeBuilder;
 
@@ -36,10 +32,10 @@ import javax.annotation.ParametersAreNonnullByDefault;
 
 @ParametersAreNonnullByDefault
 @MethodsReturnNonnullByDefault
-public class AbsoluteBaryonicPerfectionPurificationUnitMachine extends NoEnergyMultiblockMachine implements IWaterPurificationMachine {
+public class AbsoluteBaryonicPerfectionPurificationUnitMachine extends WaterPurificationUnitMachine {
 
     protected static final ManagedFieldHolder MANAGED_FIELD_HOLDER = new ManagedFieldHolder(
-            AbsoluteBaryonicPerfectionPurificationUnitMachine.class, NoEnergyMultiblockMachine.MANAGED_FIELD_HOLDER);
+            AbsoluteBaryonicPerfectionPurificationUnitMachine.class, WaterPurificationUnitMachine.MANAGED_FIELD_HOLDER);
 
     @Override
     public ManagedFieldHolder getFieldHolder() {
@@ -68,8 +64,6 @@ public class AbsoluteBaryonicPerfectionPurificationUnitMachine extends NoEnergyM
 
     @Persisted
     private boolean successful;
-
-    private GTRecipe recipe;
 
     @Persisted
     private final Set<ItemStack> outputs = new HashSet<>();
@@ -149,7 +143,8 @@ public class AbsoluteBaryonicPerfectionPurificationUnitMachine extends NoEnergyM
     }
 
     @Override
-    public long test() {
+    long before() {
+        eut = 0;
         int a = (int) (Math.random() * 5);
         int b;
         do {
@@ -161,18 +156,8 @@ public class AbsoluteBaryonicPerfectionPurificationUnitMachine extends NoEnergyM
         inputCount = (int) Math.min(Integer.MAX_VALUE, MachineUtil.getFluidAmount(this, WaterPurificationPlantMachine.GradePurifiedWater7)[0]);
         recipe = GTRecipeBuilder.ofRaw().duration(WaterPurificationPlantMachine.DURATION).inputFluids(FluidStack.create(WaterPurificationPlantMachine.GradePurifiedWater7, inputCount)).buildRawRecipe();
         if (recipe.matchRecipe(this).isSuccess()) {
-            return inputCount * 8L;
+            eut = inputCount * 8L;
         }
-        return 0;
-    }
-
-    @Override
-    public void run() {
-        getRecipeLogic().setupRecipe(recipe);
-    }
-
-    @Override
-    public WorkableMultiblockMachine getMachine() {
-        return this;
+        return eut;
     }
 }

@@ -2,10 +2,10 @@ package org.gtlcore.gtlcore.forge;
 
 import org.gtlcore.gtlcore.GTLCore;
 import org.gtlcore.gtlcore.api.machine.IVacuumMachine;
-import org.gtlcore.gtlcore.api.machine.multiblock.IWaterPurificationMachine;
 import org.gtlcore.gtlcore.common.data.GTLBlocks;
 import org.gtlcore.gtlcore.common.data.GTLItems;
 import org.gtlcore.gtlcore.common.machine.multiblock.water.WaterPurificationPlantMachine;
+import org.gtlcore.gtlcore.common.machine.multiblock.water.WaterPurificationUnitMachine;
 import org.gtlcore.gtlcore.config.GTLConfigHolder;
 import org.gtlcore.gtlcore.utils.GTLExplosion;
 import org.gtlcore.gtlcore.utils.NumberUtils;
@@ -137,7 +137,7 @@ public class ForgeCommonEventListener {
                 } else if (waterPurificationPlantMachine.addWaterPurificationMachine(waterPos, level)) {
                     player.displayClientMessage(Component.translatable("chat.wireless_bind", poss[0], poss[1], poss[2]), true);
                 }
-            } else if (machine instanceof IWaterPurificationMachine) {
+            } else if (machine instanceof WaterPurificationUnitMachine) {
                 nbt.putIntArray("poss", new int[] { machine.getPos().getX(), machine.getPos().getY(), machine.getPos().getZ() });
                 player.displayClientMessage(Component.translatable("ldlib.gui.compass.save_success"), true);
             }

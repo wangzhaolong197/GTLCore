@@ -20,6 +20,7 @@ import com.gregtechceu.gtceu.api.recipe.logic.OCParams;
 import com.gregtechceu.gtceu.api.recipe.logic.OCResult;
 import com.gregtechceu.gtceu.common.data.GTRecipeTypes;
 import com.gregtechceu.gtceu.utils.FormattingUtil;
+import com.gregtechceu.gtceu.utils.GTUtil;
 
 import com.lowdragmc.lowdraglib.gui.util.ClickData;
 import com.lowdragmc.lowdraglib.gui.widget.ComponentPanelWidget;
@@ -219,7 +220,7 @@ public class GeneratorArrayMachine extends StorageMachine {
             if (a > 0) {
                 long EUt = RecipeHelper.getOutputEUt(recipe);
                 if (EUt > 0) {
-                    int maxParallel = (int) (GTValues.V[generatorArrayMachine.getOverclockTier()] * a * 2 * getAmperage(generatorArrayMachine.getTier()) / EUt);
+                    int maxParallel = (int) ((generatorArrayMachine.getTier() > 6 ? 0.5 : generatorArrayMachine.getTier() > 3 ? 1 : 2) * GTValues.V[generatorArrayMachine.getOverclockTier()] * a * getAmperage(generatorArrayMachine.getTier()) / EUt);
                     int multipliers = 0;
                     for (RecipeCapability<?> cap : recipe.inputs.keySet()) {
                         if (cap instanceof FluidRecipeCapability fluidRecipeCapability) {
@@ -256,7 +257,7 @@ public class GeneratorArrayMachine extends StorageMachine {
         if (isActive() && this.isw) {
             GTRecipe r = getRecipeLogic().getLastRecipe();
             if (r != null) {
-                textList.add(Component.translatable("gtceu.recipe.eu_inverted", FormattingUtil.formatNumbers(eut)));
+                textList.add(Component.translatable("gtceu.multiblock.max_energy_per_tick", FormattingUtil.formatNumbers(eut), Component.literal(GTValues.VNF[GTUtil.getFloorTierByVoltage(eut)])));
             }
         }
     }
