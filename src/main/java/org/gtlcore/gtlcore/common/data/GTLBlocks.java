@@ -797,4 +797,13 @@ public class GTLBlocks {
             "time_magic_crystals_block", GTLCore.id("block/magic/time_magic_crystals_block"));
     public static final BlockEntry<Block> SPACE_MAGIC_CRYSTALS_BLOCK = createCasingBlock(
             "space_magic_crystals_block", GTLCore.id("block/magic/space_magic_crystals_block"));
+
+    public static final BlockEntry<Block> MAGIC_WOODEN_PLANK = createCasingBlock(
+            "magic_wooden_plank", GTLCore.id("block/magic/magic_wooden_plank"));
+    public static final BlockEntry<Block> MAGIC_STONE = createCasingBlock(
+            "magic_stone", GTLCore.id("block/magic/magic_stone"));
+    public static final BlockEntry<Block> MAGIC_STONE_BRICK = createCasingBlock(
+            "magice_stone_brick", GTLCore.id("block/magic/magic_stone_brick"));
+    public static final BlockEntry<Block> WORLD_SALT_BLOCK = createCasingBlock(
+            "world_salt_block", GTLCore.id("block/magic/world_salt_block"));
 }

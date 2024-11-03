@@ -817,17 +817,31 @@ public class GTLRecipeTypes {
             .setSlotOverlay(false, false, GuiTextures.SOLIDIFIER_OVERLAY)
             .setProgressBar(GuiTextures.PROGRESS_BAR_ARROW_MULTIPLE, ProgressTexture.FillDirection.LEFT_TO_RIGHT);
 
-    // 远古呼唤
-    public static final GTRecipeType CALL_OF_THE_ANCIENTS = registerRecipeType("call_of_the_ancients", MULTIBLOCK)
+    // 魔法合成，九个物品输入有序，九个流体输入，一个物品输出
+    public static final GTRecipeType MAGIC_SYNTHESIS = registerRecipeType("magic_synthesis", MULTIBLOCK)
             .setEUIO(IO.NONE)
-            .setMaxIOSize(3, 3, 3, 3)
+            .setMaxIOSize(9, 1, 9, 0)
             .setProgressBar(GuiTextures.PROGRESS_BAR_ARROW, LEFT_TO_RIGHT)
             .setSound(GTSoundEntries.FORGE_HAMMER);
 
-    // 海洋之息
-    public static final GTRecipeType THE_OCEAN_CALLS = registerRecipeType("the_ocean_calls", MULTIBLOCK)
+    // 坩埚，一个物品输入（通过投掷输入），九个流体输入，一个物品输出（会自动向上投掷）
+    public static final GTRecipeType CRUCIBLE = registerRecipeType("crucible", MULTIBLOCK)
             .setEUIO(IO.NONE)
-            .setMaxIOSize(3, 3, 3, 3)
+            .setMaxIOSize(1, 1, 9, 0)
+            .setProgressBar(GuiTextures.PROGRESS_BAR_ARROW, LEFT_TO_RIGHT)
+            .setSound(GTSoundEntries.FORGE_HAMMER);
+
+    // 炼金锅炉，一个燃料输入，可使用普通熔炉燃料，使用源动之焰（8000t）并加速*2，使用炼狱之火（4000000t）并加速*16并行*16，使用炽焱之脉（2000000000t）并加速*64并行*64，一个物品输入，一个流体输入，一个流体输出
+    public static final GTRecipeType ALCHEMICAL_BOILER = registerRecipeType("alchemical_boiler", MULTIBLOCK)
+            .setEUIO(IO.NONE)
+            .setMaxIOSize(2, 0, 1, 1)
+            .setProgressBar(GuiTextures.PROGRESS_BAR_ARROW, LEFT_TO_RIGHT)
+            .setSound(GTSoundEntries.FORGE_HAMMER);
+
+    // 炼金蒸馏，一个燃料输入，可使用普通熔炉燃料，使用源动之焰（8000t）并加速*2，使用炼狱之火（4000000t）并加速*16并行*16，使用炽焱之脉（2000000000t）并加速*64并行*64，一个流体输入，一个物品输出，一个流体输出
+    public static final GTRecipeType ALCHEMICAL_DISTILLATION = registerRecipeType("alchemical_distillation", MULTIBLOCK)
+            .setEUIO(IO.NONE)
+            .setMaxIOSize(1, 1, 1, 1)
             .setProgressBar(GuiTextures.PROGRESS_BAR_ARROW, LEFT_TO_RIGHT)
             .setSound(GTSoundEntries.FORGE_HAMMER);
 
@@ -845,10 +859,12 @@ public class GTLRecipeTypes {
             .setProgressBar(GuiTextures.PROGRESS_BAR_ARROW, LEFT_TO_RIGHT)
             .setSound(GTSoundEntries.FORGE_HAMMER);
 
-    // 神秘启示
-    public static final GTRecipeType MYSTERIOUS_REVELATION = registerRecipeType("mysterious_revelation", MULTIBLOCK)
+    // 陨星仪式
+    // 搓了个方法GTLEBallGeneration不知道怎么调用
+    // 配方结束时触发这个方法，想在配方里面传入会生成的方块和权重，不知道怎么写
+    public static final GTRecipeType FALLING_STAR_CEREMONY = registerRecipeType("falling_star_ceremony", MULTIBLOCK)
             .setEUIO(IO.NONE)
-            .setMaxIOSize(6, 6, 3, 3)
+            .setMaxIOSize(1, 1, 1, 1)
             .setProgressBar(GuiTextures.PROGRESS_BAR_ARROW, LEFT_TO_RIGHT)
             .setSound(GTSoundEntries.FORGE_HAMMER);
 

@@ -1,5 +1,6 @@
 package org.gtlcore.gtlcore.data.recipe.processing;
 
+import net.minecraft.tags.ItemTags;
 import org.gtlcore.gtlcore.GTLCore;
 
 import com.gregtechceu.gtceu.api.data.chemical.material.Material;
@@ -20,8 +21,7 @@ import static com.gregtechceu.gtceu.common.data.GTRecipeTypes.*;
 import static org.gtlcore.gtlcore.api.data.tag.GTLTagPrefix.magiccrystal;
 import static org.gtlcore.gtlcore.common.data.GTLItems.*;
 import static org.gtlcore.gtlcore.common.data.GTLMaterials.*;
-import static org.gtlcore.gtlcore.common.data.GTLRecipeTypes.DARK_PEARL_QIHUI;
-import static org.gtlcore.gtlcore.common.data.GTLRecipeTypes.DIGESTION_TREATMENT;
+import static org.gtlcore.gtlcore.common.data.GTLRecipeTypes.*;
 
 public class MagicFormula {
 
@@ -47,20 +47,14 @@ public class MagicFormula {
         };
 
         int[] SomeMagicStonetime = {
-                200, 120000, 72000000, 2147483647,
-                200, 120000, 72000000, 2147483647,
+                200, 12000, 7200000, 214748364,
+                200, 12000, 7200000, 214748364,
                 600, 600, 600, 600,
-                30000, 30000, 30000, 30000,
-                15000000, 15000000, 2147483647, 2147483647
+                30000, 30000, 120000, 120000,
+                3000000, 3000000, 214748364, 214748364
         };
         int[] SomeMagicSourcNumber = {
                 10, 30, 90, 150,
-        };
-        int[] SomeMagicSourceVoltage = {
-                30, 500, 8000, 130000,
-                30, 30, 30, 30,
-                500, 500, 8000, 8000,
-                520000, 520000, 33000000, 33000000
         };
 
         /// 魔石启辉得到魔晶
@@ -101,21 +95,19 @@ public class MagicFormula {
             Material MagicStone = SomeMagicStones[i];
             Material MagicStonesTurbid = SomeMagicStonesTurbid[i - 4];
 
-            MIXER_RECIPES.recipeBuilder(GTLCore.id("mixer_turbid_" + i))
+            ALCHEMICAL_BOILER.recipeBuilder(GTLCore.id("mixer_turbid_" + i))
                     .inputItems(dust, MagicStone, 1)
                     .inputFluids(HydrochloricAcid.getFluid(1000))
                     .outputFluids(MagicStonesTurbid.getFluid(1000))
-                    .duration(20)
-                    .EUt(SomeMagicSourceVoltage[i - 4])
+                    .duration(SomeMagicStonetime[i])
                     .save(provider);
 
-            DISTILLATION_RECIPES.recipeBuilder(GTLCore.id("distillery_turbid_" + i))
+            ALCHEMICAL_DISTILLATION.recipeBuilder(GTLCore.id("distillery_turbid_" + i))
                     .inputFluids(MagicStonesTurbid.getFluid(100))
                     .outputFluids(DilutedHydrochloricAcid.getFluid(80))
                     .outputFluids(MagicSource.getFluid(SomeMagicSourcNumber[i - 4]))
                     .outputItems(MAGICAL_RESIDUE, 1)
-                    .duration(200)
-                    .EUt(SomeMagicSourceVoltage[i - 4])
+                    .duration(SomeMagicStonetime[i] * 5)
                     .save(provider);
         }
         for (int i = 8; i < 20; i++) {
@@ -129,21 +121,19 @@ public class MagicFormula {
                 TwoResidue = ARCANE_RESIDUE;
             }
 
-            MIXER_RECIPES.recipeBuilder(GTLCore.id("mixer_turbid_" + i))
+            ALCHEMICAL_BOILER.recipeBuilder(GTLCore.id("mixer_turbid_" + i))
                     .inputItems(dust, MagicStone, 1)
                     .inputFluids(HydrochloricAcid.getFluid(1000))
                     .outputFluids(MagicStonesTurbid.getFluid(1000))
-                    .duration(20)
-                    .EUt(SomeMagicSourceVoltage[i - 4])
+                    .duration(SomeMagicStonetime[i])
                     .save(provider);
 
-            DISTILLATION_RECIPES.recipeBuilder(GTLCore.id("distillery_turbid_" + i))
+            ALCHEMICAL_DISTILLATION.recipeBuilder(GTLCore.id("distillery_turbid_" + i))
                     .inputFluids(MagicStonesTurbid.getFluid(100))
                     .outputFluids(DilutedHydrochloricAcid.getFluid(80))
                     .outputFluids(MagicSources.getFluid(10))
                     .outputItems(TwoResidue, 1)
-                    .duration(200)
-                    .EUt(SomeMagicSourceVoltage[i - 4])
+                    .duration(SomeMagicStonetime[i] * 5)
                     .save(provider);
         }
 
@@ -197,6 +187,18 @@ public class MagicFormula {
                     .duration(400)
                     .save(provider);
 
+        }
+
+        /// 魔法第一阶段
+        {
+            CHEMICAL_BATH_RECIPES.recipeBuilder(GTLCore.id("magic_phase_1"))
+                    .inputItems(ItemTags.LOGS,1)
+                    .inputItems(dust,LowGuideMagic,4)
+                    .inputFluids(SeedOil.getFluid(500))
+                    .outputItems(DIPPING_STICKS,1)
+                    .duration(16)
+                    .EUt(VA[LV])
+                    .save(provider);
         }
 
         /// 奥术源质提取
@@ -306,6 +308,16 @@ public class MagicFormula {
                     .outputFluids(FluoroantimonicAcid.getFluid(500))
                     .duration(100)
                     .EUt(VA[EV])
+                    .save(provider);
+
+        }
+
+        /// 注魔祭坛
+        {
+            INFUSION_RITUAL.recipeBuilder(GTLCore.id("infusion_1"))
+                    .inputItems(SATURATED_ARCANE_SIEVE, 1)
+                    .chancedOutput(new ItemStack(ARCANE_RESIDUE, 1), 2000, 0)
+                    .duration(100)
                     .save(provider);
 
         }

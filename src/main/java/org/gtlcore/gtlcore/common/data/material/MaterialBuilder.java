@@ -195,11 +195,12 @@ public class MaterialBuilder {
                 .buildAndRegister().setFormula("Au?");
 
         Thaumium = builderMaterial("thaumium")
-                .dust()
+                .ingot()
                 .components(InfusedGold, 1)
                 .color(0x54537e)
                 .iconSet(DULL)
-                .flags(DISABLE_DECOMPOSITION)
+                .blastTemp(1000, LOW, GTValues.VA[GTValues.LV], 100)
+                .flags(DISABLE_DECOMPOSITION, GENERATE_FRAME, GENERATE_PLATE, GENERATE_ROD)
                 .buildAndRegister();
 
         AstralSilver = builderMaterial("astral_silver")

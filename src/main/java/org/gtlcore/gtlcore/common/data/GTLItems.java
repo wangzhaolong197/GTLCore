@@ -775,11 +775,27 @@ public class GTLItems {
     public static final ItemEntry<Item> CHARM_QUARK_RELEASING_CATALYST = register("charm_quark_releasing_catalyst");
 
     // 魔法物品
+    public static final ItemEntry<Item> MAGIC_CORE_SHELL1 = registerMagic("magic_core_shell1");
+    public static final ItemEntry<Item> MAGIC_CORE_SHELL2 = registerMagic("magic_core_shell2");
+    public static final ItemEntry<Item> MAGIC_CORE_SHELL3 = registerMagic("magic_core_shell3");
     public static final ItemEntry<Item> MAGIC_CORE1 = registerMagic("magic_core1");
     public static final ItemEntry<Item> MAGIC_CORE2 = registerMagic("magic_core2");
     public static final ItemEntry<Item> MAGIC_CORE3 = registerMagic("magic_core3");
     public static final ItemEntry<Item> ARCANE_CORE1 = registerMagic("arcane_core1");
     public static final ItemEntry<Item> ARCANE_CORE2 = registerMagic("arcane_core2");
+
+    public static final ItemEntry<Item> DIPPING_STICKS = registerMagic("dipping_sticks");
+    public static final ItemEntry<Item> MAGIC_FILTER = registerMagic("magic_filter");
+
+    public static final ItemEntry<Item> THE_FLAME_OF_ORIGIN = registerMagic("the_flame_of_origin");
+    public static final ItemEntry<Item> THE_FIRE_OF_INFERNO = registerMagic("the_fire_of_inferno");
+    public static final ItemEntry<Item> BLAZING_VEIN = registerMagic("blazing_vein");
+
+    public static final ItemEntry<Item> BALANCE_MAGIC_CRYSTAL = registerMagic("balance_magic_crystal");
+    public static final ItemEntry<Item> WORLD_SALT = registerMagic("world_salt");
+
+    public static final ItemEntry<Item> PRIMAL_MAGIC = registerMagic("primal_magic");
+    public static final ItemEntry<Item> PEARL_ORIGINAL = registerMagic("pearl_original");
 
     public static final ItemEntry<Item> SOUL_FRAGMENT = registerMagic("soul_fragment");
     public static final ItemEntry<Item> SOUL_CRYSTAL_SMALL = registerMagic("soul_crystal_small");
