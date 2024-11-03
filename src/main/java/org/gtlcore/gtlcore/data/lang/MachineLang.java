@@ -183,7 +183,7 @@ public class MachineLang {
         provider.add("gtlcore.machine.space_elevator.set_out", "Set Off");
         provider.add("gtlcore.machine.space_elevator.connected", "Connected To A Running SpaceElevator");
         provider.add("gtlcore.machine.space_elevator.not_connected", "Not Connected To A Running SpaceElevator");
-        provider.add("gtlcore.machine.space_elevator.tooltip.0", "Can install up to 8 expansion modules");
+        provider.add("gtlcore.machine.space_elevator.tooltip.0", "Can install up to 12 expansion modules");
         provider.add("gtlcore.machine.space_elevator.tooltip.1", "Increasing voltage tier can provide Duration reductions for modules");
         provider.add("gtlcore.machine.space_elevator.tooltip.2", "Circuit must be set to 1 before running, and provide 128 computing power");
         provider.add("gtlcore.machine.space_probe_surface_reception.tooltip.0", "It Can Only Operate On Space Station");
@@ -196,6 +196,9 @@ public class MachineLang {
         provider.add("gtlcore.machine.super_computation.tooltip.3", "Providing §eUXV§r tier voltage requires placing §bExotic Processor Mainframe§r, and providing 2048CWU/t");
         provider.add("gtlcore.machine.super_computation.tooltip.4", "Providing §9§lOpV§r tier voltage requires placing §bCosmic Processor Mainframe§r, and providing 4096CWU/t");
         provider.add("gtlcore.machine.super_computation.tooltip.5", "Providing §4§lMAX§r tier voltage requires placing §bSupra Causal Processor Mainframe§r, and providing 8192CWU/t");
+        provider.add("gtlcore.machine.super_space_elevator.tooltip.0", "Can install up to 64 expansion modules");
+        provider.add("gtlcore.machine.super_space_elevator.tooltip.1", "Increasing voltage tier can greatly reduce the duration for modules");
+        provider.add("gtlcore.machine.super_space_elevator.tooltip.2", "Additional increase in the parallelism provided by the module");
         provider.add("gtlcore.machine.super_incubator.tooltip.0", "Ignores radiation and cleanliness requirements");
         provider.add("gtlcore.machine.suprachronal_assembly_line.tooltip.0", "§8§lInvisibly Touch§r");
         provider.add("gtlcore.machine.suprachronal_assembly_line.tooltip.1", "Modules can be expanded on both sides, sharing parallelism with the mainframe.");

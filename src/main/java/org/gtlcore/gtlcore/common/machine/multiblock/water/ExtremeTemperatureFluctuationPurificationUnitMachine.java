@@ -10,6 +10,7 @@ import com.gregtechceu.gtceu.api.fluids.store.FluidStorageKeys;
 import com.gregtechceu.gtceu.api.machine.IMachineBlockEntity;
 import com.gregtechceu.gtceu.api.machine.feature.multiblock.IMultiPart;
 import com.gregtechceu.gtceu.api.machine.multiblock.WorkableMultiblockMachine;
+import com.gregtechceu.gtceu.api.recipe.GTRecipe;
 import com.gregtechceu.gtceu.common.data.GTMaterials;
 import com.gregtechceu.gtceu.data.recipe.builder.GTRecipeBuilder;
 
@@ -54,6 +55,8 @@ public class ExtremeTemperatureFluctuationPurificationUnitMachine extends NoEner
     @Persisted
     private boolean cycle;
 
+    private GTRecipe recipe;
+
     private SensorPartMachine sensorMachine;
 
     public ExtremeTemperatureFluctuationPurificationUnitMachine(IMachineBlockEntity holder, Object... args) {
@@ -90,15 +93,15 @@ public class ExtremeTemperatureFluctuationPurificationUnitMachine extends NoEner
         boolean result = super.onWorking();
         if (getOffsetTimer() % 20 == 0) {
             long[] a = MachineUtil.getFluidAmount(this, HELIUM_LIQUID, HELIUM_PLASMA);
-            long hl = Math.min(100, a[0]);
-            if (MachineUtil.inputFluid(this, FluidStack.create(HELIUM_LIQUID, hl))) {
-                heat = Math.max(4, heat - (int) (hl * 4 + Math.random() * 2));
-                MachineUtil.outputFluid(this, FluidStack.create(HELIUM, hl));
+            long helium_liquid = Math.min(100, a[0]);
+            if (MachineUtil.inputFluid(this, FluidStack.create(HELIUM_LIQUID, helium_liquid))) {
+                heat = Math.max(4, heat - (int) (helium_liquid * (4 + Math.random() * 2)));
+                MachineUtil.outputFluid(this, FluidStack.create(HELIUM, helium_liquid));
             }
-            long hp = Math.min(10, a[1]);
-            if (MachineUtil.inputFluid(this, FluidStack.create(HELIUM_PLASMA, hp))) {
-                heat += (int) (hl * 8 + Math.random() * 4);
-                MachineUtil.outputFluid(this, FluidStack.create(HELIUM, hp));
+            long helium_plasma = Math.min(10, a[1]);
+            if (MachineUtil.inputFluid(this, FluidStack.create(HELIUM_PLASMA, helium_plasma))) {
+                heat += (int) (helium_plasma * (8 + Math.random() * 4));
+                MachineUtil.outputFluid(this, FluidStack.create(HELIUM, helium_plasma));
             }
             if (heat > 125000) {
                 heat = 298;
@@ -128,13 +131,18 @@ public class ExtremeTemperatureFluctuationPurificationUnitMachine extends NoEner
     public long test() {
         heat = 298;
         chance = 1;
+        cycle = false;
         inputCount = (int) Math.min(Integer.MAX_VALUE, MachineUtil.getFluidAmount(this, WaterPurificationPlantMachine.GradePurifiedWater4)[0]);
-        return inputCount * 5L;
+        recipe = GTRecipeBuilder.ofRaw().duration(WaterPurificationPlantMachine.DURATION).inputFluids(FluidStack.create(WaterPurificationPlantMachine.GradePurifiedWater4, inputCount)).buildRawRecipe();
+        if (recipe.matchRecipe(this).isSuccess()) {
+            return inputCount * 5L;
+        }
+        return 0;
     }
 
     @Override
     public void run() {
-        getRecipeLogic().setupRecipe(GTRecipeBuilder.ofRaw().duration(WaterPurificationPlantMachine.DURATION).inputFluids(FluidStack.create(WaterPurificationPlantMachine.GradePurifiedWater4, inputCount)).buildRawRecipe());
+        getRecipeLogic().setupRecipe(recipe);
     }
 
     @Override

@@ -4,9 +4,11 @@ import org.gtlcore.gtlcore.GTLCore;
 import org.gtlcore.gtlcore.client.ClientUtil;
 import org.gtlcore.gtlcore.client.renderer.RenderBufferHelper;
 import org.gtlcore.gtlcore.common.machine.multiblock.electric.SpaceElevatorMachine;
+import org.gtlcore.gtlcore.common.machine.multiblock.electric.SuperSpaceElevatorMachine;
 
 import com.gregtechceu.gtceu.GTCEu;
 import com.gregtechceu.gtceu.api.machine.IMachineBlockEntity;
+import com.gregtechceu.gtceu.api.machine.MetaMachine;
 import com.gregtechceu.gtceu.client.renderer.GTRenderTypes;
 import com.gregtechceu.gtceu.client.renderer.machine.WorkableCasingMachineRenderer;
 
@@ -36,26 +38,33 @@ public class SpaceElevatorRenderer extends WorkableCasingMachineRenderer {
     @OnlyIn(Dist.CLIENT)
     public void render(BlockEntity blockEntity, float partialTicks, PoseStack poseStack, MultiBufferSource buffer,
                        int combinedLight, int combinedOverlay) {
-        if (blockEntity instanceof IMachineBlockEntity machineBlockEntity &&
-                machineBlockEntity.getMetaMachine() instanceof SpaceElevatorMachine machine && machine.isFormed()) {
-            double x = 0.5, y = 1, z = 0.5;
-            switch (machine.getFrontFacing()) {
-                case NORTH -> z = 3.5;
-                case SOUTH -> z = -2.5;
-                case WEST -> x = 3.5;
-                case EAST -> x = -2.5;
+        if (blockEntity instanceof IMachineBlockEntity machineBlockEntity) {
+            MetaMachine metaMachine = machineBlockEntity.getMetaMachine();
+            if (metaMachine instanceof SpaceElevatorMachine machine && machine.isFormed()) {
+                boolean Super = machine instanceof SuperSpaceElevatorMachine;
+                double x = 0.5, y = 1, z = 0.5;
+                if (Super) {
+                    switch (machine.getFrontFacing()) {
+                        case NORTH -> z = 4.5;
+                        case SOUTH -> z = -3.5;
+                        case WEST -> x = 4.5;
+                        case EAST -> x = -3.5;
+                    }
+                } else {
+                    switch (machine.getFrontFacing()) {
+                        case NORTH -> z = 3.5;
+                        case SOUTH -> z = -2.5;
+                        case WEST -> x = 3.5;
+                        case EAST -> x = -2.5;
+                    }
+                }
+                poseStack.pushPose();
+                RenderBufferHelper.renderCylinder(poseStack, buffer.getBuffer(GTRenderTypes.getLightRing()), (float) x, (float) (y - 2), (float) z, Super ? 0.5F : 0.3F, 360, 10, 0, 0, 0, 255);
+                poseStack.translate(x, y + machine.getHigh(), z);
+                RendererModel(poseStack, buffer, Super ? 8 : 4, CLIMBER_MODEL);
+                poseStack.popPose();
             }
-            poseStack.pushPose();
-            RenderBufferHelper.renderCylinder(poseStack, buffer.getBuffer(GTRenderTypes.getLightRing()), (float) x, (float) (y - 2), (float) z, 0.3F, 360, 10, 0, 0, 0, 255);
-            poseStack.translate(x, y + machine.getHigh(), z);
-            renderClimber(poseStack, buffer);
-            poseStack.popPose();
         }
-    }
-
-    private void renderClimber(PoseStack poseStack, MultiBufferSource buffer) {
-        float scale = 4F;
-        RendererModel(poseStack, buffer, scale, CLIMBER_MODEL);
     }
 
     static void RendererModel(PoseStack poseStack, MultiBufferSource buffer, float scale, ResourceLocation climberModel) {

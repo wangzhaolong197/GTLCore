@@ -62,6 +62,7 @@ public class BallHatchPartMachine extends ItemHatchPartMachine implements IInter
         return super.afterWorking(controller);
     }
 
+    @Override
     public InteractionResult onUse(BlockState state, Level level, BlockPos pos, Player player, InteractionHand hand,
                                    BlockHitResult hit) {
         if (!isRemote() && isWorking && !player.isCreative()) {

@@ -12,6 +12,7 @@ import com.gregtechceu.gtceu.api.machine.IMachineBlockEntity;
 import com.gregtechceu.gtceu.api.machine.feature.multiblock.IMultiPart;
 import com.gregtechceu.gtceu.api.machine.multiblock.WorkableMultiblockMachine;
 import com.gregtechceu.gtceu.api.machine.trait.NotifiableItemStackHandler;
+import com.gregtechceu.gtceu.api.recipe.GTRecipe;
 import com.gregtechceu.gtceu.common.machine.multiblock.part.ItemBusPartMachine;
 import com.gregtechceu.gtceu.data.recipe.builder.GTRecipeBuilder;
 
@@ -45,13 +46,13 @@ public class AbsoluteBaryonicPerfectionPurificationUnitMachine extends NoEnergyM
         return MANAGED_FIELD_HOLDER;
     }
 
-    private static final List<ItemStack> CATALYST = List.of(
-            GTLItems.UP_QUARK_RELEASING_CATALYST.asStack(),
-            GTLItems.DOWN_QUARK_RELEASING_CATALYST.asStack(),
-            GTLItems.BOTTOM_QUARK_RELEASING_CATALYST.asStack(),
-            GTLItems.TOP_QUARK_RELEASING_CATALYST.asStack(),
-            GTLItems.STRANGE_QUARK_RELEASING_CATALYST.asStack(),
-            GTLItems.CHARM_QUARK_RELEASING_CATALYST.asStack());
+    private static final List<Item> CATALYST = List.of(
+            GTLItems.UP_QUARK_RELEASING_CATALYST.get(),
+            GTLItems.DOWN_QUARK_RELEASING_CATALYST.get(),
+            GTLItems.BOTTOM_QUARK_RELEASING_CATALYST.get(),
+            GTLItems.TOP_QUARK_RELEASING_CATALYST.get(),
+            GTLItems.STRANGE_QUARK_RELEASING_CATALYST.get(),
+            GTLItems.CHARM_QUARK_RELEASING_CATALYST.get());
 
     private static final Fluid QUARK_GLUON = GTLMaterials.QuarkGluon.getFluid(FluidStorageKeys.PLASMA);
 
@@ -67,6 +68,8 @@ public class AbsoluteBaryonicPerfectionPurificationUnitMachine extends NoEnergyM
 
     @Persisted
     private boolean successful;
+
+    private GTRecipe recipe;
 
     @Persisted
     private final Set<ItemStack> outputs = new HashSet<>();
@@ -115,7 +118,7 @@ public class AbsoluteBaryonicPerfectionPurificationUnitMachine extends NoEnergyM
                 int slots = inv.getSlots();
                 for (int i = 0; i < slots; i++) {
                     ItemStack stack = inv.getStackInSlot(i);
-                    if (CATALYST.contains(stack) && MachineUtil.inputFluid(this, FluidStack.create(QUARK_GLUON, stack.getCount() * 144L))) {
+                    if (CATALYST.contains(stack.getItem()) && MachineUtil.inputFluid(this, FluidStack.create(QUARK_GLUON, stack.getCount() * 144L))) {
                         if (i < slots - 1 && stack.getItem() == catalyst1) {
                             ItemStack stack1 = inv.getStackInSlot(i + 1);
                             if (!stack1.isEmpty() && MachineUtil.inputFluid(this, FluidStack.create(QUARK_GLUON, stack1.getCount() * 144L))) {
@@ -152,16 +155,20 @@ public class AbsoluteBaryonicPerfectionPurificationUnitMachine extends NoEnergyM
         do {
             b = (int) (Math.random() * 5);
         } while (b == a);
-        catalyst1 = CATALYST.get(a).getItem();
-        catalyst2 = CATALYST.get(b).getItem();
+        catalyst1 = CATALYST.get(a);
+        catalyst2 = CATALYST.get(b);
         successful = false;
         inputCount = (int) Math.min(Integer.MAX_VALUE, MachineUtil.getFluidAmount(this, WaterPurificationPlantMachine.GradePurifiedWater7)[0]);
-        return inputCount * 8L;
+        recipe = GTRecipeBuilder.ofRaw().duration(WaterPurificationPlantMachine.DURATION).inputFluids(FluidStack.create(WaterPurificationPlantMachine.GradePurifiedWater7, inputCount)).buildRawRecipe();
+        if (recipe.matchRecipe(this).isSuccess()) {
+            return inputCount * 8L;
+        }
+        return 0;
     }
 
     @Override
     public void run() {
-        getRecipeLogic().setupRecipe(GTRecipeBuilder.ofRaw().duration(WaterPurificationPlantMachine.DURATION).inputFluids(FluidStack.create(WaterPurificationPlantMachine.GradePurifiedWater7, inputCount)).buildRawRecipe());
+        getRecipeLogic().setupRecipe(recipe);
     }
 
     @Override

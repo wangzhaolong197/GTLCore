@@ -12,6 +12,7 @@ import com.gregtechceu.gtceu.api.fluids.store.FluidStorageKeys;
 import com.gregtechceu.gtceu.api.machine.IMachineBlockEntity;
 import com.gregtechceu.gtceu.api.machine.feature.multiblock.IMultiPart;
 import com.gregtechceu.gtceu.api.machine.multiblock.WorkableMultiblockMachine;
+import com.gregtechceu.gtceu.api.recipe.GTRecipe;
 import com.gregtechceu.gtceu.common.data.GTMaterials;
 import com.gregtechceu.gtceu.data.recipe.builder.GTRecipeBuilder;
 
@@ -68,6 +69,8 @@ public class ResidualDecontaminantDegasserPurificationUnitMachine extends NoEner
     @DescSynced
     private FluidStack fluidStack;
 
+    private GTRecipe recipe;
+
     private IndicatorHatchPartMachine indicatorHatchPartMachine;
 
     public ResidualDecontaminantDegasserPurificationUnitMachine(IMachineBlockEntity holder, Object... args) {
@@ -79,7 +82,7 @@ public class ResidualDecontaminantDegasserPurificationUnitMachine extends NoEner
         super.addDisplayText(textList);
         if (getRecipeLogic().isWorking()) {
             textList.add(Component.translatable("gtlcore.machine.residual_decontaminant_degasser_purification_unit.fluids", fluidStack.getDisplayName()));
-            textList.add(Component.translatable("gtceu.gui.content.chance_1", successful ? 100 : 0));
+            textList.add(Component.translatable("gtceu.gui.content.chance_1", (successful && !failed) ? 100 : 0));
         }
     }
 
@@ -139,12 +142,16 @@ public class ResidualDecontaminantDegasserPurificationUnitMachine extends NoEner
             fluidStack = FLUIDS.get(indicatorHatchPartMachine.getRedstoneSignalOutput());
         }
         inputCount = (int) Math.min(Integer.MAX_VALUE, MachineUtil.getFluidAmount(this, WaterPurificationPlantMachine.GradePurifiedWater6)[0]);
-        return inputCount * 7L;
+        recipe = GTRecipeBuilder.ofRaw().duration(WaterPurificationPlantMachine.DURATION).inputFluids(FluidStack.create(WaterPurificationPlantMachine.GradePurifiedWater6, inputCount)).buildRawRecipe();
+        if (recipe.matchRecipe(this).isSuccess()) {
+            return inputCount * 7L;
+        }
+        return 0;
     }
 
     @Override
     public void run() {
-        getRecipeLogic().setupRecipe(GTRecipeBuilder.ofRaw().duration(WaterPurificationPlantMachine.DURATION).inputFluids(FluidStack.create(WaterPurificationPlantMachine.GradePurifiedWater6, inputCount)).buildRawRecipe());
+        getRecipeLogic().setupRecipe(recipe);
     }
 
     @Override

@@ -32,7 +32,6 @@
         "extendedae.PartExPatternProviderMixin",
         "extendedae.TileExPatternProviderMixin",
         "ftbu.YouCantBreakAE2Mixin",
-        "gtm.CleanroomConditionMixin",
         "gtm.CWURecipeCapabilityMixin",
         "gtm.FluidPipeTypeMixin",
         "gtm.MultiblockInfoCategoryMixin",

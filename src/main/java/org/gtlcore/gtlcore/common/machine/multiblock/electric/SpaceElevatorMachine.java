@@ -16,8 +16,10 @@ import net.minecraft.core.BlockPos;
 import net.minecraft.network.chat.Component;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.world.InteractionHand;
+import net.minecraft.world.InteractionResult;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.level.Level;
+import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.phys.BlockHitResult;
 
 import earth.terrarium.adastra.common.menus.base.PlanetsMenuProvider;
@@ -46,27 +48,31 @@ public class SpaceElevatorMachine extends TierCasingMachine {
     @Persisted
     @DescSynced
     private double high;
-    private int mam = 0;
-    private Player player;
+    int mam = 0;
 
-    private void update(boolean promptly) {
+    private ServerPlayer player;
+
+    void update(boolean promptly) {
         if (promptly || getOffsetTimer() % 20 == 0) {
             mam = 0;
             Level level = getLevel();
+            if (level == null) return;
             BlockPos blockPos = MachineUtil.getOffsetPos(3, -2, getFrontFacing(), getPos());
-            BlockPos[] coordinatess = new BlockPos[] { blockPos.offset(8, 2, 3),
-                    blockPos.offset(8, 2, -3),
-                    blockPos.offset(-8, 2, 3),
-                    blockPos.offset(-8, 2, -3),
-                    blockPos.offset(3, 2, 8),
-                    blockPos.offset(-3, 2, 8),
-                    blockPos.offset(3, 2, -8),
-                    blockPos.offset(-3, 2, -8) };
+            BlockPos[] coordinatess = new BlockPos[] {
+                    blockPos.offset(7, 2, 0),
+                    blockPos.offset(7, 2, 2),
+                    blockPos.offset(7, 2, -2),
+                    blockPos.offset(-7, 2, 0),
+                    blockPos.offset(-7, 2, 2),
+                    blockPos.offset(-7, 2, -2),
+                    blockPos.offset(0, 2, 7),
+                    blockPos.offset(2, 2, 7),
+                    blockPos.offset(-2, 2, 7),
+                    blockPos.offset(0, 2, -7),
+                    blockPos.offset(2, 2, -7),
+                    blockPos.offset(-2, 2, -7) };
             for (BlockPos blockPoss : coordinatess) {
-                MetaMachine metaMachine = null;
-                if (level != null) {
-                    metaMachine = MetaMachine.getMachine(level, blockPoss);
-                }
+                MetaMachine metaMachine = MetaMachine.getMachine(level, blockPoss);
                 if (metaMachine instanceof SpaceElevatorModuleMachine moduleMachine && moduleMachine.isFormed()) {
                     moduleMachine.spaceElevatorMachine = this;
                     mam++;
@@ -75,10 +81,14 @@ public class SpaceElevatorMachine extends TierCasingMachine {
         }
     }
 
+    int getBaseHigh() {
+        return 40;
+    }
+
     @Override
     public void onStructureFormed() {
         super.onStructureFormed();
-        high = 40;
+        high = getBaseHigh();
         update(true);
     }
 
@@ -86,14 +96,17 @@ public class SpaceElevatorMachine extends TierCasingMachine {
     public boolean onWorking() {
         boolean value = super.onWorking();
         update(false);
-        high = 180 + (140 * Math.sin(getOffsetTimer() / 160D));
+        high = 12 * getBaseHigh() + 100 + ((100 + getBaseHigh()) * Math.sin(getOffsetTimer() / 160D));
         return value;
     }
 
     @Override
-    public boolean shouldOpenUI(Player player, InteractionHand hand, BlockHitResult hit) {
-        this.player = player;
-        return true;
+    public InteractionResult onUse(BlockState state, Level level, BlockPos pos, Player player, InteractionHand hand,
+                                   BlockHitResult hit) {
+        if (player instanceof ServerPlayer serverPlayer) {
+            this.player = serverPlayer;
+        }
+        return super.onUse(state, level, pos, player, hand, hit);
     }
 
     @Override
@@ -107,9 +120,9 @@ public class SpaceElevatorMachine extends TierCasingMachine {
 
     @Override
     public void handleDisplayClick(String componentData, ClickData clickData) {
-        if (componentData.equals("set_out") && getRecipeLogic().isWorking()) {
+        if (componentData.equals("set_out") && getRecipeLogic().isWorking() && player != null) {
             player.addTag("spaceelevatorst");
-            MenuHooks.openMenu((ServerPlayer) player, new PlanetsMenuProvider());
+            MenuHooks.openMenu(player, new PlanetsMenuProvider());
         }
     }
 }

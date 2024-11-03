@@ -9,6 +9,7 @@ import com.gregtechceu.gtceu.api.machine.multiblock.WorkableElectricMultiblockMa
 import com.gregtechceu.gtceu.api.machine.trait.RecipeLogic;
 import com.gregtechceu.gtceu.api.recipe.GTRecipe;
 import com.gregtechceu.gtceu.data.recipe.builder.GTRecipeBuilder;
+import com.gregtechceu.gtceu.utils.FormattingUtil;
 
 import com.lowdragmc.lowdraglib.syncdata.annotation.Persisted;
 import com.lowdragmc.lowdraglib.syncdata.field.ManagedFieldHolder;
@@ -24,9 +25,7 @@ import net.minecraft.world.level.material.Fluid;
 import lombok.Getter;
 import org.jetbrains.annotations.Nullable;
 
-import java.util.HashSet;
-import java.util.List;
-import java.util.Set;
+import java.util.*;
 
 import javax.annotation.ParametersAreNonnullByDefault;
 
@@ -58,14 +57,14 @@ public class WaterPurificationPlantMachine extends WorkableElectricMultiblockMac
     private final Set<BlockPos> poss = new HashSet<>();
 
     private final Set<IWaterPurificationMachine> waterPurificationMachines = new HashSet<>();
-    private final Set<IWaterPurificationMachine> runMachines = new HashSet<>();
+    private final Map<IWaterPurificationMachine, Long> runMachines = new HashMap<>();
 
     public WaterPurificationPlantMachine(IMachineBlockEntity holder, Object... args) {
         super(holder, args);
     }
 
     private void run() {
-        for (IWaterPurificationMachine machine : runMachines) {
+        for (IWaterPurificationMachine machine : runMachines.keySet()) {
             machine.getMachine().getRecipeLogic().resetRecipeLogic();
             machine.run();
         }
@@ -94,9 +93,8 @@ public class WaterPurificationPlantMachine extends WorkableElectricMultiblockMac
     @Override
     public void onWaiting() {
         super.onWaiting();
-        getRecipeLogic().resetRecipeLogic();
-        for (IWaterPurificationMachine machine : waterPurificationMachines) {
-            machine.getMachine().getRecipeLogic().resetRecipeLogic();
+        for (IWaterPurificationMachine machine : runMachines.keySet()) {
+            machine.getMachine().getRecipeLogic().setWaiting(null);
         }
     }
 
@@ -112,7 +110,7 @@ public class WaterPurificationPlantMachine extends WorkableElectricMultiblockMac
         for (IWaterPurificationMachine machine : waterPurificationMachines) {
             MutableComponent component = Component.translatable(machine.getMachine().getBlockState().getBlock().getDescriptionId()).append(" ");
             if (machine.getMachine().getRecipeLogic().isWorking()) {
-                component.append(Component.translatable("gtceu.multiblock.running"));
+                component.append(Component.translatable("gtceu.multiblock.running").append(" ").append(Component.translatable("gtceu.recipe.eu", FormattingUtil.formatNumbers(runMachines.get(machine)))));
             } else {
                 component.append(Component.translatable("gtceu.multiblock.idling"));
             }
@@ -143,16 +141,24 @@ public class WaterPurificationPlantMachine extends WorkableElectricMultiblockMac
 
         @Override
         public void setWorkingEnabled(boolean isWorkingAllowed) {
-            if (isWorkingAllowed) {
-                setStatus(Status.IDLE);
-                for (IWaterPurificationMachine machine : runMachines) {
-                    machine.getMachine().getRecipeLogic().setStatus(Status.IDLE);
+            if (!isWorkingAllowed) {
+                setStatus(Status.SUSPEND);
+                for (IWaterPurificationMachine machine : runMachines.keySet()) {
+                    machine.getMachine().getRecipeLogic().setStatus(Status.SUSPEND);
                 }
             } else {
-                setStatus(Status.SUSPEND);
-                for (IWaterPurificationMachine machine : runMachines) {
-                    machine.getMachine().getRecipeLogic().resetRecipeLogic();
-                    machine.getMachine().getRecipeLogic().setStatus(Status.SUSPEND);
+                if (lastRecipe != null && duration > 0) {
+                    setStatus(Status.WORKING);
+                    for (IWaterPurificationMachine machine : runMachines.keySet()) {
+                        if (machine.getMachine().getRecipeLogic().getLastRecipe() != null && machine.getMachine().getRecipeLogic().getDuration() > 0) {
+                            machine.getMachine().getRecipeLogic().setStatus(Status.IDLE);
+                        }
+                    }
+                } else {
+                    setStatus(Status.IDLE);
+                    for (IWaterPurificationMachine machine : runMachines.keySet()) {
+                        machine.getMachine().getRecipeLogic().setStatus(Status.IDLE);
+                    }
                 }
             }
         }
@@ -175,17 +181,16 @@ public class WaterPurificationPlantMachine extends WorkableElectricMultiblockMac
                 update(getLevel());
                 long eut = 0;
                 for (IWaterPurificationMachine machine : waterPurificationMachines) {
-                    if (machine.getMachine().isFormed() && machine.getMachine().getRecipeLogic().isWorkingEnabled()) {
+                    if (machine.getMachine().isFormed() && machine.getMachine().getRecipeLogic().isIdle()) {
                         long eu = machine.test();
                         if (eu > 0) {
-                            runMachines.add(machine);
+                            runMachines.put(machine, eu);
                             eut += eu;
                         }
                     }
                 }
                 GTRecipeBuilder builder = GTRecipeBuilder.ofRaw().duration(DURATION);
-                if (eut > 0) builder.EUt(eut);
-                return builder.buildRawRecipe();
+                if (eut > 0) return builder.EUt(eut).buildRawRecipe();
             }
             return null;
         }

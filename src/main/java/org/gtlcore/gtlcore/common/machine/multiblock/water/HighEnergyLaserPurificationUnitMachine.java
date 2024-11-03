@@ -12,6 +12,7 @@ import com.gregtechceu.gtceu.api.data.tag.TagPrefix;
 import com.gregtechceu.gtceu.api.machine.IMachineBlockEntity;
 import com.gregtechceu.gtceu.api.machine.feature.multiblock.IMultiPart;
 import com.gregtechceu.gtceu.api.machine.multiblock.WorkableMultiblockMachine;
+import com.gregtechceu.gtceu.api.recipe.GTRecipe;
 import com.gregtechceu.gtceu.data.recipe.builder.GTRecipeBuilder;
 
 import com.lowdragmc.lowdraglib.side.fluid.FluidStack;
@@ -67,6 +68,8 @@ public class HighEnergyLaserPurificationUnitMachine extends NoEnergyMultiblockMa
 
     @Persisted
     private int inputCount;
+
+    private GTRecipe recipe;
 
     private IndicatorHatchPartMachine indicatorHatchPartMachine;
     private ItemHatchPartMachine itemHatchPartMachine;
@@ -152,12 +155,16 @@ public class HighEnergyLaserPurificationUnitMachine extends NoEnergyMultiblockMa
         chance = 0;
         time = (int) (Math.random() * 4) + 4;
         inputCount = (int) Math.min(Integer.MAX_VALUE, MachineUtil.getFluidAmount(this, WaterPurificationPlantMachine.GradePurifiedWater5)[0]);
-        return inputCount * 6L;
+        recipe = GTRecipeBuilder.ofRaw().duration(WaterPurificationPlantMachine.DURATION).inputFluids(FluidStack.create(WaterPurificationPlantMachine.GradePurifiedWater5, inputCount)).buildRawRecipe();
+        if (recipe.matchRecipe(this).isSuccess()) {
+            return inputCount * 6L;
+        }
+        return 0;
     }
 
     @Override
     public void run() {
-        getRecipeLogic().setupRecipe(GTRecipeBuilder.ofRaw().duration(WaterPurificationPlantMachine.DURATION).inputFluids(FluidStack.create(WaterPurificationPlantMachine.GradePurifiedWater5, inputCount)).buildRawRecipe());
+        getRecipeLogic().setupRecipe(recipe);
     }
 
     @Override

@@ -7,6 +7,7 @@ import org.gtlcore.gtlcore.utils.MachineUtil;
 
 import com.gregtechceu.gtceu.api.machine.IMachineBlockEntity;
 import com.gregtechceu.gtceu.api.machine.multiblock.WorkableMultiblockMachine;
+import com.gregtechceu.gtceu.api.recipe.GTRecipe;
 import com.gregtechceu.gtceu.data.recipe.builder.GTRecipeBuilder;
 
 import com.lowdragmc.lowdraglib.side.fluid.FluidStack;
@@ -44,6 +45,8 @@ public class FlocculationPurificationUnitMachine extends NoEnergyMultiblockMachi
 
     @Persisted
     private long outputCount;
+
+    private GTRecipe recipe;
 
     public FlocculationPurificationUnitMachine(IMachineBlockEntity holder, Object... args) {
         super(holder, args);
@@ -84,13 +87,18 @@ public class FlocculationPurificationUnitMachine extends NoEnergyMultiblockMachi
     @Override
     public long test() {
         chance = 0;
+        outputCount = 0;
         inputCount = (int) Math.min(Integer.MAX_VALUE, MachineUtil.getFluidAmount(this, WaterPurificationPlantMachine.GradePurifiedWater2)[0]);
-        return inputCount * 3L;
+        recipe = GTRecipeBuilder.ofRaw().duration(WaterPurificationPlantMachine.DURATION).inputFluids(FluidStack.create(WaterPurificationPlantMachine.GradePurifiedWater2, inputCount)).buildRawRecipe();
+        if (recipe.matchRecipe(this).isSuccess()) {
+            return inputCount * 3L;
+        }
+        return 0;
     }
 
     @Override
     public void run() {
-        getRecipeLogic().setupRecipe(GTRecipeBuilder.ofRaw().duration(WaterPurificationPlantMachine.DURATION).inputFluids(FluidStack.create(WaterPurificationPlantMachine.GradePurifiedWater2, inputCount)).buildRawRecipe());
+        getRecipeLogic().setupRecipe(recipe);
     }
 
     @Override

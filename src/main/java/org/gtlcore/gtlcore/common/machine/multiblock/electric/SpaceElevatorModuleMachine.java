@@ -45,6 +45,10 @@ public class SpaceElevatorModuleMachine extends WorkableElectricMultiblockMachin
         return 0;
     }
 
+    private boolean isSuper() {
+        return spaceElevatorMachine instanceof SuperSpaceElevatorMachine;
+    }
+
     @Nullable
     public static GTRecipe recipeModifier(MetaMachine machine, @NotNull GTRecipe recipe, @NotNull OCParams params,
                                           @NotNull OCResult result) {
@@ -55,7 +59,7 @@ public class SpaceElevatorModuleMachine extends WorkableElectricMultiblockMachin
             if (spaceElevatorModuleMachine.SEPMTier && recipe.data.getInt("SEPMTier") > spaceElevatorModuleMachine.spaceElevatorMachine.getCasingTier()) {
                 return null;
             }
-            GTRecipe recipe1 = GTLRecipeModifiers.reduction(machine, recipe, 1, Math.pow(0.8, spaceElevatorModuleMachine.getSpaceElevatorTier() - 1));
+            GTRecipe recipe1 = GTLRecipeModifiers.reduction(machine, recipe, 1, spaceElevatorModuleMachine.getDurationMultiplier());
             if (recipe1 != null) {
                 recipe1 = GTRecipeModifiers.accurateParallel(machine, recipe1, spaceElevatorModuleMachine.getParallel(), false).getFirst();
                 if (recipe1 != null) return RecipeHelper.applyOverclock(OverclockingLogic.NON_PERFECT_OVERCLOCK_SUBTICK, recipe1, spaceElevatorModuleMachine.getOverclockVoltage(), params, result);
@@ -81,11 +85,15 @@ public class SpaceElevatorModuleMachine extends WorkableElectricMultiblockMachin
         if (!this.isFormed) return;
         textList.add(Component.translatable("gtceu.multiblock.parallel", Component.literal(FormattingUtil.formatNumbers(getParallel())).withStyle(ChatFormatting.DARK_PURPLE)).withStyle(ChatFormatting.GRAY));
         textList.add(Component.translatable("gtlcore.machine.space_elevator." + (getSpaceElevatorTier() < 8 ? "not_" : "") + "connected"));
-        textList.add(Component.translatable("gtlcore.machine.duration_multiplier.tooltip", FormattingUtil.formatNumbers(Math.pow(0.8, getSpaceElevatorTier() - 1))));
+        textList.add(Component.translatable("gtlcore.machine.duration_multiplier.tooltip", FormattingUtil.formatNumbers(getDurationMultiplier())));
+    }
+
+    private double getDurationMultiplier() {
+        return Math.sqrt(1D / ((getSpaceElevatorTier() - 1) * (isSuper() ? 2 : 1)));
     }
 
     @Override
     public int getParallel() {
-        return getSpaceElevatorTier() > 7 ? (int) Math.pow(4, spaceElevatorMachine.getCasingTier() - 1) : 0;
+        return getSpaceElevatorTier() > 7 ? (int) Math.pow(isSuper() ? 8 : 4, spaceElevatorMachine.getCasingTier() - 1) : 0;
     }
 }

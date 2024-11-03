@@ -66,6 +66,8 @@ public class ProcessingPlantMachine extends StorageMachine implements IParallelM
             GTRecipeTypes.ORE_WASHER_RECIPES,
             GTRecipeTypes.CHEMICAL_RECIPES,
             GTRecipeTypes.FLUID_SOLIDFICATION_RECIPES,
+            GTRecipeTypes.ARC_FURNACE_RECIPES,
+            GTLRecipeTypes.LIGHTNING_PROCESSOR_RECIPES,
             GTLRecipeTypes.LOOM_RECIPES,
             GTLRecipeTypes.LAMINATOR_RECIPES);
 
