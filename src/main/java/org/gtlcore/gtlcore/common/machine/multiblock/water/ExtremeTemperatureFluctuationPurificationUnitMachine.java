@@ -1,7 +1,5 @@
 package org.gtlcore.gtlcore.common.machine.multiblock.water;
 
-import org.gtlcore.gtlcore.api.machine.multiblock.IWaterPurificationMachine;
-import org.gtlcore.gtlcore.api.machine.multiblock.NoEnergyMultiblockMachine;
 import org.gtlcore.gtlcore.common.data.GTLMaterials;
 import org.gtlcore.gtlcore.common.machine.multiblock.part.SensorPartMachine;
 import org.gtlcore.gtlcore.utils.MachineUtil;
@@ -9,8 +7,6 @@ import org.gtlcore.gtlcore.utils.MachineUtil;
 import com.gregtechceu.gtceu.api.fluids.store.FluidStorageKeys;
 import com.gregtechceu.gtceu.api.machine.IMachineBlockEntity;
 import com.gregtechceu.gtceu.api.machine.feature.multiblock.IMultiPart;
-import com.gregtechceu.gtceu.api.machine.multiblock.WorkableMultiblockMachine;
-import com.gregtechceu.gtceu.api.recipe.GTRecipe;
 import com.gregtechceu.gtceu.common.data.GTMaterials;
 import com.gregtechceu.gtceu.data.recipe.builder.GTRecipeBuilder;
 
@@ -28,10 +24,10 @@ import javax.annotation.ParametersAreNonnullByDefault;
 
 @ParametersAreNonnullByDefault
 @MethodsReturnNonnullByDefault
-public class ExtremeTemperatureFluctuationPurificationUnitMachine extends NoEnergyMultiblockMachine implements IWaterPurificationMachine {
+public class ExtremeTemperatureFluctuationPurificationUnitMachine extends WaterPurificationUnitMachine {
 
     protected static final ManagedFieldHolder MANAGED_FIELD_HOLDER = new ManagedFieldHolder(
-            ExtremeTemperatureFluctuationPurificationUnitMachine.class, NoEnergyMultiblockMachine.MANAGED_FIELD_HOLDER);
+            ExtremeTemperatureFluctuationPurificationUnitMachine.class, WaterPurificationUnitMachine.MANAGED_FIELD_HOLDER);
 
     @Override
     public ManagedFieldHolder getFieldHolder() {
@@ -54,8 +50,6 @@ public class ExtremeTemperatureFluctuationPurificationUnitMachine extends NoEner
 
     @Persisted
     private boolean cycle;
-
-    private GTRecipe recipe;
 
     private SensorPartMachine sensorMachine;
 
@@ -128,25 +122,16 @@ public class ExtremeTemperatureFluctuationPurificationUnitMachine extends NoEner
     }
 
     @Override
-    public long test() {
+    long before() {
+        eut = 0;
         heat = 298;
         chance = 1;
         cycle = false;
         inputCount = (int) Math.min(Integer.MAX_VALUE, MachineUtil.getFluidAmount(this, WaterPurificationPlantMachine.GradePurifiedWater4)[0]);
         recipe = GTRecipeBuilder.ofRaw().duration(WaterPurificationPlantMachine.DURATION).inputFluids(FluidStack.create(WaterPurificationPlantMachine.GradePurifiedWater4, inputCount)).buildRawRecipe();
         if (recipe.matchRecipe(this).isSuccess()) {
-            return inputCount * 5L;
+            eut = inputCount * 5L;
         }
-        return 0;
-    }
-
-    @Override
-    public void run() {
-        getRecipeLogic().setupRecipe(recipe);
-    }
-
-    @Override
-    public WorkableMultiblockMachine getMachine() {
-        return this;
+        return eut;
     }
 }

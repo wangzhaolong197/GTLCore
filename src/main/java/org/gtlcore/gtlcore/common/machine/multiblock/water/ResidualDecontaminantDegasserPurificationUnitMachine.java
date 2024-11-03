@@ -1,6 +1,5 @@
 package org.gtlcore.gtlcore.common.machine.multiblock.water;
 
-import org.gtlcore.gtlcore.api.machine.multiblock.IWaterPurificationMachine;
 import org.gtlcore.gtlcore.api.machine.multiblock.NoEnergyMultiblockMachine;
 import org.gtlcore.gtlcore.common.machine.multiblock.part.IndicatorHatchPartMachine;
 import org.gtlcore.gtlcore.utils.MachineUtil;
@@ -11,8 +10,6 @@ import com.gregtechceu.gtceu.api.capability.recipe.IRecipeHandler;
 import com.gregtechceu.gtceu.api.fluids.store.FluidStorageKeys;
 import com.gregtechceu.gtceu.api.machine.IMachineBlockEntity;
 import com.gregtechceu.gtceu.api.machine.feature.multiblock.IMultiPart;
-import com.gregtechceu.gtceu.api.machine.multiblock.WorkableMultiblockMachine;
-import com.gregtechceu.gtceu.api.recipe.GTRecipe;
 import com.gregtechceu.gtceu.common.data.GTMaterials;
 import com.gregtechceu.gtceu.data.recipe.builder.GTRecipeBuilder;
 
@@ -32,7 +29,7 @@ import javax.annotation.ParametersAreNonnullByDefault;
 
 @ParametersAreNonnullByDefault
 @MethodsReturnNonnullByDefault
-public class ResidualDecontaminantDegasserPurificationUnitMachine extends NoEnergyMultiblockMachine implements IWaterPurificationMachine {
+public class ResidualDecontaminantDegasserPurificationUnitMachine extends WaterPurificationUnitMachine {
 
     protected static final ManagedFieldHolder MANAGED_FIELD_HOLDER = new ManagedFieldHolder(
             ResidualDecontaminantDegasserPurificationUnitMachine.class, NoEnergyMultiblockMachine.MANAGED_FIELD_HOLDER);
@@ -68,8 +65,6 @@ public class ResidualDecontaminantDegasserPurificationUnitMachine extends NoEner
     @Persisted
     @DescSynced
     private FluidStack fluidStack;
-
-    private GTRecipe recipe;
 
     private IndicatorHatchPartMachine indicatorHatchPartMachine;
 
@@ -130,7 +125,8 @@ public class ResidualDecontaminantDegasserPurificationUnitMachine extends NoEner
     }
 
     @Override
-    public long test() {
+    long before() {
+        eut = 0;
         successful = false;
         failed = false;
         indicatorHatchPartMachine.setRedstoneSignalOutput((int) (Math.random() * 15));
@@ -144,18 +140,8 @@ public class ResidualDecontaminantDegasserPurificationUnitMachine extends NoEner
         inputCount = (int) Math.min(Integer.MAX_VALUE, MachineUtil.getFluidAmount(this, WaterPurificationPlantMachine.GradePurifiedWater6)[0]);
         recipe = GTRecipeBuilder.ofRaw().duration(WaterPurificationPlantMachine.DURATION).inputFluids(FluidStack.create(WaterPurificationPlantMachine.GradePurifiedWater6, inputCount)).buildRawRecipe();
         if (recipe.matchRecipe(this).isSuccess()) {
-            return inputCount * 7L;
+            eut = inputCount * 7L;
         }
-        return 0;
-    }
-
-    @Override
-    public void run() {
-        getRecipeLogic().setupRecipe(recipe);
-    }
-
-    @Override
-    public WorkableMultiblockMachine getMachine() {
-        return this;
+        return eut;
     }
 }

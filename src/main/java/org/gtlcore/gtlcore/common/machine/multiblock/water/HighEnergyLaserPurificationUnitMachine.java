@@ -1,7 +1,5 @@
 package org.gtlcore.gtlcore.common.machine.multiblock.water;
 
-import org.gtlcore.gtlcore.api.machine.multiblock.IWaterPurificationMachine;
-import org.gtlcore.gtlcore.api.machine.multiblock.NoEnergyMultiblockMachine;
 import org.gtlcore.gtlcore.api.machine.part.ItemHatchPartMachine;
 import org.gtlcore.gtlcore.common.machine.multiblock.part.IndicatorHatchPartMachine;
 import org.gtlcore.gtlcore.utils.MachineUtil;
@@ -11,8 +9,6 @@ import com.gregtechceu.gtceu.api.data.chemical.material.MarkerMaterials;
 import com.gregtechceu.gtceu.api.data.tag.TagPrefix;
 import com.gregtechceu.gtceu.api.machine.IMachineBlockEntity;
 import com.gregtechceu.gtceu.api.machine.feature.multiblock.IMultiPart;
-import com.gregtechceu.gtceu.api.machine.multiblock.WorkableMultiblockMachine;
-import com.gregtechceu.gtceu.api.recipe.GTRecipe;
 import com.gregtechceu.gtceu.data.recipe.builder.GTRecipeBuilder;
 
 import com.lowdragmc.lowdraglib.side.fluid.FluidStack;
@@ -29,10 +25,10 @@ import javax.annotation.ParametersAreNonnullByDefault;
 
 @ParametersAreNonnullByDefault
 @MethodsReturnNonnullByDefault
-public class HighEnergyLaserPurificationUnitMachine extends NoEnergyMultiblockMachine implements IWaterPurificationMachine {
+public class HighEnergyLaserPurificationUnitMachine extends WaterPurificationUnitMachine {
 
     protected static final ManagedFieldHolder MANAGED_FIELD_HOLDER = new ManagedFieldHolder(
-            HighEnergyLaserPurificationUnitMachine.class, NoEnergyMultiblockMachine.MANAGED_FIELD_HOLDER);
+            HighEnergyLaserPurificationUnitMachine.class, WaterPurificationUnitMachine.MANAGED_FIELD_HOLDER);
 
     @Override
     public ManagedFieldHolder getFieldHolder() {
@@ -68,8 +64,6 @@ public class HighEnergyLaserPurificationUnitMachine extends NoEnergyMultiblockMa
 
     @Persisted
     private int inputCount;
-
-    private GTRecipe recipe;
 
     private IndicatorHatchPartMachine indicatorHatchPartMachine;
     private ItemHatchPartMachine itemHatchPartMachine;
@@ -150,25 +144,16 @@ public class HighEnergyLaserPurificationUnitMachine extends NoEnergyMultiblockMa
     }
 
     @Override
-    public long test() {
+    long before() {
+        eut = 0;
         index = 0;
         chance = 0;
         time = (int) (Math.random() * 4) + 4;
         inputCount = (int) Math.min(Integer.MAX_VALUE, MachineUtil.getFluidAmount(this, WaterPurificationPlantMachine.GradePurifiedWater5)[0]);
         recipe = GTRecipeBuilder.ofRaw().duration(WaterPurificationPlantMachine.DURATION).inputFluids(FluidStack.create(WaterPurificationPlantMachine.GradePurifiedWater5, inputCount)).buildRawRecipe();
         if (recipe.matchRecipe(this).isSuccess()) {
-            return inputCount * 6L;
+            eut = inputCount * 6L;
         }
-        return 0;
-    }
-
-    @Override
-    public void run() {
-        getRecipeLogic().setupRecipe(recipe);
-    }
-
-    @Override
-    public WorkableMultiblockMachine getMachine() {
-        return this;
+        return eut;
     }
 }
