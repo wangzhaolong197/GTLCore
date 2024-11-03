@@ -1,6 +1,7 @@
 package org.gtlcore.gtlcore.common.data;
 
 import org.gtlcore.gtlcore.GTLCore;
+import org.gtlcore.gtlcore.api.machine.SimpleNoEnergyMachine;
 import org.gtlcore.gtlcore.api.machine.multiblock.GTLPartAbility;
 import org.gtlcore.gtlcore.api.machine.multiblock.IParallelMachine;
 import org.gtlcore.gtlcore.api.machine.part.ItemHatchPartMachine;
@@ -11,10 +12,9 @@ import org.gtlcore.gtlcore.common.data.machines.AdvancedMultiBlockMachineA;
 import org.gtlcore.gtlcore.common.data.machines.GTMMachineTooltips;
 import org.gtlcore.gtlcore.common.data.machines.GeneratorMachine;
 import org.gtlcore.gtlcore.common.data.machines.MultiBlockMachineA;
-import org.gtlcore.gtlcore.common.machine.electric.VacuumPumpMachine;
-import org.gtlcore.gtlcore.common.machine.generator.LightningRodMachine;
-import org.gtlcore.gtlcore.common.machine.generator.MagicEnergyMachine;
-import org.gtlcore.gtlcore.common.machine.generator.WindMillTurbineMachine;
+import org.gtlcore.gtlcore.common.machine.electric.*;
+import org.gtlcore.gtlcore.common.machine.generator.*;
+import org.gtlcore.gtlcore.common.machine.magic.*;
 import org.gtlcore.gtlcore.common.machine.multiblock.generator.CombustionEngineMachine;
 import org.gtlcore.gtlcore.common.machine.multiblock.generator.GeneratorArrayMachine;
 import org.gtlcore.gtlcore.common.machine.multiblock.generator.TurbineMachine;
@@ -69,6 +69,7 @@ import com.hepdd.gtmthings.data.WirelessMachines;
 import it.unimi.dsi.fastutil.Pair;
 import it.unimi.dsi.fastutil.ints.Int2LongFunction;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Locale;
 import java.util.function.BiConsumer;
@@ -293,7 +294,7 @@ public class GTLMachines {
                 GTValues.tiersBetween(GTValues.LV, GTValues.OpV));
     }
 
-    public static MachineDefinition[] registerLaserHatch(IO io, int amperage, PartAbility ability) {
+    private static MachineDefinition[] registerLaserHatch(IO io, int amperage, PartAbility ability) {
         String name = io == IO.IN ? "target" : "source";
         return registerTieredMachines(amperage + "a_laser_" + name + "_hatch",
                 (holder, tier) -> new LaserHatchPartMachine(holder, io, tier, amperage), (tier, builder) -> builder
@@ -309,7 +310,7 @@ public class GTLMachines {
                 GTValues.tiersBetween(GTValues.IV, GTValues.MAX));
     }
 
-    public static MachineDefinition[] registerSimpleGenerator(String name, GTRecipeType recipeType, Int2LongFunction tankScalingFunction, int... tiers) {
+    private static MachineDefinition[] registerSimpleGenerator(String name, GTRecipeType recipeType, Int2LongFunction tankScalingFunction, int... tiers) {
         return registerTieredMachines(name,
                 (holder, tier) -> new SimpleGeneratorMachine(holder, tier, 0.1F * tier, tankScalingFunction),
                 (tier, builder) -> builder
@@ -328,17 +329,22 @@ public class GTLMachines {
                 tiers);
     }
 
-    public static MachineDefinition[] registerSimpleMachines(String name,
-                                                             GTRecipeType recipeType,
-                                                             Int2LongFunction tankScalingFunction,
-                                                             int... tiers) {
+    private static MachineDefinition[] registerSimpleMachines(String name, GTRecipeType recipeType,
+                                                              Int2LongFunction tankScalingFunction) {
+        return registerSimpleMachines(name, recipeType, tankScalingFunction, GTMachines.ELECTRIC_TIERS);
+    }
+
+    private static MachineDefinition[] registerSimpleMachines(String name,
+                                                              GTRecipeType recipeType,
+                                                              Int2LongFunction tankScalingFunction,
+                                                              int... tiers) {
         return registerSimpleMachines(name, recipeType, tankScalingFunction, GTLCore.id("block/machines/" + name), tiers);
     }
 
-    public static MachineDefinition[] registerSimpleMachines(String name,
-                                                             GTRecipeType recipeType,
-                                                             Int2LongFunction tankScalingFunction,
-                                                             ResourceLocation workableModel, int... tiers) {
+    private static MachineDefinition[] registerSimpleMachines(String name,
+                                                              GTRecipeType recipeType,
+                                                              Int2LongFunction tankScalingFunction,
+                                                              ResourceLocation workableModel, int... tiers) {
         return registerTieredMachines(name,
                 (holder, tier) -> new SimpleTieredMachine(holder, tier, tankScalingFunction), (tier, builder) -> {
                     builder.recipeModifier(GTRecipeModifiers.ELECTRIC_OVERCLOCK.apply(OverclockingLogic.NON_PERFECT_OVERCLOCK));
@@ -355,15 +361,46 @@ public class GTLMachines {
                 tiers);
     }
 
-    public static MachineDefinition[] registerSimpleMachines(String name, GTRecipeType recipeType,
-                                                             Int2LongFunction tankScalingFunction) {
-        return registerSimpleMachines(name, recipeType, tankScalingFunction, GTMachines.ELECTRIC_TIERS);
+    private static MachineDefinition[] registerSimpleNoEnergyMachines(String name,
+                                                                      GTRecipeType recipeType,
+                                                                      Int2LongFunction tankScalingFunction,
+                                                                      int... tiers) {
+        return registerSimpleNoEnergyMachines(name, recipeType, tankScalingFunction, GTLCore.id("block/machines/" + name), tiers);
     }
 
-    public static MachineDefinition[] registerTieredMachines(String name,
-                                                             BiFunction<IMachineBlockEntity, Integer, MetaMachine> factory,
-                                                             BiFunction<Integer, MachineBuilder<MachineDefinition>, MachineDefinition> builder,
-                                                             int... tiers) {
+    private static MachineDefinition[] registerSimpleNoEnergyMachines(String name,
+                                                                      GTRecipeType recipeType,
+                                                                      Int2LongFunction tankScalingFunction,
+                                                                      ResourceLocation workableModel, int... tiers) {
+        return registerTieredMachines(name,
+                (holder, tier) -> new SimpleNoEnergyMachine(holder, tier, tankScalingFunction), (tier, builder) -> {
+                    builder.recipeModifier((machine, recipe, params, result) -> recipe);
+                    return builder
+                            .langValue("%s %s %s".formatted(GTValues.VLVH[tier], FormattingUtil.toEnglishName(name), GTValues.VLVT[tier]))
+                            .editableUI(SimpleNoEnergyMachine.EDITABLE_UI_CREATOR.apply(GTCEu.id(name), recipeType))
+                            .rotationState(RotationState.NON_Y_AXIS)
+                            .recipeType(recipeType)
+                            .workableTieredHullRenderer(workableModel)
+                            .tooltips(workable(recipeType, tankScalingFunction.apply(tier)))
+                            .register();
+                },
+                tiers);
+    }
+
+    private static Component[] workable(GTRecipeType recipeType, long tankCapacity) {
+        List<Component> tooltipComponents = new ArrayList<>();
+        if (recipeType.getMaxInputs(FluidRecipeCapability.CAP) > 0 ||
+                recipeType.getMaxOutputs(FluidRecipeCapability.CAP) > 0)
+            tooltipComponents
+                    .add(Component.translatable("gtceu.universal.tooltip.fluid_storage_capacity",
+                            FormattingUtil.formatNumbers(tankCapacity)));
+        return tooltipComponents.toArray(Component[]::new);
+    }
+
+    private static MachineDefinition[] registerTieredMachines(String name,
+                                                              BiFunction<IMachineBlockEntity, Integer, MetaMachine> factory,
+                                                              BiFunction<Integer, MachineBuilder<MachineDefinition>, MachineDefinition> builder,
+                                                              int... tiers) {
         return registerMachineDefinitions(name, factory, builder, REGISTRATE, tiers);
     }
 
@@ -378,12 +415,12 @@ public class GTLMachines {
         return definitions;
     }
 
-    public static MachineDefinition[] registerWirelessEnergyHatch(IO io, int amperage, PartAbility ability, int[] tiers) {
+    private static MachineDefinition[] registerWirelessEnergyHatch(IO io, PartAbility ability, int[] tiers) {
         var name = io == IO.IN ? "input" : "output";
-        return registerTieredMachines(amperage + "a_wireless_energy_" + name + "_hatch",
-                (holder, tier) -> new WirelessEnergyHatchPartMachine(holder, tier, io, amperage),
+        return registerTieredMachines(64 + "a_wireless_energy_" + name + "_hatch",
+                (holder, tier) -> new WirelessEnergyHatchPartMachine(holder, tier, io, 64),
                 (tier, builder) -> builder
-                        .langValue(GTValues.VNF[tier] + " " + amperage + "A Wireless" + (io == IO.IN ? " Energy Hatch" : " Dynamo Hatch"))
+                        .langValue(GTValues.VNF[tier] + " " + 64 + "A Wireless" + (io == IO.IN ? " Energy Hatch" : " Dynamo Hatch"))
                         .rotationState(RotationState.ALL)
                         .abilities(ability)
                         .tooltips(Component.translatable("gtmthings.machine.energy_hatch." + name + ".tooltip"), (Component.translatable("gtmthings.machine.wireless_energy_hatch." + name + ".tooltip")))
@@ -393,7 +430,7 @@ public class GTLMachines {
                 tiers);
     }
 
-    public static MachineDefinition[] registerWirelessLaserHatch(IO io, int amperage, PartAbility ability, int[] tiers) {
+    private static MachineDefinition[] registerWirelessLaserHatch(IO io, int amperage, PartAbility ability) {
         var name = io == IO.IN ? "target" : "source";
         return registerTieredMachines(amperage + "a_wireless_laser_" + name + "_hatch",
                 (holder, tier) -> new WirelessEnergyHatchPartMachine(holder, tier, io, amperage),
@@ -405,12 +442,12 @@ public class GTLMachines {
                         .renderer(() -> new OverlayTieredMachineRenderer(tier, GTMThings.id("block/machine/part/wireless_laser_hatch.target")))
                         .compassNode("laser_hatch." + name)
                         .register(),
-                tiers);
+                WirelessMachines.WIRELL_ENERGY_HIGH_TIERS);
     }
 
-    public static Pair<MachineDefinition, MachineDefinition> registerSteamMachines(String name,
-                                                                                   BiFunction<IMachineBlockEntity, Boolean, MetaMachine> factory,
-                                                                                   BiFunction<Boolean, MachineBuilder<MachineDefinition>, MachineDefinition> builder) {
+    private static Pair<MachineDefinition, MachineDefinition> registerSteamMachines(String name,
+                                                                                    BiFunction<IMachineBlockEntity, Boolean, MetaMachine> factory,
+                                                                                    BiFunction<Boolean, MachineBuilder<MachineDefinition>, MachineDefinition> builder) {
         MachineDefinition lowTier = builder.apply(false,
                 REGISTRATE.machine("lp_%s".formatted(name), holder -> factory.apply(holder, false))
                         .langValue("Low Pressure " + FormattingUtil.toEnglishName(name))
@@ -567,15 +604,15 @@ public class GTLMachines {
     public static final MachineDefinition[] LASER_OUTPUT_HATCH_4194304 = registerLaserHatch(IO.OUT, 4194304,
             PartAbility.OUTPUT_LASER);
 
-    public static final MachineDefinition[] WIRELESS_ENERGY_INPUT_HATCH_64A = registerWirelessEnergyHatch(IO.IN, 64, PartAbility.INPUT_ENERGY, GTValues.tiersBetween(GTValues.EV, GTValues.MAX));
-    public static final MachineDefinition[] WIRELESS_ENERGY_OUTPUT_HATCH_64A = registerWirelessEnergyHatch(IO.OUT, 64, PartAbility.OUTPUT_ENERGY, GTValues.tiersBetween(GTValues.EV, GTValues.MAX));
+    public static final MachineDefinition[] WIRELESS_ENERGY_INPUT_HATCH_64A = registerWirelessEnergyHatch(IO.IN, PartAbility.INPUT_ENERGY, GTValues.tiersBetween(GTValues.EV, GTValues.MAX));
+    public static final MachineDefinition[] WIRELESS_ENERGY_OUTPUT_HATCH_64A = registerWirelessEnergyHatch(IO.OUT, PartAbility.OUTPUT_ENERGY, GTValues.tiersBetween(GTValues.EV, GTValues.MAX));
 
-    public static final MachineDefinition[] WIRELESS_ENERGY_INPUT_HATCH_262144A = registerWirelessLaserHatch(IO.IN, 262144, PartAbility.INPUT_LASER, WirelessMachines.WIRELL_ENERGY_HIGH_TIERS);
-    public static final MachineDefinition[] WIRELESS_ENERGY_INPUT_HATCH_1048576A = registerWirelessLaserHatch(IO.IN, 1048576, PartAbility.INPUT_LASER, WirelessMachines.WIRELL_ENERGY_HIGH_TIERS);
-    public static final MachineDefinition[] WIRELESS_ENERGY_INPUT_HATCH_4194304A = registerWirelessLaserHatch(IO.IN, 4194304, PartAbility.INPUT_LASER, WirelessMachines.WIRELL_ENERGY_HIGH_TIERS);
-    public static final MachineDefinition[] WIRELESS_ENERGY_OUTPUT_HATCH_262144A = registerWirelessLaserHatch(IO.OUT, 262144, PartAbility.OUTPUT_LASER, WirelessMachines.WIRELL_ENERGY_HIGH_TIERS);
-    public static final MachineDefinition[] WIRELESS_ENERGY_OUTPUT_HATCH_1048576A = registerWirelessLaserHatch(IO.OUT, 1048576, PartAbility.OUTPUT_LASER, WirelessMachines.WIRELL_ENERGY_HIGH_TIERS);
-    public static final MachineDefinition[] WIRELESS_ENERGY_OUTPUT_HATCH_4194304A = registerWirelessLaserHatch(IO.OUT, 4194304, PartAbility.OUTPUT_LASER, WirelessMachines.WIRELL_ENERGY_HIGH_TIERS);
+    public static final MachineDefinition[] WIRELESS_ENERGY_INPUT_HATCH_262144A = registerWirelessLaserHatch(IO.IN, 262144, PartAbility.INPUT_LASER);
+    public static final MachineDefinition[] WIRELESS_ENERGY_INPUT_HATCH_1048576A = registerWirelessLaserHatch(IO.IN, 1048576, PartAbility.INPUT_LASER);
+    public static final MachineDefinition[] WIRELESS_ENERGY_INPUT_HATCH_4194304A = registerWirelessLaserHatch(IO.IN, 4194304, PartAbility.INPUT_LASER);
+    public static final MachineDefinition[] WIRELESS_ENERGY_OUTPUT_HATCH_262144A = registerWirelessLaserHatch(IO.OUT, 262144, PartAbility.OUTPUT_LASER);
+    public static final MachineDefinition[] WIRELESS_ENERGY_OUTPUT_HATCH_1048576A = registerWirelessLaserHatch(IO.OUT, 1048576, PartAbility.OUTPUT_LASER);
+    public static final MachineDefinition[] WIRELESS_ENERGY_OUTPUT_HATCH_4194304A = registerWirelessLaserHatch(IO.OUT, 4194304, PartAbility.OUTPUT_LASER);
 
     public static final MachineDefinition[] ROTOR_HOLDER = registerTieredMachines("rotor_holder",
             RotorHolderPartMachine::new,
@@ -814,4 +851,42 @@ public class GTLMachines {
             .rotationState(RotationState.ALL)
             .overlayTieredHullRenderer("neutron_sensor")
             .register();
+
+    public static final MachineDefinition[] MAGIC_SYNTHESIS = registerTieredMachines("magic_synthesis", MagicSynthesisMachine::new,
+            (tier, builder) -> builder
+                    .langValue("%s Magic Synthesis %s".formatted(GTValues.VLVH[tier], GTValues.VLVT[tier]))
+                    .rotationState(RotationState.NON_Y_AXIS)
+                    .editableUI(MagicSynthesisMachine.EDITABLE_UI_CREATOR.apply(GTCEu.id("magic_synthesis"), GTLRecipeTypes.MAGIC_SYNTHESIS_RECIPES))
+                    .recipeModifier((machine, recipe, params, result) -> recipe)
+                    .recipeType(GTLRecipeTypes.MAGIC_SYNTHESIS_RECIPES)
+                    .workableTieredHullRenderer(GTLCore.id("block/machines/magic_synthesis"))
+                    .tooltips(workable(GTLRecipeTypes.MAGIC_SYNTHESIS_RECIPES, GTMachines.defaultTankSizeFunction.apply(tier)))
+                    .register(),
+            GTValues.LV);
+
+    public static final MachineDefinition[] CRUCIBLE = registerTieredMachines("crucible", CrucibleMachine::new,
+            (tier, builder) -> builder
+                    .langValue("%s Crucible %s".formatted(GTValues.VLVH[tier], GTValues.VLVT[tier]))
+                    .rotationState(RotationState.NON_Y_AXIS)
+                    .editableUI(CrucibleMachine.EDITABLE_UI_CREATOR.apply(GTCEu.id("crucible"), GTLRecipeTypes.CRUCIBLE_RECIPES))
+                    .recipeModifier((machine, recipe, params, result) -> recipe)
+                    .recipeType(GTLRecipeTypes.CRUCIBLE_RECIPES)
+                    .workableTieredHullRenderer(GTLCore.id("block/machines/crucible"))
+                    .tooltips(workable(GTLRecipeTypes.CRUCIBLE_RECIPES, GTMachines.defaultTankSizeFunction.apply(tier)))
+                    .register(),
+            GTValues.LV);
+
+    public static final MachineDefinition[] ALCHEMICAL_BOILER = registerTieredMachines("alchemical_boiler", AlchemicalBoilerMachine::new,
+            (tier, builder) -> builder
+                    .langValue("%s Alchemical Boiler %s".formatted(GTValues.VLVH[tier], GTValues.VLVT[tier]))
+                    .rotationState(RotationState.NON_Y_AXIS)
+                    .editableUI(AlchemicalBoilerMachine.EDITABLE_UI_CREATOR.apply(GTCEu.id("alchemical_boiler"), GTLRecipeTypes.ALCHEMICAL_BOILER_RECIPES))
+                    .recipeModifier(AlchemicalBoilerMachine::recipeModifier)
+                    .recipeType(GTLRecipeTypes.ALCHEMICAL_BOILER_RECIPES)
+                    .workableTieredHullRenderer(GTLCore.id("block/machines/alchemical_boiler"))
+                    .tooltips(workable(GTLRecipeTypes.ALCHEMICAL_BOILER_RECIPES, GTMachines.defaultTankSizeFunction.apply(tier)))
+                    .register(),
+            GTValues.LV);
+
+    public static final MachineDefinition[] ALCHEMICAL_DISTILLATION = null; // 同理
 }

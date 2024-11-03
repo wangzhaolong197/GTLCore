@@ -94,7 +94,7 @@ public class ExtremeTemperatureFluctuationPurificationUnitMachine extends WaterP
             }
             long helium_plasma = Math.min(10, a[1]);
             if (MachineUtil.inputFluid(this, FluidStack.create(HELIUM_PLASMA, helium_plasma))) {
-                heat += (int) (helium_plasma * (8 + Math.random() * 4));
+                heat += (int) (helium_plasma * (80 + Math.random() * 40));
                 MachineUtil.outputFluid(this, FluidStack.create(HELIUM, helium_plasma));
             }
             if (heat > 125000) {

@@ -3,6 +3,7 @@ package org.gtlcore.gtlcore.common.data;
 import org.gtlcore.gtlcore.common.recipe.RecipeModify;
 import org.gtlcore.gtlcore.config.GTLConfigHolder;
 import org.gtlcore.gtlcore.data.recipe.GenerateDisassembly;
+import org.gtlcore.gtlcore.utils.Registries;
 
 import com.gregtechceu.gtceu.api.GTCEuAPI;
 import com.gregtechceu.gtceu.api.GTValues;
@@ -26,15 +27,14 @@ import net.minecraft.sounds.SoundEvents;
 import net.minecraft.sounds.SoundSource;
 import net.minecraft.world.item.ItemStack;
 
-import java.util.ArrayList;
-import java.util.HashSet;
-import java.util.List;
-import java.util.Set;
+import java.util.*;
 
 import static com.gregtechceu.gtceu.common.data.GTRecipeTypes.*;
 import static com.lowdragmc.lowdraglib.gui.texture.ProgressTexture.FillDirection.LEFT_TO_RIGHT;
 
 public class GTLRecipeTypes {
+
+    public static final String MAGIC = "magic";
 
     public static final Set<String> ALL_RECIPE_TYPE = new HashSet<>();
 
@@ -237,7 +237,10 @@ public class GTLRecipeTypes {
             .addDataInfo(data -> {
                 int temp = data.getInt("ebf_temp");
                 ICoilType requiredCoil = ICoilType.getMinRequiredType(temp);
-                return LocalizationUtils.format("gtceu.recipe.coil.tier", (temp > 21600 && temp <= 32000) ? "超级热容" : I18n.get(requiredCoil.getMaterial().getUnlocalizedName()));
+                if (requiredCoil != null && requiredCoil.getMaterial() != null) {
+                    return LocalizationUtils.format("gtceu.recipe.coil.tier", (temp > 21600 && temp <= 32000) ? "超级热容" : I18n.get(requiredCoil.getMaterial().getUnlocalizedName()));
+                }
+                return "";
             })
             .setUiBuilder((recipe, widgetGroup) -> {
                 List<List<ItemStack>> items = new ArrayList<>();
@@ -437,7 +440,7 @@ public class GTLRecipeTypes {
             .setProgressBar(GuiTextures.PROGRESS_BAR_BATH, LEFT_TO_RIGHT)
             .setSound(GTSoundEntries.COOLING)
             .addDataInfo(data -> LocalizationUtils.format("gtceu.recipe.cleanroom", getFilterCasing(data.getInt("filter_casing"))))
-            .addDataInfo(data -> LocalizationUtils.format("gtlcore.recipe.radioactivity", data.getInt("radioactivity")));
+            .addDataInfo(data -> data.contains("radioactivity") ? LocalizationUtils.format("gtlcore.recipe.radioactivity", data.getInt("radioactivity")) : "");
 
     public static final GTRecipeType PCB_FACTORY_RECIPES = registerRecipeType("pcb_factory", MULTIBLOCK)
             .setEUIO(IO.IN)
@@ -810,50 +813,54 @@ public class GTLRecipeTypes {
                         widgetGroup.getSize().width - 50, widgetGroup.getSize().height - 40, false, false));
             });
 
-    public static final GTRecipeType PHOTOVOLTAIC_POWER = GTRecipeTypes.register("photovoltaic_power", MULTIBLOCK)
+    public static final GTRecipeType PHOTOVOLTAIC_POWER_RECIPES = GTRecipeTypes.register("photovoltaic_power", MULTIBLOCK)
             .setMaxIOSize(1, 0, 0, 0)
             .setEUIO(IO.OUT)
             .setXEIVisible(false)
             .setSlotOverlay(false, false, GuiTextures.SOLIDIFIER_OVERLAY)
             .setProgressBar(GuiTextures.PROGRESS_BAR_ARROW_MULTIPLE, ProgressTexture.FillDirection.LEFT_TO_RIGHT);
 
-    // 魔法合成，九个物品输入有序，九个流体输入，一个物品输出
-    public static final GTRecipeType MAGIC_SYNTHESIS = registerRecipeType("magic_synthesis", MULTIBLOCK)
+    public static final GTRecipeType MAGIC_SYNTHESIS_RECIPES = registerRecipeType("magic_synthesis", MAGIC)
             .setEUIO(IO.NONE)
             .setMaxIOSize(9, 1, 9, 0)
             .setProgressBar(GuiTextures.PROGRESS_BAR_ARROW, LEFT_TO_RIGHT)
             .setSound(GTSoundEntries.FORGE_HAMMER);
 
-    // 坩埚，一个物品输入（通过投掷输入），九个流体输入，一个物品输出（会自动向上投掷）
-    public static final GTRecipeType CRUCIBLE = registerRecipeType("crucible", MULTIBLOCK)
+    public static final GTRecipeType CRUCIBLE_RECIPES = registerRecipeType("crucible", MAGIC)
             .setEUIO(IO.NONE)
-            .setMaxIOSize(1, 1, 9, 0)
+            .setMaxIOSize(0, 0, 9, 0)
             .setProgressBar(GuiTextures.PROGRESS_BAR_ARROW, LEFT_TO_RIGHT)
-            .setSound(GTSoundEntries.FORGE_HAMMER);
+            .setSound(GTSoundEntries.FURNACE)
+            .setUiBuilder((recipe, widgetGroup) -> {
+                List<List<ItemStack>> input_stacks = List.of(List.of(Registries.getItemStack(recipe.data.getString("input"), recipe.data.getInt("input_count"))));
+                widgetGroup.addWidget(new SlotWidget(new CycleItemStackHandler(input_stacks), 0, widgetGroup.getSize().width - 40, widgetGroup.getSize().height - 100, false, false));
+                List<List<ItemStack>> output_stacks = List.of(List.of(Registries.getItemStack(recipe.data.getString("output"), recipe.data.getInt("output_count"))));
+                widgetGroup.addWidget(new SlotWidget(new CycleItemStackHandler(output_stacks), 0, widgetGroup.getSize().width - 40, widgetGroup.getSize().height - 60, false, false));
+            });
 
     // 炼金锅炉，一个燃料输入，可使用普通熔炉燃料，使用源动之焰（8000t）并加速*2，使用炼狱之火（4000000t）并加速*16并行*16，使用炽焱之脉（2000000000t）并加速*64并行*64，一个物品输入，一个流体输入，一个流体输出
-    public static final GTRecipeType ALCHEMICAL_BOILER = registerRecipeType("alchemical_boiler", MULTIBLOCK)
+    public static final GTRecipeType ALCHEMICAL_BOILER_RECIPES = registerRecipeType("alchemical_boiler", MAGIC)
             .setEUIO(IO.NONE)
             .setMaxIOSize(2, 0, 1, 1)
             .setProgressBar(GuiTextures.PROGRESS_BAR_ARROW, LEFT_TO_RIGHT)
-            .setSound(GTSoundEntries.FORGE_HAMMER);
+            .setSound(GTSoundEntries.FURNACE);
 
     // 炼金蒸馏，一个燃料输入，可使用普通熔炉燃料，使用源动之焰（8000t）并加速*2，使用炼狱之火（4000000t）并加速*16并行*16，使用炽焱之脉（2000000000t）并加速*64并行*64，一个流体输入，一个物品输出，一个流体输出
-    public static final GTRecipeType ALCHEMICAL_DISTILLATION = registerRecipeType("alchemical_distillation", MULTIBLOCK)
+    public static final GTRecipeType ALCHEMICAL_DISTILLATION_RECIPES = registerRecipeType("alchemical_distillation", MAGIC)
             .setEUIO(IO.NONE)
             .setMaxIOSize(1, 1, 1, 1)
             .setProgressBar(GuiTextures.PROGRESS_BAR_ARROW, LEFT_TO_RIGHT)
             .setSound(GTSoundEntries.FORGE_HAMMER);
 
     // 暗珠启辉
-    public static final GTRecipeType DARK_PEARL_QIHUI = registerRecipeType("dark_pearl_qihui", MULTIBLOCK)
+    public static final GTRecipeType DARK_PEARL_QIHUI_RECIPES = registerRecipeType("dark_pearl_qihui", MAGIC)
             .setEUIO(IO.NONE)
             .setMaxIOSize(1, 1, 0, 0)
             .setProgressBar(GuiTextures.PROGRESS_BAR_ARROW, LEFT_TO_RIGHT)
             .setSound(GTSoundEntries.FORGE_HAMMER);
 
     // 注魔仪式
-    public static final GTRecipeType INFUSION_RITUAL = registerRecipeType("infusion_ritual", MULTIBLOCK)
+    public static final GTRecipeType INFUSION_RITUAL_RECIPES = registerRecipeType("infusion_ritual", MAGIC)
             .setEUIO(IO.NONE)
             .setMaxIOSize(16, 1, 8, 1)
             .setProgressBar(GuiTextures.PROGRESS_BAR_ARROW, LEFT_TO_RIGHT)
@@ -862,7 +869,7 @@ public class GTLRecipeTypes {
     // 陨星仪式
     // 搓了个方法GTLEBallGeneration不知道怎么调用
     // 配方结束时触发这个方法，想在配方里面传入会生成的方块和权重，不知道怎么写
-    public static final GTRecipeType FALLING_STAR_CEREMONY = registerRecipeType("falling_star_ceremony", MULTIBLOCK)
+    public static final GTRecipeType FALLING_STAR_CEREMONY_RECIPES = registerRecipeType("falling_star_ceremony", MAGIC)
             .setEUIO(IO.NONE)
             .setMaxIOSize(1, 1, 1, 1)
             .setProgressBar(GuiTextures.PROGRESS_BAR_ARROW, LEFT_TO_RIGHT)

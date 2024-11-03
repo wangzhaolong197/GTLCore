@@ -54,7 +54,7 @@ public class MiscRecipe {
                 'T', GLASS_TUBE.asStack(),
                 'W', new UnificationEntry(wireGtSingle, Copper));
 
-        PHOTOVOLTAIC_POWER.recipeBuilder(GTLCore.id("a"))
+        PHOTOVOLTAIC_POWER_RECIPES.recipeBuilder(GTLCore.id("a"))
                 .circuitMeta(1)
                 .duration(20)
                 .save(provider);

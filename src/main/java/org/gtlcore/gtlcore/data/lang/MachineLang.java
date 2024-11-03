@@ -241,7 +241,7 @@ public class MachineLang {
         provider.add("gtlcore.machine.extreme_temperature_fluctuation_purification_unit_4.tooltip", "For each completed heating cycle, success rate increases by §433%§r.");
         provider.add("gtlcore.machine.extreme_temperature_fluctuation_purification_unit_5.tooltip", "If the temperature reaches §612500K§r, the recipe will fail and output §bSupercritical Steam§r.");
         provider.add("gtlcore.machine.extreme_temperature_fluctuation_purification_unit_6.tooltip", "Consumes up to §610mB§r of §bHelium Plasma§r and §6100mB§r of §bLiquid Helium§r per second.");
-        provider.add("gtlcore.machine.extreme_temperature_fluctuation_purification_unit_7.tooltip", "Each consumption of 1mB §bHelium Plasma§r raises the temperature by §68-120K§r.");
+        provider.add("gtlcore.machine.extreme_temperature_fluctuation_purification_unit_7.tooltip", "Each consumption of 1mB §bHelium Plasma§r raises the temperature by §680-120K§r.");
         provider.add("gtlcore.machine.extreme_temperature_fluctuation_purification_unit_8.tooltip", "Each consumption of 1mB §bLiquid Helium§r lowers the temperature by §64-6K§r.");
         provider.add("gtlcore.machine.extreme_temperature_fluctuation_purification_unit_9.tooltip", "----------------------------------------------------------------");
         provider.add("gtlcore.machine.extreme_temperature_fluctuation_purification_unit_a.tooltip", "§a§oThe fifth step of water purification evaporates complex organic polymers and extreme microorganisms that may resist simple acids, clarifiers, and filters.");

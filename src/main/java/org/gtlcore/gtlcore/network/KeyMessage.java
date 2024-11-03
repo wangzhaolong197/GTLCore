@@ -140,7 +140,7 @@ public class KeyMessage {
             float speed = itemStack.getTag().getCompound("GT.Tool").getFloat("ToolSpeed");
             float newSpeed = adjustToolSpeed(speed, value);
             itemStack.getTag().getCompound("GT.Tool").putFloat("ToolSpeed", newSpeed);
-            player.displayClientMessage(Component.translatable("gtlcore.speed", newSpeed), true);
+            player.displayClientMessage(Component.translatable("jade.horseStat.speed", newSpeed), true);
         }
     }
 

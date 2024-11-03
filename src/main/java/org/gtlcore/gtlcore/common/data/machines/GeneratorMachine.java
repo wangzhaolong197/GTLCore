@@ -47,7 +47,7 @@ public class GeneratorMachine {
         return REGISTRATE.multiblock(name + "_photovoltaic_power_station", holder -> new PhotovoltaicPowerStationMachine(holder, basicRate))
                 .rotationState(RotationState.NON_Y_AXIS)
                 .generator(true)
-                .recipeType(GTLRecipeTypes.PHOTOVOLTAIC_POWER)
+                .recipeType(GTLRecipeTypes.PHOTOVOLTAIC_POWER_RECIPES)
                 .tooltips(Component.translatable("gtlcore.machine.photovoltaic_power_station.tooltip.0"))
                 .tooltips(Component.translatable("gtlcore.machine.photovoltaic_power_station.tooltip.1"))
                 .recipeModifier(PhotovoltaicPowerStationMachine::recipeModifier)

@@ -16,10 +16,6 @@ public class GTLMaterialFlags {
     public static final MaterialFlag DISABLE_ORE_PROCESS = new MaterialFlag.Builder("disable_ore_process")
             .build();
 
-    public static final MaterialFlag DISABLE_RAW_ORE = new MaterialFlag.Builder("disable_raw_ore")
-            .requireFlags(DISABLE_ORE_PROCESS)
-            .build();
-
     public static final MaterialFlag DISABLE_CRUSHED = new MaterialFlag.Builder("disable_crushed")
             .requireFlags(DISABLE_ORE_PROCESS)
             .build();
@@ -38,5 +34,9 @@ public class GTLMaterialFlags {
 
     public static final MaterialFlag DISABLE_DUST_PURE = new MaterialFlag.Builder("disable_dust_pure")
             .requireFlags(DISABLE_ORE_PROCESS)
+            .build();
+
+    public static final MaterialFlag DISABLE_ALL_ORE_DUST = new MaterialFlag.Builder("disable_all_ore_dust")
+            .requireFlags(DISABLE_CRUSHED, DISABLE_CRUSHED_PURIFIED, DISABLE_CRUSHED_REFINED, DISABLE_DUST_IMPURE, DISABLE_DUST_PURE)
             .build();
 }

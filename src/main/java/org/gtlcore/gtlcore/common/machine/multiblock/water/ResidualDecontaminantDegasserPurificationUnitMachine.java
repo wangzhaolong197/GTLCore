@@ -104,12 +104,12 @@ public class ResidualDecontaminantDegasserPurificationUnitMachine extends WaterP
             for (IRecipeHandler<?> handler : Objects.requireNonNullElseGet(getCapabilitiesProxy().get(IO.IN, FluidRecipeCapability.CAP), Collections::<IRecipeHandler<?>>emptyList)) {
                 for (Object contents : handler.getContents()) {
                     if (contents instanceof FluidStack stack && stack.getAmount() > 0) {
-                        MachineUtil.inputFluid(this, stack);
                         if (!fluidStack.isEmpty() && fluidStack.getFluid() == stack.getFluid() && fluidStack.getAmount() <= stack.getAmount()) {
                             successful = true;
                         } else {
                             failed = true;
                         }
+                        MachineUtil.inputFluid(this, stack);
                     }
                 }
             }

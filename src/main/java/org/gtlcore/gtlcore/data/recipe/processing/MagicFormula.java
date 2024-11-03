@@ -1,12 +1,12 @@
 package org.gtlcore.gtlcore.data.recipe.processing;
 
-import net.minecraft.tags.ItemTags;
 import org.gtlcore.gtlcore.GTLCore;
 
 import com.gregtechceu.gtceu.api.data.chemical.material.Material;
 import com.gregtechceu.gtceu.api.fluids.store.FluidStorageKeys;
 
 import net.minecraft.data.recipes.FinishedRecipe;
+import net.minecraft.tags.ItemTags;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 
@@ -61,13 +61,13 @@ public class MagicFormula {
         for (int i = 0; i < 16; i++) {
             Material MagicStone = SomeMagicStones[i];
 
-            DARK_PEARL_QIHUI.recipeBuilder(GTLCore.id("anzhu_qihui_rawore_" + i))
+            DARK_PEARL_QIHUI_RECIPES.recipeBuilder(GTLCore.id("anzhu_qihui_rawore_" + i))
                     .inputItems(rawOre, MagicStone, 2)
                     .chancedOutput(magiccrystal, MagicStone, 1, 1000, 0)
                     .duration(SomeMagicStonetime[i])
                     .save(provider);
 
-            DARK_PEARL_QIHUI.recipeBuilder(GTLCore.id("anzhu_qihui_ore_" + i))
+            DARK_PEARL_QIHUI_RECIPES.recipeBuilder(GTLCore.id("anzhu_qihui_ore_" + i))
                     .inputItems(ore, MagicStone, 1)
                     .chancedOutput(magiccrystal, MagicStone, 1, 1000, 0)
                     .duration(SomeMagicStonetime[i])
@@ -76,7 +76,7 @@ public class MagicFormula {
         for (int i = 0; i < 20; i++) {
             Material MagicStone = SomeMagicStones[i];
 
-            DARK_PEARL_QIHUI.recipeBuilder(GTLCore.id("anzhu_qihui_gemexquisite_" + i))
+            DARK_PEARL_QIHUI_RECIPES.recipeBuilder(GTLCore.id("anzhu_qihui_gemexquisite_" + i))
                     .inputItems(gemExquisite, MagicStone, 1)
                     .chancedOutput(magiccrystal, MagicStone, 1, 8000, 0)
                     .duration(SomeMagicStonetime[i])
@@ -95,14 +95,14 @@ public class MagicFormula {
             Material MagicStone = SomeMagicStones[i];
             Material MagicStonesTurbid = SomeMagicStonesTurbid[i - 4];
 
-            ALCHEMICAL_BOILER.recipeBuilder(GTLCore.id("mixer_turbid_" + i))
+            ALCHEMICAL_BOILER_RECIPES.recipeBuilder(GTLCore.id("mixer_turbid_" + i))
                     .inputItems(dust, MagicStone, 1)
                     .inputFluids(HydrochloricAcid.getFluid(1000))
                     .outputFluids(MagicStonesTurbid.getFluid(1000))
                     .duration(SomeMagicStonetime[i])
                     .save(provider);
 
-            ALCHEMICAL_DISTILLATION.recipeBuilder(GTLCore.id("distillery_turbid_" + i))
+            ALCHEMICAL_DISTILLATION_RECIPES.recipeBuilder(GTLCore.id("distillery_turbid_" + i))
                     .inputFluids(MagicStonesTurbid.getFluid(100))
                     .outputFluids(DilutedHydrochloricAcid.getFluid(80))
                     .outputFluids(MagicSource.getFluid(SomeMagicSourcNumber[i - 4]))
@@ -121,14 +121,14 @@ public class MagicFormula {
                 TwoResidue = ARCANE_RESIDUE;
             }
 
-            ALCHEMICAL_BOILER.recipeBuilder(GTLCore.id("mixer_turbid_" + i))
+            ALCHEMICAL_BOILER_RECIPES.recipeBuilder(GTLCore.id("mixer_turbid_" + i))
                     .inputItems(dust, MagicStone, 1)
                     .inputFluids(HydrochloricAcid.getFluid(1000))
                     .outputFluids(MagicStonesTurbid.getFluid(1000))
                     .duration(SomeMagicStonetime[i])
                     .save(provider);
 
-            ALCHEMICAL_DISTILLATION.recipeBuilder(GTLCore.id("distillery_turbid_" + i))
+            ALCHEMICAL_DISTILLATION_RECIPES.recipeBuilder(GTLCore.id("distillery_turbid_" + i))
                     .inputFluids(MagicStonesTurbid.getFluid(100))
                     .outputFluids(DilutedHydrochloricAcid.getFluid(80))
                     .outputFluids(MagicSources.getFluid(10))
@@ -192,10 +192,10 @@ public class MagicFormula {
         /// 魔法第一阶段
         {
             CHEMICAL_BATH_RECIPES.recipeBuilder(GTLCore.id("magic_phase_1"))
-                    .inputItems(ItemTags.LOGS,1)
-                    .inputItems(dust,LowGuideMagic,4)
+                    .inputItems(ItemTags.LOGS, 1)
+                    .inputItems(dust, LowGuideMagic, 4)
                     .inputFluids(SeedOil.getFluid(500))
-                    .outputItems(DIPPING_STICKS,1)
+                    .outputItems(DIPPING_STICKS, 1)
                     .duration(16)
                     .EUt(VA[LV])
                     .save(provider);
@@ -238,7 +238,7 @@ public class MagicFormula {
                     .EUt(VA[HV])
                     .save(provider);
 
-            DARK_PEARL_QIHUI.recipeBuilder(GTLCore.id("anzhu_qihui_brightlargepiecemagiccrystal"))
+            DARK_PEARL_QIHUI_RECIPES.recipeBuilder(GTLCore.id("anzhu_qihui_brightlargepiecemagiccrystal"))
                     .inputItems(CONCENTRATED_MAGIC_ESSENCE_CRYSTAL, 1)
                     .outputItems(BRIGHT_LARGE_PIECE_OF_MAGIC_CRYSTAL, 1)
                     .duration(2000)
@@ -314,7 +314,7 @@ public class MagicFormula {
 
         /// 注魔祭坛
         {
-            INFUSION_RITUAL.recipeBuilder(GTLCore.id("infusion_1"))
+            INFUSION_RITUAL_RECIPES.recipeBuilder(GTLCore.id("infusion_1"))
                     .inputItems(SATURATED_ARCANE_SIEVE, 1)
                     .chancedOutput(new ItemStack(ARCANE_RESIDUE, 1), 2000, 0)
                     .duration(100)

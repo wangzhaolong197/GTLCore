@@ -52,7 +52,6 @@ public class LangHandler {
         provider.add("gtlcore.fly_speed_reset", "fly Speed Reset");
         provider.add("gtlcore.fly_speed", "fly Speed x%s");
         provider.add("gtlcore.reach_limit", "Reach Limit");
-        provider.add("gtlcore.speed", "Speed: %s");
 
         provider.add("config.gtlcore.option.cellType", "AE Disk Storage Type Multiplier");
         provider.add("config.gtlcore.option.disableDrift", "Disable Flight Inertia");

@@ -19,7 +19,6 @@ import com.lowdragmc.lowdraglib.misc.ItemStackTransfer;
 import net.minecraft.core.BlockPos;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
-import net.minecraft.world.item.crafting.Ingredient;
 
 import org.jetbrains.annotations.NotNull;
 
@@ -50,8 +49,7 @@ public class AdvancedAssemblyLineMachine extends WorkableElectricMultiblockMachi
                     }
                 }
                 if (itemSet.size() != 1) return null;
-                Ingredient recipeStack = ItemRecipeCapability.CAP.of(recipeInputs.get(i).content);
-                if (!recipeStack.test(stack)) return null;
+                if (!ItemRecipeCapability.CAP.of(recipeInputs.get(i).content).test(stack)) return null;
             }
             GTRecipe recipe1 = GTRecipeModifiers.hatchParallel(machine, recipe, false, params, result);
             if (recipe1 == null) return null;
