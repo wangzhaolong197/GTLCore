@@ -62,7 +62,7 @@ public abstract class RecyclingRecipesMixin {
 
         int voltageMultiplier = calculateVoltageMultiplier(components);
 
-        if (prefix == TagPrefix.ingot || prefix == TagPrefix.gem) {
+        if (prefix != null && prefix != TagPrefix.dust) {
             registerMaceratorRecycling(provider, input, components, voltageMultiplier);
         }
         if (prefix == TagPrefix.ingot || prefix == TagPrefix.dust) {

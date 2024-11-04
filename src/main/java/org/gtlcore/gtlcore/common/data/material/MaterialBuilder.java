@@ -278,7 +278,7 @@ public class MaterialBuilder {
                 .color(0xf3d5d7)
                 .components(Zirconium, 1, Oxygen, 2)
                 .iconSet(EMERALD)
-                .flags(GENERATE_PLATE)
+                .flags(GENERATE_PLATE, NO_SMASHING, NO_SMELTING, EXCLUDE_BLOCK_CRAFTING_BY_HAND_RECIPES)
                 .buildAndRegister();
 
         MagnetoResonatic = builderMaterial("magneto_resonatic")

@@ -66,14 +66,14 @@ public class GTLPredicates {
             if (type.getMaxInputs(EURecipeCapability.CAP) > 0) {
                 predicate = predicate.or(Predicates.abilities(PartAbility.INPUT_ENERGY)
                         .setMaxGlobalLimited(2).setPreviewCount(1))
-                        .or(Predicates.abilities(PartAbility.INPUT_LASER))
-                        .setMaxGlobalLimited(1).setPreviewCount(1);
+                        .or(Predicates.abilities(PartAbility.INPUT_LASER)
+                                .setMaxGlobalLimited(1).setPreviewCount(1));
                 break;
             } else if (type.getMaxOutputs(EURecipeCapability.CAP) > 0) {
                 predicate = predicate.or(Predicates.abilities(PartAbility.OUTPUT_ENERGY)
                         .setMaxGlobalLimited(2).setPreviewCount(1))
-                        .or(Predicates.abilities(PartAbility.OUTPUT_LASER))
-                        .setMaxGlobalLimited(1).setPreviewCount(1);
+                        .or(Predicates.abilities(PartAbility.OUTPUT_LASER)
+                                .setMaxGlobalLimited(1).setPreviewCount(1));
                 break;
             }
         }
