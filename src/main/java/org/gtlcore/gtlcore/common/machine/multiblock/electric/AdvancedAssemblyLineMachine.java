@@ -8,7 +8,6 @@ import com.gregtechceu.gtceu.api.pattern.util.RelativeDirection;
 import com.gregtechceu.gtceu.api.recipe.GTRecipe;
 import com.gregtechceu.gtceu.api.recipe.OverclockingLogic;
 import com.gregtechceu.gtceu.api.recipe.RecipeHelper;
-import com.gregtechceu.gtceu.api.recipe.content.Content;
 import com.gregtechceu.gtceu.api.recipe.logic.OCParams;
 import com.gregtechceu.gtceu.api.recipe.logic.OCResult;
 import com.gregtechceu.gtceu.common.data.GTRecipeModifiers;
@@ -19,6 +18,7 @@ import com.lowdragmc.lowdraglib.misc.ItemStackTransfer;
 import net.minecraft.core.BlockPos;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.item.crafting.Ingredient;
 
 import org.jetbrains.annotations.NotNull;
 
@@ -35,9 +35,25 @@ public class AdvancedAssemblyLineMachine extends WorkableElectricMultiblockMachi
 
     public static GTRecipe recipeModifier(MetaMachine machine, @NotNull GTRecipe recipe, OCParams params, OCResult result) {
         if (machine instanceof AdvancedAssemblyLineMachine lineMachine) {
-            List<Content> recipeInputs = recipe.inputs.get(ItemRecipeCapability.CAP);
-            if (lineMachine.itemStackTransfers.size() < recipeInputs.size()) return null;
-            for (int i = 0; i < recipeInputs.size(); i++) {
+            Ingredient[] recipeIngredients = recipe.inputs.get(ItemRecipeCapability.CAP).stream().map(i -> ItemRecipeCapability.CAP.of(i.getContent())).toArray(Ingredient[]::new);
+            int size = recipeIngredients.length;
+            if (lineMachine.itemStackTransfers.size() < size) return null;
+            Ingredient[] matchIngredients = new Ingredient[size];
+            ItemStack recipeStack = recipeIngredients[0].getItems()[0];
+            matchIngredients[0] = recipeIngredients[0];
+            for (int i = 1; i < size; i++) {
+                Ingredient currentIngredient = recipeIngredients[i];
+                if (currentIngredient.test(recipeStack)) {
+                    matchIngredients[i - 1] = Ingredient.EMPTY;
+                    matchIngredients[i] = Ingredient.EMPTY;
+                } else {
+                    matchIngredients[i] = currentIngredient;
+                }
+                recipeStack = currentIngredient.getItems()[0];
+            }
+            for (int i = 0; i < size; i++) {
+                Ingredient currentIngredient = matchIngredients[i];
+                if (currentIngredient.isEmpty()) continue;
                 ItemStackTransfer storage = lineMachine.itemStackTransfers.get(i);
                 Set<Item> itemSet = new HashSet<>();
                 ItemStack stack = ItemStack.EMPTY;
@@ -49,7 +65,7 @@ public class AdvancedAssemblyLineMachine extends WorkableElectricMultiblockMachi
                     }
                 }
                 if (itemSet.size() != 1) return null;
-                if (!ItemRecipeCapability.CAP.of(recipeInputs.get(i).content).test(stack)) return null;
+                if (!currentIngredient.test(stack)) return null;
             }
             GTRecipe recipe1 = GTRecipeModifiers.hatchParallel(machine, recipe, false, params, result);
             if (recipe1 == null) return null;

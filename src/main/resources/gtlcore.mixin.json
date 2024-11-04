@@ -19,6 +19,8 @@
         "adastra.VehicleItemMixin",
         "ae2.BasicCellInventoryMixin",
         "ae2.CPUSelectionListMixin",
+        "ae2.MixinGenericSlotCapacities",
+        "ae2.MixinGenericStackInv",
         "ae2.PortableCellItemMixin",
         "ae2.TooltipsMixin",
         "ae2.gui.PatternEncodingTermMenuMixin",
