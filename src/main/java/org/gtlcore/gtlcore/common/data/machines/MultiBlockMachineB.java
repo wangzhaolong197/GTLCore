@@ -920,7 +920,7 @@ public class MultiBlockMachineB {
                     .where("I", Predicates.blocks(Registries.getBlock("gtceu:high_power_casing")))
                     .where("J", Predicates.blocks(GTLBlocks.SPACE_ELEVATOR_MECHANICAL_CASING.get()))
                     .where("K", Predicates.blocks(Registries.getBlock("gtceu:neutronium_frame")))
-                    .where("M", GTLPredicates.createTierPredicate(GTLBlocks.sepmmap, "SEPMTier"))
+                    .where("M", GTLPredicates.POWER_MODULE)
                     .where("N", Predicates.blocks(GTLBlocks.POWER_CORE.get()))
                     .where("X", Predicates.blocks(GTLBlocks.SPACE_ELEVATOR_MECHANICAL_CASING.get())
                             .or(Predicates.abilities(PartAbility.INPUT_ENERGY).setExactLimit(1))

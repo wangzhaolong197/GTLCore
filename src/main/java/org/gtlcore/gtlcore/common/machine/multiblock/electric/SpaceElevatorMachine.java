@@ -35,7 +35,7 @@ public class SpaceElevatorMachine extends TierCasingMachine {
             SpaceElevatorMachine.class, TierCasingMachine.MANAGED_FIELD_HOLDER);
 
     public SpaceElevatorMachine(IMachineBlockEntity holder) {
-        super(holder, "SEPMTier");
+        super(holder, "power_module_tier");
     }
 
     @Override

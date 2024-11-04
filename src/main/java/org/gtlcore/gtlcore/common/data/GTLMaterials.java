@@ -729,6 +729,7 @@ public class GTLMaterials {
     public static Material PiranhaSolution;
     public static Material PolyAluminiumChloride;
     public static Material FlocculationWasteSolution;
+    public static Material ChromaticGlass;
 
     public static Material SamariumRefinedPowder;
     public static Material SamariumRrareEearthTurbidLiquid;

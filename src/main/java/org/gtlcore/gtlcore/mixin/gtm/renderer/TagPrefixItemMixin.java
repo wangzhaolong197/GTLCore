@@ -1,4 +1,4 @@
-package org.gtlcore.gtlcore.mixin.gtm;
+package org.gtlcore.gtlcore.mixin.gtm.renderer;
 
 import org.gtlcore.gtlcore.api.data.chemical.material.info.GTLMaterialIconSet;
 
@@ -21,18 +21,14 @@ import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 
-@Mixin(value = TagPrefixItem.class, remap = false)
-public class TagPrefixItemMixin extends Item implements IItemRendererProvider {
+@Mixin(TagPrefixItem.class)
+public class TagPrefixItemMixin implements IItemRendererProvider {
 
     @Unique
     private ICustomRenderer gtlcore$customRenderer;
 
-    private TagPrefixItemMixin(Properties properties) {
-        super(properties);
-    }
-
-    @Inject(method = "<init>(Lnet/minecraft/world/item/Item$Properties;Lcom/gregtechceu/gtceu/api/data/tag/TagPrefix;Lcom/gregtechceu/gtceu/api/data/chemical/material/Material;)V", at = @At(value = "RETURN"))
-    private void TagPrefixItem(Properties properties, TagPrefix tagPrefix, Material material, CallbackInfo ci) {
+    @Inject(method = "<init>(Lnet/minecraft/world/item/Item$Properties;Lcom/gregtechceu/gtceu/api/data/tag/TagPrefix;Lcom/gregtechceu/gtceu/api/data/chemical/material/Material;)V", at = @At(value = "RETURN"), remap = false)
+    private void TagPrefixItem(Item.Properties properties, TagPrefix tagPrefix, Material material, CallbackInfo ci) {
         if (Platform.isClient()) {
             if (material.getMaterialIconSet() instanceof GTLMaterialIconSet iconSet) {
                 this.gtlcore$customRenderer = iconSet.getCustomRenderer();

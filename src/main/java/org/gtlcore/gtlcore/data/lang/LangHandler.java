@@ -135,7 +135,7 @@ public class LangHandler {
         provider.add("tagprefix.titanstone", "Titan %s Ore");
         provider.add("tagprefix.venus_stone", "Venus %s Ore");
 
-        provider.add("gtlcore.recipe.ca_tier", "Casing Tier: %s");
+        provider.add("gtlcore.tier.component_assembly_line_casing_tier", "Casing Tier: %s");
         provider.add("gtlcore.recipe.ev_max", "Maximum Neutron Energy: %s MeV");
         provider.add("gtlcore.recipe.ev_min", "Minimum Neutron Energy: %s MeV");
         provider.add("gtlcore.recipe.evt", "Energy Consumption per Tick: %s KeV");
@@ -144,15 +144,14 @@ public class LangHandler {
         provider.add("gtlcore.recipe.law_cleanroom.display_name", "Absolute Clean Room");
         provider.add("gtlcore.recipe.nano_forge_tier", "Nano Forge Tier: %s");
         provider.add("gtlcore.recipe.radioactivity", "Radiation Dose: %s Sv");
-        provider.add("gtlcore.recipe.sepm_tier", "Required Power Module: MK%s");
-        provider.add("gtlcore.recipe.stellar_containment_tier", "Stellar Container Tier: %s");
+        provider.add("gtlcore.tier.power_module_tier", "Power Module Tier: %s");
+        provider.add("gtlcore.tier.stellar_containment_tier", "Stellar Container Tier: %s");
         provider.add("gtlcore.recipe.vacuum.tier", "Vacuum Tier: %s");
         provider.add("gtlcore.registry.modify", "Modified by GregTech Leisure");
         provider.add("gtlcore.tier.advanced", "Advanced");
         provider.add("gtlcore.tier.base", "Basic");
         provider.add("gtlcore.tier.ultimate", "Ultimate");
         provider.add("gtlcore.universal.tooltip.ampere_out", "§bOutput Current: §r%sA");
-        provider.add("gtlcore.casings.tier", "Tier: %s");
         provider.add("gtlcore.condition.gravity", "Requires Strong Gravity Environment");
         provider.add("gtlcore.condition.zero_gravity", "Requires Zero Gravity Environment");
     }

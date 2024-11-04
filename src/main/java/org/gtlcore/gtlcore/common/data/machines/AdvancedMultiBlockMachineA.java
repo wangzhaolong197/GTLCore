@@ -1366,7 +1366,7 @@ public class AdvancedMultiBlockMachineA {
                     .where("E", Predicates.blocks(ChemicalHelper.getBlock(TagPrefix.frameGt, GTMaterials.Neutronium)))
                     .where("F", Predicates.blocks(GTLBlocks.MODULE_BASE.get()))
                     .where("G", Predicates.blocks(GTLBlocks.HIGH_STRENGTH_CONCRETE.get()).or(Predicates.blocks(GTLBlocks.MODULE_CONNECTOR.get()).setPreviewCount(1)))
-                    .where("H", GTLPredicates.createTierPredicate(GTLBlocks.sepmmap, "SEPMTier"))
+                    .where("H", GTLPredicates.POWER_MODULE)
                     .where("I", Predicates.air())
                     .where("J", Predicates.blocks(GTLBlocks.POWER_CORE.get()))
                     .where("X", Predicates.blocks(GTLBlocks.SPACE_ELEVATOR_MECHANICAL_CASING.get())

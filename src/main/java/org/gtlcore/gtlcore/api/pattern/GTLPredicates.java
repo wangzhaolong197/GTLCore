@@ -2,6 +2,7 @@ package org.gtlcore.gtlcore.api.pattern;
 
 import org.gtlcore.gtlcore.api.pattern.util.IValueContainer;
 import org.gtlcore.gtlcore.api.pattern.util.SimpleValueContainer;
+import org.gtlcore.gtlcore.common.data.GTLBlocks;
 
 import com.gregtechceu.gtceu.api.block.MetaMachineBlock;
 import com.gregtechceu.gtceu.api.capability.recipe.EURecipeCapability;
@@ -31,27 +32,11 @@ import java.util.function.Supplier;
 
 public class GTLPredicates {
 
-    public static TraceabilityPredicate autoLaserAbilities(GTRecipeType... recipeType) {
-        TraceabilityPredicate predicate = Predicates.autoAbilities(recipeType, false, false, true, true, true, true);
-        for (GTRecipeType type : recipeType) {
-            if (type.getMaxInputs(EURecipeCapability.CAP) > 0) {
-                predicate = predicate.or(Predicates.abilities(PartAbility.INPUT_ENERGY)
-                        .setMaxGlobalLimited(2).setPreviewCount(1))
-                        .or(Predicates.abilities(PartAbility.INPUT_LASER))
-                        .setMaxGlobalLimited(1).setPreviewCount(1);
-                break;
-            } else if (type.getMaxOutputs(EURecipeCapability.CAP) > 0) {
-                predicate = predicate.or(Predicates.abilities(PartAbility.OUTPUT_ENERGY)
-                        .setMaxGlobalLimited(2).setPreviewCount(1))
-                        .or(Predicates.abilities(PartAbility.OUTPUT_LASER))
-                        .setMaxGlobalLimited(1).setPreviewCount(1);
-                break;
-            }
-        }
-        return predicate;
-    }
+    public static final TraceabilityPredicate STELLAR_CONTAINMENT = createTierPredicate(GTLBlocks.SCMAP, "stellar_containment_tier");
+    public static final TraceabilityPredicate POWER_MODULE = createTierPredicate(GTLBlocks.SEPMMAP, "power_module_tier");
+    public static final TraceabilityPredicate COMPONENT_ASSEMBLY_LINE_CASING = createTierPredicate(GTLBlocks.CALMAP, "component_assembly_line_casing_tier");
 
-    public static TraceabilityPredicate createTierPredicate(Map<Integer, Supplier<?>> map, String tierType) {
+    private static TraceabilityPredicate createTierPredicate(Map<Integer, Supplier<?>> map, String tierType) {
         BlockInfo[] blockInfos = new BlockInfo[map.size()];
         int index = 0;
         for (Supplier<?> blockSupplier : map.values()) {
@@ -73,6 +58,26 @@ public class GTLPredicates {
             }
             return false;
         }, () -> blockInfos).addTooltips(Component.translatable("gtlcore.machine.pattern.error.tier"));
+    }
+
+    public static TraceabilityPredicate autoLaserAbilities(GTRecipeType... recipeType) {
+        TraceabilityPredicate predicate = Predicates.autoAbilities(recipeType, false, false, true, true, true, true);
+        for (GTRecipeType type : recipeType) {
+            if (type.getMaxInputs(EURecipeCapability.CAP) > 0) {
+                predicate = predicate.or(Predicates.abilities(PartAbility.INPUT_ENERGY)
+                        .setMaxGlobalLimited(2).setPreviewCount(1))
+                        .or(Predicates.abilities(PartAbility.INPUT_LASER))
+                        .setMaxGlobalLimited(1).setPreviewCount(1);
+                break;
+            } else if (type.getMaxOutputs(EURecipeCapability.CAP) > 0) {
+                predicate = predicate.or(Predicates.abilities(PartAbility.OUTPUT_ENERGY)
+                        .setMaxGlobalLimited(2).setPreviewCount(1))
+                        .or(Predicates.abilities(PartAbility.OUTPUT_LASER))
+                        .setMaxGlobalLimited(1).setPreviewCount(1);
+                break;
+            }
+        }
+        return predicate;
     }
 
     public static TraceabilityPredicate countBlock(String name, Block... blocks) {

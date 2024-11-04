@@ -11,40 +11,46 @@ import lombok.Getter;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import javax.annotation.ParametersAreNonnullByDefault;
 
+@Getter
 @ParametersAreNonnullByDefault
 @MethodsReturnNonnullByDefault
 public class TierCasingMachine extends WorkableElectricMultiblockMachine {
 
-    private final String tierType;
+    private final Map<String, Integer> casingTiers = new HashMap<>();
 
-    @Getter
-    private int casingTier = 0;
-
-    public TierCasingMachine(IMachineBlockEntity holder, String tierType, Object... args) {
-        super(holder, args);
-        this.tierType = tierType;
+    public TierCasingMachine(IMachineBlockEntity holder, String... tierTypes) {
+        super(holder);
+        for (String type : tierTypes) {
+            casingTiers.put(type, 0);
+        }
     }
 
     @Override
     public void onStructureFormed() {
         super.onStructureFormed();
-        casingTier = getMultiblockState().getMatchContext().get(tierType);
+        casingTiers.replaceAll((t, v) -> getMultiblockState().getMatchContext().get(t));
     }
 
     @Override
     public void onStructureInvalid() {
         super.onStructureInvalid();
-        casingTier = 0;
+        casingTiers.replaceAll((t, v) -> 0);
     }
 
     @Override
     public boolean beforeWorking(@Nullable GTRecipe recipe) {
-        if (recipe != null && recipe.data.contains(tierType) && recipe.data.getInt(tierType) > casingTier) {
-            return false;
+        if (recipe != null && !recipe.data.contains("no_inspection")) {
+            for (String type : casingTiers.keySet()) {
+                if (recipe.data.contains(type) && recipe.data.getInt(type) > casingTiers.get(type)) {
+                    return false;
+                }
+            }
         }
         return super.beforeWorking(recipe);
     }
@@ -53,6 +59,8 @@ public class TierCasingMachine extends WorkableElectricMultiblockMachine {
     public void addDisplayText(@NotNull List<Component> textList) {
         super.addDisplayText(textList);
         if (!this.isFormed) return;
-        textList.add(Component.translatable("gtlcore.casings.tier", casingTier));
+        for (String type : casingTiers.keySet()) {
+            textList.add(Component.translatable("gtlcore.tier." + type, casingTiers.get(type)));
+        }
     }
 }

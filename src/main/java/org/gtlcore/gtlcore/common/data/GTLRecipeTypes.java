@@ -193,26 +193,25 @@ public class GTLRecipeTypes {
             .setProgressBar(GuiTextures.PROGRESS_BAR_ARROW, LEFT_TO_RIGHT)
             .setXEIVisible(false);
 
-    public static String getSCTier(int tier) {
-        return switch (tier) {
-            case 3 -> I18n.get("gtlcore.tier.ultimate");
-            case 2 -> I18n.get("gtlcore.tier.advanced");
-            default -> I18n.get("gtlcore.tier.base");
-        };
-    }
-
     public static final GTRecipeType STELLAR_FORGE_RECIPES = registerRecipeType("stellar_forge", MULTIBLOCK)
             .setEUIO(IO.IN)
             .setMaxIOSize(3, 2, 9, 2)
             .setProgressBar(GuiTextures.PROGRESS_BAR_ARC_FURNACE, LEFT_TO_RIGHT)
             .setSound(GTSoundEntries.ARC)
-            .addDataInfo(data -> LocalizationUtils.format("gtlcore.recipe.stellar_containment_tier", getSCTier(data.getInt("SCTier"))));
+            .addDataInfo(data -> {
+                String tierString = switch (data.getInt("stellar_containment_tier")) {
+                    case 3 -> I18n.get("gtlcore.tier.ultimate");
+                    case 2 -> I18n.get("gtlcore.tier.advanced");
+                    default -> I18n.get("gtlcore.tier.base");
+                };
+                return LocalizationUtils.format("gtlcore.tier.stellar_containment_tier", tierString);
+            });
 
     public static final GTRecipeType COMPONENT_ASSEMBLY_LINE_RECIPES = registerRecipeType("component_assembly_line", MULTIBLOCK)
             .setMaxIOSize(9, 1, 9, 0)
             .setEUIO(IO.IN)
             .setProgressBar(GuiTextures.PROGRESS_BAR_ARROW, LEFT_TO_RIGHT)
-            .addDataInfo(data -> LocalizationUtils.format("gtlcore.recipe.ca_tier", GTValues.VN[data.getInt("CATier")]))
+            .addDataInfo(data -> LocalizationUtils.format("gtlcore.tier.component_assembly_line_casing_tier", GTValues.VN[data.getInt("component_assembly_line_casing_tier")]))
             .setSound(GTSoundEntries.ASSEMBLER);
 
     public static final GTRecipeType SLAUGHTERHOUSE_RECIPES = registerRecipeType("slaughterhouse", MULTIBLOCK)
@@ -397,7 +396,7 @@ public class GTLRecipeTypes {
             .setProgressBar(GuiTextures.PROGRESS_BAR_ARROW, LEFT_TO_RIGHT)
             .setSound(GTSoundEntries.ASSEMBLER)
             .onRecipeBuild(GenerateDisassembly::generateDisassembly)
-            .addDataInfo(data -> LocalizationUtils.format("gtlcore.recipe.sepm_tier", FormattingUtil.formatNumbers(data.getInt("SEPMTier"))));
+            .addDataInfo(data -> LocalizationUtils.format("gtlcore.tier.power_module_tier", FormattingUtil.formatNumbers(data.getInt("power_module_tier"))));
 
     public static final GTRecipeType MINER_MODULE_RECIPES = registerRecipeType("miner_module", MULTIBLOCK)
             .setEUIO(IO.IN)
@@ -424,22 +423,19 @@ public class GTLRecipeTypes {
             .setSound(GTSoundEntries.ARC)
             .setXEIVisible(false);
 
-    private static String getFilterCasing(int tier) {
-        if (tier == 3) {
-            return "T3：" + I18n.get("block.gtlcore.law_filter_casing");
-        }
-        if (tier == 2) {
-            return "T2：" + I18n.get("block.gtceu.sterilizing_filter_casing");
-        }
-        return "T1：" + I18n.get("block.gtceu.filter_casing");
-    }
-
     public static final GTRecipeType INCUBATOR_RECIPES = registerRecipeType("incubator", MULTIBLOCK)
             .setEUIO(IO.IN)
             .setMaxIOSize(6, 1, 2, 1)
             .setProgressBar(GuiTextures.PROGRESS_BAR_BATH, LEFT_TO_RIGHT)
             .setSound(GTSoundEntries.COOLING)
-            .addDataInfo(data -> LocalizationUtils.format("gtceu.recipe.cleanroom", getFilterCasing(data.getInt("filter_casing"))))
+            .addDataInfo(data -> {
+                String filterCasing = switch (data.getInt("filter_casing")) {
+                    case 3 -> "T3：" + I18n.get("block.gtlcore.law_filter_casing");
+                    case 2 -> "T2：" + I18n.get("block.gtceu.sterilizing_filter_casing");
+                    default -> "T1：" + I18n.get("block.gtceu.filter_casing");
+                };
+                return LocalizationUtils.format("gtceu.recipe.cleanroom", filterCasing);
+            })
             .addDataInfo(data -> data.contains("radioactivity") ? LocalizationUtils.format("gtlcore.recipe.radioactivity", data.getInt("radioactivity")) : "");
 
     public static final GTRecipeType PCB_FACTORY_RECIPES = registerRecipeType("pcb_factory", MULTIBLOCK)
@@ -659,19 +655,12 @@ public class GTLRecipeTypes {
             })
             .setSound(GTSoundEntries.ARC);
 
-    private static String getGrindball(int tier) {
-        if (tier == 2) {
-            return I18n.get("material.gtceu.aluminium");
-        }
-        return I18n.get("material.gtceu.soapstone");
-    }
-
     public static final GTRecipeType ISA_MILL_RECIPES = registerRecipeType("isa_mill", MULTIBLOCK)
             .setMaxIOSize(2, 1, 1, 0)
             .setEUIO(IO.IN)
             .setProgressBar(GuiTextures.PROGRESS_BAR_ARROW, LEFT_TO_RIGHT)
             .setSound(GTSoundEntries.MACERATOR)
-            .addDataInfo(data -> LocalizationUtils.format("gtlcore.recipe.grindball", getGrindball(data.getInt("grindball"))));
+            .addDataInfo(data -> LocalizationUtils.format("gtlcore.recipe.grindball", I18n.get(data.getInt("grindball") == 2 ? "material.gtceu.aluminium" : "material.gtceu.soapstone")));
 
     public static final GTRecipeType FLOTATING_BENEFICIATION_RECIPES = registerRecipeType("flotating_beneficiation", MULTIBLOCK)
             .setMaxIOSize(2, 0, 1, 1)

@@ -12,11 +12,12 @@ import net.minecraft.world.item.Item;
 import com.tterrag.registrate.util.entry.RegistryEntry;
 
 import java.util.*;
+import java.util.function.Supplier;
 
 public class Tooltips {
 
     public static final Map<Item, String[]> TOOL_TIPS_MAP = new HashMap<>();
-    public static final Map<Item, String> FLICKER_TOOL_TIPS_MAP = new HashMap<>();
+    public static final Map<Item, Supplier<String>> FLICKER_TOOL_TIPS_MAP = new HashMap<>();
     public static final Set<Item> suprachronalCircuitSet = new HashSet<>();
     public static final Set<Item> magnetoresonaticcircuitSet = new HashSet<>();
 
@@ -66,30 +67,28 @@ public class Tooltips {
         TOOL_TIPS_MAP.put(GTLItems.BIOWARE_MAINFRAME.get(), new String[] { "§7Network of microbial consciousness" });
         TOOL_TIPS_MAP.put(GTLItems.BIOWARE_PROCESSOR.get(), new String[] { "§7Viscous organic slurry adheres to the surface" });
         TOOL_TIPS_MAP.put(GTLBlocks.QUANTUM_GLASS.asItem(), new String[] { "Dense but Transparent", "§bGlass & Elegance" });
-    }
 
-    public static void updateTooltipMap() {
-        FLICKER_TOOL_TIPS_MAP.put(GTLItems.CREATE_ULTIMATE_BATTERY.get(), "§2" + I18n.get("gtlcore.casings.tier", "-" + StringUtil.white_blue(I18n.get("gtlcore.tooltip.unknown"))));
-        FLICKER_TOOL_TIPS_MAP.put(GTLItems.SUPRACHRONAL_MAINFRAME_COMPLEX.get(), "§2" + I18n.get("gtlcore.casings.tier", "-" + StringUtil.white_blue(I18n.get("gtlcore.tooltip.unknown"))));
-        FLICKER_TOOL_TIPS_MAP.put(GTLItems.SUPRACAUSAL_MAINFRAME.get(), StringUtil.full_color(I18n.get("gtlcore.tooltip.item.tier_circuit", "MAX")));
-        FLICKER_TOOL_TIPS_MAP.put(GTLItems.SUPRACAUSAL_COMPUTER.get(), StringUtil.full_color(I18n.get("gtlcore.tooltip.item.tier_circuit", "OpV")));
-        FLICKER_TOOL_TIPS_MAP.put(GTLItems.SUPRACAUSAL_ASSEMBLY.get(), StringUtil.full_color(I18n.get("gtlcore.tooltip.item.tier_circuit", "UXV")));
-        FLICKER_TOOL_TIPS_MAP.put(GTLItems.SUPRACAUSAL_PROCESSOR.get(), StringUtil.full_color(I18n.get("gtlcore.tooltip.item.tier_circuit", "UIV")));
-        FLICKER_TOOL_TIPS_MAP.put(GTLItems.COSMIC_ASSEMBLY.get(), StringUtil.dark_purplish_red(I18n.get("gtlcore.tooltip.item.tier_circuit", "UIV")));
-        FLICKER_TOOL_TIPS_MAP.put(GTLItems.COSMIC_COMPUTER.get(), StringUtil.dark_purplish_red(I18n.get("gtlcore.tooltip.item.tier_circuit", "UXV")));
-        FLICKER_TOOL_TIPS_MAP.put(GTLItems.COSMIC_MAINFRAME.get(), StringUtil.dark_purplish_red(I18n.get("gtlcore.tooltip.item.tier_circuit", "OpV")));
-        FLICKER_TOOL_TIPS_MAP.put(GTLItems.COSMIC_PROCESSOR.get(), StringUtil.dark_purplish_red(I18n.get("gtlcore.tooltip.item.tier_circuit", "UEV")));
-        FLICKER_TOOL_TIPS_MAP.put(GTLItems.EXOTIC_ASSEMBLY.get(), StringUtil.purplish_red(I18n.get("gtlcore.tooltip.item.tier_circuit", "UEV")));
-        FLICKER_TOOL_TIPS_MAP.put(GTLItems.EXOTIC_COMPUTER.get(), StringUtil.purplish_red(I18n.get("gtlcore.tooltip.item.tier_circuit", "UIV")));
-        FLICKER_TOOL_TIPS_MAP.put(GTLItems.EXOTIC_MAINFRAME.get(), StringUtil.purplish_red(I18n.get("gtlcore.tooltip.item.tier_circuit", "UXV")));
-        FLICKER_TOOL_TIPS_MAP.put(GTLItems.EXOTIC_PROCESSOR.get(), StringUtil.purplish_red(I18n.get("gtlcore.tooltip.item.tier_circuit", "UHV")));
-        FLICKER_TOOL_TIPS_MAP.put(GTLItems.OPTICAL_ASSEMBLY.get(), StringUtil.golden(I18n.get("gtlcore.tooltip.item.tier_circuit", "UHV")));
-        FLICKER_TOOL_TIPS_MAP.put(GTLItems.OPTICAL_COMPUTER.get(), StringUtil.golden(I18n.get("gtlcore.tooltip.item.tier_circuit", "UEV")));
-        FLICKER_TOOL_TIPS_MAP.put(GTLItems.OPTICAL_MAINFRAME.get(), StringUtil.golden(I18n.get("gtlcore.tooltip.item.tier_circuit", "UIV")));
-        FLICKER_TOOL_TIPS_MAP.put(GTLItems.OPTICAL_PROCESSOR.get(), StringUtil.golden(I18n.get("gtlcore.tooltip.item.tier_circuit", "UV")));
-        FLICKER_TOOL_TIPS_MAP.put(GTLItems.BIOWARE_ASSEMBLY.get(), StringUtil.dark_green(I18n.get("gtlcore.tooltip.item.tier_circuit", "UV")));
-        FLICKER_TOOL_TIPS_MAP.put(GTLItems.BIOWARE_COMPUTER.get(), StringUtil.dark_green(I18n.get("gtlcore.tooltip.item.tier_circuit", "UHV")));
-        FLICKER_TOOL_TIPS_MAP.put(GTLItems.BIOWARE_MAINFRAME.get(), StringUtil.dark_green(I18n.get("gtlcore.tooltip.item.tier_circuit", "UEV")));
-        FLICKER_TOOL_TIPS_MAP.put(GTLItems.BIOWARE_PROCESSOR.get(), StringUtil.dark_green(I18n.get("gtlcore.tooltip.item.tier_circuit", "ZPM")));
+        FLICKER_TOOL_TIPS_MAP.put(GTLItems.CREATE_ULTIMATE_BATTERY.get(), () -> "§2" + I18n.get("tooltip.avaritia.tier", "-" + StringUtil.white_blue(I18n.get("gtlcore.tooltip.unknown"))));
+        FLICKER_TOOL_TIPS_MAP.put(GTLItems.SUPRACHRONAL_MAINFRAME_COMPLEX.get(), () -> "§2" + I18n.get("tooltip.avaritia.tier", "-" + StringUtil.white_blue(I18n.get("gtlcore.tooltip.unknown"))));
+        FLICKER_TOOL_TIPS_MAP.put(GTLItems.SUPRACAUSAL_MAINFRAME.get(), () -> StringUtil.full_color(I18n.get("gtlcore.tooltip.item.tier_circuit", "MAX")));
+        FLICKER_TOOL_TIPS_MAP.put(GTLItems.SUPRACAUSAL_COMPUTER.get(), () -> StringUtil.full_color(I18n.get("gtlcore.tooltip.item.tier_circuit", "OpV")));
+        FLICKER_TOOL_TIPS_MAP.put(GTLItems.SUPRACAUSAL_ASSEMBLY.get(), () -> StringUtil.full_color(I18n.get("gtlcore.tooltip.item.tier_circuit", "UXV")));
+        FLICKER_TOOL_TIPS_MAP.put(GTLItems.SUPRACAUSAL_PROCESSOR.get(), () -> StringUtil.full_color(I18n.get("gtlcore.tooltip.item.tier_circuit", "UIV")));
+        FLICKER_TOOL_TIPS_MAP.put(GTLItems.COSMIC_ASSEMBLY.get(), () -> StringUtil.dark_purplish_red(I18n.get("gtlcore.tooltip.item.tier_circuit", "UIV")));
+        FLICKER_TOOL_TIPS_MAP.put(GTLItems.COSMIC_COMPUTER.get(), () -> StringUtil.dark_purplish_red(I18n.get("gtlcore.tooltip.item.tier_circuit", "UXV")));
+        FLICKER_TOOL_TIPS_MAP.put(GTLItems.COSMIC_MAINFRAME.get(), () -> StringUtil.dark_purplish_red(I18n.get("gtlcore.tooltip.item.tier_circuit", "OpV")));
+        FLICKER_TOOL_TIPS_MAP.put(GTLItems.COSMIC_PROCESSOR.get(), () -> StringUtil.dark_purplish_red(I18n.get("gtlcore.tooltip.item.tier_circuit", "UEV")));
+        FLICKER_TOOL_TIPS_MAP.put(GTLItems.EXOTIC_ASSEMBLY.get(), () -> StringUtil.purplish_red(I18n.get("gtlcore.tooltip.item.tier_circuit", "UEV")));
+        FLICKER_TOOL_TIPS_MAP.put(GTLItems.EXOTIC_COMPUTER.get(), () -> StringUtil.purplish_red(I18n.get("gtlcore.tooltip.item.tier_circuit", "UIV")));
+        FLICKER_TOOL_TIPS_MAP.put(GTLItems.EXOTIC_MAINFRAME.get(), () -> StringUtil.purplish_red(I18n.get("gtlcore.tooltip.item.tier_circuit", "UXV")));
+        FLICKER_TOOL_TIPS_MAP.put(GTLItems.EXOTIC_PROCESSOR.get(), () -> StringUtil.purplish_red(I18n.get("gtlcore.tooltip.item.tier_circuit", "UHV")));
+        FLICKER_TOOL_TIPS_MAP.put(GTLItems.OPTICAL_ASSEMBLY.get(), () -> StringUtil.golden(I18n.get("gtlcore.tooltip.item.tier_circuit", "UHV")));
+        FLICKER_TOOL_TIPS_MAP.put(GTLItems.OPTICAL_COMPUTER.get(), () -> StringUtil.golden(I18n.get("gtlcore.tooltip.item.tier_circuit", "UEV")));
+        FLICKER_TOOL_TIPS_MAP.put(GTLItems.OPTICAL_MAINFRAME.get(), () -> StringUtil.golden(I18n.get("gtlcore.tooltip.item.tier_circuit", "UIV")));
+        FLICKER_TOOL_TIPS_MAP.put(GTLItems.OPTICAL_PROCESSOR.get(), () -> StringUtil.golden(I18n.get("gtlcore.tooltip.item.tier_circuit", "UV")));
+        FLICKER_TOOL_TIPS_MAP.put(GTLItems.BIOWARE_ASSEMBLY.get(), () -> StringUtil.dark_green(I18n.get("gtlcore.tooltip.item.tier_circuit", "UV")));
+        FLICKER_TOOL_TIPS_MAP.put(GTLItems.BIOWARE_COMPUTER.get(), () -> StringUtil.dark_green(I18n.get("gtlcore.tooltip.item.tier_circuit", "UHV")));
+        FLICKER_TOOL_TIPS_MAP.put(GTLItems.BIOWARE_MAINFRAME.get(), () -> StringUtil.dark_green(I18n.get("gtlcore.tooltip.item.tier_circuit", "UEV")));
+        FLICKER_TOOL_TIPS_MAP.put(GTLItems.BIOWARE_PROCESSOR.get(), () -> StringUtil.dark_green(I18n.get("gtlcore.tooltip.item.tier_circuit", "ZPM")));
     }
 }

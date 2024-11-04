@@ -6,11 +6,11 @@
     "client": [
         "ae2.client.BuiltInModelHooksAccessor",
         "ae2.client.ModelBakeryMixin",
-        "gtm.TagPrefixItemRendererMixin",
         "gtm.gui.AEFluidConfigSlotWidgetMixin",
         "gtm.gui.PatternPreviewWidgetMixin",
         "gtm.gui.ProspectingMapWidgetMixin",
         "gtm.gui.ProspectingTextureMixin",
+        "gtm.renderer.TagPrefixItemRendererMixin",
         "mc.ClientRecipeBookMixin"
     ],
     "mixins": [
@@ -34,10 +34,10 @@
         "ftbu.YouCantBreakAE2Mixin",
         "gtm.CWURecipeCapabilityMixin",
         "gtm.FluidPipeTypeMixin",
+        "gtm.MaterialMixin",
         "gtm.MultiblockInfoCategoryMixin",
         "gtm.OverclockingLogicMixin",
         "gtm.RockBreakerConditionMixin",
-        "gtm.TagPrefixItemMixin",
         "gtm.TagPrefixMixin",
         "gtm.cover.ConveyorCoverMixin",
         "gtm.cover.InfiniteWaterCoverMixin",
@@ -79,6 +79,7 @@
         "gtm.registry.GTDimensionMarkersMixin",
         "gtm.registry.GTMachinesMixin",
         "gtm.registry.GTRecipeBuilderMixin",
+        "gtm.renderer.TagPrefixItemMixin",
         "gtmt.WirelessEnergyReceiveCoverMixin",
         "mc.CursedInternalSlotMixin",
         "mc.RecipeBookMixin",

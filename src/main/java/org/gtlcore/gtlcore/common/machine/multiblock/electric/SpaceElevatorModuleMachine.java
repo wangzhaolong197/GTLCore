@@ -31,11 +31,11 @@ public class SpaceElevatorModuleMachine extends WorkableElectricMultiblockMachin
 
     SpaceElevatorMachine spaceElevatorMachine = null;
 
-    private final boolean SEPMTier;
+    private final boolean power_module_tier;
 
-    public SpaceElevatorModuleMachine(IMachineBlockEntity holder, boolean SEPMTier, Object... args) {
+    public SpaceElevatorModuleMachine(IMachineBlockEntity holder, boolean power_module_tier, Object... args) {
         super(holder, args);
-        this.SEPMTier = SEPMTier;
+        this.power_module_tier = power_module_tier;
     }
 
     private int getSpaceElevatorTier() {
@@ -56,7 +56,7 @@ public class SpaceElevatorModuleMachine extends WorkableElectricMultiblockMachin
             if (spaceElevatorModuleMachine.getSpaceElevatorTier() < 8) {
                 return null;
             }
-            if (spaceElevatorModuleMachine.SEPMTier && recipe.data.getInt("SEPMTier") > spaceElevatorModuleMachine.spaceElevatorMachine.getCasingTier()) {
+            if (spaceElevatorModuleMachine.power_module_tier && recipe.data.getInt("power_module_tier") > spaceElevatorModuleMachine.spaceElevatorMachine.getCasingTiers().get("power_module_tier")) {
                 return null;
             }
             GTRecipe recipe1 = GTLRecipeModifiers.reduction(machine, recipe, 1, spaceElevatorModuleMachine.getDurationMultiplier());
@@ -94,6 +94,6 @@ public class SpaceElevatorModuleMachine extends WorkableElectricMultiblockMachin
 
     @Override
     public int getParallel() {
-        return getSpaceElevatorTier() > 7 ? (int) Math.pow(isSuper() ? 8 : 4, spaceElevatorMachine.getCasingTier() - 1) : 0;
+        return getSpaceElevatorTier() > 7 ? (int) Math.pow(isSuper() ? 8 : 4, spaceElevatorMachine.getCasingTiers().get("power_module_tier") - 1) : 0;
     }
 }

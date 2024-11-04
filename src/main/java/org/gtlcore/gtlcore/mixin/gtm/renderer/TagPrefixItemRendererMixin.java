@@ -1,4 +1,4 @@
-package org.gtlcore.gtlcore.mixin.gtm;
+package org.gtlcore.gtlcore.mixin.gtm.renderer;
 
 import com.gregtechceu.gtceu.api.data.chemical.material.info.MaterialIconSet;
 import com.gregtechceu.gtceu.api.data.chemical.material.info.MaterialIconType;

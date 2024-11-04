@@ -713,6 +713,33 @@ public class MaterialBuilder {
                 .iconSet(BRIGHT)
                 .buildAndRegister();
 
+        HexaphaseCopper = builderMaterial("hexaphasecopper")
+                .ingot()
+                .fluid()
+                .plasma()
+                .color(0xec7916)
+                .element(GTLElements.HEXAPHASECOPPER)
+                .blastTemp(75000, HIGHER)
+                .iconSet(METALLIC)
+                .flags(GTLMaterialFlags.GENERATE_NANOSWARM, GENERATE_ROTOR, GENERATE_FRAME, GENERATE_GEAR, GENERATE_SMALL_GEAR, GENERATE_LONG_ROD)
+                .buildAndRegister();
+
+        Mercury194 = builderMaterial("mercury194")
+                .dust()
+                .element(GTLElements.MERCURY194)
+                .color(0xb3b1b5)
+                .iconSet(BRIGHT)
+                .buildAndRegister();
+
+        ChromaticGlass = builderMaterial("chromatic_glass")
+                .ingot()
+                .fluid()
+                .plasma()
+                .element(GTLElements.CHROMATICGLASS)
+                .flags(GENERATE_LENS)
+                .iconSet(GLASS)
+                .buildAndRegister();
+
         Enderite = builderMaterial("enderite")
                 .ingot()
                 .fluid()
@@ -2404,7 +2431,7 @@ public class MaterialBuilder {
         HighEnergyQuarkGluon = builderMaterial("high_energy_quark_gluon")
                 .plasma()
                 .color(0x7400ce)
-                .element(GTLElements.HEAVY_QUARK_ENRICHED_MIXTURE)
+                .element(GTLElements.HIGH_ENERGY_QUARK_GLUON)
                 .iconSet(BRIGHT)
                 .buildAndRegister();
 
@@ -5970,25 +5997,6 @@ public class MaterialBuilder {
                 .fluid()
                 .color(0x008000)
                 .iconSet(GTLMaterialIconSet.LIMPID)
-                .buildAndRegister();
-
-        HexaphaseCopper = builderMaterial("hexaphasecopper")
-                .ingot()
-                .fluid()
-                .plasma()
-                .ore()
-                .element(GTLElements.HEXAPHASECOPPER)
-                .blastTemp(75000, HIGHER)
-                .color(0xec7916)
-                .iconSet(METALLIC)
-                .flags(GTLMaterialFlags.GENERATE_NANOSWARM, GENERATE_ROTOR, GENERATE_FRAME, GENERATE_GEAR, GENERATE_SMALL_GEAR, GENERATE_LONG_ROD)
-                .buildAndRegister();
-
-        Mercury194 = builderMaterial("mercury194")
-                .dust()
-                .element(GTLElements.MERCURY194)
-                .color(0xb3b1b5)
-                .iconSet(BRIGHT)
                 .buildAndRegister();
 
         FluorosulfuricAcid = builderMaterial("fluorosulfuric_acid")

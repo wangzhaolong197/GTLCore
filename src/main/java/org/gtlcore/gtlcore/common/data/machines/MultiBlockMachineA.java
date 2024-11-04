@@ -2313,7 +2313,7 @@ public class MultiBlockMachineA {
                     GTCEu.id("block/multiblock/implosion_compressor"))
             .register();
 
-    public final static MultiblockMachineDefinition STELLAR_FORGE = REGISTRATE.multiblock("stellar_forge", (holder) -> new TierCasingMachine(holder, "SCTier"))
+    public final static MultiblockMachineDefinition STELLAR_FORGE = REGISTRATE.multiblock("stellar_forge", (holder) -> new TierCasingMachine(holder, "stellar_containment_tier"))
             .rotationState(RotationState.NON_Y_AXIS)
             .allowExtendedFacing(false)
             .recipeType(GTLRecipeTypes.STELLAR_FORGE_RECIPES)
@@ -2344,13 +2344,13 @@ public class MultiBlockMachineA {
                             .or(Predicates.autoAbilities(definition.getRecipeTypes()))
                             .or(Predicates.abilities(PartAbility.MAINTENANCE).setExactLimit(1)))
                     .where("c", Predicates.blocks(GTBlocks.FUSION_COIL.get()))
-                    .where("d", GTLPredicates.createTierPredicate(GTLBlocks.scmap, "SCTier"))
+                    .where("d", GTLPredicates.STELLAR_CONTAINMENT)
                     .where(" ", Predicates.any())
                     .build())
             .workableCasingRenderer(GTCEu.id("block/casings/gcym/atomic_casing"), GTCEu.id("block/multiblock/electric_blast_furnace"))
             .register();
 
-    public final static MultiblockMachineDefinition COMPONENT_ASSEMBLY_LINE = REGISTRATE.multiblock("component_assembly_line", (holder) -> new TierCasingMachine(holder, "CATier"))
+    public final static MultiblockMachineDefinition COMPONENT_ASSEMBLY_LINE = REGISTRATE.multiblock("component_assembly_line", (holder) -> new TierCasingMachine(holder, "component_assembly_line_casing_tier"))
             .rotationState(RotationState.ALL)
             .recipeType(GTLRecipeTypes.COMPONENT_ASSEMBLY_LINE_RECIPES)
             .tooltips(Component.translatable("gtlcore.machine.laser.tooltip"))
@@ -2411,7 +2411,7 @@ public class MultiBlockMachineA {
                             .or(Predicates.abilities(PartAbility.INPUT_LASER).setMaxGlobalLimited(1)))
                     .where("I", Predicates.blocks(ChemicalHelper.getBlock(TagPrefix.frameGt, GTLMaterials.HastelloyN)))
                     .where("J", Predicates.blocks(GTLBlocks.ADVANCED_ASSEMBLY_LINE_UNIT.get()))
-                    .where("K", GTLPredicates.createTierPredicate(GTLBlocks.calmap, "CATier"))
+                    .where("K", GTLPredicates.COMPONENT_ASSEMBLY_LINE_CASING)
                     .where("L", Predicates.blocks(GTBlocks.CASING_POLYTETRAFLUOROETHYLENE_PIPE.get()))
                     .where("M", Predicates.blocks(ChemicalHelper.getBlock(TagPrefix.frameGt, GTMaterials.TungstenSteel)))
                     .where("N", Predicates.blocks(GTLBlocks.IRIDIUM_CASING.get())

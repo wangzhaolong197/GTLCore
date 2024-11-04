@@ -81,7 +81,7 @@ public class IncubatorMachine extends WorkableElectricMultiblockMachine {
     @Override
     public void addDisplayText(List<Component> textList) {
         super.addDisplayText(textList);
-        textList.add(Component.translatable("gtlcore.casings.tier", cleanroomTier));
+        textList.add(Component.translatable("tooltip.avaritia.tier", cleanroomTier));
         textList.add(Component.translatable("gtlcore.recipe.radioactivity", getRecipeRadioactivity()));
     }
 

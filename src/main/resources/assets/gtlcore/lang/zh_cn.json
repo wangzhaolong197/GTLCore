@@ -999,7 +999,6 @@
     "gtceu.weather_control": "天气控制",
     "gtceu.wood_distillation": "木化工厂",
     "gtceu.world_data_scanner": "世界信息扫描",
-    "gtlcore.casings.tier": "等级：%s",
     "gtlcore.condition.gravity": "需要强重力环境",
     "gtlcore.condition.zero_gravity": "需要无重力环境",
     "gtlcore.fly_speed": "飞行速度 x%s",
@@ -1321,7 +1320,7 @@
     "gtlcore.pattern.tooltip.multiply": "将样板材料和配方数量 ÷ %s",
     "gtlcore.position_are_saved_to_this_slot": "坐标已保存在该槽位",
     "gtlcore.reach_limit": "达到极限",
-    "gtlcore.recipe.ca_tier": "外壳等级：%s",
+    "gtlcore.tier.component_assembly_line_casing_tier": "外壳等级：%s",
     "gtlcore.recipe.ev_max": "最大中子动能：%s MeV",
     "gtlcore.recipe.ev_min": "最小中子动能：%s MeV",
     "gtlcore.recipe.evt": "每刻中子动能消耗：%s KeV",
@@ -1330,8 +1329,8 @@
     "gtlcore.recipe.law_cleanroom.display_name": "绝对超净间",
     "gtlcore.recipe.nano_forge_tier": "纳米锻炉等级：%s",
     "gtlcore.recipe.radioactivity": "辐射剂量：%s Sv",
-    "gtlcore.recipe.sepm_tier": "需要动力模块：MK%s",
-    "gtlcore.recipe.stellar_containment_tier": "恒星热力容器等级：%s",
+    "gtlcore.tier.power_module_tier": "动力模块等级：%s",
+    "gtlcore.tier.stellar_containment_tier": "恒星热力容器等级：%s",
     "gtlcore.recipe.vacuum.tier": "真空等级：%s",
     "gtlcore.registry.modify": "由GregTech Leisure修改",
     "gtlcore.relocate_mined_blocks": "磁力吸引 %s",
@@ -2784,5 +2783,6 @@
     "tagprefix.nanoswarm": "%s纳米蜂群",
     "tagprefix.plutostone": "冥王星%s矿石",
     "tagprefix.titanstone": "土卫六%s矿石",
-    "tagprefix.venus_stone": "金星石%s矿石"
+    "tagprefix.venus_stone": "金星石%s矿石",
+    "material.gtceu.chromatic_glass": "彩色玻璃"
 }

@@ -75,7 +75,7 @@ public class WaterPurificationPlantMachine extends WorkableElectricMultiblockMac
     public boolean addWaterPurificationMachine(BlockPos pos, Level level) {
         MetaMachine machine = MetaMachine.getMachine(level, pos);
         if (machine instanceof WaterPurificationUnitMachine waterPurificationMachine && !waterPurificationUnitMachineMap.containsKey(waterPurificationMachine) && waterPurificationMachine.isFormed()) {
-            waterPurificationUnitMachineMap.put(waterPurificationMachine, false);
+            waterPurificationUnitMachineMap.put(waterPurificationMachine, waterPurificationMachine.getRecipeLogic().isWorking());
             return true;
         }
         return false;

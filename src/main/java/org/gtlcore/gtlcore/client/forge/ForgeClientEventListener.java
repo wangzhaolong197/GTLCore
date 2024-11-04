@@ -43,16 +43,13 @@ public class ForgeClientEventListener {
     public static void onTooltipEvent(ItemTooltipEvent event) {
         Player player = event.getEntity();
         if (player == null) return;
-        if (player.tickCount % 2 == 0) {
-            Tooltips.updateTooltipMap();
-        }
         Item item = event.getItemStack().getItem();
         if (Tooltips.TOOL_TIPS_MAP.containsKey(item)) {
             for (int i = 0; i < Tooltips.TOOL_TIPS_MAP.get(item).length; i++) {
                 event.getToolTip().add(Component.translatable("gtlcore.tooltip.item." + item.kjs$getIdLocation().getPath() + "." + i));
             }
             if (Tooltips.FLICKER_TOOL_TIPS_MAP.containsKey(item)) {
-                event.getToolTip().add(Component.literal(Tooltips.FLICKER_TOOL_TIPS_MAP.get(item)));
+                event.getToolTip().add(Component.literal(Tooltips.FLICKER_TOOL_TIPS_MAP.get(item).get()));
             }
             return;
         }
