@@ -129,17 +129,17 @@ public class ResidualDecontaminantDegasserPurificationUnitMachine extends WaterP
         eut = 0;
         successful = false;
         failed = false;
-        indicatorHatchPartMachine.setRedstoneSignalOutput((int) (Math.random() * 15));
-        if (indicatorHatchPartMachine.getRedstoneSignalOutput() == 13 || indicatorHatchPartMachine.getRedstoneSignalOutput() == 15) {
-            fluidStack = FLUIDS.get(11);
-        } else if (indicatorHatchPartMachine.getRedstoneSignalOutput() == 12 || indicatorHatchPartMachine.getRedstoneSignalOutput() == 14) {
-            fluidStack = FluidStack.empty();
-        } else {
-            fluidStack = FLUIDS.get(indicatorHatchPartMachine.getRedstoneSignalOutput());
-        }
         inputCount = (int) Math.min(Integer.MAX_VALUE, MachineUtil.getFluidAmount(this, WaterPurificationPlantMachine.GradePurifiedWater6)[0]);
         recipe = GTRecipeBuilder.ofRaw().duration(WaterPurificationPlantMachine.DURATION).inputFluids(FluidStack.create(WaterPurificationPlantMachine.GradePurifiedWater6, inputCount)).buildRawRecipe();
         if (recipe.matchRecipe(this).isSuccess()) {
+            indicatorHatchPartMachine.setRedstoneSignalOutput((int) (Math.random() * 15));
+            if (indicatorHatchPartMachine.getRedstoneSignalOutput() == 13 || indicatorHatchPartMachine.getRedstoneSignalOutput() == 15) {
+                fluidStack = FLUIDS.get(11);
+            } else if (indicatorHatchPartMachine.getRedstoneSignalOutput() == 12 || indicatorHatchPartMachine.getRedstoneSignalOutput() == 14) {
+                fluidStack = FluidStack.empty();
+            } else {
+                fluidStack = FLUIDS.get(indicatorHatchPartMachine.getRedstoneSignalOutput());
+            }
             eut = inputCount * 7L;
         }
         return eut;

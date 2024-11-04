@@ -145,17 +145,17 @@ public class AbsoluteBaryonicPerfectionPurificationUnitMachine extends WaterPuri
     @Override
     long before() {
         eut = 0;
-        int a = (int) (Math.random() * 5);
-        int b;
-        do {
-            b = (int) (Math.random() * 5);
-        } while (b == a);
-        catalyst1 = CATALYST.get(a);
-        catalyst2 = CATALYST.get(b);
         successful = false;
         inputCount = (int) Math.min(Integer.MAX_VALUE, MachineUtil.getFluidAmount(this, WaterPurificationPlantMachine.GradePurifiedWater7)[0]);
         recipe = GTRecipeBuilder.ofRaw().duration(WaterPurificationPlantMachine.DURATION).inputFluids(FluidStack.create(WaterPurificationPlantMachine.GradePurifiedWater7, inputCount)).buildRawRecipe();
         if (recipe.matchRecipe(this).isSuccess()) {
+            int a = (int) (Math.random() * 5);
+            int b;
+            do {
+                b = (int) (Math.random() * 5);
+            } while (b == a);
+            catalyst1 = CATALYST.get(a);
+            catalyst2 = CATALYST.get(b);
             eut = inputCount * 8L;
         }
         return eut;
