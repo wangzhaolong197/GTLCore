@@ -202,6 +202,8 @@ public class GTLMachines {
 
     public static final MachineDefinition[] LOOM = registerSimpleMachines("loom", GTLRecipeTypes.LOOM_RECIPES, GTMachines.defaultTankSizeFunction);
 
+    public static final MachineDefinition[] LASER_WELDER = registerSimpleMachines("laser_welder", GTLRecipeTypes.LASER_WELDER_RECIPES, GTMachines.defaultTankSizeFunction);
+
     public static final MachineDefinition[] WORLD_DATA_SCANNER = registerSimpleMachines("world_data_scanner",
             GTLRecipeTypes.WORLD_DATA_SCANNER_RECIPES, tier -> 64000);
 

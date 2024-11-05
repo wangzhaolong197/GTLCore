@@ -56,6 +56,7 @@ public abstract class MaterialRecipeHandlerMixin {
 
     @Inject(method = "init", at = @At("HEAD"), remap = false, cancellable = true)
     private static void init(Consumer<FinishedRecipe> provider, CallbackInfo ci) {
+        ci.cancel();
         ingot.executeHandler(provider, PropertyKey.INGOT, MaterialRecipeHandlerMixin::gTLCore$processIngot);
         nugget.executeHandler(provider, PropertyKey.DUST, MaterialRecipeHandler::processNugget);
 
@@ -69,7 +70,6 @@ public abstract class MaterialRecipeHandlerMixin {
         for (TagPrefix orePrefix : Arrays.asList(gem, gemFlawless, gemExquisite)) {
             orePrefix.executeHandler(provider, PropertyKey.GEM, MaterialRecipeHandlerMixin::gTLCore$processGemConversion);
         }
-        ci.cancel();
     }
 
     @Unique
@@ -146,7 +146,7 @@ public abstract class MaterialRecipeHandlerMixin {
             if (!material.hasFlag(NO_SMASHING)) {
                 ItemStack plateStack = ChemicalHelper.get(plate, material);
                 if (!plateStack.isEmpty()) {
-                    BENDER_RECIPES.recipeBuilder("bend_" + material.getName() + "_to_plate")
+                    GTLRecipeTypes.ROLLING_RECIPES.recipeBuilder("rolling_" + material.getName() + "_to_plate")
                             .inputItems(ingotPrefix, material)
                             .outputItems(plateStack)
                             .EUt(24).duration(mass)

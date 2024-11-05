@@ -48,6 +48,7 @@ public class WireRecipeHandlerMixin {
 
     @Inject(method = "init", at = @At("HEAD"), remap = false, cancellable = true)
     private static void init(Consumer<FinishedRecipe> provider, CallbackInfo ci) {
+        ci.cancel();
         wireGtSingle.executeHandler(provider, PropertyKey.WIRE, WireRecipeHandlerMixin::gTLCore$processWires);
 
         wireGtSingle.executeHandler(provider, PropertyKey.WIRE, WireRecipeHandlerMixin::gTLCore$generateCableCovering);
@@ -55,7 +56,6 @@ public class WireRecipeHandlerMixin {
         wireGtQuadruple.executeHandler(provider, PropertyKey.WIRE, WireRecipeHandlerMixin::gTLCore$generateCableCovering);
         wireGtOctal.executeHandler(provider, PropertyKey.WIRE, WireRecipeHandlerMixin::gTLCore$generateCableCovering);
         wireGtHex.executeHandler(provider, PropertyKey.WIRE, WireRecipeHandlerMixin::gTLCore$generateCableCovering);
-        ci.cancel();
     }
 
     @Unique

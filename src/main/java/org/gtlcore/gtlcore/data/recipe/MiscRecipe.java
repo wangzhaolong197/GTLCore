@@ -1,6 +1,7 @@
 package org.gtlcore.gtlcore.data.recipe;
 
 import org.gtlcore.gtlcore.GTLCore;
+import org.gtlcore.gtlcore.api.data.tag.GTLTagPrefix;
 import org.gtlcore.gtlcore.common.data.GTLItems;
 import org.gtlcore.gtlcore.config.GTLConfigHolder;
 
@@ -43,6 +44,9 @@ public class MiscRecipe {
                     .duration(200)
                     .save(provider);
         }
+
+        VanillaRecipeHelper.addShapedRecipe(provider, GTLCore.id("iron_bucket"), new ItemStack(Items.BUCKET), "ChC", " X ", 'X',
+                new UnificationEntry(TagPrefix.plate, GTMaterials.Iron), 'C', new UnificationEntry(GTLTagPrefix.curvedPlate, GTMaterials.Iron));
 
         VanillaRecipeHelper.addBlastingRecipe(provider, GTLCore.id("hot_iron_ingot"), ChemicalHelper.getTag(ingot, Iron), GTLItems.HOT_IRON_INGOT.asStack(), 0);
 

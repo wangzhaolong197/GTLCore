@@ -134,6 +134,7 @@ public class LangHandler {
         provider.add("tagprefix.plutostone", "Pluto %s Ore");
         provider.add("tagprefix.titanstone", "Titan %s Ore");
         provider.add("tagprefix.venus_stone", "Venus %s Ore");
+        provider.add("tagprefix.curved_plate", "Curved %s Plate");
 
         provider.add("gtlcore.tier.component_assembly_line_casing_tier", "Casing Tier: %s");
         provider.add("gtlcore.recipe.ev_max", "Maximum Neutron Energy: %s MeV");

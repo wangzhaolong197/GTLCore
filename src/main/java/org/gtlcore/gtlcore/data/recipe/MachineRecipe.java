@@ -1,10 +1,7 @@
 package org.gtlcore.gtlcore.data.recipe;
 
 import org.gtlcore.gtlcore.GTLCore;
-import org.gtlcore.gtlcore.common.data.GTLBlocks;
-import org.gtlcore.gtlcore.common.data.GTLItems;
-import org.gtlcore.gtlcore.common.data.GTLMachines;
-import org.gtlcore.gtlcore.common.data.GTLMaterials;
+import org.gtlcore.gtlcore.common.data.*;
 import org.gtlcore.gtlcore.common.data.machines.*;
 
 import com.gregtechceu.gtceu.api.GTValues;
@@ -50,21 +47,36 @@ public class MachineRecipe {
         VanillaRecipeHelper.addShapedRecipe(provider, true, GTLCore.id("casing_max"), GTBlocks.MACHINE_CASING_MAX.asStack(),
                 "PPP",
                 "PwP", "PPP", 'P', new UnificationEntry(TagPrefix.plate, GTLMaterials.Chaos));
-        ASSEMBLER_RECIPES.recipeBuilder(GTLCore.id("casing_uev")).EUt(16).inputItems(plate, GTLMaterials.Quantanium, 8)
-                .outputItems(GTBlocks.MACHINE_CASING_UEV.asStack()).circuitMeta(8).duration(50)
-                .save(provider);
-        ASSEMBLER_RECIPES.recipeBuilder(GTLCore.id("casing_uiv")).EUt(16).inputItems(plate, GTLMaterials.Adamantium, 8)
-                .outputItems(GTBlocks.MACHINE_CASING_UIV.asStack()).circuitMeta(8).duration(50)
-                .save(provider);
-        ASSEMBLER_RECIPES.recipeBuilder(GTLCore.id("casing_uxv")).EUt(16).inputItems(plate, GTLMaterials.Vibranium, 8)
-                .outputItems(GTBlocks.MACHINE_CASING_UXV.asStack()).circuitMeta(8).duration(50)
-                .save(provider);
-        ASSEMBLER_RECIPES.recipeBuilder(GTLCore.id("casing_opv")).EUt(16).inputItems(plate, GTLMaterials.Draconium, 8)
-                .outputItems(GTBlocks.MACHINE_CASING_OpV.asStack()).circuitMeta(8).duration(50)
-                .save(provider);
-        ASSEMBLER_RECIPES.recipeBuilder(GTLCore.id("casing_max")).EUt(16).inputItems(plate, GTLMaterials.Chaos, 8)
-                .outputItems(GTBlocks.MACHINE_CASING_MAX.asStack()).circuitMeta(8).duration(50)
-                .save(provider);
+        GTLRecipeTypes.LASER_WELDER_RECIPES.recipeBuilder("casing_ulv").EUt(16).inputItems(plate, WroughtIron, 8)
+                .outputItems(GTBlocks.MACHINE_CASING_ULV.asStack()).circuitMeta(8).duration(25).save(provider);
+        GTLRecipeTypes.LASER_WELDER_RECIPES.recipeBuilder("casing_lv").EUt(16).inputItems(plate, Steel, 8)
+                .outputItems(GTBlocks.MACHINE_CASING_LV.asStack()).circuitMeta(8).duration(50).save(provider);
+        GTLRecipeTypes.LASER_WELDER_RECIPES.recipeBuilder("casing_mv").EUt(16).inputItems(plate, Aluminium, 8)
+                .outputItems(GTBlocks.MACHINE_CASING_MV.asStack()).circuitMeta(8).duration(50).save(provider);
+        GTLRecipeTypes.LASER_WELDER_RECIPES.recipeBuilder("casing_hv").EUt(16).inputItems(plate, StainlessSteel, 8)
+                .outputItems(GTBlocks.MACHINE_CASING_HV.asStack()).circuitMeta(8).duration(50).save(provider);
+        GTLRecipeTypes.LASER_WELDER_RECIPES.recipeBuilder("casing_ev").EUt(16).inputItems(plate, Titanium, 8)
+                .outputItems(GTBlocks.MACHINE_CASING_EV.asStack()).circuitMeta(8).duration(50).save(provider);
+        GTLRecipeTypes.LASER_WELDER_RECIPES.recipeBuilder("casing_iv").EUt(16).inputItems(plate, TungstenSteel, 8)
+                .outputItems(GTBlocks.MACHINE_CASING_IV.asStack()).circuitMeta(8).duration(50).save(provider);
+        GTLRecipeTypes.LASER_WELDER_RECIPES.recipeBuilder("casing_luv").EUt(16).inputItems(plate, RhodiumPlatedPalladium, 8)
+                .outputItems(GTBlocks.MACHINE_CASING_LuV.asStack()).circuitMeta(8).duration(50).save(provider);
+        GTLRecipeTypes.LASER_WELDER_RECIPES.recipeBuilder("casing_zpm").EUt(16).inputItems(plate, NaquadahAlloy, 8)
+                .outputItems(GTBlocks.MACHINE_CASING_ZPM.asStack()).circuitMeta(8).duration(50).save(provider);
+        GTLRecipeTypes.LASER_WELDER_RECIPES.recipeBuilder("casing_uv").EUt(16).inputItems(plate, Darmstadtium, 8)
+                .outputItems(GTBlocks.MACHINE_CASING_UV.asStack()).circuitMeta(8).duration(50).save(provider);
+        GTLRecipeTypes.LASER_WELDER_RECIPES.recipeBuilder("casing_uhv").EUt(16).inputItems(plate, Neutronium, 8)
+                .outputItems(GTBlocks.MACHINE_CASING_UHV.asStack()).circuitMeta(8).duration(50).save(provider);
+        GTLRecipeTypes.LASER_WELDER_RECIPES.recipeBuilder(GTLCore.id("casing_uev")).EUt(16).inputItems(plate, GTLMaterials.Quantanium, 8)
+                .outputItems(GTBlocks.MACHINE_CASING_UEV.asStack()).circuitMeta(8).duration(50).save(provider);
+        GTLRecipeTypes.LASER_WELDER_RECIPES.recipeBuilder(GTLCore.id("casing_uiv")).EUt(16).inputItems(plate, GTLMaterials.Adamantium, 8)
+                .outputItems(GTBlocks.MACHINE_CASING_UIV.asStack()).circuitMeta(8).duration(50).save(provider);
+        GTLRecipeTypes.LASER_WELDER_RECIPES.recipeBuilder(GTLCore.id("casing_uxv")).EUt(16).inputItems(plate, GTLMaterials.Vibranium, 8)
+                .outputItems(GTBlocks.MACHINE_CASING_UXV.asStack()).circuitMeta(8).duration(50).save(provider);
+        GTLRecipeTypes.LASER_WELDER_RECIPES.recipeBuilder(GTLCore.id("casing_opv")).EUt(16).inputItems(plate, GTLMaterials.Draconium, 8)
+                .outputItems(GTBlocks.MACHINE_CASING_OpV.asStack()).circuitMeta(8).duration(50).save(provider);
+        GTLRecipeTypes.LASER_WELDER_RECIPES.recipeBuilder(GTLCore.id("casing_max")).EUt(16).inputItems(plate, GTLMaterials.Chaos, 8)
+                .outputItems(GTBlocks.MACHINE_CASING_MAX.asStack()).circuitMeta(8).duration(50).save(provider);
 
         ASSEMBLER_RECIPES.recipeBuilder(GTLCore.id("hull_uhv")).duration(50).EUt(16)
                 .inputItems(GTBlocks.MACHINE_CASING_UHV.asStack())
@@ -123,6 +135,7 @@ public class MachineRecipe {
         registerMachineRecipe(provider, GTLMachines.LOOM, "CWC", "EME", "EWE", 'M', HULL, 'E', MOTOR, 'C', CIRCUIT,
                 'W', CABLE);
         registerMachineRecipe(provider, GTLMachines.VACUUM_PUMP, "CLC", "LML", "PLP", 'M', HULL, 'P', PUMP, 'C', CIRCUIT, 'L', PIPE_LARGE);
+        registerMachineRecipe(provider, GTLMachines.LASER_WELDER, "WEW", "CMC", "PPP", 'M', HULL, 'P', PLATE, 'C', CIRCUIT, 'E', EMITTER, 'W', CABLE);
 
         VanillaRecipeHelper.addShapedRecipe(provider, true, GTLCore.id("rotor_holder_uhv"), GTLMachines.ROTOR_HOLDER[UHV].asStack(),
                 "SGS", "GHG", "SGS", 'H', GTMachines.HULL[GTValues.UHV].asStack(), 'G',

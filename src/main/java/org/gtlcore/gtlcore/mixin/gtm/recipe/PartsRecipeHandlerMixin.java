@@ -1,6 +1,5 @@
 package org.gtlcore.gtlcore.mixin.gtm.recipe;
 
-import org.gtlcore.gtlcore.GTLCore;
 import org.gtlcore.gtlcore.api.data.tag.GTLTagPrefix;
 import org.gtlcore.gtlcore.common.data.GTLMaterials;
 import org.gtlcore.gtlcore.common.data.GTLRecipeTypes;
@@ -47,6 +46,7 @@ public class PartsRecipeHandlerMixin {
 
     @Inject(method = "init", at = @At("HEAD"), remap = false, cancellable = true)
     private static void init(Consumer<FinishedRecipe> provider, CallbackInfo ci) {
+        ci.cancel();
         rod.executeHandler(provider, PropertyKey.DUST, PartsRecipeHandlerMixin::gTLCore$processStick);
         rodLong.executeHandler(provider, PropertyKey.DUST, PartsRecipeHandlerMixin::gTLCore$processLongStick);
         plate.executeHandler(provider, PropertyKey.DUST, PartsRecipeHandler::processPlate);
@@ -68,7 +68,7 @@ public class PartsRecipeHandlerMixin {
         spring.executeHandler(provider, PropertyKey.INGOT, PartsRecipeHandlerMixin::gTLCore$processSpring);
         round.executeHandler(provider, PropertyKey.INGOT, PartsRecipeHandlerMixin::gTLCore$processRound);
         GTLTagPrefix.contaminableManoswarm.executeHandler(provider, PropertyKey.DUST, PartsRecipeHandlerMixin::gTLCore$processManoswarm);
-        ci.cancel();
+        GTLTagPrefix.curvedPlate.executeHandler(provider, PropertyKey.INGOT, PartsRecipeHandlerMixin::gTLCore$processcurvedPlate);
     }
 
     @Unique
@@ -98,7 +98,7 @@ public class PartsRecipeHandlerMixin {
                     ChemicalHelper.get(foilPrefix, material, 2),
                     "hP ", 'P', new UnificationEntry(plate, material));
 
-        GTLRecipeTypes.CLUSTER_RECIPES.recipeBuilder(GTLCore.id("bend_" + material.getName() + "_plate_to_foil"))
+        GTLRecipeTypes.CLUSTER_RECIPES.recipeBuilder("bend_" + material.getName() + "_plate_to_foil")
                 .inputItems(plate, material)
                 .outputItems(foilPrefix, material, 4)
                 .duration(mass)
@@ -224,10 +224,11 @@ public class PartsRecipeHandlerMixin {
                         "h", "P", "P", 'P', new UnificationEntry(plate, material));
             }
 
-            GTLRecipeTypes.ROLLING_RECIPES.recipeBuilder(GTLCore.id("bend_" + material.getName() + "_plate_to_double_plate"))
+            GTLRecipeTypes.ROLLING_RECIPES.recipeBuilder("bend_" + material.getName() + "_plate_to_double_plate")
                     .EUt(96).duration(mass * 2)
                     .inputItems(ingot, material, 2)
                     .outputItems(doublePrefix, material)
+                    .circuitMeta(2)
                     .save(provider);
         }
     }
@@ -237,17 +238,19 @@ public class PartsRecipeHandlerMixin {
                                                   Consumer<FinishedRecipe> provider) {
         int mass = (int) material.getMass();
         if (material.hasProperty(PropertyKey.INGOT)) {
-            GTLRecipeTypes.ROLLING_RECIPES.recipeBuilder(GTLCore.id("bend_" + material.getName() + "_block_to_dense_plate"))
+            GTLRecipeTypes.ROLLING_RECIPES.recipeBuilder("bend_" + material.getName() + "_block_to_dense_plate")
                     .inputItems(block, material)
                     .outputItems(tagPrefix, material)
                     .duration(mass * 11)
+                    .circuitMeta(3)
                     .EUt(96)
                     .save(provider);
         } else {
-            GTLRecipeTypes.ROLLING_RECIPES.recipeBuilder(GTLCore.id("bend_" + material.getName() + "_plate_to_dense_plate"))
+            GTLRecipeTypes.ROLLING_RECIPES.recipeBuilder("bend_" + material.getName() + "_plate_to_dense_plate")
                     .inputItems(plate, material, 9)
                     .outputItems(tagPrefix, material)
                     .duration(mass * 11)
+                    .circuitMeta(3)
                     .EUt(96)
                     .save(provider);
         }
@@ -266,7 +269,7 @@ public class PartsRecipeHandlerMixin {
                 .save(provider);
 
         if (material.hasFlag(GENERATE_ROD)) {
-            BENDER_RECIPES.recipeBuilder(GTLCore.id("bender_" + material.getName() + "_rod_to_ring"))
+            BENDER_RECIPES.recipeBuilder("bender_" + material.getName() + "_rod_to_ring")
                     .inputItems(rod, material)
                     .outputItems(ringPrefix, material, 2)
                     .duration(mass * 2)
@@ -331,18 +334,20 @@ public class PartsRecipeHandlerMixin {
     private static void gTLCore$processRotor(TagPrefix rotorPrefix, Material material, IngotProperty property,
                                              Consumer<FinishedRecipe> provider) {
         int mass = (int) material.getMass();
+        ItemStack curvedPlateStack = ChemicalHelper.get(GTLTagPrefix.curvedPlate, material);
+        ItemStack ringStack = ChemicalHelper.get(ring, material);
         ItemStack stack = ChemicalHelper.get(rotorPrefix, material);
         if (mass < 240 && material.getBlastTemperature() < 3600)
             VanillaRecipeHelper.addShapedRecipe(provider, String.format("rotor_%s", material.getName()), stack,
                     "ChC", "SRf", "CdC",
-                    'C', new UnificationEntry(plate, material),
+                    'C', curvedPlateStack,
                     'S', new UnificationEntry(screw, material),
-                    'R', new UnificationEntry(ring, material));
+                    'R', ringStack);
 
         if (material.hasFluid()) {
             FLUID_SOLIDFICATION_RECIPES.recipeBuilder("solidify_" + material.getName() + "_to_rotor")
                     .notConsumable(GTItems.SHAPE_MOLD_ROTOR)
-                    .inputFluids(material.getFluid(L * 4))
+                    .inputFluids(material.getFluid(L * 5))
                     .outputItems(GTUtil.copy(stack))
                     .duration(mass * 4)
                     .EUt(20)
@@ -350,16 +355,24 @@ public class PartsRecipeHandlerMixin {
         }
 
         EXTRUDER_RECIPES.recipeBuilder("extrude_" + material.getName() + "_ingot_to_rotor")
-                .inputItems(ingot, material, 4)
+                .inputItems(ingot, material, 5)
                 .notConsumable(GTItems.SHAPE_EXTRUDER_ROTOR)
                 .outputItems(GTUtil.copy(stack))
                 .duration(mass * 8)
                 .EUt(material.getBlastTemperature() >= 2800 ? 256 : 64)
                 .save(provider);
 
+        GTLRecipeTypes.LASER_WELDER_RECIPES.recipeBuilder(material.getName() + "_to_rotor")
+                .inputItems(ringStack)
+                .inputItems(curvedPlateStack.copyWithCount(4))
+                .outputItems(GTUtil.copy(stack))
+                .duration(mass)
+                .EUt(30)
+                .save(provider);
+
         if (material.hasFlag(NO_SMASHING)) {
             EXTRUDER_RECIPES.recipeBuilder("extrude_" + material.getName() + "_dust_to_rotor")
-                    .inputItems(dust, material, 4)
+                    .inputItems(dust, material, 5)
                     .notConsumable(GTItems.SHAPE_EXTRUDER_ROTOR)
                     .outputItems(GTUtil.copy(stack))
                     .duration(mass * 8)
@@ -373,7 +386,7 @@ public class PartsRecipeHandlerMixin {
                                              Consumer<FinishedRecipe> provider) {
         int mass = (int) material.getMass();
         if (material.hasProperty(PropertyKey.GEM) || material.hasProperty(PropertyKey.INGOT)) {
-            LATHE_RECIPES.recipeBuilder(GTLCore.id("lathe_" + material.getName() + "_to_rod"))
+            LATHE_RECIPES.recipeBuilder("lathe_" + material.getName() + "_to_rod")
                     .inputItems(material.hasProperty(PropertyKey.GEM) ? gem : ingot, material)
                     .outputItems(rod, material, 2)
                     .duration(mass * 2)
@@ -419,7 +432,7 @@ public class PartsRecipeHandlerMixin {
                     "ShS",
                     'S', new UnificationEntry(rod, material));
 
-        FORGE_HAMMER_RECIPES.recipeBuilder("hammer_" + material.getName() + "_rod_to_long_rod")
+        GTLRecipeTypes.LASER_WELDER_RECIPES.recipeBuilder(material.getName() + "_rod_to_long_rod")
                 .inputItems(rod, material, 2)
                 .outputItems(stack)
                 .duration(mass)
@@ -502,6 +515,25 @@ public class PartsRecipeHandlerMixin {
                 .duration((int) material.getMass() * 16)
                 .EUt(480)
                 .cleanroom(CleanroomType.CLEANROOM)
+                .save(provider);
+    }
+
+    @Unique
+    private static void gTLCore$processcurvedPlate(TagPrefix roundPrefix, Material material, IngotProperty property,
+                                                   Consumer<FinishedRecipe> provider) {
+        int mass = (int) material.getMass();
+        ItemStack plateStack = ChemicalHelper.get(plate, material);
+        ItemStack curvedPlateStack = ChemicalHelper.get(GTLTagPrefix.curvedPlate, material);
+        if (mass < 240 && material.getBlastTemperature() < 3600)
+            VanillaRecipeHelper.addShapedRecipe(provider, String.format("curved_plate_%s", material.getName()),
+                    curvedPlateStack, "hI", 'I', plateStack);
+
+        BENDER_RECIPES.recipeBuilder(material.getName() + "_curved_plate")
+                .inputItems(plateStack)
+                .outputItems(curvedPlateStack)
+                .circuitMeta(1)
+                .duration(mass)
+                .EUt(16)
                 .save(provider);
     }
 }

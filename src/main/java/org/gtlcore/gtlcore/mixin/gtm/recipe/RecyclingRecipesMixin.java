@@ -1,14 +1,17 @@
 package org.gtlcore.gtlcore.mixin.gtm.recipe;
 
 import org.gtlcore.gtlcore.common.data.GTLRecipeTypes;
+import org.gtlcore.gtlcore.common.data.GTLRecipes;
 
 import com.gregtechceu.gtceu.api.GTValues;
 import com.gregtechceu.gtceu.api.data.chemical.ChemicalHelper;
 import com.gregtechceu.gtceu.api.data.chemical.material.Material;
 import com.gregtechceu.gtceu.api.data.chemical.material.properties.PropertyKey;
+import com.gregtechceu.gtceu.api.data.chemical.material.stack.ItemMaterialInfo;
 import com.gregtechceu.gtceu.api.data.chemical.material.stack.MaterialStack;
 import com.gregtechceu.gtceu.api.data.chemical.material.stack.UnificationEntry;
 import com.gregtechceu.gtceu.api.data.tag.TagPrefix;
+import com.gregtechceu.gtceu.api.item.IGTTool;
 import com.gregtechceu.gtceu.data.recipe.builder.GTRecipeBuilder;
 import com.gregtechceu.gtceu.data.recipe.misc.RecyclingRecipes;
 
@@ -27,8 +30,10 @@ import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 
+import java.util.ArrayList;
 import java.util.Comparator;
 import java.util.List;
+import java.util.Map;
 import java.util.function.Consumer;
 
 import static com.gregtechceu.gtceu.api.GTValues.L;
@@ -36,7 +41,7 @@ import static com.gregtechceu.gtceu.api.GTValues.M;
 import static com.gregtechceu.gtceu.api.data.chemical.material.info.MaterialFlags.IS_MAGNETIC;
 
 @Mixin(RecyclingRecipes.class)
-public abstract class RecyclingRecipesMixin {
+public class RecyclingRecipesMixin {
 
     @Shadow(remap = false)
     private static int calculateVoltageMultiplier(List<MaterialStack> materials) {
@@ -49,9 +54,19 @@ public abstract class RecyclingRecipesMixin {
     @Shadow(remap = false)
     private static void registerMaceratorRecycling(Consumer<FinishedRecipe> provider, ItemStack input, List<MaterialStack> materials, int multiplier) {}
 
-    @Inject(method = "registerRecyclingRecipes", at = @At("HEAD"), remap = false, cancellable = true)
-    private static void registerRecyclingRecipes(Consumer<FinishedRecipe> provider, ItemStack input, List<MaterialStack> components, boolean ignoreArcSmelting, @Nullable TagPrefix prefix, CallbackInfo ci) {
+    @Inject(method = "init", at = @At("HEAD"), remap = false, cancellable = true)
+    private static void init(Consumer<FinishedRecipe> provider, CallbackInfo ci) {
         ci.cancel();
+        GTLRecipes.recipeAddition(provider);
+        for (Map.Entry<ItemStack, ItemMaterialInfo> entry : ChemicalHelper.getAllItemInfos()) {
+            ItemStack itemStack = entry.getKey();
+            if (itemStack.getItem() instanceof IGTTool) continue;
+            gTLCore$registerRecyclingRecipes(provider, itemStack, new ArrayList<>(entry.getValue().getMaterials()), false, null);
+        }
+    }
+
+    @Unique
+    private static void gTLCore$registerRecyclingRecipes(Consumer<FinishedRecipe> provider, ItemStack input, List<MaterialStack> components, boolean ignoreArcSmelting, @Nullable TagPrefix prefix) {
         List<MaterialStack> materials = components.stream()
                 .filter(stack -> stack.material().hasProperty(PropertyKey.DUST))
                 .filter(stack -> stack.amount() >= M / 9)

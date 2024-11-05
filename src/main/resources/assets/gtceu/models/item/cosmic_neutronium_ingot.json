@@ -1,6 +1,7 @@
 {
-  "parent": "gtceu:item/material_sets/cosmic_neutronium/ingot",
+  "parent": "item/generated",
   "textures": {
+    "layer0": "avaritia:item/resource/neutron_ingot",
     "halo": "avaritia:misc/halo_noise"
   },
   "loader": "avaritia:halo",

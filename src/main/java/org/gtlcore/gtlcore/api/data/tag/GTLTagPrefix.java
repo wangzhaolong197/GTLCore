@@ -3,8 +3,12 @@ package org.gtlcore.gtlcore.api.data.tag;
 import org.gtlcore.gtlcore.api.data.chemical.material.info.GTLMaterialFlags;
 
 import com.gregtechceu.gtceu.api.GTValues;
+import com.gregtechceu.gtceu.api.data.chemical.material.info.MaterialFlags;
 import com.gregtechceu.gtceu.api.data.chemical.material.info.MaterialIconType;
+import com.gregtechceu.gtceu.api.data.chemical.material.properties.PropertyKey;
 import com.gregtechceu.gtceu.api.data.tag.TagPrefix;
+
+import static com.gregtechceu.gtceu.api.data.chemical.material.info.MaterialFlags.NO_SMASHING;
 
 @SuppressWarnings("unused")
 public class GTLTagPrefix {
@@ -17,7 +21,6 @@ public class GTLTagPrefix {
             .idPattern("%s_nanoswarm")
             .defaultTagPath("nanoswarms/%s")
             .unformattedTagPath("nanoswarms")
-            .langValue(" %s nanoswarm")
             .materialAmount(GTValues.M)
             .materialIconType(nanoswarmIcon)
             .unificationEnabled(true)
@@ -28,7 +31,6 @@ public class GTLTagPrefix {
             .idPattern("contaminable_%s_nanoswarm")
             .defaultTagPath("contaminable_nanoswarm/%s")
             .unformattedTagPath("contaminable_nanoswarm")
-            .langValue(" %s contaminable_nanoswarm")
             .materialAmount(GTValues.M)
             .materialIconType(nanoswarmIcon)
             .unificationEnabled(true)
@@ -39,18 +41,26 @@ public class GTLTagPrefix {
             .idPattern("milled_%s")
             .defaultTagPath("milled/%s")
             .unformattedTagPath("milled")
-            .langValue("Milled %s")
             .materialAmount(GTValues.M)
             .materialIconType(new MaterialIconType("milled"))
             .unificationEnabled(true)
             .generateItem(true)
             .generationCondition(mat -> mat.hasFlag(GTLMaterialFlags.GENERATE_MILLED));
 
+    public static final TagPrefix curvedPlate = new TagPrefix("curved_plate")
+            .idPattern("curved_%s_plate")
+            .defaultTagPath("curved_plate/%s")
+            .unformattedTagPath("curved_plate")
+            .materialAmount(GTValues.M)
+            .materialIconType(new MaterialIconType("curved_plate"))
+            .unificationEnabled(true)
+            .generateItem(true)
+            .generationCondition(mat -> mat.hasFlag(GTLMaterialFlags.GENERATE_CURVED_PLATE) || mat.hasFlag(MaterialFlags.GENERATE_ROTOR) || ((mat.hasProperty(PropertyKey.FLUID_PIPE) || mat.hasProperty(PropertyKey.ITEM_PIPE)) && !mat.hasFlag(NO_SMASHING) && mat.getMass() < 240 && mat.getBlastTemperature() < 3600));
+
     public static final TagPrefix magiccrystal = new TagPrefix("magiccrystal")
             .idPattern("%s_magiccrystal")
             .defaultTagPath("/%s_magiccrystal")
             .unformattedTagPath("magiccrystal")
-            .langValue("MagicCrystal %s")
             .materialAmount(GTValues.M)
             .materialIconType(new MaterialIconType("magiccrystal"))
             .unificationEnabled(true)

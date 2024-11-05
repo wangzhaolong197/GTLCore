@@ -881,6 +881,7 @@ public class AdvancedMultiBlockMachineA {
                             .append("，").append(Component.translatable("gtceu.arc_furnace"))
                             .append("，").append(Component.translatable("gtceu.lightning_processor"))
                             .append("，").append(Component.translatable("gtceu.laser_engraver"))
+                            .append("，").append(Component.translatable("gtceu.laser_welder"))
                             .append("，").append(Component.translatable("gtceu.assembler"))
                             .append("，").append(Component.translatable("gtceu.circuit_assembler"))))
             .recipeModifiers(ProcessingPlantMachine::processingPlantOverclock)

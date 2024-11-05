@@ -1,5 +1,7 @@
 package org.gtlcore.gtlcore.mixin.gtm.recipe;
 
+import org.gtlcore.gtlcore.api.data.tag.GTLTagPrefix;
+
 import com.gregtechceu.gtceu.api.data.chemical.material.properties.PropertyKey;
 import com.gregtechceu.gtceu.api.data.tag.TagPrefix;
 import com.gregtechceu.gtceu.data.recipe.generated.RecyclingRecipeHandler;
@@ -27,12 +29,14 @@ public class RecyclingRecipeHandlerMixin {
             ingot, gem, rod, plate, ring, rodLong, foil, bolt, screw,
             nugget, gearSmall, gear, frameGt, plateDense, spring, springSmall,
             block, wireFine, rotor, lens, turbineBlade, round, plateDouble, dust,
+            GTLTagPrefix.curvedPlate,
             (Predicate<TagPrefix>) orePrefix -> orePrefix.name().startsWith("gem"),
             (Predicate<TagPrefix>) orePrefix -> orePrefix.name().startsWith("wireGt"),
             (Predicate<TagPrefix>) orePrefix -> orePrefix.name().startsWith("pipe"));
 
     @Inject(method = "init", at = @At("HEAD"), remap = false, cancellable = true)
     private static void init(Consumer<FinishedRecipe> provider, CallbackInfo ci) {
+        ci.cancel();
         for (TagPrefix orePrefix : TagPrefix.values()) {
             if (gTLCore$PREFIXES.stream().anyMatch(object -> {
                 if (object instanceof TagPrefix)
@@ -42,6 +46,5 @@ public class RecyclingRecipeHandlerMixin {
                 else return false;
             })) orePrefix.executeHandler(provider, PropertyKey.DUST, RecyclingRecipeHandler::processCrushing);
         }
-        ci.cancel();
     }
 }

@@ -1,7 +1,5 @@
 package org.gtlcore.gtlcore.mixin.gtm.recipe.change;
 
-import org.gtlcore.gtlcore.data.recipe.processing.PlatGroupMetals;
-
 import com.gregtechceu.gtceu.data.recipe.serialized.chemistry.PlatGroupMetalsRecipes;
 
 import net.minecraft.data.recipes.FinishedRecipe;
@@ -18,7 +16,6 @@ public class PlatGroupMetalsRecipesMixin {
 
     @Inject(method = "init", at = @At("HEAD"), remap = false, cancellable = true)
     private static void init(Consumer<FinishedRecipe> provider, CallbackInfo ci) {
-        PlatGroupMetals.init(provider);
         ci.cancel();
     }
 }

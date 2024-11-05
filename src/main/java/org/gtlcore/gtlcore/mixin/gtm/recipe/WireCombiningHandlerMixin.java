@@ -38,12 +38,12 @@ public class WireCombiningHandlerMixin {
 
     @Inject(method = "init", at = @At("HEAD"), remap = false, cancellable = true)
     private static void init(Consumer<FinishedRecipe> provider, CallbackInfo ci) {
+        ci.cancel();
         TagPrefix.wireGtSingle.executeHandler(provider, PropertyKey.WIRE, WireCombiningHandlerMixin::gTLCore$processWireCompression);
 
         for (TagPrefix cablePrefix : cableToWireMap.keySet()) {
             cablePrefix.executeHandler(provider, PropertyKey.WIRE, WireCombiningHandlerMixin::gTLCore$processCableStripping);
         }
-        ci.cancel();
     }
 
     @Unique

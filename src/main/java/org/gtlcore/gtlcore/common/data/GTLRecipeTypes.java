@@ -80,7 +80,7 @@ public class GTLRecipeTypes {
             .setSound(GTSoundEntries.MOTOR);
 
     public final static GTRecipeType ROLLING_RECIPES = registerRecipeType("rolling", ELECTRIC)
-            .setMaxIOSize(1, 1, 0, 0)
+            .setMaxIOSize(2, 1, 0, 0)
             .setEUIO(IO.IN)
             .setProgressBar(GuiTextures.PROGRESS_BAR_BENDING, LEFT_TO_RIGHT)
             .setSound(GTSoundEntries.MOTOR);
@@ -97,6 +97,12 @@ public class GTLRecipeTypes {
             .setEUIO(IO.IN)
             .setProgressBar(GuiTextures.PROGRESS_BAR_WIREMILL, LEFT_TO_RIGHT)
             .setSound(GTSoundEntries.MOTOR);
+
+    public final static GTRecipeType LASER_WELDER_RECIPES = registerRecipeType("laser_welder", ELECTRIC)
+            .setMaxIOSize(3, 1, 0, 0)
+            .setEUIO(IO.IN)
+            .setProgressBar(GuiTextures.PROGRESS_BAR_WIREMILL, LEFT_TO_RIGHT)
+            .setSound(GTSoundEntries.ARC);
 
     public static final GTRecipeType WORLD_DATA_SCANNER_RECIPES = registerRecipeType("world_data_scanner", ELECTRIC)
             .setEUIO(IO.IN)
@@ -669,7 +675,7 @@ public class GTLRecipeTypes {
             .setSound(GTSoundEntries.CHEMICAL);
 
     public static final GTRecipeType VACUUM_DRYING_RECIPES = registerRecipeType("vacuum_drying", MULTIBLOCK)
-            .setMaxIOSize(1, 6, 1, 2)
+            .setMaxIOSize(0, 6, 1, 2)
             .setEUIO(IO.IN)
             .setProgressBar(GuiTextures.PROGRESS_BAR_ARROW, LEFT_TO_RIGHT)
             .setSound(GTSoundEntries.COOLING)

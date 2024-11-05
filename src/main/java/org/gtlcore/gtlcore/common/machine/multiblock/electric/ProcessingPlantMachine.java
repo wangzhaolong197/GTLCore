@@ -69,7 +69,8 @@ public class ProcessingPlantMachine extends StorageMachine implements IParallelM
             GTRecipeTypes.ARC_FURNACE_RECIPES,
             GTLRecipeTypes.LIGHTNING_PROCESSOR_RECIPES,
             GTLRecipeTypes.LOOM_RECIPES,
-            GTLRecipeTypes.LAMINATOR_RECIPES);
+            GTLRecipeTypes.LAMINATOR_RECIPES,
+            GTLRecipeTypes.LASER_WELDER_RECIPES);
 
     @Nullable
     private GTRecipeType[] recipeTypeCache = new GTRecipeType[] { GTRecipeTypes.DUMMY_RECIPES };

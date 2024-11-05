@@ -10,6 +10,9 @@ public class GTLMaterialFlags {
     public static final MaterialFlag GENERATE_MILLED = new MaterialFlag.Builder("generate_milled")
             .build();
 
+    public static final MaterialFlag GENERATE_CURVED_PLATE = new MaterialFlag.Builder("generate_curved_plate")
+            .build();
+
     public static final MaterialFlag GENERATE_MAGICCRYSTAL = new MaterialFlag.Builder("generate_magiccrystal")
             .build();
 

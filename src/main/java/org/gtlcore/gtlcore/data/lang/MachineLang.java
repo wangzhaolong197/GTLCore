@@ -49,7 +49,7 @@ public class MachineLang {
         provider.add("gtlcore.machine.dyson_sphere.tooltip.6", "Each launch can increase power by 1A MAX");
         provider.add("gtlcore.machine.dyson_sphere.voltage", "Maximum Energy Output: %s EU/t");
         provider.add("gtlcore.machine.efficiency.tooltip", "§7Efficiency: §r%s");
-        provider.add("gtlcore.machine.engraving_laser_plant.tooltip.0", "Precision laser mode does not support parallelism");
+        provider.add("gtlcore.machine.engraving_laser_plant.tooltip.0", "Precision laser mode does not support parallelism, Running the Laser Welder formula at speed x5.");
         provider.add("gtlcore.machine.eut_multiplier.tooltip", "Energy Consumption Multiplier: %s");
         provider.add("gtlcore.machine.eye_of_harmony.eu", "Startup Energy Consumption: %s EU");
         provider.add("gtlcore.machine.eye_of_harmony.helium", "Helium Storage: %smB");

@@ -1,7 +1,5 @@
 package org.gtlcore.gtlcore.mixin.gtm.recipe.change;
 
-import org.gtlcore.gtlcore.data.recipe.processing.NaquadahProcess;
-
 import com.gregtechceu.gtceu.data.recipe.serialized.chemistry.NaquadahRecipes;
 
 import net.minecraft.data.recipes.FinishedRecipe;
@@ -18,7 +16,6 @@ public class NaquadahRecipesMixin {
 
     @Inject(method = "init", at = @At("HEAD"), remap = false, cancellable = true)
     private static void init(Consumer<FinishedRecipe> provider, CallbackInfo ci) {
-        NaquadahProcess.init(provider);
         ci.cancel();
     }
 }

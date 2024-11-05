@@ -3,6 +3,8 @@ package org.gtlcore.gtlcore.client.renderer.item;
 import org.gtlcore.gtlcore.common.data.GTLMaterials;
 import org.gtlcore.gtlcore.utils.ColorUtils;
 
+import com.lowdragmc.lowdraglib.LDLib;
+
 import committee.nova.mods.avaritia.client.AvaritiaClient;
 
 import java.util.HashMap;
@@ -14,7 +16,7 @@ public class TagPrefixColor {
     public static final Map<String, Supplier<Integer>> MaterialColors = new HashMap<>();
 
     static {
-        MaterialColors.put(GTLMaterials.ChromaticGlass.getName(), AvaritiaClient::getCurrentRainbowColor);
+        MaterialColors.put(GTLMaterials.ChromaticGlass.getName(), LDLib.isModLoaded("avaritia") ? AvaritiaClient::getCurrentRainbowColor : () -> -1);
         MaterialColors.put(GTLMaterials.Hypogen.getName(), () -> ColorUtils.getInterpolatedColor(0xFF3D00, 0xDA9100, Math.abs(1 - (System.currentTimeMillis() % 6000) / 3000F)));
         MaterialColors.put(GTLMaterials.HexaphaseCopper.getName(), () -> {
             float spot = (System.currentTimeMillis() % 4000) / 4000F;

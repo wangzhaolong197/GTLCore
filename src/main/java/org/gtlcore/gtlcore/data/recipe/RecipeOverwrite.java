@@ -1,11 +1,14 @@
 package org.gtlcore.gtlcore.data.recipe;
 
+import org.gtlcore.gtlcore.api.data.tag.GTLTagPrefix;
 import org.gtlcore.gtlcore.common.data.GTLMaterials;
 import org.gtlcore.gtlcore.common.data.GTLRecipeTypes;
 import org.gtlcore.gtlcore.common.recipe.condition.GravityCondition;
 import org.gtlcore.gtlcore.common.recipe.condition.VacuumCondition;
 
 import net.minecraft.data.recipes.FinishedRecipe;
+import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.item.Items;
 
 import java.util.function.Consumer;
 
@@ -19,6 +22,13 @@ public class RecipeOverwrite {
 
     public static void init(Consumer<FinishedRecipe> provider) {
         // 修改
+        ASSEMBLER_RECIPES.recipeBuilder("bucket")
+                .inputItems(GTLTagPrefix.curvedPlate, Iron, 2)
+                .inputItems(plate, Iron)
+                .outputItems(new ItemStack(Items.BUCKET))
+                .duration(100).EUt(4)
+                .save(provider);
+
         ASSEMBLER_RECIPES.recipeBuilder("vacuum_tube_plain")
                 .inputItems(GLASS_TUBE)
                 .inputItems(bolt, Steel)

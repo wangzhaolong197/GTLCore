@@ -49,6 +49,7 @@ public class OreRecipeHandlerMixin {
 
     @Inject(method = "init", at = @At("HEAD"), remap = false, cancellable = true)
     private static void init(Consumer<FinishedRecipe> provider, CallbackInfo ci) {
+        ci.cancel();
         for (TagPrefix ore : ORES.keySet()) {
             Supplier<Material> material = ORES.get(ore).material();
             if (material != null && material.get() == GTMaterials.Stone) {
@@ -64,7 +65,6 @@ public class OreRecipeHandlerMixin {
         crushedRefined.executeHandler(provider, PropertyKey.ORE, OreRecipeHandler::processCrushedCentrifuged);
         dustImpure.executeHandler(provider, PropertyKey.ORE, OreRecipeHandler::processDirtyDust);
         dustPure.executeHandler(provider, PropertyKey.ORE, OreRecipeHandler::processPureDust);
-        ci.cancel();
     }
 
     @Unique
